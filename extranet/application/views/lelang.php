@@ -175,7 +175,7 @@
 								</div>
 								<div class="modal-footer">
 									<button style="display: none;" type="button" class="btn btn-primary" id="picker_pick">Login</button>
-									<button type="button" class="btn btn-default" id="dismiss" data-dismiss="modal"><?php echo $this->lang->line('Tutup'); ?></button>
+									<button type="button" class="btn btn-light" id="dismiss" data-dismiss="modal"><?php echo $this->lang->line('Tutup'); ?></button>
 								</div>
 							</div>
 						</div>

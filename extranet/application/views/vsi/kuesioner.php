@@ -99,7 +99,7 @@
 							<div class="col-sm-2">
 								<span class="input-group-btn">
 									<a class="btn btn-primary action_add">Tambah</a>
-									<!-- <a class="btn btn-default empty_item">Hapus</a> -->
+									<!-- <a class="btn btn-light empty_item">Hapus</a> -->
 								</span>
 							</div>
 						</div>
@@ -238,7 +238,7 @@
 										<div class="form-group">
 											<div class="col-lg-12 m-l-n text-center">
 
-												<a href="javascript:window.history.go(-1);" class="btn btn-default">Kembali</a>
+												<a href="javascript:window.history.go(-1);" class="btn btn-light">Kembali</a>
 												<button class="btn btn-primary" type="submit">Simpan</button>
 											</div>
 										</div>

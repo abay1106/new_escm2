@@ -105,7 +105,7 @@
     <?php if(isset($data['photo_user']) && !empty($data['photo_user'])){ ?>
     <br/>
       <img src="<?php echo base_url($dir.'/'.$data['photo_user']) ?>" class="img-responsive thumbnail"/>
-      <a href="<?php echo site_url('user/delete_img/'.$id) ?>" onclick="return confirm('Are you sure to delete this picture?');" class="btn btn-default btn-sm">Remove</a>
+      <a href="<?php echo site_url('user/delete_img/'.$id) ?>" onclick="return confirm('Are you sure to delete this picture?');" class="btn btn-light btn-sm">Remove</a>
     <?php } ?>
     
     </div>
@@ -134,7 +134,7 @@
         <input type="hidden" name="act" value="<?php echo $act ?>">
         <input type="hidden" name="id" value="<?php echo $id ?>">
         <button type="submit" class="btn btn-info">Submit</button>
-        <button type="reset" class="btn btn-default">Reset</button>
+        <button type="reset" class="btn btn-light">Reset</button>
         <a href="<?php echo site_url('user') ?>" class="btn btn-primary">Back</a>
       </div>
     </div>

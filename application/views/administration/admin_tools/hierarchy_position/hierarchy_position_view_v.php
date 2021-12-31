@@ -23,10 +23,10 @@
 
           <div class="btn-group" role="group" aria-label="...">
             <!-- <button type="button" onclick="action_tree('add','<?php echo $key ?>')" class="btn btn-success">Tambah</button>
-            <button type="button" onclick="action_tree('edit','<?php echo $key ?>')" class="btn btn-default">Ubah</button>
+            <button type="button" onclick="action_tree('edit','<?php echo $key ?>')" class="btn btn-light">Ubah</button>
             <button type="button" onclick="action_tree('delete','<?php echo $key ?>')" class="btn btn-danger">Hapus</button> -->
             <button type="button" onclick="action_tree('add','<?php echo $value['url'] ?>')" class="btn btn-success">Tambah</button>
-            <button type="button" onclick="action_tree('edit','<?php echo $value['url'] ?>')" class="btn btn-default">Ubah</button>
+            <button type="button" onclick="action_tree('edit','<?php echo $value['url'] ?>')" class="btn btn-light">Ubah</button>
             <button type="button" onclick="action_tree('delete','<?php echo $value['url'] ?>')" class="btn btn-danger">Hapus</button>
           </div>
 

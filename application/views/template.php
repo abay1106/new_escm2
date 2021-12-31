@@ -7,8 +7,7 @@
 
     <base href="<?php echo base_url() ?>"/>
 
-    <link rel="manifest" href="<?php echo base_url('manifest.json') ?>">
-
+    <link rel="manifest" href="<?php echo base_url('manifest.json') ?>">    
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/'.$site_favicon) ?>">
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/theme.css"/>
@@ -33,11 +32,9 @@
     <link href="assets/css/animate.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fonts.css"/>
     <link rel="stylesheet" href="assets/css/plugins/toastr/toastr.min.css"/>
-    <link href="assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/custom.css"/>
-    <link rel="stylesheet" href="assets/css/asdp.css"/>
+    <link href="assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />    
 
+    <script type="text/javascript" src="assets/app-assets/vendors/js/vendors.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/app-assets/fonts/feather/style.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/perfect-scrollbar.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap.css">
@@ -50,12 +47,7 @@
 
     <!-- haqim -->
     <link rel="stylesheet" href="assets/css/chosen/chosen.min.css">
-    <!-- end -->
-    <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
-    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <script src="assets/plugins/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <!-- end -->        
     <script src='assets/plugins/fastclick/lib/fastclick.js'></script>
     <script src='assets/plugins/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'></script>
     <script src='assets/plugins/autoNumeric/autoNumeric.js'></script>
@@ -251,8 +243,7 @@
   <script type="text/javascript" src="assets/js/angular/administration.js"></script>
   <script type="text/javascript" src="assets/js/bottom.js"></script>
   <div id="ajax-modal" class="modal fade" tabindex="-1"></div>
-
-  <script type="text/javascript" src="assets/app-assets/vendors/js/vendors.min.js"></script>
+  
   <script type="text/javascript" src="assets/app-assets/js/core/app-menu.js"></script>
   <script type="text/javascript" src="assets/app-assets/js/toastr/toastr.min.js"></script>
   <script type="text/javascript" src="assets/app-assets/js/toastr/abe-toast.js"></script>

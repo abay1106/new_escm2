@@ -6,7 +6,7 @@
       <form class="form-inline" method="post" action="<?php echo site_url('user/add') ?>" role="form">
         <input type="hidden" name="table" value="<?php echo $table ?>">
         <div class="btn-group">
-          <button type="submit" class="btn btn-default btn-sm">Add Data</button>
+          <button type="submit" class="btn btn-light btn-sm">Add Data</button>
         </div>
       </form>
     </div>

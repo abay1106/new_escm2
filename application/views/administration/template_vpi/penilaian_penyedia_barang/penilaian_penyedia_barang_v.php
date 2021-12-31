@@ -196,7 +196,7 @@
       <div class="row">
         <div class="col-md-12">
           <div style="padding-bottom:50px;">
-            <button class="btn btn-default btn-lg cancel-btn">Batal</button>
+            <button class="btn btn-light btn-lg cancel-btn">Batal</button>
             <button type="submit" class="btn btn-primary btn-lg pull-right"><?php echo lang('save') ?></button>
           </div>
         </div>

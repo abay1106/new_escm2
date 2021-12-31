@@ -184,7 +184,7 @@
 
              <center>
               <a class="btn btn-primary action_item">Simpan</a>
-              <a class="btn btn-default empty_item">Hapus</a>
+              <a class="btn btn-light empty_item">Hapus</a>
               <input type="hidden" id="current_item" name="current_item" value=""/>
               <br>
              </center>
@@ -361,7 +361,7 @@
 								<div class="form-group">
 									<div class="col-lg-12 m-l-n text-center">
 
-										<a href="javascript:window.history.go(-1);" class="btn btn-default">Kembali</a>
+										<a href="javascript:window.history.go(-1);" class="btn btn-light">Kembali</a>
 										<button class="btn btn-primary" type="submit">Simpan</button>
 									</div>
 								</div>
@@ -372,7 +372,7 @@
 				</div>
 
 				<?php } else { ?>
-				<a href="javascript:window.history.go(-1);" class="btn btn-default">Kembali</a>
+				<a href="javascript:window.history.go(-1);" class="btn btn-light">Kembali</a>
 				<?php } ?> 
 
 			</form>

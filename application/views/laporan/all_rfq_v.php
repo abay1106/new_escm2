@@ -74,7 +74,7 @@
     </div>
     <div class="col-md-12">
       <div style="padding-bottom:50px;">
-        <a onclick="history.back(-1)" target="_self" class="btn btn-default btn-lg">Kembali</a>
+        <a onclick="history.back(-1)" target="_self" class="btn btn-light btn-lg">Kembali</a>
       </div>
     </div>
   </div>

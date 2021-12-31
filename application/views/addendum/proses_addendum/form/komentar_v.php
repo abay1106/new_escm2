@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-xs-1">
-      <button type="submit" class="btn btn-default">Simpan</button>
+      <button type="submit" class="btn btn-light">Simpan</button>
       </div>
 
       <div class="col-xs-1">

@@ -184,7 +184,7 @@
 
 <center>
   <a class="btn btn-primary action_item">Simpan</a>
-  <a class="btn btn-default empty_item">Hapus</a>
+  <a class="btn btn-light empty_item">Hapus</a>
   <input type="hidden" id="current_item" value=""/>
   <br>
 </center>

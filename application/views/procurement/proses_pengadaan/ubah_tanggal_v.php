@@ -6,7 +6,7 @@
 <?php include("form/jadwal_pengadaan_v.php"); ?>
 
 <center>
-<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+<button type="button" class="btn btn-light" data-dismiss="modal">Kembali</button>
 <button type="button" id="update_date_proc" class="btn btn-primary">Simpan</button>
 </center>
 

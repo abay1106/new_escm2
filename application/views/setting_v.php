@@ -52,7 +52,7 @@ if(!empty($msg)){
       <a href="uploads/<?php echo $value['value_gp'] ?>" target="_blank">
         <img class="thumbnail" width="128px" src="uploads/<?php echo $value['value_gp'] ?>"/>
       </a>
-      <a href="<?php echo site_url() ?>/setting/deleteimg/<?php echo $value['id_gp'] ?>" onclick="return confirm('Apakah anda yakin untuk menghapus file?');" class="btn btn-default">Hapus Gambar</a>
+      <a href="<?php echo site_url() ?>/setting/deleteimg/<?php echo $value['id_gp'] ?>" onclick="return confirm('Apakah anda yakin untuk menghapus file?');" class="btn btn-light">Hapus Gambar</a>
       <?php } ?>
 
       <?php } ?>
@@ -64,7 +64,7 @@ if(!empty($msg)){
     <?php } } ?>
 
     <div class="form-group col-xs-12">
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-light">Submit</button>
     </div>
   </form>
 </div>

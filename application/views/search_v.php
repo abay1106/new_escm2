@@ -49,7 +49,7 @@
                 echo implode(" - ", $variant);
                 ?>
               </td>
-              <td widtd="90px"><a href="<?php echo site_url('inventory/edit/'.$value['id']) ?>" class="btn btn-default">View</a></td>
+              <td widtd="90px"><a href="<?php echo site_url('inventory/edit/'.$value['id']) ?>" class="btn btn-light">View</a></td>
             </tr>
             <?php } ?>
 
@@ -95,7 +95,7 @@
               <td><?php echo $value['phone_cust'] ?></td>
               <td><?php echo $value['city_cust'] ?></td>
               <td><?php echo $value['address_cust'] ?></td>
-              <td widtd="90px"><a href="<?php echo site_url('customer/edit/'.$value['id_cust']) ?>" class="btn btn-default">View</a></td>
+              <td widtd="90px"><a href="<?php echo site_url('customer/edit/'.$value['id_cust']) ?>" class="btn btn-light">View</a></td>
             </tr>
             <?php } ?>
 

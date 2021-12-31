@@ -69,7 +69,7 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('procurement/procurement_tools/') ?>";
     return [
-    '<a class="btn btn-default btn-xs action" href="'+link+'/lihat_template_evaluasi/'+value+'">',
+    '<a class="btn btn-light btn-xs action" href="'+link+'/lihat_template_evaluasi/'+value+'">',
     'Lihat',
     '</a>  ',
     '<a class="btn btn-primary btn-xs action" href="'+link+'/ubah_template_evaluasi/'+value+'">',

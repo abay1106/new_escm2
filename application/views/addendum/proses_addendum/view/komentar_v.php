@@ -56,7 +56,7 @@
       </div>
 
       <div class="col-xs-1">
-      <button type="submit" class="btn btn-default">Tidak Setuju</button>
+      <button type="submit" class="btn btn-light">Tidak Setuju</button>
       </div>
 
       <div class="col-xs-1">
@@ -76,7 +76,7 @@
       </div>
 
       <div class="col-xs-1">
-      <button type="submit" class="btn btn-default">Setuju</button>
+      <button type="submit" class="btn btn-light">Setuju</button>
       </div>
 
       <div class="col-xs-1">
@@ -96,7 +96,7 @@
       </div>
 
       <div class="col-xs-1">
-      <button type="submit" class="btn btn-default">Verifikasi Selesai</button>
+      <button type="submit" class="btn btn-light">Verifikasi Selesai</button>
       </div>
 
       <div class="col-xs-1">

@@ -276,7 +276,7 @@
 			</div>
 
 			
-			<a href="javascript:window.history.go(-1);" class="btn btn-default">Kembali</a>
+			<a href="javascript:window.history.go(-1);" class="btn btn-light">Kembali</a>
 		</form>
 
 	</div>

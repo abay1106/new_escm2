@@ -134,15 +134,15 @@
 							<p><small>Administration</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-3"> 
-							<button href="#step-2" type="button" class="btn btn-default btn-circle" disabled>2</button>
+							<button href="#step-2" type="button" class="btn btn-light btn-circle" disabled>2</button>
 							<p><small>Keuangan</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-3"> 
-							<button href="#step-3" type="button" class="btn btn-default btn-circle" disabled>3</button>
+							<button href="#step-3" type="button" class="btn btn-light btn-circle" disabled>3</button>
 							<p><small>Pengalaman</small></p>
 						</div>
 						<div class="stepwizard-step col-xs-3"> 
-							<button href="#step-4" type="button" class="btn btn-default btn-circle" disabled >4</button>
+							<button href="#step-4" type="button" class="btn btn-light btn-circle" disabled >4</button>
 							<p><small>Teknis</small></p>
 						</div>
 					</div>

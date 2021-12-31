@@ -23,7 +23,7 @@ function buttonsubmit($url,$back = "Kembali", $save = "Simpan"){
   $html = "<div class='row'>
   <div class='col-md-12'>
     <div style='padding-bottom:20px;'>
-      <a href='".site_url($url)."' class='btn btn-default btn-lg'>".$back."</a>
+      <a href='".site_url($url)."' class='btn btn-light btn-lg'>".$back."</a>
       <button type='submit' class='btn btn-primary btn-lg pull-right'>".$save."</button>
     </div>
   </div>
@@ -35,7 +35,7 @@ function buttonback($url,$back = "Kembali"){
   $html = "<div class='row'>
   <div class='col-md-12'>
     <div style='padding-bottom:20px;'>
-      <a href='".site_url($url)."' class='btn btn-default btn-lg'>".$back."</a>
+      <a href='".site_url($url)."' class='btn btn-light btn-lg'>".$back."</a>
     </div>
   </div>
 </div>";

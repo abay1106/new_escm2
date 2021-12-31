@@ -14,7 +14,7 @@
       </div>
       <div class="modal-footer">
 	  <button type="button" class="btn btn-primary" id=<?php echo $idpick ?>><?php echo $this->lang->line('Simpan'); ?></button>
-        <button type="button" class="btn btn-default" id="dismiss" data-dismiss="modal"><?php echo $this->lang->line('Keluar'); ?></button>
+        <button type="button" class="btn btn-light" id="dismiss" data-dismiss="modal"><?php echo $this->lang->line('Keluar'); ?></button>
       </div>
     </div>
   </div>

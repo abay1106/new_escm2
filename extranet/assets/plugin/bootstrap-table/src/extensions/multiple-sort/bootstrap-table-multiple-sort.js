@@ -35,8 +35,8 @@
             sModal += '                         <div class="fixed-table-toolbar">';
             sModal += '                             <div class="bars">';
             sModal += '                                 <div id="toolbar">';
-            sModal += '                                     <button id="add" type="button" class="btn btn-default"><i class="' + that.options.iconsPrefix + ' ' + that.options.icons.plus + '"></i> ' + that.options.formatAddLevel() + '</button>';
-            sModal += '                                     <button id="delete" type="button" class="btn btn-default" disabled><i class="' + that.options.iconsPrefix + ' ' + that.options.icons.minus + '"></i> ' + that.options.formatDeleteLevel() + '</button>';
+            sModal += '                                     <button id="add" type="button" class="btn btn-light"><i class="' + that.options.iconsPrefix + ' ' + that.options.icons.plus + '"></i> ' + that.options.formatAddLevel() + '</button>';
+            sModal += '                                     <button id="delete" type="button" class="btn btn-light" disabled><i class="' + that.options.iconsPrefix + ' ' + that.options.icons.minus + '"></i> ' + that.options.formatDeleteLevel() + '</button>';
             sModal += '                                 </div>';
             sModal += '                             </div>';
             sModal += '                         </div>';
@@ -55,7 +55,7 @@
             sModal += '                     </div>';
             sModal += '                 </div>';
             sModal += '                 <div class="modal-footer">';
-            sModal += '                     <button type="button" class="btn btn-default" data-dismiss="modal">' + that.options.formatCancel() + '</button>';
+            sModal += '                     <button type="button" class="btn btn-light" data-dismiss="modal">' + that.options.formatCancel() + '</button>';
             sModal += '                     <button type="button" class="btn btn-primary">' + that.options.formatSort() + '</button>';
             sModal += '                 </div>';
             sModal += '             </div>';
@@ -226,7 +226,7 @@
                 $multiSortBtn = $btnGroup.find('div.multi-sort');
 
             if (!$multiSortBtn.length) {
-                $multiSortBtn = '  <button class="multi-sort btn btn-default' + (this.options.iconSize === undefined ? '' : ' btn-' + this.options.iconSize) + '" type="button" data-toggle="modal" data-target="#sortModal" title="' + this.options.formatMultipleSort() + '">';
+                $multiSortBtn = '  <button class="multi-sort btn btn-light' + (this.options.iconSize === undefined ? '' : ' btn-' + this.options.iconSize) + '" type="button" data-toggle="modal" data-target="#sortModal" title="' + this.options.formatMultipleSort() + '">';
                 $multiSortBtn += '     <i class="' + this.options.iconsPrefix + ' ' + this.options.icons.sort + '"></i>';
                 $multiSortBtn += '</button>';
 

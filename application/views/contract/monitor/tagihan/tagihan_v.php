@@ -85,7 +85,7 @@
             <td>Termin 1</td>
             <td>08.10.2015</td>
             <td>60%</td>
-            <td align="center"><button class="btn btn-default" type="submit">Ubah</button> <span><button class="btn btn-danger" type="submit">Hapus</button></span></td>
+            <td align="center"><button class="btn btn-light" type="submit">Ubah</button> <span><button class="btn btn-danger" type="submit">Hapus</button></span></td>
           </tr>
         </tbody>
       </table>

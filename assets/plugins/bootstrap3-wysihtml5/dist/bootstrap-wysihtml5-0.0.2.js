@@ -6,7 +6,7 @@
         var tpl = {
             "font-styles":
                 "<li class='dropdown'>" +
-                  "<a class='btn btn-default dropdown-toggle' data-toggle='dropdown' href='#'>" +
+                  "<a class='btn btn-light dropdown-toggle' data-toggle='dropdown' href='#'>" +
                   "<i class='glyphicon glyphglyphicon glyphicon-font'></i>&nbsp;<span class='current-font'>" + locale.font_styles.normal + "</span>&nbsp;<b class='caret'></b>" +
                   "</a>" +
                   "<ul class='dropdown-menu'>" +
@@ -20,19 +20,19 @@
             "emphasis":
                 "<li>" +
                   "<div class='btn-group'>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='bold' title='CTRL+B'>" + locale.emphasis.bold + "</a>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='italic' title='CTRL+I'>" + locale.emphasis.italic + "</a>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='underline' title='CTRL+U'>" + locale.emphasis.underline + "</a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='bold' title='CTRL+B'>" + locale.emphasis.bold + "</a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='italic' title='CTRL+I'>" + locale.emphasis.italic + "</a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='underline' title='CTRL+U'>" + locale.emphasis.underline + "</a>" +
                   "</div>" +
                 "</li>",
 
             "lists":
                 "<li>" +
                   "<div class='btn-group'>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "'><i class='glyphicon glyphicon-list'></i></a>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "'><i class='glyphicon glyphicon-th-list'></i></a>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "'><i class='glyphicon glyphicon-indent-right'></i></a>" +
-                    "<a class='btn btn-default' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "'><i class='glyphicon glyphicon-indent-left'></i></a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "'><i class='glyphicon glyphicon-list'></i></a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "'><i class='glyphicon glyphicon-th-list'></i></a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "'><i class='glyphicon glyphicon-indent-right'></i></a>" +
+                    "<a class='btn btn-light' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "'><i class='glyphicon glyphicon-indent-left'></i></a>" +
                   "</div>" +
                 "</li>",
 
@@ -47,11 +47,11 @@
                       "<input value='http://' class='bootstrap-wysihtml5-insert-link-url input-xlarge'>" +
                     "</div>" +
                     "<div class='modal-footer'>" +
-                      "<a href='#' class='btn btn-default' data-dismiss='modal'>" + locale.link.cancel + "</a>" +
+                      "<a href='#' class='btn btn-light' data-dismiss='modal'>" + locale.link.cancel + "</a>" +
                       "<a href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.link.insert + "</a>" +
                     "</div>" +
                   "</div>" +
-                  "<a class='btn btn-default' data-wysihtml5-command='createLink' title='" + locale.link.insert + "'><i class='glyphicon glyphicon-share'></i></a>" +
+                  "<a class='btn btn-light' data-wysihtml5-command='createLink' title='" + locale.link.insert + "'><i class='glyphicon glyphicon-share'></i></a>" +
                 "</li>",
 
             "image":
@@ -65,17 +65,17 @@
                       "<input value='http://' class='bootstrap-wysihtml5-insert-image-url input-xlarge'>" +
                     "</div>" +
                     "<div class='modal-footer'>" +
-                      "<a href='#' class='btn btn-default' data-dismiss='modal'>" + locale.image.cancel + "</a>" +
+                      "<a href='#' class='btn btn-light' data-dismiss='modal'>" + locale.image.cancel + "</a>" +
                       "<a href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.image.insert + "</a>" +
                     "</div>" +
                   "</div>" +
-                  "<a class='btn btn-default' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "'><i class='glyphicon glyphicon-picture'></i></a>" +
+                  "<a class='btn btn-light' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "'><i class='glyphicon glyphicon-picture'></i></a>" +
                 "</li>",
 
             "html":
                 "<li>" +
                   "<div class='btn-group'>" +
-                    "<a class='btn btn-default' data-wysihtml5-action='change_view' title='" + locale.html.edit + "'><i class='glyphicon glyphicon-pencil'></i></a>" +
+                    "<a class='btn btn-light' data-wysihtml5-action='change_view' title='" + locale.html.edit + "'><i class='glyphicon glyphicon-pencil'></i></a>" +
                   "</div>" +
                 "</li>",
 
@@ -198,7 +198,7 @@
         initHtml: function(toolbar) {
             var changeViewSelector = "a[data-wysihtml5-action='change_view']";
             toolbar.find(changeViewSelector).click(function(e) {
-                toolbar.find('a.btn btn-default').not(changeViewSelector).toggleClass('disabled');
+                toolbar.find('a.btn btn-light').not(changeViewSelector).toggleClass('disabled');
             });
         },
 

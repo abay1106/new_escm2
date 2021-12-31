@@ -44,7 +44,7 @@ if($contract_type != "HARGA SATUAN"){ ?>
 
           <center>
             <a class="btn btn-primary action_milestone">Add</a>
-            <a class="btn btn-default empty_milestone">Clear</a>
+            <a class="btn btn-light empty_milestone">Clear</a>
             <input type="hidden" id="current_milestone" value=""/>
             <br>
           </center>

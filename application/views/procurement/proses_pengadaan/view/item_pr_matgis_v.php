@@ -96,7 +96,7 @@ include(VIEWPATH."procurement/proses_pengadaan/view/item_pr_v.php");
 
 <center>
   <a class="btn btn-primary action_item">Simpan</a>
-  <a class="btn btn-default empty_item">Hapus</a>
+  <a class="btn btn-light empty_item">Hapus</a>
   <input type="hidden" id="current_item" name="current_item" value=""/>
   <br>
 </center>
