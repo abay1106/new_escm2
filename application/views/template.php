@@ -12,7 +12,6 @@
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/'.$site_favicon) ?>">
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/theme.css"/>
-    <link href="assets/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />

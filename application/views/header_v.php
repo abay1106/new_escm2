@@ -9,7 +9,7 @@
       
       <div class="navbar-container">
          <div class="collapse navbar-collapse d-block" id="navbarSupportedContent">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mt-2">
                <!--- ============ New Remider Document Vendor ================ -->
                <?php if($this->data['userdata']['pos_id'] == "27") { ?>
                <li class="dropdown">
@@ -50,10 +50,10 @@
                </li>  
 
                <!--- ============ New notif ================ -->
-               <li class="dropdown nav-item mr-1"><a class="nav-link dropdown-toggle dropdown-notification p-0 mt-1" id="dropdownBasic1" href="javascript:;" data-toggle="dropdown"><i class="ft-bell font-medium-1"></i><span class="notification badge badge-pill badge-danger"><?php echo count($jobs)?></span></a>
-                  <ul class="notification-dropdown dropdown-menu dropdown-menu-media dropdown-menu-right m-0 overflow-hidden">
+               <li class="dropdown nav-item mr-1"><a class="nav-link dropdown-toggle dropdown-notification" id="dropdownBasic1" href="javascript:;" data-toggle="dropdown"><i class="ft-bell font-medium-1"></i><span class="notification badge badge-pill badge-danger"><?php echo count($jobs)?></span></a>
+                  <ul class="notification-dropdown dropdown-menu dropdown-menu-media dropdown-menu-right overflow-hidden">
                      <li class="dropdown-menu-header">
-                        <div class="dropdown-header d-flex justify-content-between m-0 px-3 py-2 white bg-info">
+                        <div class="dropdown-header d-flex justify-content-between white bg-info">
                               <div class="d-flex"><i class="ft-bell font-medium-3 d-flex align-items-center mr-2"></i><span class="noti-title"><?php echo count($jobs)?> Notification</span></div>
                         </div>
                      </li>                        
