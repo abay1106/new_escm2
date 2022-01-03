@@ -21,14 +21,19 @@
 
       if(!empty($message)){ ?>
 
-      <div class="alert alert-info alert-dismissible" style="margin:10px 10px 0px 10px" role="alert">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <div class="alert bg-light-info mb-2 col-12" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <?php echo $message ?>
       </div>
 
       <?php } $this->session->unset_userdata("message");
 
       if(!empty($validate)){ ?>
+
+      <div class="alert bg-danger-info mb-2 col-12" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php echo $validate ?>
+      </div>
 
       <div class="alert alert-danger alert-dismissible" style="margin:10px 10px 0px 10px" role="alert">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
