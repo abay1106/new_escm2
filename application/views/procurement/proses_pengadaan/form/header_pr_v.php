@@ -1,262 +1,181 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Headline</h4>
+      </div>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-          <div class="ibox-title">
-            <h5>HEADLINE</h5>
-            <div class="ibox-tools">
-              <a class="collapse-link">
-                <i class="fa fa-chevron-up"></i>
-              </a>
-            </div>
-          </div>
-          <div class="ibox-content">
-
+      <div class="card-content">
+        <div class="card-body">
             <?php $curval = (isset($permintaan['pr_number'])) ? $permintaan['pr_number'] : "AUTO"; ?>
 
-           <div class="form-group">
-            <label class="col-sm-2 control-label">No. Permintaan</label>
-            <div class="col-sm-10">
-             <p class="form-control-static"><?php echo $curval ?></p>
-           </div>
-         </div>
-
-           <?php $curval = (isset($permintaan['pr_requester_name'])) ? $permintaan['pr_requester_name'] : $userdata['complete_name']; ?>
-
-           <div class="form-group">
-            <label class="col-sm-2 control-label">User</label>
-            <div class="col-sm-10">
-             <p class="form-control-static"><?php echo $curval ?></p>
-           </div>
-         </div>
-
-         <?php $curval = (isset($permintaan['pr_requester_pos_name'])) ? $permintaan['pr_requester_pos_name'] : $pos['dept_name']; ?>
-
-         <div class="form-group">
-          <label class="col-sm-2 control-label">Divisi/Departemen</label>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">No. Permintaan</label>
           <div class="col-sm-10">
             <p class="form-control-static"><?php echo $curval ?></p>
           </div>
-        </div>
+          </div>
 
-        <?php $curval = (isset($permintaan['pr_subject_of_work'])) ?  $permintaan["pr_subject_of_work"] : set_value("nama_pekerjaan"); ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Nama Rencana Pengadaan</label>
+          <?php $curval = (isset($permintaan['pr_requester_name'])) ? $permintaan['pr_requester_name'] : $userdata['complete_name']; ?>
+
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">User</label>
+          <div class="col-sm-10">
+            <p class="form-control-static"><?php echo $curval ?></p>
+          </div>
+          </div>
+
+          <?php $curval = (isset($permintaan['pr_requester_pos_name'])) ? $permintaan['pr_requester_pos_name'] : $pos['dept_name']; ?>
+
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Divisi/Departemen</label>
+          <div class="col-sm-10">
+          <p class="form-control-static"><?php echo $curval ?></p>
+          </div>
+          </div>
+
+          <?php $curval = (isset($permintaan['pr_subject_of_work'])) ?  $permintaan["pr_subject_of_work"] : set_value("nama_pekerjaan"); ?>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Nama Rencana Pengadaan</label>
           <div class="col-sm-8">
-             <input type="text" class="form-control" required="true" name="nama_pekerjaan" id="nama_pekerjaan" value="<?php echo $curval ?>" readonly>
+            <input type="text" class="form-control" required="true" name="nama_pekerjaan" id="nama_pekerjaan" value="<?php echo $curval ?>" readonly>
           </div>
           <div class="col-sm-2">
           <?php $curval = (isset($permintaan['ppm_id'])) ?  $permintaan["ppm_id"] : set_value("perencanaan_pengadaan_inp"); ?>
-            <button type="button" data-id="perencanaan_pengadaan_inp" data-url="<?php echo site_url(PROCUREMENT_PERENCANAAN_PENGADAAN_PATH.'/picker') ?>" class="btn btn-primary picker"><i class="fa fa-search"></i></button> 
-            <input type="hidden" name="perencanaan_pengadaan_inp" required="true" value="<?php echo $curval ?>" id="perencanaan_pengadaan_inp"/>
+          <button type="button" data-id="perencanaan_pengadaan_inp" data-url="<?php echo site_url(PROCUREMENT_PERENCANAAN_PENGADAAN_PATH.'/picker') ?>" class="btn btn-info picker"><i class="fa fa-search"></i></button> 
+          <input type="hidden" name="perencanaan_pengadaan_inp" required="true" value="<?php echo $curval ?>" id="perencanaan_pengadaan_inp"/>
           </div>
-        </div>
+          </div>
 
-        <?php $curval = (isset($permintaan['pr_scope_of_work'])) ? $permintaan["pr_scope_of_work"] : set_value("deskripsi_pekerjaan"); ?>
-        <div class="form-group" hidden="hidden">
-          <label class="col-sm-2 control-label">Deskripsi Pekerjaan</label>
+          <?php $curval = (isset($permintaan['pr_scope_of_work'])) ? $permintaan["pr_scope_of_work"] : set_value("deskripsi_pekerjaan"); ?>
+          <div class="row form-group" hidden="hidden">
+          <label class="col-sm-2 control-label text-right">Deskripsi Pekerjaan</label>
           <div class="col-sm-10">
 
-            <textarea type="text" class="form-control" id="deskripsi_pekerjaan" required="true" name="deskripsi_pekerjaan" readonly><?php echo $curval ?></textarea>
+          <textarea type="text" class="form-control" id="deskripsi_pekerjaan" required="true" name="deskripsi_pekerjaan" readonly><?php echo $curval ?></textarea>
           </div>
-        </div>
+          </div>
 
-        <!-- haqim -->
-        <?php $curval = (isset($permintaan['pr_spk_code'])) ? $permintaan["pr_spk_code"] : set_value("nama_proyek"); ?>
-        <div class="form-group" id="kode_spk_div">
-          <label class="col-sm-2 control-label">Kode SPK</label>
+          <!-- haqim -->
+          <?php $curval = (isset($permintaan['pr_spk_code'])) ? $permintaan["pr_spk_code"] : set_value("nama_proyek"); ?>
+          <div class="row form-group" id="kode_spk_div">
+          <label class="col-sm-2 control-label text-right">Kode SPK</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="spk_code" required="true" id="kode_spk" value="<?php echo $curval ?>" disabled>
+          <input type="text" class="form-control" name="spk_code" required="true" id="kode_spk" value="<?php echo $curval ?>" disabled>
           </div>
-        </div>
+          </div>
 
-        <?php $curval = (isset($permintaan['pr_project_name'])) ? $permintaan["pr_scope_of_work"] : set_value("nama_proyek"); ?>
-        <div class="form-group" id="nama_proyek_div">
-          <label class="col-sm-2 control-label">Nama Proyek</label>
+          <?php $curval = (isset($permintaan['pr_project_name'])) ? $permintaan["pr_scope_of_work"] : set_value("nama_proyek"); ?>
+          <div class="row form-group" id="nama_proyek_div">
+          <label class="col-sm-2 control-label text-right">Nama Proyek</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" name="nama_pekerjaan" id="nama_proyek" required="true" value="<?php echo $curval ?>" disabled>
+          <input type="text" class="form-control" name="nama_pekerjaan" id="nama_proyek" required="true" value="<?php echo $curval ?>" disabled>
           </div>
-        </div>
-        <!-- end -->
+          </div>
+          <!-- end -->
 
-        <?php 
-    $code = (isset($permintaan['pr_mata_anggaran']) && !empty($permintaan['pr_mata_anggaran'])) ? $permintaan['pr_mata_anggaran'] : null;
-    $label = (isset($permintaan['pr_nama_mata_anggaran']) && !empty($permintaan['pr_nama_mata_anggaran'])) ? $permintaan['pr_nama_mata_anggaran'] : null;
-    $curval = (!empty($code) && !empty($label)) ? $code." ".$label : null; 
-    ?>
-    
-    <?php if(!empty($curval)){ ?>
+          <?php 
+          $code = (isset($permintaan['pr_mata_anggaran']) && !empty($permintaan['pr_mata_anggaran'])) ? $permintaan['pr_mata_anggaran'] : null;
+          $label = (isset($permintaan['pr_nama_mata_anggaran']) && !empty($permintaan['pr_nama_mata_anggaran'])) ? $permintaan['pr_nama_mata_anggaran'] : null;
+          $curval = (!empty($code) && !empty($label)) ? $code." ".$label : null; 
+          ?>
 
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Mata Anggaran</label>
+          <?php if(!empty($curval)){ ?>
+
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Mata Anggaran</label>
           <div class="col-sm-10">
-            <p class="form-control-static" id="mata_anggaran"><?php echo $curval ?></p>
+          <p class="form-control-static" id="mata_anggaran"><?php echo $curval ?></p>
           </div>
-        </div>
-
-      <?php } ?>
-
-        <?php
-
-    $curval = null;
-    if (isset($permintaan["pr_sub_mata_anggaran"]) and substr_count($permintaan["pr_sub_mata_anggaran"], " , ") >= 1 ) {
-     $code = explode(" , ", $permintaan["pr_sub_mata_anggaran"]);
-     $name = explode(" , ", $permintaan["pr_nama_sub_mata_anggaran"]);
-     $curval = $permintaan["pr_sub_mata_anggaran"]." - ".$permintaan["pr_nama_sub_mata_anggaran"];
-   }
-   ?>
-
-   <?php if(!empty($curval)){ ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Sub Mata Anggaran *</label>
-            <div class="col-sm-10">
-              <p class="form-control-static" id="sub_mata_anggaran">
-                <?php
-                  if (isset($code)) {
-                    foreach (array_combine($code, $name) as $code => $name ) {
-                      echo $code.' - '.$name."<br/>";
-                    }
-                   }else{
-                   // else if ($permintaan["pr_sub_mata_anggaran"] == 0) {
-                   //   foreach ($project_cost as $keypc => $valuepc) {
-                   //    echo $valuepc['coa_code'].' - '.$valuepc['coa_name']."<br/>";
-                   //   }
-                   // }
-                   // else{
-                      echo $curval;
-                   } 
-
-                  ?>
-              </p>
-            </div>
           </div>
-        <?php } ?>
 
-        <?php //$curval = (isset($permintaan['pr_sub_mata_anggaran']) && isset($permintaan['pr_nama_sub_mata_anggaran'])) ? $permintaan["pr_sub_mata_anggaran"]." - ".$permintaan["pr_nama_sub_mata_anggaran"] : ""; ?>
-        <!-- <div class="form-group">
-          <label class="col-sm-2 control-label">Sub Mata Anggaran</label>
+          <?php } ?>
+
+          <?php
+
+          $curval = null;
+          if (isset($permintaan["pr_sub_mata_anggaran"]) and substr_count($permintaan["pr_sub_mata_anggaran"], " , ") >= 1 ) {
+          $code = explode(" , ", $permintaan["pr_sub_mata_anggaran"]);
+          $name = explode(" , ", $permintaan["pr_nama_sub_mata_anggaran"]);
+          $curval = $permintaan["pr_sub_mata_anggaran"]." - ".$permintaan["pr_nama_sub_mata_anggaran"];
+          }
+          ?>
+
+          <?php if(!empty($curval)){ ?>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Sub Mata Anggaran *</label>
           <div class="col-sm-10">
-            <p class="form-control-static" id="sub_mata_anggaran"><?php //echo $curval ?></p>
-          </div>
-        </div> -->
+            <p class="form-control-static" id="sub_mata_anggaran">
+              <?php
+                if (isset($code)) {
+                  foreach (array_combine($code, $name) as $code => $name ) {
+                    echo $code.' - '.$name."<br/>";
+                  }
+                  }else{
+                    echo $curval;
+                  } 
 
-        <?php $curval = (isset($permintaan['pr_pagu_anggaran'])) ? $permintaan["pr_pagu_anggaran"] : 0; ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Nilai Anggaran</label>
+                ?>
+            </p>
+          </div>
+          </div>
+          <?php } ?>
+
+          <?php $curval = (isset($permintaan['pr_pagu_anggaran'])) ? $permintaan["pr_pagu_anggaran"] : 0; ?>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Nilai Anggaran</label>
           <div class="col-sm-4">
-            <p class="form-control-static" id="pagu_anggaran" maxlength="22"><?php echo inttomoney($curval) ?></p>
+          <p class="form-control-static" id="pagu_anggaran" maxlength="22"><?php echo inttomoney($curval) ?></p>
           </div>
-        </div>
+          </div>
 
-        <?php $curval = (isset($permintaan['pr_sisa_anggaran'])) ? $permintaan["pr_sisa_anggaran"] : 0 ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Sisa Anggaran</label>
+          <?php $curval = (isset($permintaan['pr_sisa_anggaran'])) ? $permintaan["pr_sisa_anggaran"] : 0 ?>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Sisa Anggaran</label>
           <div class="col-sm-4">
-            <p class="form-control-static" id="sisa_anggaran"><?php echo inttomoney($curval) ?></p>
+          <p class="form-control-static" id="sisa_anggaran"><?php echo inttomoney($curval) ?></p>
           </div>
-        </div>
-
-        
-
-
-<?php /*
-        <?php $curval = (isset($permintaan['pr_district_id'])) ? $permintaan["pr_district_id"] : set_value("lokasi_kebutuhan_inp"); ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Lokasi Kebutuhan *</label>
-          <div class="col-sm-5">
-           <select class="form-control" required name="lokasi_kebutuhan_inp" value="<?php echo $curval ?>">
-             <option value=""><?php echo lang('choose') ?></option>
-             <?php foreach($district_list as $key => $val){
-              $selected = ($val['district_id'] == $curval) ? "selected" : ""; 
-              ?>
-              <option <?php echo $selected ?> value="<?php echo $val['district_id'] ?>"><?php echo $val['district_code'] ?> - <?php echo $val['district_name'] ?></option>
-              <?php } ?>
-            </select>
           </div>
-        </div>
-        */ ?>
-        <?php /* haqim
-        <?php $curval = (isset($permintaan['pr_delivery_point_id'])) ? $permintaan["pr_delivery_point_id"] : set_value("lokasi_pengiriman_inp"); ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Lokasi Pengiriman *</label>
-          <div class="col-sm-5">
-           <select class="form-control" required name="lokasi_pengiriman_inp">
-             <option value=""><?php echo lang('choose') ?></option>
-             <?php foreach($del_point_list as $key => $val){
-              $selected = ($val['dept_id'] == $curval) ? "selected" : ""; 
-              $type = (!empty($val['dept_type'])) ? "Pelabuhan" : "Divisi";
-              ?>
-              <option <?php echo $selected ?> value="<?php echo $val['dept_id'] ?>">
-              <?php echo $type ?> - <?php echo $val['dept_name'] ?></option>
-              <?php } ?>
-            </select>
-          </div>
-        </div>*/
-        ?>
-        <?php $curval = (isset($permintaan['pr_packet'])) ?  $permintaan["pr_packet"] : set_value("nama_paket"); ?>
-       <div class="form-group">
-          <label class="col-sm-2 control-label">Nama Paket Pengadaan*</label>
+
+          <?php $curval = (isset($permintaan['pr_packet'])) ?  $permintaan["pr_packet"] : set_value("nama_paket"); ?>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Nama Paket Pengadaan*</label>
           <div class="col-sm-8" id="nama_paket_div">
-             <input type="text" class="form-control" name="nama_paket" id="nama_paket" required="true" value="<?php echo $curval ?>">
+            <input type="text" class="form-control" name="nama_paket" id="nama_paket" required="true" value="<?php echo $curval ?>">
           </div>
-        </div>
+          </div>
 
-        <!-- //y tambah jenis pr -->        
-        <?php $curval = (isset($permintaan['pr_type'])) ?  $permintaan["pr_type"] : set_value("tipe_pr"); ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Jenis Paket Pengadaan*</label>
+          <!-- //y tambah jenis pr -->        
+          <?php $curval = (isset($permintaan['pr_type'])) ?  $permintaan["pr_type"] : set_value("tipe_pr"); ?>
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Jenis Paket Pengadaan*</label>
           <div class="col-sm-5">
-           <select class="form-control" name="tipe_pr" required="true" value="<?php echo $curval ?>">
-            <option value=""><?php echo lang('choose') ?></option>
-            <?php foreach($pr_type as $key => $val){
-              $selected = ($key == $curval) ? "selected" : ""; 
-              ?>
-              <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $val ?></option>
-              <?php } ?>
-            </select>
+          <select class="form-control" name="tipe_pr" required="true" value="<?php echo $curval ?>">
+          <option value=""><?php echo lang('choose') ?></option>
+          <?php foreach($pr_type as $key => $val){
+            $selected = ($key == $curval) ? "selected" : ""; 
+            ?>
+            <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $val ?></option>
+            <?php } ?>
+          </select>
           </div>
-        </div>
+          </div>
 
-        <!--  <div class="form-group">
-          <label class="col-sm-2 control-label">Join Paket Pengadaan</label>
-            <div class="col-sm-4">
-              <div class="checkbox">
-                <?php //$curval = set_value("joinpr"); ?>
-                <input type="checkbox" onclick="joinpr_confirm()" class="" name="joinpr" id="joinpr" value="1">
-              </div>
-            </div>
-        </div> -->
-
-<!-- HLMIFZI -->
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Pembelian Langsung/Swakelola
-</label>
+          <!-- HLMIFZI -->
+          <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Pembelian Langsung/Swakelola
+          </label>
           <div class="col-sm-4">
-            <div class="checkbox">
-              <?php $curval = set_value("swakelola_inp"); ?>
-              <input type="checkbox" onclick="swakelola_confirm()" class="" name="swakelola_inp" id="swakelola_inp" value="1">
-            </div>
+          <div class="">
+            <?php $curval = set_value("swakelola_inp"); ?>
+            <input type="checkbox" onclick="swakelola_confirm()" class="" name="swakelola_inp" id="swakelola_inp" value="1">
+          </div>
+          </div>
           </div>
         </div>
-
-<?php /*
-        <?php $curval = (isset($permintaan['pr_contract_type'])) ?  $permintaan["pr_contract_type"] : set_value("jenis_kontrak_inp"); ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Jenis Kontrak *</label>
-          <div class="col-sm-5">
-           <select class="form-control" required name="jenis_kontrak_inp" value="<?php echo $curval ?>">
-            <option value=""><?php echo lang('choose') ?></option>
-            <?php foreach($contract_type as $key => $val){
-              $selected = ($key == $curval) ? "selected" : ""; 
-              ?>
-              <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $val ?></option>
-              <?php } ?>
-            </select>
-          </div>
-        </div>
-        */ ?>
-
       </div>
+
     </div>
   </div>
 </div>

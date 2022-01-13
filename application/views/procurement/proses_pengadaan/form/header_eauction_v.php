@@ -31,26 +31,8 @@
             echo $curval; ?></textarea>
           </div>
         </div>
-<?php /*
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Batas Nilai eAuction</label>
-          <div class="col-sm-2">
-            <div class="input-group">
-              <input type="radio" id="persentase" value="1" name="metode_batas" checked="checked">
-              <span>Persentase</span>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="input-group">
-              <input type="radio" id="nominal" value="2" name="metode_batas">
-              <span>Nominal</span>
-            </div>
-          </div>
-        </div>
-*/ ?>
-<div class="form-group" id="batas_persentase">
-  <?php //if (is_array($eauction_header) || $eauction_header['batas_method'] == 1 || empty($eauction_header['batas_method'])) { ?>
 
+<div class="form-group" id="batas_persentase">
     <?php $persenbb = (isset($eauction_header['batas_bawah_percent'])) ? $eauction_header['batas_bawah_percent'] : set_value("b_bawah_eauction_percent_inp"); ?>
     <label class="col-sm-2 control-label">Batas Bawah (%)</label>
     <div class="col-sm-3">
@@ -74,12 +56,9 @@
      <?php $curval = (isset($eauction_header['batas_bawah'])) ? $eauction_header['batas_bawah'] : set_value("b_bawah_eauction_money_inp"); ?>
      <input type="hidden" name="b_bawah_eauction_money_inp" id="b_bawah_eauction_money_inp_h" value="<?php echo $curval ?>">
    </div>
-   <?php //} ?>
  </div>
 
  <div class="form-group" id="batas_nominal">
-  <?php //if (is_array($eauction_header) || $eauction_header['batas_method'] == 2) { ?>
-
    <?php $curval = (isset($eauction_header['batas_bawah'])) ? $eauction_header['batas_bawah'] : set_value("b_bawah_eauction_money_inp"); ?>
    <label class="col-sm-2 control-label">Batas Bawah (Nominal)</label>
    <div class="col-sm-3">
@@ -105,7 +84,6 @@
    <?php $curval = (isset($eauction_header['batas_bawah_percent'])) ? $eauction_header['batas_bawah_percent'] : $persenbb ?>
    <input type="hidden" id="b_bawah" name="b_bawah_eauction_percent_inp_h"  value="<?php echo $curval ?>">
  </div>
- <?php //} ?>
 </div>
 
 <div class="form-group">
@@ -167,62 +145,6 @@
     //$('#batas_nominal').hide()
     $('input[type=radio][name=metode_batas]').change(function() {
       reset_range(this.value);
-      /*
-      if (this.value == '1') {
-          html = '';
-          html += "<label class='col-sm-2 control-label'>Batas Bawah</label>";
-          html += '<div class="col-sm-2">';
-          html += '<div class="input-group">';
-          html += '<input type="text" class="form-control money" id="b_bawah" name="b_bawah_eauction_percent_inp" value="'+$('[name=b_bawah_eauction_percent_inp]').val()+'" maxlength="6">';
-          html += '<span class="input-group-addon">%</span>';
-          html += '</div> </div>';
-          html += '<label class="col-sm-2 control-label">Batas Atas</label>';
-          html += '<div class="col-sm-2">';
-          html += '<div class="input-group">';
-          html += '<input type="text" class="form-control money" id="b_atas" name="b_atas_eauction_percent_inp" value="'+$('[name=b_atas_eauction_percent_inp]').val()+'" maxlength="6">';
-          html += '<span class="input-group-addon">%</span>';
-          html += '</div> </div>';
-          html += '<div class="col-sm-4">';
-          html += '<p class="form-control-static" id="b_eauction_label"></p>';
-          html += '<input type="hidden" name="b_atas_eauction_money_inp" id="b_atas_eauction_money_inp" value="'+$('[name=b_atas_eauction_money_inp]').val()+'">';
-          html += '<input type="hidden" name="b_bawah_eauction_money_inp" id="b_bawah_eauction_money_inp" value="'+$('[name=b_bawah_eauction_money_inp]').val()+'">';
-          html += '</div>';
-          $('#batas_persentase').html('');
-          $('#batas_nominal').html('');
-          $('#batas_nominal').hide();
-          $('#batas_persentase').show();
-          $('#batas_persentase').html(html);
-          $("#b_eauction_label").html('Range : <strong>'+inttomoney($("#b_bawah_eauction_money_inp").val())+'</strong> - <strong>'+inttomoney($("#b_atas_eauction_money_inp").val())+'</strong>');
-             
-      }
-      else if (this.value == '2') {
-          html = '';
-          html += '<label class="col-sm-2 control-label">Batas Bawah</label>';
-          html += '<div class="col-sm-3">';
-          html += '<div class="input-group">';
-          html += '<span class="input-group-addon">IDR</span>';
-          html += '<input type="text" class="form-control money" id="b_bawah_eauction_money_inp" name="b_bawah_eauction_money_inp" value="'+$('[name=b_bawah_eauction_money_inp]').val()+'">';
-          html += '</div> </div>';
-          html += '<label class="col-sm-2 control-label">Batas Atas</label>';
-          html += '<div class="col-sm-3">';
-          html += '<div class="input-group">';
-          html += '<span class="input-group-addon">IDR</span>';
-          html += '<input type="text" class="form-control money" id="b_atas_eauction_money_inp" name="b_atas_eauction_money_inp" value="'+$('[name=b_atas_eauction_money_inp]').val()+'">';
-          html += '</div> </div>';
-          html += '<div class="col-sm-2">';
-          html += '<p class="form-control-static" id="b_eauction_label"></p>';
-          html += '<input type="hidden" name="b_atas_eauction_percent_inp" id="b_atas" value="'+$('[name=b_atas_eauction_percent_inp]').val()+'">';
-          html += '<input type="hidden" id="b_bawah" name="b_bawah_eauction_percent_inp"  value="'+$('[name=b_bawah_eauction_percent_inp]').val()+'">';
-          html += '</div>';
-          $('#batas_nominal').html('');
-          $('#batas_persentase').html('');
-          $('#batas_nominal').show();
-          $('#batas_persentase').hide();
-          $('#batas_nominal').html(html);
-          $("#b_eauction_label").html('Range : <strong>'+inttomoney($('#b_bawah').val())+' % </strong> - <strong>'+inttomoney($('#b_atas').val())+' % </strong>');
-              
-      }
-      */
     });
 
     //hlmifzi
@@ -260,18 +182,6 @@
       $(".type_b").show();
     }
     var hps = $("#total_alokasi_inp").val();
-      // $("#b_atas_eauction_money_inp").val(hps);
-      // $("#b_bawah_eauction_money_inp").val(hps);
-      // $("#b_eauction_label").html('Range : <strong>'+inttomoney(hps)+'</strong> - <strong>'+inttomoney(hps)+'</strong>');
-      
-      /*
-    if ($('#metode_batas').val() == null || $('#metode_batas').val() == 1) {
-      
-      $("#b_eauction_label").html('Range : <strong>'+inttomoney($("#b_bawah_eauction_money_inp").val())+'</strong> - <strong>'+inttomoney($("#b_atas_eauction_money_inp").val())+'</strong>');
-    }else{
-      $("#b_eauction_label").html('Range : <strong>'+inttomoney($('#b_bawah').val())+'</strong> - <strong>'+inttomoney($('#b_atas').val())+'</strong>');
-    }
-    */
 
     $("#b_atas,#b_bawah").change(function(){
       var val = moneytoint($("#b_atas").val());
@@ -289,13 +199,11 @@
 
     $("#b_bawah_eauction_money_inp,#b_atas_eauction_money_inp").change(function(){
      var val = moneytoint($("#b_atas_eauction_money_inp").val());
-        // var persen = 1+(val/100);
         var nominal_atas = (val/hps*100)-100;
         var x = parseFloat(nominal_atas).toFixed(2);
         console.log("PERSEN ATAS "+x);
         $("#b_atas").val(x);
         val = moneytoint($("#b_bawah_eauction_money_inp").val());
-        // persen = 1-(val/100);
         var nominal_bawah = 100 - (val/hps*100);
         var x = parseFloat(nominal_bawah).toFixed(2);
         console.log("PERSEN BAWAH "+x);
@@ -311,9 +219,6 @@
       }
     }
     reset_range($('[name=metode_batas]').val());
-
-    
-
   });
 
 </script>

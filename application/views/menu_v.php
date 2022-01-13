@@ -13,7 +13,7 @@
 
 		if (empty($parent)) { ?>
 			<li class="nav-item <?php echo $class ?>">
-				<a href="<?php echo site_url() ?><?php echo $key ?>">
+				<a href="<?php echo site_url() ?>/<?php echo $key ?>">
 					<i class="<?php echo $value['icon'] ?>"></i>
 					<span class="menu-title"><?php echo $value['label'] ?></span>
 				</a>
