@@ -1,36 +1,24 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Daftar Vendor Terpilih</h4>
+      </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Daftar Vendor Terpilih</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-
-          </div>
+      <div class="card-content">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="daftar_vendor" class="table table-bordered table-striped"></table>
+            </div>
         </div>
-        <div class="ibox-content">
-<?php /*
-            <a class="btn btn-primary" href="#" role="button">Tampilkan Kinerja</a>
-*/ ?>
-          <div class="table-responsive">
+      </div>
 
-          <table id="daftar_vendor" class="table table-bordered table-striped"></table>
-
-          </div>
-
-       </div>
-     </div>
-
-
-   </div>
- </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
-
-
   jQuery.extend({
     getCustomJSON: function(url) {
       var result = null;
@@ -118,12 +106,13 @@ var $daftar_vendor = $('#daftar_vendor'),
       ]
 
     });
-setTimeout(function () {
-  $daftar_vendor.bootstrapTable('resetView');
-}, 200);
+    setTimeout(function () {
+      $daftar_vendor.bootstrapTable('resetView');
+    }, 200);
 
-$daftar_vendor.on('expand-row.bs.table', function (e, index, row, $detail) {
-  $detail.html(detailFormatter(index,row,"alias_vendor"));
-});
+    $daftar_vendor.on('expand-row.bs.table', function (e, index, row, $detail) {
+      $detail.html(detailFormatter(index,row,"alias_vendor"));
     });
+    
+  });
 </script>

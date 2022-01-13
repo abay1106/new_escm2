@@ -72,9 +72,9 @@ $validateeval = $this->Procrfq_m->getEvalViewRFQ("", $ptm_number)->result_array(
 
 foreach ($validateeval as $key => $evals) {
 
-  $evaltech += $evals['pte_technical_value'];
+  $evaltech .= $evals['pte_technical_value'];
 
-  $evalprice += $evals['pte_price_value'];
+  $evalprice .= $evals['pte_price_value'];
 
 }
 
@@ -458,11 +458,11 @@ if(!empty($bid_close) && !empty($open_doc) && $bid_close > $open_doc){
 
 if ($tender['ptm_type_of_plan'] == "rkp" && $last_activity == 1040) {
   
-  $mppp = $this->Administration_m->getPos($post['mppp_inp'])->row_array();
+  // $mppp = $this->Administration_m->getPos($post['mppp_inp'])->row_array();
   
-  $input['mppp_pos_code'] = $mppp['pos_id'];
-  $input['mppp_pos_name'] = $mppp['pos_name'];
-  $input['amm_id'] = $post['mdiv_inp'];
+  // $input['mppp_pos_code'] = $mppp['pos_id'];
+  // $input['mppp_pos_name'] = $mppp['pos_name'];
+  // $input['amm_id'] = $post['mdiv_inp'];
 }
 
 if($last_activity == 1071){

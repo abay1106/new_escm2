@@ -1,37 +1,24 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Verifikasi Vendor</h4>
+      </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Verifikasi Vendor</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-
-          </div>
+      <div class="card-content">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="vendor_verifikasi_view" class="table table-bordered table-striped"></table>
+            </div>
         </div>
-        <div class="ibox-content">
-<?php /*
-            <a class="btn btn-primary" href="#" role="button">Tampilkan Kinerja</a>
-            */ ?>
-          <div class="table-responsive">
+      </div>
 
-          <table id="vendor_verifikasi_view" class="table table-bordered table-striped"></table>
-
-          </div>
-
-       </div>
-     </div>
-
-
-   </div>
- </div>
-
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
-
-
   jQuery.extend({
     getCustomJSON: function(url) {
       var result = null;

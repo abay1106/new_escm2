@@ -26,8 +26,6 @@ class Home extends MY_Controller {
 	
 	public function index()
 	{
-
-
 		$userid = $this->session->userdata("userid");
 		$data["undangan"] = $this->db->query("select count(a.ptm_number) as jumlah from prc_tender_vendor_status a join prc_tender_prep b on a.ptm_number = b.ptm_number where a.pvs_vendor_code = '".$userid."' and a.pvs_status = '1' and b.ptp_reg_closing_date > now()")->row_array();
 		$data["negosiasi"] = $this->db->query("select count(prc_tender_vendor_status.ptm_number) as jumlah from prc_tender_vendor_status
@@ -44,13 +42,7 @@ class Home extends MY_Controller {
 			INNER JOIN prc_tender_main B ON A.ptm_number = B.ptm_number
 			INNER JOIN prc_tender_prep C ON A.ptm_number = C.ptm_number
 			where C.ptp_aanwijzing_online=1 AND A.pvs_vendor_code = '".$userid."'  AND ptp_prebid_date < NOW() AND ptp_quot_opening_date > NOW() ")->row()->jumlah;
-		/*
-		$query_eauction = "select count(A.vendor_id) as jumlah 
-		from prc_eauction_vendor A
-		 	INNER JOIN prc_eauction_header B ON A.PPM_ID = B.PPM_ID
-		 	LEFT JOIN prc_tender_vendor_status C on C.pvs_vendor_code = A.vendor_id and C.ptm_number = A.ppm_id
-		 	where  c.pvs_status in (8) AND B.status = 1 AND NOW() BETWEEN TANGGAL_MULAI AND TANGGAL_BERAKHIR AND A.vendor_id = '".$userid."'";
-		 	*/
+		
 		$query_eauction = "select count(A.vendor_id) as jumlah from prc_eauction_vendor A INNER JOIN prc_eauction_header B ON A.PPM_ID = B.PPM_ID INNER JOIN prc_tender_vendor_status C on C.pvs_vendor_code = A.vendor_id and C.ptm_number = A.ppm_id where NOW() BETWEEN TANGGAL_MULAI AND TANGGAL_BERAKHIR AND C.pvs_status IN (4,5,8) AND B.status = 1 AND A.vendor_id = '".$userid."'";
 		$data["eauction"] = $this->db->query($query_eauction)->row()->jumlah;
 		$data['bast'] = $this->db

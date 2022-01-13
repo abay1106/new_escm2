@@ -1,34 +1,31 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>LAMPIRAN</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-        </div>
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Lampiran</h4>
       </div>
-      <div class="ibox-content">
 
-       <table class="table table-bordered default">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Kategori</th>
-            <th>Deskripsi</th>
-            <th>File</th>
-            <th>Tipe</th>
-          </tr>
-        </thead>
+      <div class="card-content">
+        <div class="card-body">
+          <table class="table table-bordered default">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Kategori</th>
+              <th>Deskripsi</th>
+              <th>File</th>
+              <th>Tipe</th>
+            </tr>
+          </thead>
 
-        <tbody>
-         <?php 
-         $sisa = 5;
-         if(isset($document) && !empty($document)){
-          foreach ($document as $k => $v) {
-            if(!empty($v['ptd_file_name'])){
-              ?>
+          <tbody>
+          <?php 
+            $sisa = 5;
+            if(isset($document) && !empty($document)){
+              foreach ($document as $k => $v) {
+                if(!empty($v['ptd_file_name'])){
+          ?>
               <tr>
                 <td><?php echo $k+1 ?></td>
                 <td><?php echo $v["ptd_category"] ?></td>
@@ -42,9 +39,9 @@
               <?php } } } ?>
             </tbody>
           </table>
-
         </div>
-
       </div>
+
     </div>
   </div>
+</div>

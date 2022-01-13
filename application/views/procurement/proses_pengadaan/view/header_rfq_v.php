@@ -1,224 +1,178 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>HEADLINE</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Headline</h4>
+      </div>
+
+      <div class="card-content">
+        <div class="card-body">
+            <?php $curval = $permintaan['ptm_number']; ?>
+            <div class="row form-group">
+              <label class="col-sm-2 control-label text-right">No. Tender</label>
+              <div class="col-sm-10">
+              <p class="form-control-static"><?php echo $curval ?></p>
+            </div>
+          </div>
+
+          <?php $curval = $permintaan['ptm_requester_name']; ?>
+          <div class="row form-group">
+            <label class="col-sm-2 control-label text-right">User</label>
+            <div class="col-sm-10">
+            <p class="form-control-static"><?php echo $curval ?></p>
+          </div>
+        </div>
+
+        <?php $curval = $permintaan['ptm_requester_pos_name']; ?>
+        <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Divisi/Departemen</label>
+          <div class="col-sm-10">
+            <p class="form-control-static"><?php echo $curval ?></p>
+          </div>
+        </div>
+
+        <?php $curval = date(DEFAULT_FORMAT_DATETIME,strtotime($permintaan['ptm_created_date'])); ?>
+        <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Tanggal Pembuatan</label>
+          <div class="col-sm-10">
+          <p class="form-control-static"><?php echo $curval ?></p>
         </div>
       </div>
-      <div class="ibox-content">
 
-        <?php $curval = $permintaan['ptm_number']; ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">No. Tender</label>
-          <div class="col-sm-10">
-           <p class="form-control-static"><?php echo $curval ?></p>
-         </div>
-       </div>
+      <?php $curval = $permintaan["ptm_subject_of_work"]; ?>
+      <div class="row form-group">
+        <label class="col-sm-2 control-label text-right">Nama Pekerjaan</label>
+        <div class="col-sm-8">
+          <p class="form-control-static" id="nama_pekerjaan"><?php echo $curval ?></p>
 
-       <?php $curval = $permintaan['ptm_requester_name']; ?>
-       <div class="form-group">
-        <label class="col-sm-2 control-label">User</label>
+        </div>
+
+      </div>
+
+      <?php $curval = $permintaan["ptm_scope_of_work"]; ?>
+      <div class="row form-group">
+        <label class="col-sm-2 control-label text-right">Deskripsi Pekerjaan</label>
         <div class="col-sm-10">
-         <p class="form-control-static"><?php echo $curval ?></p>
-       </div>
-     </div>
+          <p class="form-control-static" id="deskripsi_pekerjaan"><?php echo $curval ?></p>
 
-     <?php $curval = $permintaan['ptm_requester_pos_name']; ?>
-     <div class="form-group">
-      <label class="col-sm-2 control-label">Divisi/Departemen</label>
-      <div class="col-sm-10">
-        <p class="form-control-static"><?php echo $curval ?></p>
+        </div>
       </div>
-    </div>
 
-    <?php $curval = date(DEFAULT_FORMAT_DATETIME,strtotime($permintaan['ptm_created_date'])); ?>
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Tanggal Pembuatan</label>
-      <div class="col-sm-10">
-       <p class="form-control-static"><?php echo $curval ?></p>
-     </div>
-   </div>
+      <!-- haqim -->
+      <?php $curval = $permintaan['ptm_project_name']; 
+      if (isset($permintaan['ptm_project_name'])) { ?>
+        <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Nama Proyek</label>
+          <div class="col-sm-10">
+            <p class="form-control-static" id="deskripsi_pekerjaan"><?php echo $curval ?></p>
 
-   <?php $curval = $permintaan["ptm_subject_of_work"]; ?>
-   <div class="form-group">
-    <label class="col-sm-2 control-label">Nama Pekerjaan</label>
-    <div class="col-sm-8">
-      <p class="form-control-static" id="nama_pekerjaan"><?php echo $curval ?></p>
-
-    </div>
-
-  </div>
-
-  <?php $curval = $permintaan["ptm_scope_of_work"]; ?>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Deskripsi Pekerjaan</label>
-    <div class="col-sm-10">
-      <p class="form-control-static" id="deskripsi_pekerjaan"><?php echo $curval ?></p>
-
-    </div>
-  </div>
-
-  <!-- haqim -->
-  <?php $curval = $permintaan['ptm_project_name']; 
-  if (isset($permintaan['ptm_project_name'])) { ?>
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Nama Proyek</label>
-      <div class="col-sm-10">
-        <p class="form-control-static" id="deskripsi_pekerjaan"><?php echo $curval ?></p>
-
+          </div>
+        </div>
+      <?php  }
+      ?>
+      <?php if(isset($beritaAcaraAanwijzing) && !empty($beritaAcaraAanwijzing)){ ?>
+      <div class="row form-group">
+        <label class="col-sm-2 control-label text-right">Download Berita Acara Aanwijzing</label>
+        <div class="col-sm-10">
+          <p class="form-control-static"><?php echo $beritaAcaraAanwijzing ?></p>
+        </div>
       </div>
-    </div>
-  <?php  }
-  ?>
-  <?php if(isset($beritaAcaraAanwijzing) && !empty($beritaAcaraAanwijzing)){ ?>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Download Berita Acara Aanwijzing</label>
-    <div class="col-sm-10">
-      <p class="form-control-static"><?php echo $beritaAcaraAanwijzing ?></p>
-    </div>
-  </div>
-  <?php } ?>
+      <?php } ?>
+      <!-- end -->
 
-  <!-- <div class="form-group">
-    <label class="col-sm-2 control-label">Profil Pengadaan</label>
-    <div class="col-sm-10">
-      <btn class="btn btn-success" onclick="printToPdf()">Print to PDF</btn>
-    </div>
-  </div> -->
-  <!-- end -->
+      <?php if ($permintaan['isjoin'] != 1) { ?>
 
-  <?php if ($permintaan['isjoin'] != 1) { ?>
+        <?php 
+        $code = (isset($permintaan['ptm_mata_anggaran']) && !empty($permintaan['ptm_mata_anggaran'])) ? $permintaan['ptm_mata_anggaran'] : null;
+        $label = (isset($permintaan['ptm_nama_mata_anggaran']) && !empty($permintaan['ptm_nama_mata_anggaran'])) ? $permintaan['ptm_nama_mata_anggaran'] : null;
+        $curval = (!empty($code) && !empty($label)) ? $code." ".$label : null; 
+        ?>
 
-    <?php 
-    $code = (isset($permintaan['ptm_mata_anggaran']) && !empty($permintaan['ptm_mata_anggaran'])) ? $permintaan['ptm_mata_anggaran'] : null;
-    $label = (isset($permintaan['ptm_nama_mata_anggaran']) && !empty($permintaan['ptm_nama_mata_anggaran'])) ? $permintaan['ptm_nama_mata_anggaran'] : null;
-    $curval = (!empty($code) && !empty($label)) ? $code." ".$label : null; 
-    ?>
+        <?php if(!empty($curval)){ ?>
 
-    <?php if(!empty($curval)){ ?>
+        <div class="row form-group">
+          <label class="col-sm-2 control-label text-right">Mata Anggaran</label>
+          <div class="col-sm-10">
+            <p class="form-control-static" id="mata_anggaran"><?php echo $curval ?></p>
+          </div>
+        </div>
 
-     <div class="form-group">
-      <label class="col-sm-2 control-label">Mata Anggaran</label>
-      <div class="col-sm-10">
-        <p class="form-control-static" id="mata_anggaran"><?php echo $curval ?></p>
-      </div>
-    </div>
+      <?php } ?>
 
-  <?php } ?>
+      <?php
 
-  <?php
+      $curval = null;
+      if (isset($permintaan["ptm_sub_mata_anggaran"]) and substr_count($permintaan["ptm_sub_mata_anggaran"], " , ") >= 1 ) {
+      $code = explode(" , ", $permintaan["ptm_sub_mata_anggaran"]);
+      $name = explode(" , ", $permintaan["ptm_nama_sub_mata_anggaran"]);
+      $curval = $permintaan["ptm_sub_mata_anggaran"]." - ".$permintaan["ptm_nama_sub_mata_anggaran"];
+    }
 
-  $curval = null;
-  if (isset($permintaan["ptm_sub_mata_anggaran"]) and substr_count($permintaan["ptm_sub_mata_anggaran"], " , ") >= 1 ) {
-   $code = explode(" , ", $permintaan["ptm_sub_mata_anggaran"]);
-   $name = explode(" , ", $permintaan["ptm_nama_sub_mata_anggaran"]);
-   $curval = $permintaan["ptm_sub_mata_anggaran"]." - ".$permintaan["ptm_nama_sub_mata_anggaran"];
- }
+    if(!empty($curval)){ ?>
 
- if(!empty($curval)){ ?>
-
-   <div class="form-group">
-    <label class="col-sm-2 control-label">Sub Mata Anggaran</label>
-    <div class="col-sm-10">
-      <p class="form-control-static" id="sub_mata_anggaran"><?php 
-      if (isset($code)) {
-        foreach (array_combine($code, $name) as $code => $name ) {
-          echo $code.' - '.$name."<br/>";
+      <div class="row form-group">
+        <label class="col-sm-2 control-label text-right">Sub Mata Anggaran</label>
+        <div class="col-sm-10">
+          <p class="form-control-static" id="sub_mata_anggaran"><?php 
+          if (isset($code)) {
+            foreach (array_combine($code, $name) as $code => $name ) {
+              echo $code.' - '.$name."<br/>";
+            }
+          }else if ($permintaan["ptm_sub_mata_anggaran"] == 0) {
+          foreach ($project_cost as $keypc => $valuepc) {
+            echo $valuepc['coa_code'].' - '.$valuepc['coa_name']."<br/>";
+          }
         }
-      }else if ($permintaan["ptm_sub_mata_anggaran"] == 0) {
-       foreach ($project_cost as $keypc => $valuepc) {
-         echo $valuepc['coa_code'].' - '.$valuepc['coa_name']."<br/>";
-       }
-     }
-     else{
-      echo $curval;
-    } 
+        else{
+          echo $curval;
+        } 
 
-    ?></p>
-  </div>
-</div>
+        ?></p>
+      </div>
+    </div>
 
-<?php } ?>
+    <?php } ?>
 
-<?php $curval = $permintaan['ptm_currency']; ?>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Mata Uang</label>
-  <div class="col-sm-10">
-   <p class="form-control-static"><?php echo $curval ?></p>
- </div>
-</div>
+    <?php $curval = $permintaan['ptm_currency']; ?>
+    <div class="row form-group">
+      <label class="col-sm-2 control-label text-right">Mata Uang</label>
+      <div class="col-sm-10">
+      <p class="form-control-static"><?php echo $curval ?></p>
+    </div>
+    </div>
 
-<?php $curval = inttomoney($permintaan["ptm_pagu_anggaran"]); ?>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Nilai Anggaran</label>
-  <div class="col-sm-4">
-    <p class="form-control-static" id="pagu_anggaran"><?php echo $curval ?></p>
-  </div>
-</div>
+    <?php $curval = inttomoney($permintaan["ptm_pagu_anggaran"]); ?>
+    <div class="row form-group">
+      <label class="col-sm-2 control-label text-right">Nilai Anggaran</label>
+      <div class="col-sm-4">
+        <p class="form-control-static" id="pagu_anggaran"><?php echo $curval ?></p>
+      </div>
+    </div>
 
-<?php $curval = inttomoney($permintaan["ptm_sisa_anggaran"]); ?>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Sisa Anggaran</label>
-  <div class="col-sm-4">
-    <p class="form-control-static" id="sisa_anggaran"><?php echo $curval ?></p>
-  </div>
-</div>
+    <?php $curval = inttomoney($permintaan["ptm_sisa_anggaran"]); ?>
+    <div class="row form-group">
+      <label class="col-sm-2 control-label text-right">Sisa Anggaran</label>
+      <div class="col-sm-4">
+        <p class="form-control-static" id="sisa_anggaran"><?php echo $curval ?></p>
+      </div>
+    </div>
 
-<?php } ?>
-<?php /*
-        <?php $curval = $permintaan["ptm_district_name"]; ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Lokasi Kebutuhan</label>
-          <div class="col-sm-10">
-            <p class="form-control-static" id="lokasi_kebutuhan"><?php echo $curval ?></p>
-          </div>
-        </div>
-       */ ?>
-
-       <?php /*
-        <?php $curval = $permintaan["ptm_delivery_point"]; ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Lokasi Pengiriman</label>
-          <div class="col-sm-10">
-            <p class="form-control-static" id="lokasi_pengiriman"><?php echo $curval ?></p>
-          </div>
-        </div>
-        */ ?>
+    <?php } ?>
 
         <!-- haqim -->
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Message</label>
-          <div class="col-sm-10">
-            <button type="button" id="chatBtn" class="btn btn-primary" data-toggle="modal" data-target="#chatModal">Message</button>
-          </div>
-        </div>
 
         <?php if ($permintaan['isjoin'] != 1) { ?>
           <?php $curval = $permintaan['ptm_packet']?>
 
           <?php if(!empty($curval)){ ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Nama Paket</label>
-            <div class="col-sm-10">
-              <p class="form-control-static" id="nama_paket"><?php echo $curval ?></p>
-            </div>
-          </div>
-        <?php } ?>
-
-          <?php $curval = $permintaan['pr_type']?>
-          <?php if(!empty($curval)){ ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Jenis PR</label>
-            <div class="col-sm-10">
-              <p class="form-control-static" id="deskripsi_pekerjaan"><?php echo $curval ?></p>
-
-            </div>
-          </div>
-        <?php } ?>
+              <div class="row form-group">
+                <label class="col-sm-2 control-label text-right">Nama Paket</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static" id="nama_paket"><?php echo $curval ?></p>
+                </div>
+              </div>
+          <?php } ?>
 
         <?php } ?>
         <!-- end -->
@@ -226,8 +180,8 @@
         <?php 
         if($activity_id > 1030){ 
           $curval = $permintaan["ptm_contract_type"]; ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Jenis Kontrak</label>
+          <div class="row form-group">
+            <label class="col-sm-2 control-label text-right">Jenis Kontrak</label>
             <div class="col-sm-10">
               <p class="form-control-static" id="jenis_kontrak"><?php echo $curval ?></p>
             </div>
@@ -235,8 +189,8 @@
         <?php } ?>
 
         <?php if ($activity_id >= 1141) { ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Tipe Pemenang</label>
+          <div class="row form-group">
+            <label class="col-sm-2 control-label text-right">Tipe Pemenang</label>
             <div class="col-sm-10">
               <div class="checkbox">
                 <?php 
@@ -263,8 +217,9 @@
             </div>
           </div>
         <?php } ?>
-
+        </div>
       </div>
+
     </div>
   </div>
 </div>

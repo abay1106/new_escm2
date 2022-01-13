@@ -116,7 +116,7 @@ foreach ($post as $key => $value) {
         $input_item[$key2]['ppi_quantity']=$post['item_jumlah'][$key2];
         $input_item[$key2]['ppi_unit']=$post['item_satuan'][$key2];
         $input_item[$key2]['ppi_price']=$post['item_harga_satuan'][$key2];
-		$input_item[$key2]['ppi_pr_tujuan']=$post['item_tujuan'][$key2];
+		//$input_item[$key2]['ppi_pr_tujuan']=$post['item_tujuan'][$key2];
 
         $input_item[$key2]['ppi_ppn']=$post['item_ppn_satuan'][$key2];
 
