@@ -62,7 +62,12 @@ $data['evaluation'] = $this->Procrfq_m->getEvalViewRFQ("",$ptm_number)->result_a
 $data['penata_perencana'] = $this->Administration_m->getUserByJob("PENATA PERENCANAAN")->result_array();
 
 
-$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan",3=>"Pembelian Langsung");
+$data["metode"] = [
+  2 => "Tender Umum",
+  1 => "Ternder Terbatas",
+  0 => "Penunjukkan Langsung"
+];
+//$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan",3=>"Pembelian Langsung");
 
 $data['sampul'] = array(0=>"1 Sampul",1=>"2 Sampul",2=>"2 Tahap");
 
