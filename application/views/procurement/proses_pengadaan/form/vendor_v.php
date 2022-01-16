@@ -1,44 +1,41 @@
 <?php if($prep['ptp_prequalify'] == 2){ 
   include(VIEWPATH."procurement/proses_pengadaan/view/vendor_v.php");
  } else { ?>
-<div class="row" id="vendor_container">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>Daftar Vendor</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
 
-        </div>
-      </div>
-      <div class="ibox-content">
-
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary active">
-            <input type="radio" name="vendor_district" value="<?php echo $district_id ?>" autocomplete="off" checked> 
-            Vendor berdasarkan Wilayah
-          </label>
-          <label class="btn btn-primary">
-            <input type="radio" name="vendor_district" value="0" autocomplete="off"> 
-            Semua Vendor
-          </label>
+<section>		
+  <div class="row" id="vendor_container">
+    <div class="col-12">
+      <div class="card">
+        
+        <div class="card-header border-bottom pb-2">
+            <h4 class="card-title">Daftar Vendor</h4>
         </div>
 
-        <div class="table-responsive">
+        <div class="card-content">
+          <div class="card-body">
+              <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-info active">
+                <input type="radio" name="vendor_district" value="<?php echo $district_id ?>" autocomplete="off" checked> 
+                Vendor berdasarkan Wilayah
+              </label>
+              <label class="btn btn-info">
+                <input type="radio" name="vendor_district" value="0" autocomplete="off"> 
+                Semua Vendor
+              </label>
+            </div>
 
-          <table id="daftar_vendor" class="table table-bordered table-striped"></table>
+            <div class="table-responsive">
 
+              <table id="daftar_vendor" class="table table-bordered table-striped"></table>
+
+            </div>
+          </div>
         </div>
 
       </div>
     </div>
-
-
   </div>
-</div>
-
+</section>
 
 <script type="text/javascript">
 

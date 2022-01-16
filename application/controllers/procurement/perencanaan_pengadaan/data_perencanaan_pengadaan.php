@@ -37,7 +37,7 @@ $limit_anggaran = ($is_proyek) ? 200000000000 : 20000000000;
 if ($userdata['job_title'] == "ADMIN" && ($userdata['dept_name'] == 'DIVISI SUPPLY CHAIN MANAGEMENT' || $userdata['dept_name'] == 'SUPPLY CHAIN MANAGEMENT') || $userdata['job_title'] == 'PIC ANGGARAN') {
     
 }else{
-  $this->db->where('ppm_dept_id', $userdata['dept_id']);
+  //$this->db->where('ppm_dept_id', $userdata['dept_id']);
 }
 
 if(!empty($id)){
@@ -100,7 +100,7 @@ if(!empty($filtering)){
     $this->db->where( array(
       'ppm_next_pos_id'=> 212,
       "ppm_status"=>3,
-      "ppm_dept_id" => $userdata['dept_id'],
+      //"ppm_dept_id" => $userdata['dept_id'],
       "ppm_type_of_plan !=" => "rkp_matgis"
      ));
 
@@ -146,7 +146,7 @@ $data['total'] = $this->Procplan_m->getPerencanaanPengadaan()->num_rows();
 if ($userdata['job_title'] == "ADMIN" && ($userdata['dept_name'] == 'SUPPLY CHAIN MANAGEMENT' || $userdata['dept_name'] == 'SCM') || $userdata['job_title'] == 'PIC ANGGARAN') {
     
 }else{
-  $this->db->where('ppm_dept_id', $userdata['dept_id']);
+  //$this->db->where('ppm_dept_id', $userdata['dept_id']);
 }
 
 /*
@@ -218,7 +218,7 @@ if(!empty($filtering)){
     $this->db->where( array(
       'ppm_next_pos_id'=> 212,
       "ppm_status"=>3,
-      "ppm_dept_id" => $userdata['dept_id'],
+      //"ppm_dept_id" => $userdata['dept_id'],
       "ppm_type_of_plan !=" => "rkp_matgis"
      ));
 

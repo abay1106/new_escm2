@@ -5,18 +5,12 @@
         <div class="ibox-title">
           <h5>Template Evaluasi</h5>
           <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-
           </div>
         </div>
         <div class="ibox-content">
 
           <div class="table-responsive">
-
             <table id="table" class="table table-bordered table-striped"></table>
-
           </div>
 
         </div>

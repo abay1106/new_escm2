@@ -1,60 +1,51 @@
-<?php  //if($prep['ptp_prequalify'] == 2){ 
- //  include(VIEWPATH."procurement/proses_pengadaan/view/panitia_v.php");
- // } else { 
- //  if($hps['hps_total'] > 500*1000000){ ?>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>PANITIA PENGADAAN</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
+<section>		
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        
+        <div class="card-header border-bottom pb-2">
+            <h4 class="card-title">Panitia Pengadaan</h4>
         </div>
-      </div>
 
-      <div class="ibox-content">
+        <div class="card-content">
+          <div class="card-body">
+              <?php $curval = $prep['adm_bid_committee']; ?>
+              <div class="form-group" id="panitia_pengadaan_cont">
+                <label class="col-sm-2 control-label">Tim Panitia</label>
+                <div class="col-sm-6">
+                  <div class="input-group"> 
+                    <span class="input-group-btn">
+                      <button type="button" data-id="panitia_pengadaan_inp" data-url="<?php echo site_url(PROCUREMENT_PANITIA_PENGADAAN_PATH.'/picker') ?>" class="btn btn-info picker"><i class="fa fa-search"></i></button> 
+                    </span>
+                    <input type="hidden" class="form-control" id="panitia_pengadaan_inp" name="panitia_pengadaan_inp" value="<?php echo $curval ?>">
+                    <?php $curval = $prep['adm_bid_committee_name']; ?>
+                    <input type="text" class="form-control" readonly id="panitia_pengadaan_label" value="<?php echo $curval ?>">
+                    <span class="input-group-btn">
+                      <button type="button" id="hapus_panitia_inp" class="btn btn-danger"><i class="fa fa-remove"></i></button> 
+                    </span>
 
-        <?php $curval = $prep['adm_bid_committee']; ?>
-        <div class="form-group" id="panitia_pengadaan_cont">
-          <label class="col-sm-2 control-label">Tim Panitia</label>
-          <div class="col-sm-6">
-            <div class="input-group"> 
-              <span class="input-group-btn">
-                <button type="button" data-id="panitia_pengadaan_inp" data-url="<?php echo site_url(PROCUREMENT_PANITIA_PENGADAAN_PATH.'/picker') ?>" class="btn btn-primary picker"><i class="fa fa-search"></i></button> 
-              </span>
-              <input type="hidden" class="form-control" id="panitia_pengadaan_inp" name="panitia_pengadaan_inp" value="<?php echo $curval ?>">
-              <?php $curval = $prep['adm_bid_committee_name']; ?>
-              <input type="text" class="form-control" readonly id="panitia_pengadaan_label" value="<?php echo $curval ?>">
-              <span class="input-group-btn">
-                <button type="button" id="hapus_panitia_inp" class="btn btn-danger"><i class="fa fa-remove"></i></button> 
-              </span>
+                  </div>
+                </div>
+              </div>
 
-            </div>
+              <?php $curval = (isset($panitia['committee_doc'])) ? $panitia['committee_doc'] : ""; ?>
+              <div class="form-group" id="panitia_pengadaan_doc">
+                <label class="col-sm-2 control-label">Dokumen Panitia</label>
+                <div class="col-sm-6">
+                  <p class="form-control-static" id="doc_id"><a href="<?php echo INTRANET_UPLOAD_FOLDER."/$dir/$curval" ?>" target="_blank"><?php echo $curval ?></a></p>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table id="panitia_pengadaan_table" class="table table-bordered table-striped"></table>
+              </div>
           </div>
         </div>
 
-        <?php $curval = (isset($panitia['committee_doc'])) ? $panitia['committee_doc'] : ""; ?>
-        <div class="form-group" id="panitia_pengadaan_doc">
-          <label class="col-sm-2 control-label">Dokumen Panitia</label>
-          <div class="col-sm-6">
-            <p class="form-control-static" id="doc_id"><a href="<?php echo INTRANET_UPLOAD_FOLDER."/$dir/$curval" ?>" target="_blank"><?php echo $curval ?></a></p>
-          </div>
-        </div>
-
-        <div class="table-responsive">
-
-          <table id="panitia_pengadaan_table" class="table table-bordered table-striped"></table>
-
-        </div>
-
-
       </div>
-
     </div>
   </div>
-</div>
+</section>
 
 <script type="text/javascript">
 
@@ -171,17 +162,6 @@
         align: 'center',
         valign: 'middle'
       },
-      /*
-      {
-        field: 'committee_pos',
-        title: 'Posisi',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      */
       {
         field: 'name_abct',
         title: 'Jabatan',
@@ -235,8 +215,7 @@
       $detail.html(detailFormatter(index,row));
 
     });
-    $panitia_pengadaan_table.on('all.bs.table', function (e, name, args) {
-  //console.log(name, args);
+    $panitia_pengadaan_table.on('all.bs.table', function (e, name, args) {  
 });
 
     function getIdSelections() {
@@ -254,6 +233,3 @@
   });
 
 </script>
-
-<?php //} ?>
-<?php //} ?>

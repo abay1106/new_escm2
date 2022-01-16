@@ -1,82 +1,70 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>Peringkat Vendor E-Auction</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-
-        </div>
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Peringkat Vendor E-Auction</h4>
       </div>
-      <div class="ibox-content">
 
-        <div class="row">
+      <div class="card-content">
+          <div class="card-body">
+              <div class="row">
+                <?php foreach ($eauction_item as $key => $value) { 
+                  $jdl = explode("-", $key);
+                  ?>
 
-          <?php foreach ($eauction_item as $key => $value) { 
-            $jdl = explode("-", $key);
+                  <div class="col-lg-12">
 
-            ?>
+                    <div class="text-center" style="margin: 12px 0">
+                      <h2><?php echo $jdl[1] ?></h2>
+                    </div>
 
-            <div class="col-lg-12">
+                      <?php foreach ($value as $k => $v) { 
+                        $x = $eauction_hist[$k];
+                      ?>
+                      <div class="col-lg-4 col-md-6" style="color:<?php echo !empty($x['selected']) ? "green" : "" ?>;border:1px solid #0054a6;padding:10px 12px;">
 
-              <div class="text-center" style="margin: 12px 0">
-                <h2><?php echo $jdl[1] ?></h2>
-              </div>
+                      <span style="font-weight: bold"><?php echo inttomoney($x['jumlah_bid']) ?></span>
+                      <span style="float: right;font-weight: bold"><?php echo date('d/m/Y H:i',strtotime($x['tgl_bid'])) ?></span>
 
-                <?php foreach ($value as $k => $v) { 
-                  $x = $eauction_hist[$k];
-                 ?>
-                 <div class="col-lg-4 col-md-6" style="color:<?php echo !empty($x['selected']) ? "green" : "" ?>;border:1px solid #0054a6;padding:10px 12px;">
- 
-                 <span style="font-weight: bold"><?php echo inttomoney($x['jumlah_bid']) ?></span>
-                 <span style="float: right;font-weight: bold"><?php echo date('d/m/Y H:i',strtotime($x['tgl_bid'])) ?></span>
-
-                 <?php foreach ($v as $k2 => $v2) { ?>
-                  <ul style="margin-top: 12px">
-                    <li>
-                      E-Auction : <?php echo $v2['judul'] ?>
-                    </li>
-                    <li>
-                      Kode : <?php echo $v2['tit_code'] ?>
-                      </li>
-                      <li>
-                      Barang : <?php echo $v2['tit_description'] ?>
-                    </li>
-                    <li>
-                      Jumlah : <?php echo inttomoney($v2['tit_quantity']) ?> <?php echo ($v2['tit_quantity'] != $v2['qty_bid']) ? " -> ".inttomoney($v2['qty_bid']) : "" ?>
-                    </li>
-                    <li>
-                      Harga : <?php echo inttomoney($v2['tit_price']) ?> <?php echo ($v2['tit_price'] != $v2['jumlah_bid']) ? " -> ".inttomoney($v2['jumlah_bid']) : "" ?>
-                    </li>
-                  </ul>
-                  <?php } ?>
+                      <?php foreach ($v as $k2 => $v2) { ?>
+                        <ul style="margin-top: 12px">
+                          <li>
+                            E-Auction : <?php echo $v2['judul'] ?>
+                          </li>
+                          <li>
+                            Kode : <?php echo $v2['tit_code'] ?>
+                            </li>
+                            <li>
+                            Barang : <?php echo $v2['tit_description'] ?>
+                          </li>
+                          <li>
+                            Jumlah : <?php echo inttomoney($v2['tit_quantity']) ?> <?php echo ($v2['tit_quantity'] != $v2['qty_bid']) ? " -> ".inttomoney($v2['qty_bid']) : "" ?>
+                          </li>
+                          <li>
+                            Harga : <?php echo inttomoney($v2['tit_price']) ?> <?php echo ($v2['tit_price'] != $v2['jumlah_bid']) ? " -> ".inttomoney($v2['jumlah_bid']) : "" ?>
+                          </li>
+                        </ul>
+                        <?php } ?>
+                        </div>
+                      <?php } ?>
                   </div>
+
                 <?php } ?>
 
-              
+                </div>
 
-            </div>
+                <div class="table-responsive">
 
-          <?php } ?>
+                    <table id="peringkat_vendor_eauction" class="table table-bordered table-striped"></table>
 
-        </div>
-
-        <div class="table-responsive">
-
-          <table id="peringkat_vendor_eauction" class="table table-bordered table-striped"></table>
-
-        </div>
-
+                </div>
+          </div>
       </div>
 
     </div>
-
   </div>
-
 </div>
-
 
 <script type="text/javascript">
 

@@ -2,143 +2,143 @@
 if($prep['ptp_prequalify'] == 2){ 
   include(VIEWPATH."procurement/proses_pengadaan/view/metode_pengadaan_v.php");
  } else { ?>
-<div class="row" id="metode_pengadaan">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>METODE PENGADAAN</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-        </div>
-      </div>
-      <div class="ibox-content">
-
-        <?php $curval = $prep['ptp_tender_method']; ?>
-        <div class="form-group" id="metode_pengadaan_cont">
-          <label class="col-sm-2 control-label">Metode Pengadaan</label>
-          <div class="col-sm-6">
-           <select class="form-control" id="metode_pengadaan_inp" name="metode_pengadaan_inp" required value="<?php echo $curval ?>">
-            <option value=""><?php echo lang('choose') ?></option>
-            <?php foreach ($metode as $key => $value) { 
-              $selected = ($curval == $key) ? "selected" : "";
-              ?>
-              <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
-              <?php } ?>
-            </select>
-          </div>
+ <section>		
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        
+        <div class="card-header border-bottom pb-2">
+            <h4 class="card-title">Metode Pengadaan</h4>
         </div>
 
-        <?php $curval = $prep['ptp_submission_method']; ?>
-        <div class="form-group" id="sistem_sampul_cont">
-          <label class="col-sm-2 control-label">Sistem Sampul</label>
-          <div class="col-sm-3">
-           <select class="form-control" name="sistem_sampul_inp" id="sistem_sampul_inp"  required value="<?php echo $curval ?>">
-             <option value=""><?php echo lang('choose') ?></option>
-             <?php foreach ($sampul as $key => $value) { 
-              $selected = ($curval == $key) ? "selected" : "";
-              ?>
-              <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
-              <?php } ?>
-            </select>
-          </div>
-          <div id="eauction_cont">
-          <label class="col-sm-1 control-label eauction_cont">E-Auction</label>
-          <div class="col-sm-1 eauction_cont">
-            <div class="checkbox">
-              <?php $curval = (!empty($prep['ptp_eauction'])) ? "checked" : ""; ?>
-              <input type="checkbox" name="eauction_inp"  <?php echo $curval ?> value="1">
-            </div>
-          </div>
-        </div>
-          <label class="col-sm-2 control-label pq_cont">Pra Kualifikasi</label>
-          <div class="col-sm-1 pq_cont">
-            <div class="checkbox">
-              <?php $curval = (!empty($prep['ptp_prequalify'])) ? "checked" : ""; ?>
-              <input type="checkbox" name="pq_inp"  required <?php echo $curval ?> value="1">
-            </div>
-          </div>
-        </div>
+        <div class="card-content">
+          <div class="card-body">
+              <?php $curval = $prep['ptp_tender_method']; ?>
+              <div class="row form-group" id="metode_pengadaan_cont">
+                <label class="col-sm-2 control-label">Metode Pengadaan</label>
+                <div class="col-sm-6">
+                <select class="form-control" id="metode_pengadaan_inp" name="metode_pengadaan_inp" required value="<?php echo $curval ?>">
+                  <option value=""><?php echo lang('choose') ?></option>
+                  <?php foreach ($metode as $key => $value) { 
+                    $selected = ($curval == $key) ? "selected" : "";
+                    ?>
+                    <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
 
-        <?php $curval = $prep['evt_id']; ?>
-        <div class="form-group" id="template_evaluasi_cont">
-          <label class="col-sm-2 control-label">Template Evaluasi</label>
-          <div class="col-sm-6">
-            <div class="input-group"> 
-              <span class="input-group-btn">
-                <button type="button" data-id="template_evaluasi_inp" data-url="<?php echo site_url(PROCUREMENT_TEMPLATE_EVALUASI_PATH.'/picker') ?>" class="btn btn-primary picker"><i class="fa fa-search"></i></button> 
-              </span>
-              <input type="hidden" class="form-control" required  id="template_evaluasi_inp" name="template_evaluasi_inp" value="<?php echo $curval ?>">
-              <?php $curval = $prep['evt_description']; ?>
-              <p id="template_evaluasi_label" style="margin-left: 20px" class="form-control-static"><?php echo $curval ?></p>
-            </div>
-          </div>
-        </div>
+              <?php $curval = $prep['ptp_submission_method']; ?>
+              <div class="row form-group" id="sistem_sampul_cont">
+                <label class="col-sm-2 control-label">Sistem Sampul</label>
+                <div class="col-sm-3">
+                <select class="form-control" name="sistem_sampul_inp" id="sistem_sampul_inp"  required value="<?php echo $curval ?>">
+                  <option value=""><?php echo lang('choose') ?></option>
+                  <?php foreach ($sampul as $key => $value) { 
+                    $selected = ($curval == $key) ? "selected" : "";
+                    ?>
+                    <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
 
-        <div class="form-group" id="klasifikasi_peserta_cont">
-          <label class="col-sm-2 control-label">Klasifikasi Peserta</label>
-          <div class="col-sm-4">
-            <div class="checkbox">
-              <label>
-                <?php $curval = substr($prep['ptp_klasifikasi_peserta'], 0,1); ?>
-                <input type="checkbox" id="klasifikasi_kecil_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="klasifikasi_kecil_inp" value="1"> Kecil
-              </label>
-              <label>
-                <?php $curval = substr($prep['ptp_klasifikasi_peserta'], 1,1); ?>
-                <input type="checkbox" id="klasifikasi_menengah_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="klasifikasi_menengah_inp" value="1"> Menengah
-              </label>
-              <label>
-                <?php $curval = substr($prep['ptp_klasifikasi_peserta'], 2,1); ?>
-                <input type="checkbox" id="klasifikasi_besar_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="klasifikasi_besar_inp" value="1"> Besar
-              </label>
-            </div>
-          </div>
-        </div>
+                <label class="col-sm-2 control-label eauction_cont">E-Auction</label>
+                <div class="col-sm-1 eauction_cont">
+                  <div class="">
+                    <?php $curval = (!empty($prep['ptp_eauction'])) ? "checked" : ""; ?>
+                    <input type="checkbox" name="eauction_inp" <?php echo $curval ?> value="1">
+                  </div>
+                </div>  
 
-        <div class="form-group" id="quo_type_peserta_cont">
-          <label class="col-sm-2 control-label">Tipe Penawaran</label>
-          <div class="col-sm-4">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" id="quo_type_a_inp" disabled checked name="quo_type_a_inp" value="1"> A
-              </label>
-              <label>
-                <?php $curval = substr($prep['ptp_quo_type'], 1,1); ?>
-                <input type="checkbox" id="quo_type_b_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="quo_type_b_inp" value="1"> B
-              </label>  
-              <label>
-                <?php $curval = substr($prep['ptp_quo_type'], 2,1); ?>
-                <input type="checkbox" id="quo_type_c_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="quo_type_c_inp" value="1"> C
-              </label>
-            </div>
-            </br>
-          <label>
-              A : Sesuai spek & jumlah
-            </label>
-          </br>
-            <label>
-              B : Alternatif spek
-            </label>
-          </br>
-            <label>
-              C : Spek & Jumlah beda
-            </label>
-          </div>
-        </div>
+                <label class="col-sm-2 control-label pq_cont">Pra Kualifikasi</label>
+                <div class="col-sm-1 pq_cont">
+                  <div class="">
+                    <?php $curval = (!empty($prep['ptp_prequalify'])) ? "checked" : ""; ?>
+                    <input type="checkbox" name="pq_inp" required <?php echo $curval ?> value="1">
+                  </div>
+                </div>
+              </div>
 
-        <?php $curval = $prep['ptp_inquiry_notes']; ?>
-        <div class="form-group" id="keterangan_metode_cont">
-          <label class="col-sm-2 control-label">Keterangan Tambahan</label>
-          <div class="col-sm-6">
-            <textarea class="form-control" name="keterangan_metode_inp" id="keterangan_metode_inp"><?php echo $curval ?></textarea>
+              <?php $curval = $prep['evt_id']; ?>
+              <div class="row form-group" id="template_evaluasi_cont">
+                <label class="col-sm-2 control-label">Template Evaluasi</label>
+                <div class="col-sm-6">
+                  <div class="input-group"> 
+                    <span class="input-group-btn">
+                      <button type="button" data-id="template_evaluasi_inp" data-url="<?php echo site_url(PROCUREMENT_TEMPLATE_EVALUASI_PATH.'/picker') ?>" class="btn btn-info picker"><i class="fa fa-search"></i></button> 
+                    </span>
+                    <input type="hidden" class="form-control" required  id="template_evaluasi_inp" name="template_evaluasi_inp" value="<?php echo $curval ?>">
+                    <?php $curval = $prep['evt_description']; ?>
+                    <p id="template_evaluasi_label" style="margin-left: 20px" class="form-control-static"><?php echo $curval ?></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row form-group" id="klasifikasi_peserta_cont">
+                <label class="col-sm-2 control-label">Klasifikasi Peserta</label>
+                <div class="col-sm-4">
+                  <div class="">
+                    <label>
+                      <?php $curval = substr($prep['ptp_klasifikasi_peserta'], 0,1); ?>
+                      <input type="checkbox" id="klasifikasi_kecil_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="klasifikasi_kecil_inp" value="1"> Kecil
+                    </label>
+                    <label>
+                      <?php $curval = substr($prep['ptp_klasifikasi_peserta'], 1,1); ?>
+                      <input type="checkbox" id="klasifikasi_menengah_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="klasifikasi_menengah_inp" value="1"> Menengah
+                    </label>
+                    <label>
+                      <?php $curval = substr($prep['ptp_klasifikasi_peserta'], 2,1); ?>
+                      <input type="checkbox" id="klasifikasi_besar_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="klasifikasi_besar_inp" value="1"> Besar
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row form-group" id="quo_type_peserta_cont">
+                <label class="col-sm-2 control-label">Tipe Penawaran</label>
+                <div class="col-sm-4">
+                  <div class="">
+                    <label>
+                      <input type="checkbox" id="quo_type_a_inp" disabled checked name="quo_type_a_inp" value="1"> A
+                    </label>
+                    <label>
+                      <?php $curval = substr($prep['ptp_quo_type'], 1,1); ?>
+                      <input type="checkbox" id="quo_type_b_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="quo_type_b_inp" value="1"> B
+                    </label>  
+                    <label>
+                      <?php $curval = substr($prep['ptp_quo_type'], 2,1); ?>
+                      <input type="checkbox" id="quo_type_c_inp" <?php echo ($curval == 1) ? "checked" : "" ?> name="quo_type_c_inp" value="1"> C
+                    </label>
+                  </div>
+                  </br>
+                <label>
+                    A : Sesuai spek & jumlah
+                  </label>
+                </br>
+                  <label>
+                    B : Alternatif spek
+                  </label>
+                </br>
+                  <label>
+                    C : Spek & Jumlah beda
+                  </label>
+                </div>
+              </div>
+
+              <?php $curval = $prep['ptp_inquiry_notes']; ?>
+              <div class="row form-group" id="keterangan_metode_cont">
+                <label class="col-sm-2 control-label">Keterangan Tambahan</label>
+                <div class="col-sm-6">
+                  <textarea class="form-control" name="keterangan_metode_inp" id="keterangan_metode_inp"><?php echo $curval ?></textarea>
+                </div>
+              </div>
           </div>
         </div>
 
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <script type="text/javascript">
 

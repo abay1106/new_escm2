@@ -16,6 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <p><?php echo site_url('pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("undangan"), 'enkrip')); ?></p>
                         <tr>
                             <td><?php echo $this->lang->line('Undangan Pengadaan/Pengadaan'); ?></td>
                             <?php if($undangan["jumlah"] > 0){ ?>

@@ -1,102 +1,93 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>Peringkat Vendor E-Auction</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-
-        </div>
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Peringkat Vendor E-Auction</h4>
       </div>
-      <div class="ibox-content eauction">
 
+      <div class="card-content">
+        <div class="card-body eauction">
+            <div class="row">
+                <?php foreach ($eauction_item as $key => $value) { 
+                $jdl = explode("-", $key);
 
-        <div class="row">
-
-          <?php foreach ($eauction_item as $key => $value) { 
-            $jdl = explode("-", $key);
-
-            ?>
-
-            <div class="col-lg-12">
-
-              <div class="text-center" style="margin: 24px 0">
-                <h2 style="margin:0"><?php echo $jdl[1] ?></h2>
-              </div>
-
-              <?php foreach ($value as $k => $v) { 
-                $x = $eauction_hist[$k];
                 ?>
 
+                <div class="col-lg-12">
 
-                <div data-vendor="<?php echo $jdl[0] ?>" data-id="<?php echo $x['id'] ?>" class="col-lg-6 col-md-6 chose-cont <?php echo !empty($x['selected']) ? "selected" : "" ?>">
+                <div class="text-center" style="margin: 24px 0">
+                  <h2 style="margin:0"><?php echo $jdl[1] ?></h2>
+                </div>
 
-                   <input <?php echo ($permintaan['ptm_type_of_plan'] == "rkp_matgis") ? "" : "disabled" ?> type="radio" <?php echo !empty($x['selected']) ? "checked" : "" ?> class="eauction_vendor_radio" data-vendor="<?php echo $jdl[0] ?>" value="<?php echo $x['id'] ?>" name="eauction_vendor[<?php echo $jdl[0] ?>]">
-
-                 <span style="font-weight: <?php echo !empty($x['selected']) ? "bold" : "none" ?>"><?php echo $x['judul'] ?> (<?php echo inttomoney($x['jumlah_bid']) ?>)</span>
-                 <span style="float: right;font-weight: <?php echo !empty($x['selected']) ? "bold" : "none" ?>"><?php echo date('d/m/Y H:i',strtotime($x['tgl_bid'])) ?></span>
-
-                 <table style="margin-top: 8px" class="table table-bordered">
-
-                  <thead>
-                    <tr >
-                      <th rowspan="2">Kode</th>
-                      <th rowspan="2">Barang</th>
-                      <th colspan="2">Jumlah</th>
-                      <th colspan="2">Harga</th>
-                    </tr>
-                    <tr>
-                      <th>Awal</th>
-                      <th>Akhir</th>
-                      <th>Awal</th>
-                      <th>Akhir</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-
-                   <?php foreach ($v as $k2 => $v2) { ?>
-                    <tr>
-                      <td><?php echo $v2['tit_code'] ?></td>
-                      <td><?php echo $v2['tit_description'] ?></td>
-                      <td><?php echo inttomoney($v2['tit_quantity']) ?></td>
-                      <td><?php echo inttomoney($v2['qty_bid']) ?></td>
-                      <td><?php echo inttomoney($v2['tit_price']) ?></td>
-                      <td><?php echo inttomoney($v2['jumlah_bid']) ?></td>
-                    </tr>
-                  <?php } ?>
-
-                </tbody>
-
-              </table>
+                <?php foreach ($value as $k => $v) { 
+                  $x = $eauction_hist[$k];
+                  ?>
 
 
-            </div>
-          <?php } ?>
+                  <div data-vendor="<?php echo $jdl[0] ?>" data-id="<?php echo $x['id'] ?>" class="col-lg-6 col-md-6 chose-cont <?php echo !empty($x['selected']) ? "selected" : "" ?>">
+
+                      <input <?php echo ($permintaan['ptm_type_of_plan'] == "rkp_matgis") ? "" : "disabled" ?> type="radio" <?php echo !empty($x['selected']) ? "checked" : "" ?> class="eauction_vendor_radio" data-vendor="<?php echo $jdl[0] ?>" value="<?php echo $x['id'] ?>" name="eauction_vendor[<?php echo $jdl[0] ?>]">
+
+                    <span style="font-weight: <?php echo !empty($x['selected']) ? "bold" : "none" ?>"><?php echo $x['judul'] ?> (<?php echo inttomoney($x['jumlah_bid']) ?>)</span>
+                    <span style="float: right;font-weight: <?php echo !empty($x['selected']) ? "bold" : "none" ?>"><?php echo date('d/m/Y H:i',strtotime($x['tgl_bid'])) ?></span>
+
+                    <table style="margin-top: 8px" class="table table-bordered">
+
+                    <thead>
+                      <tr >
+                        <th rowspan="2">Kode</th>
+                        <th rowspan="2">Barang</th>
+                        <th colspan="2">Jumlah</th>
+                        <th colspan="2">Harga</th>
+                      </tr>
+                      <tr>
+                        <th>Awal</th>
+                        <th>Akhir</th>
+                        <th>Awal</th>
+                        <th>Akhir</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <?php foreach ($v as $k2 => $v2) { ?>
+                      <tr>
+                        <td><?php echo $v2['tit_code'] ?></td>
+                        <td><?php echo $v2['tit_description'] ?></td>
+                        <td><?php echo inttomoney($v2['tit_quantity']) ?></td>
+                        <td><?php echo inttomoney($v2['qty_bid']) ?></td>
+                        <td><?php echo inttomoney($v2['tit_price']) ?></td>
+                        <td><?php echo inttomoney($v2['jumlah_bid']) ?></td>
+                      </tr>
+                    <?php } ?>
+
+                  </tbody>
+
+                </table>
+
+
+                </div>
+                <?php } ?>
 
 
 
+                </div>
+
+                <?php } ?>
+
+                </div>
+
+                <div class="table-responsive">
+
+                <table id="peringkat_vendor_eauction" class="table table-bordered table-striped"></table>
+
+                </div>
         </div>
-
-      <?php } ?>
-
-    </div>
-
-    <div class="table-responsive">
-
-      <table id="peringkat_vendor_eauction" class="table table-bordered table-striped"></table>
+      </div>
 
     </div>
-
-
   </div>
-
-</div>
-
-</div>
-
 </div>
 
 <style type="text/css">

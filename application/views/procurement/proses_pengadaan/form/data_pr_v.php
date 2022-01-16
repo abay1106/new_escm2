@@ -1,29 +1,22 @@
 <div class="row" id="pr_container">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>Daftar Join Paket Pengadaan</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-
-        </div>
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Daftar Join Paket Pengadaan</h4>
       </div>
-      <div class="ibox-content">
-        
 
-        <div class="table-responsive">
-
-          <table id="daftar_pr" class="table table-bordered table-striped"></table>
-
+      <div class="card-content">
+        <div class="card-body">
+            <div class="table-responsive">
+              <table id="daftar_pr" class="table table-bordered table-striped"></table>
+            </div>
         </div>
-
       </div>
 
     </div>
-
-
+  </div>
+</div>
 
 <script type="text/javascript">
 
@@ -51,9 +44,7 @@
     $daftar_pr.bootstrapTable({
 
       url: "<?php echo site_url('Procurement/data_pr') ?>",
-      // selectItemName:"vendor_tender[]",
-      // cookieIdTable:"vendor_tender",
-       idField:"pr_number",
+      idField:"pr_number",
 
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
 
@@ -159,7 +150,6 @@
       data:param,
       type:"get"
     });
-  //console.log(param);
   });
 
   //unchecked

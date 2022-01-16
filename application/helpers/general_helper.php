@@ -37,7 +37,7 @@ function errormessage($str){
 
 }
 function default_submit_modal_button($url = ""){
-  return "<a href='$url' class='btn btn-light' data-dismiss='modal' aria-label='Close'>Kembali</a> &nbsp; <input class='btn btn-primary pull-right' type='submit' value='Simpan'>";
+  return "<a href='$url' class='btn btn-secondary' data-dismiss='modal' aria-label='Close'>Kembali</a> &nbsp; <input class='btn btn-info pull-right' type='submit' value='Simpan'>";
 }
 
 function romanic_number($integer, $upcase = true)
@@ -80,11 +80,9 @@ function tree(array $data, &$tree = array(), $level = 0) {
 
 function buttonsubmit($url,$back = "Kembali", $save = "Simpan"){
   $html = "<div class='row'>
-  <div class='col-md-12'>
-    <div style='padding-bottom:50px;'>
-      <a href='".site_url($url)."' target='_self' class='btn btn-light btn-lg'>".$back."</a>
-      <button type='submit' class='btn btn-primary btn-lg pull-right'>".$save."</button>
-    </div>
+  <div class='col-md-12'>    
+    <a href='".site_url($url)."' target='_self' class='btn btn-secondary btn-lg'>".$back."</a>
+    <button type='submit' class='btn btn-info btn-lg pull-right'>".$save."</button>    
   </div>
 </div>";
 return $html;
@@ -93,9 +91,7 @@ return $html;
 function buttonback($url,$back = "Kembali"){
   $html = "<div class='row'>
   <div class='col-md-12'>
-    <div style='padding-bottom:50px;'>
-      <a href='".site_url($url)."' target='_self' class='btn btn-light btn-lg'>".$back."</a>
-    </div>
+      <a href='".site_url($url)."' target='_self' class='btn btn-secondary btn-lg'>".$back."</a>    
   </div>
 </div>";
 return $html;
