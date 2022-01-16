@@ -400,4 +400,29 @@ class Telescoope_Controller extends CI_Controller {
 }
   //==================
 
+
+  public function syarat_penunjuk_lgsg($id)
+  {
+      // gunakan ID untuk pencarian data dari Key
+      $data = [
+          1 => "1. Barang dan Jasa yang dibutuhkan bagi kinerja utama perusahaan dan tidak dapat ditunda keberadaannya (business critical asset)",
+          2 => "2. Hanya terdapat satu penyedia Barang dan Jasa yang dapat melaksanakan pekerjaan sesuai kebutuhan pengguna (user requirement) atau sesuai dengan ketentuan peraturan perundangan yang berlaku",
+          3 => "3. Barang dan jasa yg bersifat knowledge intensive dimana untuk menggunakan dan memelihara produk tersebut membutuhkan kelangsungan pengetahuan dari penyedia barang dan jasa",
+          4 => "4. Bila pelaksanaan pengadaan barang dan jasa dengan menggunakan cara tender/seleksi  umum atau tender terbatas/seleksi terbatas, telah 2 (dua) kali dilakukan dan tidak mendapatkan Penyedia Barang dan Jasa yang dibutuhkan atau tidak ada pihak yang memenuhi kriteria atau tidak ada pihak yang mengikuti tender / seleksi",
+          5 => "5. Barang dan jasa yang dimiliki oleh pemegang Hak Atas Kekayaan Intelektual (HAKI) atau yg memiliki jaminan (warranty) dari Original Equipment Manufacture",
+          6 => "6. Penanganan darurat untuk keamanan, keselamatan masyarakat dan aset strategis perusahaan",
+          7 => "7. Barang dan jasa yang merupakan pembelian berulang (repeat order) sepanjang harga yang ditawarkan menguntungkan dengan tidak mengorbankan kualitas barang dan jasa",
+          8 => "8. Penanganan darurat akibat bencana alam, baik yang bersifat lokal maupun nasional (force majeure)",
+          9 => "9. Barang dan jasa lanjutan yang secara teknis merupakan satu kesatuan yang sifatnya tidak dapat dipecah-pecah dari pekerjaan yang sudah dilaksanakan sebelumny",
+          10 => "10. Penyedia barang dan Jasa adalah BUMN, Anak Perusahaan atau Perusahaan Terafiliasi BUMN, sepanjang kualitas harga dan tujuannya dapat dipertanggungjawabkan dan barang dan jasa yang dibutuhkan merupakan produk atau layanan sesuai dengan bidang usaha dari penyedia barang dan jasa bersangkutan",
+          11 => "11. Pengadaan barang dan jasa dalam jumlah dan nilai tertentu yang ditetapkan Direksi dengan terlebih dahulu mendapat persetujuan dewan Komisaris",
+          12 => "12. Konsultan yang tidak direncanakan sebelumnya untuk menghadapi permasalahan tertentu yang sifat pelaksanaan pekerjaannya harus segera dan tidak dapat ditunda",
+      ];
+
+      if (!empty($id) || $id != "") {
+          return $data[$id];
+      } else {
+          return $data;
+      }
+  }
 }

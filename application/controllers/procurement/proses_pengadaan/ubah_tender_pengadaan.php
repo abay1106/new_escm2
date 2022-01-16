@@ -255,7 +255,14 @@ $data['penata_perencana'] = $this->Administration_m->getUserByJob("PENATA PERENC
 
 //$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan",3=>"Pembelian Langsung");
 
-$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan");
+//$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan");
+$data["metode"] = [
+  2 => "Tender Umum",
+  1 => "Ternder Terbatas",
+  0 => "Penunjukkan Langsung"
+];
+
+$data["pilihan_syarat"] = $this->syarat_penunjuk_lgsg("");
 
 $data['sampul'] = array(0=>"1 Sampul",1=>"2 Sampul",2=>"2 Tahap");
 

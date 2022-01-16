@@ -1,3 +1,5 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
 <?php 
 if($prep['ptp_prequalify'] == 2){ 
   include(VIEWPATH."procurement/proses_pengadaan/view/metode_pengadaan_v.php");
@@ -20,6 +22,21 @@ if($prep['ptp_prequalify'] == 2){
                 <select class="form-control" id="metode_pengadaan_inp" name="metode_pengadaan_inp" required value="<?php echo $curval ?>">
                   <option value=""><?php echo lang('choose') ?></option>
                   <?php foreach ($metode as $key => $value) { 
+                    $selected = ($curval == $key) ? "selected" : "";
+                    ?>
+                    <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+
+              <?php $curval = (!empty($prep['ptp_syarat_penunjuk']) ? $prep['ptp_syarat_penunjuk'] : "" );?>
+              <div class="row form-group d-none" id="syarat_penunjuk_langsung">
+                <label class="col-sm-2 control-label">Syarat Penunjuk langsung</label>
+                <div class="col-sm-6">
+                <select class="form-control" id="ptp_syarat_penunjuk" name="ptp_syarat_penunjuk[]" id="ptp_syarat_penunjuk"  multiple="multiple" required value="<?php echo $curval ?>">
+                  <option value=""><?php echo lang('choose') ?></option>
+                  <?php foreach ($pilihan_syarat as $key => $value) { 
                     $selected = ($curval == $key) ? "selected" : "";
                     ?>
                     <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
@@ -161,6 +178,9 @@ if($prep['ptp_prequalify'] == 2){
         $("input[name='eauction_inp']").prop('checked',false);
         $("input[name='eauction_inp']").prop('required',false);
         //panitia_pelelangan.hide();
+        $("#penunjuk_langsung").removeClass("d-none");
+        $("#syarat_penunjuk_langsung").removeClass("d-none");
+
       } else if(metode == 1){
         template_evaluasi.show();
         klasifikasi_peserta.show();
@@ -171,6 +191,8 @@ if($prep['ptp_prequalify'] == 2){
         $("input[name='eauction_inp']").prop('checked',false);
         $("input[name='eauction_inp']").prop('required',false);
         //panitia_pelelangan.hide();
+        $("#penunjuk_langsung").addClass("d-none");
+        $("#syarat_penunjuk_langsung").addClass("d-none");
       } else if(metode == 2){
         template_evaluasi.show();
         klasifikasi_peserta.show();
@@ -180,6 +202,8 @@ if($prep['ptp_prequalify'] == 2){
         eauction.show();
         $("input[name='eauction_inp']").prop('required',false);
         //panitia_pelelangan.show();
+        $("#penunjuk_langsung").addClass("d-none");
+        $("#syarat_penunjuk_langsung").addClass("d-none");
       } else {
         template_evaluasi.hide();
         klasifikasi_peserta.hide();
@@ -187,6 +211,8 @@ if($prep['ptp_prequalify'] == 2){
         sampul.hide();
         vendor.show();
         //panitia_pelelangan.hide();
+        $("#penunjuk_langsung").addClass("d-none");
+        $("#syarat_penunjuk_langsung").addClass("d-none");
       }
 
       var ss = $("#sistem_sampul_inp option:selected").val();
