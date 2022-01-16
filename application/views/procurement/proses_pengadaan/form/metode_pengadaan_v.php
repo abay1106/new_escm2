@@ -34,8 +34,7 @@ if($prep['ptp_prequalify'] == 2){
               <div class="row form-group d-none" id="syarat_penunjuk_langsung">
                 <label class="col-sm-2 control-label">Syarat Penunjuk langsung</label>
                 <div class="col-sm-6">
-                <select class="form-control" id="ptp_syarat_penunjuk" name="ptp_syarat_penunjuk[]" id="ptp_syarat_penunjuk"  multiple="multiple" required value="<?php echo $curval ?>">
-                  <option value=""><?php echo lang('choose') ?></option>
+                <select class="form-control multiselect" id="ptp_syarat_penunjuk" name="ptp_syarat_penunjuk[]" id="ptp_syarat_penunjuk"  multiple="multiple" required value="<?php echo $curval ?>">
                   <?php foreach ($pilihan_syarat as $key => $value) { 
                     $selected = ($curval == $key) ? "selected" : "";
                     ?>
@@ -302,6 +301,7 @@ if($prep['ptp_prequalify'] == 2){
   }
 
   $(document).ready(function(){
+    $('.multiselect').select2();
 
     window.setTimeout(function(){
       filtervendor();
