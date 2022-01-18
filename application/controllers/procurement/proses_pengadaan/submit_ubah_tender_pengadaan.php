@@ -417,6 +417,34 @@ if(!empty($post['tgl_pembukaan_dok_penawaran_inp'])){
   $input_prep['ptp_doc_open_date'] = "";
 }
 
+if (!empty($post["negosiasi"])) {
+  $input_prep["ptp_negosiation_date"] = todatetime($post["negosiasi"]);
+} else {
+  $input_prep["ptp_negosiation_date"] = "";
+}
+
+if (!empty($post["uskep"])) {
+  $input_prep["ptp_uskep_date"] = todatetime($post["uskep"]);
+} else {
+  $input_prep["ptp_uskep_date"] = "";
+}
+
+if (!empty($post["pengumuman"])) {
+  $input_prep["ptp_announcement_date"] = todatetime($post["pengumuman"]);
+} else {
+  $input_prep["ptp_announcement_date"] = "";
+}
+if (!empty($post["sanggahan"])) {
+  $input_prep["ptp_disclaimer_date"] = todatetime($post["sanggahan"]);
+} else {
+  $input_prep["ptp_disclaimer_date"] = "";
+}
+if (!empty($post["penunjukan"])) {
+  $input_prep["ptp_appointment_date"] = todatetime($post["penunjukan"]);
+} else {
+  $input_prep["ptp_appointment_date"] = "";
+}
+
 $opening = strtotime($input_prep['ptp_reg_opening_date']);
 $closing = strtotime($input_prep['ptp_reg_closing_date']);
 $aanwijzing = strtotime($input_prep['ptp_prebid_date']);
