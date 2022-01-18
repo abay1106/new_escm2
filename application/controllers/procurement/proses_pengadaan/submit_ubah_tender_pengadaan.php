@@ -205,6 +205,14 @@ if($last_activity == 1040){
       $input_prep['ptp_tender_method'] = $metode_pengadaan;
     }
 
+    if (isset($post["ptp_syarat_penunjuk"])) {
+      $syarat_penunjuk = !empty($post["ptp_syarat_penunjuk"]) ? $post["ptp_syarat_penunjuk"] : "";
+      $arr_data = array();
+
+      $syarat_penunjuk = json_encode($post["ptp_syarat_penunjuk"]);
+      $input_prep["ptp_syarat_penunjuk"] = $syarat_penunjuk;
+  }
+
     if(isset($post['sistem_sampul_inp'])){
       $sampul = (!empty($post['sistem_sampul_inp'])) ? $post['sistem_sampul_inp'] : 0;
       $input_prep['ptp_submission_method'] = $sampul;
