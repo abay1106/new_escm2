@@ -89,10 +89,10 @@ class Home extends MY_Controller {
 		$vdp_id = 0;
 
 		if (count(array($data_header))) {
-			$vtm_id = $data_header->vtm_id;
-			$avd_id = $data_header->avd_id;
-			$vdp_status = $data_header->vdp_status;
-			$vdp_id = $data_header->vdp_id;
+			$vtm_id = $data_header['vtm_id'];
+			$avd_id = $data_header['avd_id'];
+			$vdp_status = $data_header['vdp_status'];
+			$vdp_id = $data_header['vdp_id'];
 		}
 
 		$data['template_doc'] = $this->profile->getVndDocTemplate($vtm_id, $avd_id)->result_array();

@@ -2,7 +2,7 @@
 <!-- Modal -->
 <?php $idpick = (isset($isnego) == TRUE) ? "picker_pick_nego" : "picker_pick" ?>
 <div class="modal fade" id="picker" tabindex="-1" role="dialog" aria-labelledby="pickerLabel">
-  <div class="modal-dialog modal-lg" style="width:90%" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -19,24 +19,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  // $(document).ready(function(){
-  //   $("#picker_pick").click(function(){
-  //     button_disabled();
-  //   });
-  
-  // function button_disabled(){
-  //   $("#picker_pick").prop("disabled", true);
-  //   $("#dismiss").prop("disabled", true);
-  //   $("#picker_pick").text("Sedang Mengirim ..."); 
-  // }
-  
-  // function button_enabled(){
-  //   $("#picker_pick").prop("disabled", false);
-  //   $("#dismiss").prop("disabled", false);
-  //   $("#picker_pick").text("Simpan");  
-  // }
-
-  // })
-
-</script>
