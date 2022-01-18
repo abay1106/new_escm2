@@ -71,7 +71,7 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('procurement/perencanaan_pengadaan/daftar_perencanaan_pengadaan') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/lihat/'+value+'">',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat/'+value+'">',
     'Lihat',
     '</a>  ',
     ].join('');

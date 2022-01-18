@@ -1,11 +1,14 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-10">
-		<h2><?php echo ($viewer) ? "Lihat" : "Form"; ?> BAST Milestone</h2>
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong><?php echo ($viewer) ? "Lihat" : "Form"; ?> BAST Milestone</strong></div>			
 	</div>
-	<div class="col-lg-2">
-		
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
 	</div>
 </div>
+
 <form class="form-horizontal" method="post" action="<?php echo site_url('kontrak/submit_bast_milestone') ?>" enctype="multipart/form-data">
 	<div class="wrapper wrapper-content animated fadeIn">
 		<div class="row">

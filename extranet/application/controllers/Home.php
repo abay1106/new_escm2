@@ -89,18 +89,16 @@ class Home extends MY_Controller {
 		$vdp_id = 0;
 
 		if (count(array($data_header))) {
-			$vtm_id = $data_header['vtm_id'];
-			$avd_id = $data_header['avd_id'];
-			$vdp_status = $data_header['vdp_status'];
-			$vdp_id = $data_header['vdp_id'];
+			$vtm_id = $data_header->vtm_id;
+			$avd_id = $data_header->avd_id;
+			$vdp_status = $data_header->vdp_status;
+			$vdp_id = $data_header->vdp_id;
 		}
 
 		$data['template_doc'] = $this->profile->getVndDocTemplate($vtm_id, $avd_id)->result_array();
 
 		$comment_list = $this->profile->getCommentDocPQ("", $this->session->userdata("userid"))->result_array();
 		$data['comment_list'] = $comment_list;
-
-		// var_dump($data['comment_list']);exit();
 
 		$data['vtm_id'] = $vtm_id;
 		$data['must_upload'] = 0;
