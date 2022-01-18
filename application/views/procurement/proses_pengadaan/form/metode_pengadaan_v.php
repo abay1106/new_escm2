@@ -1,5 +1,14 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-
+<style>
+.select2-selection--single {
+  height: 100% !important;
+}
+.select2-selection__rendered{
+  word-wrap: break-word !important;
+  text-overflow: inherit !important;
+  white-space: normal !important;
+}
+</style>
 <?php 
 if($prep['ptp_prequalify'] == 2){ 
   include(VIEWPATH."procurement/proses_pengadaan/view/metode_pengadaan_v.php");
