@@ -166,6 +166,15 @@
 		})
 	</script>
 
+	<style>
+        .content-header {
+            color : #2b71c6;
+        }
+        th {
+            white-space: nowrap;
+        }
+    </style>
+
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns navbar-sticky" data-menu="vertical-menu" data-col="2-columns">
@@ -175,8 +184,7 @@
             <div class="navbar-header d-flex">
                 <div class="navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center" data-toggle="collapse"><i class="ft-menu font-medium-3"></i></div>
                 <ul class="navbar-nav">
-                    <li class="nav-item mr-2 d-none d-lg-block"><a class="nav-link apptogglefullscreen" id="navbar-fullscreen" href="javascript:;"><i class="ft-maximize font-medium-3"></i></a></li>                    
-                    <li class="nav-item mr-2 d-none d-lg-block"><span id="servertime" class="text-muted text-xs block"></span></li>                    
+                    <li class="nav-item mr-2 d-none d-lg-block"><a class="nav-link apptogglefullscreen" id="navbar-fullscreen" href="javascript:;"><i class="ft-maximize font-medium-3"></i></a></li>                                        
                 </ul>
             </div>
             <div class="navbar-container">
@@ -208,49 +216,55 @@
                     </a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
             </div>
 
+			<?php
+                $link = $_SERVER['PHP_SELF'];
+                $link_array = explode('/', $link);
+                $url = end($link_array);
+            ?>
+
 			<div class="sidebar-content main-menu-content">
 				<div class="nav-container">
 					<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">							
 
 						<?php if ($this->session->userdata('status_aktivasi') == 'Active') { ?>
 
-						<li class=" nav-item"><a href="<?php echo site_url('home'); ?>"><i class="ft-home"></i><span class="menu-title">Beranda</span></a></li>
+						<li class="<?php echo $url == 'home' ? 'active' : ''; ?> nav-item"><a href="<?php echo site_url('home'); ?>"><i class="ft-home"></i><span class="menu-title">Beranda</span></a></li>
 
 						<li class="has-sub nav-item"><a href="javascript:;"><i class="ft-edit"></i><span class="menu-title"><?php echo $this->lang->line('Pengadaan'); ?></span></a>
 							<ul class="menu-content">							
-								<li><a href="<?php echo site_url("pengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Daftar Pekerjaan'); ?></span></a></li>
-								<li><a href="<?php echo site_url("pengadaan/monitorpengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Pengadaan'); ?></span></a></li>
-								<li><a href="<?php echo site_url("pengadaan/buatsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Membuat Sanggahan'); ?></span></a></li>
-								<li><a href="<?php echo site_url("pengadaan/monitorsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Sanggahan'); ?></span></a></li>
+								<li class="<?php echo $url == 'pengadaan' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Daftar Pekerjaan'); ?></span></a></li>
+								<li class="<?php echo $url == 'monitorpengadaan' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorpengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Pengadaan'); ?></span></a></li>
+								<li class="<?php echo $url == 'buatsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/buatsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Membuat Sanggahan'); ?></span></a></li>
+								<li class="<?php echo $url == 'monitorsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Sanggahan'); ?></span></a></li>
 							</ul>
 						</li>
 
 						<li class="has-sub nav-item"><a href="javascript:;"><i class="ft-box"></i><span class="menu-title"><?php echo $this->lang->line('Kontrak'); ?></span></a>
 							<ul class="menu-content">							
-								<li><a href="<?php echo site_url("kontrak"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Daftar Pekerjaan'); ?></span></a></li>
-								<li><a href="<?php echo site_url("kontrak/addendum"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Addendum</span></a></li>
-								<li><a href="<?php echo site_url("kontrak/wo"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Update Progress PO</span></a></li>
-								<li><a href="<?php echo site_url("kontrak/milestone"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Update Progress Milestone</span></a></li>
-								<li><a href="<?php echo site_url("kontrak/monitor"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Kontrak'); ?></span></a></li>
-								<li><a href="<?php echo site_url("kontrak/monitor_wo"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Monitor PO</span></a></li>
-								<li><a href="<?php echo site_url("kontrak/monitor_milestone"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Monitor Milestone / Termin</span></a></li>
-								<li><a href="<?php echo site_url("kontrak/monitor_bast"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Monitor BAST</span></a></li>
-								<li><a href="<?php echo site_url("kontrak/tagihan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Tagihan'); ?></span></a></li>
+								<li class="<?php echo $url == 'kontrak' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Daftar Pekerjaan'); ?></span></a></li>
+								<li class="<?php echo $url == 'addendum' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/addendum"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Addendum</span></a></li>
+								<li class="<?php echo $url == 'wo' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/wo"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Update Progress PO</span></a></li>
+								<li class="<?php echo $url == 'milestone' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/milestone"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Update Progress Milestone</span></a></li>
+								<li class="<?php echo $url == 'monitor' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/monitor"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Kontrak'); ?></span></a></li>
+								<li class="<?php echo $url == 'monitor_wo' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/monitor_wo"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Monitor PO</span></a></li>
+								<li class="<?php echo $url == 'monitor_milestone' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/monitor_milestone"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Monitor Milestone / Termin</span></a></li>
+								<li class="<?php echo $url == 'monitor_bast' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/monitor_bast"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Monitor BAST</span></a></li>
+								<li class="<?php echo $url == 'tagihan' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/tagihan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Tagihan'); ?></span></a></li>
 							</ul>
 						</li>
 
 						<li class="has-sub nav-item"><a href="javascript:;"><i class="ft-file-text"></i><span class="menu-title"><?php echo $this->lang->line('VSI'); ?></span></a>
 							<ul class="menu-content">							
-								<li><a href="<?php echo site_url("vsi/kuesioner"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Kuesioner</span></a></li>
-								<li><a href="<?php echo site_url("vsi/lihat_kuesioner"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">History Kuesioner</span></a></li>
+								<li class="<?php echo $url == 'kuesioner' ? 'active' : ''; ?>"><a href="<?php echo site_url("vsi/kuesioner"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Kuesioner</span></a></li>
+								<li class="<?php echo $url == 'lihat_kuesioner' ? 'active' : ''; ?>"><a href="<?php echo site_url("vsi/lihat_kuesioner"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">History Kuesioner</span></a></li>
 							</ul>
 						</li>
 						
 						<?php } ?>
 
-						<li class=" nav-item"><a href="<?php echo site_url('home/profile'); ?>"><i class="ft-user"></i><span class="menu-title"><?php echo $this->lang->line('Profil'); ?></span></a></li>
+						<li class="<?php echo $url == 'profile' ? 'active' : ''; ?> nav-item"><a href="<?php echo site_url('home/profile'); ?>"><i class="ft-user"></i><span class="menu-title"><?php echo $this->lang->line('Profil'); ?></span></a></li>
 
-						<li class=" nav-item"><a href="<?php echo base_url("assets/guide/Manual_Vendor_Site.pdf"); ?>" target="_blank"><i class="ft-book-open"></i><span class="menu-title"><?php echo $this->lang->line('Bantuan'); ?></span></a></li>
+						<li class="nav-item"><a href="<?php echo base_url("assets/guide/Manual_Vendor_Site.pdf"); ?>" target="_blank"><i class="ft-book-open"></i><span class="menu-title"><?php echo $this->lang->line('Bantuan'); ?></span></a></li>
 
 					</ul>
 				</div>
@@ -264,7 +278,7 @@
 			<!-- BEGIN : Main Content-->
 			<div class="main-content">
 				<div class="content-overlay"></div>
-				<div class="content-wrapper">
+				<div class="content-wrapper">					
 					<?php echo $content_for_layout; ?>
 					<?php include("picker_v.php"); ?>
 				</div>

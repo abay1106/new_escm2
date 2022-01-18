@@ -7,6 +7,18 @@
     color: white !important;
   }
 </style>
+
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong>Aanwijzing Online</strong></div>			
+	</div>
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
+	</div>
+</div>
+
 <div class="row" id="aanwijzing_online">
   <div class="col-lg-12">
     <div class="ibox float-e-margins">

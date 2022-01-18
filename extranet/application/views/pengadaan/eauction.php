@@ -1,3 +1,14 @@
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong>E-Auction</strong></div>			
+	</div>
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
+	</div>
+</div>
+
 <form method="post" action="<?php echo site_url("pengadaan/view");?>"  class="form-horizontal ajaxform">
   <input type="hidden" name="ids" value="<?php echo (isset($tender['ptm_number'])) ? $tender["ptm_number"] : ""; ?>">
   <div class="row">

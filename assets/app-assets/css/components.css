@@ -2070,12 +2070,12 @@ body .app-sidebar .navigation li > a:before {
   top: 0;
   width: 100%;
   height: 100%;
-  border-right: solid 5px #F55252;
+  border-right: solid 5px #ecebf1;
   background: rgba(224, 224, 224, 0.2);
   transition: 0.35s ease left; }
 
 body .app-sidebar .navigation li.sidebar-group-active:not(.open) {
-  border-right: solid 5px #F55252;
+  border-right: solid 5px #ecebf1;
   background: rgba(224, 224, 224, 0.2); }
 
 body[data-menu="vertical-menu"] .app-sidebar .navigation li.active:not(.open) > a:before {
@@ -2090,7 +2090,7 @@ body[data-menu="vertical-menu"] .app-sidebar .navigation li.active > a:before {
   top: 0;
   width: 100%;
   height: 100%;
-  border-right: solid 5px #F55252;
+  border-right: solid 5px #ecebf1;
   background: rgba(224, 224, 224, 0.2);
   transition: 0.35s ease left; }
 

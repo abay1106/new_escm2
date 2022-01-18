@@ -7,6 +7,17 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong>Addendum</strong></div>			
+	</div>
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
+	</div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeIn">
 <form class="form-horizontal" method="post" enctype='multipart/form-data' action="<?php echo site_url('kontrak/submit_addendum') ?>">
 	<div class="row">
