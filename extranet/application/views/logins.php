@@ -23,10 +23,10 @@
               <div class="text-center py-3">
                 <img src="<?php echo base_url('assets/img/logo.png') ?>" class="img-responsive" style="height: 30%; width: 30%">
               </div>              
-              <p class="mb-4 text-center">Electronic Supply Chain Management <br/><strong><?php echo COMPANY_NAME ?></strong></p>
-              <p class="text-center">
+              <div class="my-4 text-center text-bold-700">Electronic Supply Chain Management <br/><strong><?php echo COMPANY_NAME ?></strong></div> <hr/>
+              <!-- <p class="text-center">
                 Tujuan eSCM adalah untuk menciptakan transparansi, efisiensi dan efektifitas serta akuntabilitas dalam pengadaan barang dan jasa melalui media elektronik antara pengguna jasa dan penyedia jasa.
-              </p>    
+              </p>     -->
               
               <?php
                 $pesan = $this->session->userdata('message');
@@ -65,7 +65,7 @@
                   <input type="text" name="captcha" class="form-control form-control-sm" placeholder="Type Text Above" required>
                 </div>
 
-                <button id="logins" type="submit" class="btn btn-info block mb-3" style="float: left;"><?php echo $this->lang->line('Login'); ?></button>
+                <button id="logins" type="submit" class="btn btn-info block mb-3"><?php echo $this->lang->line('Login'); ?></button>
                 <btn class="btn btn-info tombolButtons" id="arrowDown" style="float: right; width: 15%;"> &#x2193; </btn>
                 <btn class="btn btn-info tombolButtons" id="arrowUp" style="display: none;float: right; width: 15%;"> &#x2191; </btn>
 
@@ -81,7 +81,7 @@
                 </p>
               </div>
 
-              <div style="display: none" id="crPhone">
+              <div class="text-center" style="display: none" id="crPhone">
                 <small>© <?php $made = 2018; echo ($made == DATE('Y')) ? $made : $made .'-'. DATE('Y') ?> All Right Reserved</small>
               </div>
 
