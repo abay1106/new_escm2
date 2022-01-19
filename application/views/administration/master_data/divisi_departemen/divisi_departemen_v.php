@@ -61,12 +61,12 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/master_data/divisi_departemen') ?>";
     return [
-      '<a class="btn btn-primary btn-xs action" href="' + link + '/ubah/' + value + '">',
+      '<div class = "btn-group"> <a class="btn btn-sm btn-info ft ft-edit btn-xs action" href="' + link + '/ubah/' + value + '">',
       'Ubah',
       '</a>  ',
-      '<a class="btn btn-danger btn-xs action" onclick="return confirm(\'Anda yakin ingin menonaktifkan data?\')" href="' + link + '/nonaktif/' + value + '">',
+      '<a class="btn btn-sm btn-danger ft ft-trash btn-xs action" onclick="return confirm(\'Anda yakin ingin menonaktifkan data?\')" href="' + link + '/nonaktif/' + value + '">',
       'Nonaktif',
-      '</a>  ',
+      '</a> </div> ',
     ].join('');
   }
 
