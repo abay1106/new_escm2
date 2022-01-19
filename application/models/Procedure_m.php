@@ -1122,11 +1122,7 @@ class Procedure_m extends MY_Model {
 			$response_real = $this->getResponseName($response);
 			$response = url_title($response_real,"_",true);
 		}
-/*
-		echo "ACTIVITY : ".$activity;
-		echo "<br/>";
-		echo "RESPONSE : ".$response;
-*/
+
 		$message = "";
 		$nextPosCode = "";
 		$nextPosName = "";
@@ -1149,13 +1145,7 @@ class Procedure_m extends MY_Model {
 		->get("prc_tender_comment")
 		->num_rows();
 
-		//print_r($anyIncompleteComment);
-
 		if($anyIncompleteComment > 0){
-/*
-			echo "<br/>";
-		echo "WKF START";
-*/
 
 		$this->db->where(array(
 			"ptm_number"=>$ptm_number,
@@ -1180,7 +1170,7 @@ class Procedure_m extends MY_Model {
 		$nextPosCode = $lastPosCode;
 		$nextPosName = $lastPosName;
 		
-				//completing tender comment
+		// completing tender comment
 
 		$totalOE = $this->db->select("sum((tit_price*tit_quantity)*(1+(COALESCE(tit_pph::double precision,0)/100)+(COALESCE(tit_ppn::integer,0)/100))) as total")->from("prc_tender_item")
 		//$totalOE = $this->db->select("ptm_pagu_anggaran as total")->from("prc_tender_main")
@@ -1191,17 +1181,17 @@ class Procedure_m extends MY_Model {
 		$max_amount = $this->db->select("max_amount")->from($tbl)
 		->where("pos_id",$lastPosCode)->get()->row();
 
-		//start code hlmifzi
+		// start code hlmifzi
 		// $max_amount_2 = $this->db->select("max_amount")->from("adm_auth_hie_rfq_non_proyek")
 		$max_amount_2 = $this->db->select("max_amount")->from($tbl_pemenang)
 		->where("pos_id",$lastPosCode)->get()->row();
-// ubah $pr_number jadi ptm_number
+		// ubah $pr_number jadi ptm_number
 		$totalOE_2 = $this->db
 		->select("sum((tit_price*tit_quantity)*(1+(COALESCE(tit_pph::double precision,0)/100)+(COALESCE(tit_ppn::integer,0)/100))) as total")
 		->from("prc_tender_item")
 		->where("ptm_number",$ptm_number)
 		->get()->row()->total;
-		//end
+		// end
 
 		$max_amount = (isset($max_amount->max_amount)) ? $max_amount->max_amount : 0;
 
@@ -1216,7 +1206,7 @@ class Procedure_m extends MY_Model {
 			"ptc_user" => $user_id,
 		));
 
-		//$run= $this->db->last_query($update);echo $run;die;
+		// $run= $this->db->last_query($update);echo $run;die;
 
 		$update = $this->db
 		->where(array("ptm_number"=>$ptm_number))
@@ -1224,8 +1214,7 @@ class Procedure_m extends MY_Model {
 			"ptm_status" => $lastActivity,
 		));
 
-
-		//ganti ketua panitia sebagai manajer pengadaan
+		// ganti ketua panitia sebagai manajer pengadaan
 		$lastcom = $this->db
 					->where(array("ptc_id"=>$ptcId))
 					->get("prc_tender_comment")
@@ -1244,7 +1233,6 @@ class Procedure_m extends MY_Model {
 			$lastPosName = $realman['pos_name'];
 		}
 		//end y code
-
 
 		if($activity == 1029){
 
