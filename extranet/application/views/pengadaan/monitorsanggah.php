@@ -1,8 +1,18 @@
-        <div class="row">
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong><?php echo $this->lang->line('Monitor Sanggah'); ?></strong></div>			
+	</div>
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
+	</div>
+</div>
+
+<div class="row">
         <div class="col-lg-12">
         <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5><?php echo $this->lang->line('Monitor Sanggah'); ?></h5>
         </div>
         <div class="ibox-content">
             <div class="table-responsive">

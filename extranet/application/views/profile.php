@@ -1,9 +1,11 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-10">
-		<h2><?php echo $this->lang->line('Profil Anda'); ?></h2>
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong><?php echo $this->lang->line('Profil Anda'); ?></strong></div>			
 	</div>
-	<div class="col-lg-2">
-		
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
 	</div>
 </div>
 
@@ -31,7 +33,7 @@
 					<div class="tab-content ">
 						<div id="tab-1" class="tab-pane <?= $must_upload  ? "" : "active" ?>">
 							<div class="panel-body">
-								<div class="panel panel-primary">
+								<div class="panel panel-info">
 									<div class="panel-heading">
 										<?php echo $this->lang->line('Nama Perusahaan'); ?>
 									</div>
@@ -76,7 +78,7 @@
 									</div>
 								</div>
 								
-								<div class="panel panel-primary">
+								<div class="panel panel-info">
 									<div class="panel-heading">
 										<?php echo $this->lang->line('Kontak Perusahaan'); ?>
 									</div>
@@ -121,7 +123,7 @@
 								</div>
 							</div>
 
-							<div class="panel panel-primary">
+							<div class="panel panel-info">
 								<div class="panel-heading">
 									<?php echo $this->lang->line('Kontak Person'); ?>
 								</div>
@@ -153,7 +155,7 @@
 					</div>
 					<div id="tab-2" class="tab-pane">
 						<div class="panel-body">
-							<div class="panel panel-primary">
+							<div class="panel panel-info">
 								<div class="panel-heading">
 									<?php echo $this->lang->line('Akta Pendirian'); ?>
 								</div>
@@ -194,7 +196,7 @@
 							</div>
 						</div>
 
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<?php echo $this->lang->line('Domisili Perusahaan'); ?>
 							</div>
@@ -241,7 +243,7 @@
 							</div>
 						</div>
 
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<?php echo $this->lang->line('Nilai Pokok Wajib Pajak (NPWP)'); ?>
 							</div>
@@ -280,7 +282,7 @@
 							</div>
 						</div>
 
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<?php echo $this->lang->line('Jenis Mitra Kerja'); ?>
 							</div>
@@ -295,7 +297,7 @@
 							</div>
 						</div>
 
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<?php echo $this->lang->line('Surat Izin Usaha Perusahaan (SIUP)'); ?>
 							</div>
@@ -326,7 +328,7 @@
 							</div>
 						</div>
 
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<?php echo $this->lang->line('Izin Lain Lain'); ?>
 							</div>
@@ -365,7 +367,7 @@
 						</div>
 					</div>
 
-					<div class="panel panel-primary">
+					<div class="panel panel-info">
 						<div class="panel-heading">
 							<?php echo $this->lang->line('Tanda Daftar Perusahaan (TDP)'); ?>
 						</div>
@@ -392,7 +394,7 @@
 						</div>
 					</div>
 
-					<div class="panel panel-primary">
+					<div class="panel panel-info">
 						<div class="panel-heading">
 							<?php echo $this->lang->line('Surat Keagenan/Distributorship'); ?>
 						</div>
@@ -431,7 +433,7 @@
 			</div>
 
 
-			<div class="panel panel-primary">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<?php echo $this->lang->line('Angka Pengenal Importir'); ?>
 				</div>
@@ -471,9 +473,10 @@
 
 </div>
 </div>
+
 <div id="tab-3" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Dewan Komisaris'); ?>
 			</div>
@@ -514,7 +517,8 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-primary">
+
+<div class="panel panel-info">
 	<div class="panel-heading">
 		<?php echo $this->lang->line('Dewan Direksi'); ?>
 	</div>
@@ -559,7 +563,7 @@
 </div>
 <div id="tab-4" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Rekening Bank'); ?>
 			</div>
@@ -599,7 +603,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-primary">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<?php echo $this->lang->line('Modal Sesuai Data Terakhir'); ?>
 		</div>
@@ -617,7 +621,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="panel panel-primary">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<?php echo $this->lang->line('Informasi Laporan Keuangan'); ?>
 		</div>
@@ -657,7 +661,7 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-primary">
+<div class="panel panel-info">
 	<div class="panel-heading">
 		<?php echo $this->lang->line('Klasifikasi Perusahaan'); ?>
 	</div>
@@ -675,7 +679,7 @@
 </div>
 <div id="tab-5" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Barang yang Bisa Dipasok'); ?>
 			</div>
@@ -714,7 +718,7 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-primary">
+<div class="panel panel-info">
 	<div class="panel-heading">
 		<?php echo $this->lang->line('Jasa yang Bisa Dipasok'); ?>
 	</div>
@@ -757,7 +761,7 @@
 </div>
 <div id="tab-6" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Tenaga Ahli Utama'); ?>
 			</div>
@@ -796,7 +800,7 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-primary">
+<div class="panel panel-info">
 	<div class="panel-heading">
 		<?php echo $this->lang->line('Tenaga Ahli Pendukung'); ?>
 	</div>
@@ -839,7 +843,7 @@
 </div>
 <div id="tab-7" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Keterangan Sertifikasi'); ?>
 			</div>
@@ -883,7 +887,7 @@
 </div>
 <div id="tab-8" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Keterangan Fasilitas/Peralatan'); ?>
 			</div>
@@ -925,7 +929,7 @@
 </div>
 <div id="tab-9" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Pengalaman Pekerjaan'); ?>
 			</div>
@@ -975,7 +979,7 @@
 </div>
 <div id="tab-10" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?php echo $this->lang->line('Prinsipal'); ?>
 			</div>
@@ -1018,7 +1022,7 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-primary">
+<div class="panel panel-info">
 	<div class="panel-heading">
 		<?php echo $this->lang->line('Afiliasi'); ?>
 	</div>
@@ -1061,7 +1065,7 @@
 </div>
 </div>
 </div>
-<div class="panel panel-primary">
+<div class="panel panel-info">
 	<div class="panel-heading">
 		<?php echo $this->lang->line('Subkontraktor'); ?>
 	</div>
@@ -1109,7 +1113,7 @@
 
 <div id="tab-11" class="tab-pane">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				Dokumen
 			</div>
@@ -1147,7 +1151,7 @@
 </div>
 <div id="tab-12" class="tab-pane <?= $must_upload ? "active" : "" ?> ">
 	<div class="panel-body">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<?= $this->lang->line('Dokumen PQ') ?>
 			</div>
@@ -1317,7 +1321,7 @@
 				        </div>
 						
 						<div class="form-group " style="<?= (!$must_upload OR !count($template_doc)) ? "display:none" : "" ?>">
-							<button class="btn btn-primary" type="submit">
+							<button class="btn btn-info" type="submit">
 								<?php echo $this->lang->line('Kirim'); ?>
 							</button>
 							<!-- <button class="btn btn-white" onclick="history.go(-1)"><?php echo $this->lang->line('Nanti'); ?></button> -->

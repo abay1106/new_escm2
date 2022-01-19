@@ -100,8 +100,6 @@ class Home extends MY_Controller {
 		$comment_list = $this->profile->getCommentDocPQ("", $this->session->userdata("userid"))->result_array();
 		$data['comment_list'] = $comment_list;
 
-		// var_dump($data['comment_list']);exit();
-
 		$data['vtm_id'] = $vtm_id;
 		$data['must_upload'] = 0;
 

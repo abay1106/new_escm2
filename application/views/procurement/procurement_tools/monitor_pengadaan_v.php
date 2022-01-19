@@ -98,7 +98,7 @@
   function operateFormatter2(value, row, index) {
     var link = "<?php echo site_url('procurement/procurement_tools/monitor_pengadaan') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/lihat_permintaan/'+value+'">',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat_permintaan/'+value+'">',
     'Lihat',
     '</a>  ',
     ].join('');
@@ -107,7 +107,7 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('procurement/procurement_tools/monitor_pengadaan') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/lihat/'+value+'">',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat/'+value+'">',
     'Lihat',
     '</a>  ',
     ].join('');
