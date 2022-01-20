@@ -70,7 +70,7 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('procurement/procurement_tools/monitor_permintaan') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/lihat/'+value+'">',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat/'+value+'">',
     'Lihat',
     '</a>  ',
   ].join('');

@@ -40,6 +40,12 @@ function default_submit_modal_button($url = ""){
   return "<a href='$url' class='btn btn-secondary' data-dismiss='modal' aria-label='Close'>Kembali</a> &nbsp; <input class='btn btn-info pull-right' type='submit' value='Simpan'>";
 }
 
+
+function todatetime($value){
+	//2020-12-03 10:25:09
+	return date("Y-m-d h:s:i",strtotime($value));
+}
+
 function romanic_number($integer, $upcase = true)
 {
   $table = array('M'=>1000, 'CM'=>900, 'D'=>500, 'CD'=>400, 'C'=>100, 'XC'=>90, 'L'=>50, 'XL'=>40, 'X'=>10, 'IX'=>9, 'V'=>5, 'IV'=>4, 'I'=>1);

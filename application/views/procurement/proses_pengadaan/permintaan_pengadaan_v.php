@@ -1,27 +1,18 @@
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Paket Pengadaan</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-
-          </div>
-        </div>
-        <div class="ibox-content">
-
-          <div class="table-responsive">
-
-            <table id="table_permintaan_pengadaan" class="table table-bordered table-striped"></table>
-
-          </div>
-
-        </div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Paket Pengadaan</h4>
       </div>
 
+      <div class="card-content">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="table_permintaan_pengadaan" class="table table-bordered table-striped"></table>
+            </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -69,23 +60,14 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('procurement/proses_pengadaan/daftar_permintaan_pengadaan') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/lihat/'+value+'">',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat/'+value+'">',
     'Lihat',
     '</a>  ',
   ].join('');
 }
 window.operateEvents = {
   'click .approval': function (e, value, row, index) {
-    //alert('You click approval action, row: ' + JSON.stringify(row));
   },
-  /*
-  'click .remove': function (e, value, row, index) {
-    $table_permintaan_pengadaan.bootstrapTable('remove', {
-      field: 'id',
-      values: [row.pr_number]
-    });
-  }
-  */
 };
 function totalTextFormatter(data) {
   return 'Total';

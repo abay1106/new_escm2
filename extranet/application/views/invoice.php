@@ -1,9 +1,11 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-	<div class="col-lg-10">
-		<h2><?php echo $this->lang->line('Monitor Tagihan'); ?></h2>
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong><?php echo $this->lang->line('Monitor Tagihan'); ?></strong></div>			
 	</div>
-	<div class="col-lg-2">
-		
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
 	</div>
 </div>
 

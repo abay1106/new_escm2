@@ -1,3 +1,14 @@
+<div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong><?php echo $this->lang->line('Informasi Umum'); ?></strong></div>			
+	</div>
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
+	</div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeIn">
 	<div class="row">
         <div class="col-lg-12">

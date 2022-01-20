@@ -1,4 +1,15 @@
 <div class="row">
+	<div class="col-7">
+		<div class="content-header"><strong><?php echo $this->lang->line('Ringkasan Pekerjaan'); ?></strong></div>			
+	</div>
+	<div class="col-5">
+		<div class="content-header float-right">
+			<a class="text-muted text-xs block h5" id="servertime"></a>
+		</div>
+	</div>
+</div>
+
+<div class="row">
     <div class="col-12">
         <div class="card">
         
@@ -61,7 +72,7 @@
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                <td>Aanwijzing Online</td>
+                                    <td>Aanwijzing Online</td>
                                     <?php if($aanwijzing_online > 0){ ?>
                                     <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("aanwijzingonline"), 'enkrip')); ?>"><?php echo $aanwijzing_online; ?></a></td>
                                     <?php } else { ?>
@@ -75,7 +86,7 @@
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                <td>BAST</td>
+                                    <td>BAST</td>
                                     <?php if($bast > 0){ ?>
                                     <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('kontrak'); ?>"><?php echo $bast; ?></a></td>
                                     <?php } else { ?>
@@ -87,6 +98,16 @@
                                     <?php } else { ?>
                                     <td style="text-align: center;"><?php echo $tagihan; ?></td>
                                     <?php } ?>
+                                </tr>
+                                <tr>
+                                    <td>Terminasi Lelang</td>
+                                    <?php if($bast > 0){ ?>
+                                    <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('kontrak'); ?>"><?php echo $bast; ?></a></td>
+                                    <?php } else { ?>
+                                    <td style="text-align: center;"><?php echo $bast; ?></td>
+                                    <?php } ?>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>                                                                       
                                 </tr>
                             </tbody>
                         </table>

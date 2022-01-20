@@ -106,6 +106,12 @@ $pecah = [];
 
 $data['prep'] = $this->Procrfq_m->getPrepRFQ($ptm_number)->row_array();
 
+$data["periodes"] = [
+  7 => "7 Hari Kalender",
+  14 => "14 Hari Kalender",
+  30 => "30 Hari Kalender",
+];
+
 $manager_name = (!empty($permintaan['ptm_man_emp_id'])) ? $this->db->where("id",$permintaan['ptm_man_emp_id'])->get("adm_employee")->row()->fullname : "-";
 
 $data['manager_name'] = $manager_name;
