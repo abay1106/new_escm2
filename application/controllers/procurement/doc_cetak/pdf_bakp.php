@@ -87,6 +87,25 @@ $getDataUskep = $this->Procrfq_m->getUskepData($rfq_id)->row_array();
 $vendor_verifikasi = $this->Procrfq_m->getVendorBidderRFQ($rfq_id)->result_array();
 
 
+$this->db->where('kegiatan_id', 3);
+$listTtd = array();
+
+$ttdList = $this->db->get('adm_matriks_kewenangan_kegiatan')->result_array();
+
+if(count($ttdList) > 0 ){
+	foreach ($ttdList as $key => $value) {
+		# code...
+		$listTtd[$key]['pos_id'] = $value['job_position_id'];
+		$list = array();
+		$this->db->where('pos_id', $value['job_position_id']);
+		$list = $this->db->get('vw_user_employee')->result_array();
+
+		$listTtd[$key]['lists_name'] = $list;
+
+	}
+}
+
+
 //$tender['ptm_status'] = "1141";
 
 
@@ -103,6 +122,8 @@ $data=array(
 	'ptm_id' => $rfq_id,
 	'data_uskep' => $getDataUskep,
 	'nama_user_approval' => $nama_user_approval,
+	'ttd_list' => $listTtd,
+
 	
 );
 
@@ -120,5 +141,11 @@ $dompdf->load_html($html);
 $dompdf->render();
 $dompdf->stream("BAKP-".date('YmdHis').'-'.$rfq_id.'.pdf');
 */
-
+function get_matriks_kewenangan()
+{
+	
+	
+	
+	
+}
 

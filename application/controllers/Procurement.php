@@ -83,6 +83,137 @@ class Procurement extends Telescoope_Controller {
 
  }
 
+ public function privyupload($rfid, $nama_file) {
+	 
+  $getDataUskep = $this->Procrfq_m->getUskepData($rfid)->row_array();
+  //print_r($getDataUskep);
+  //exit;
+
+  $data_recipient = "";
+  if (!$getDataUskep) {
+     echo json_encode(array("Message" => "Data Uskep Tidak Tersedia"));
+     exit;
+  } else {
+     $data_recipient = $getDataUskep['bakp_kpd_name'];
+  }
+
+  $signer = array();
+  if ($data_recipient != "") {
+
+   $data_recipient_array = explode(";", $data_recipient);
+   foreach ($data_recipient_array as $val) {
+     $data_signer_array = explode(" [", $val);
+     if (count($data_signer_array) > 1) {
+       
+       $signer_id = str_replace("]","",$data_signer_array[1]);
+       if ($signer_id != "") {
+         array_push($signer, $signer_id);
+       }
+     }
+   }
+
+  }
+
+  //print_r($signer);
+  $signer_array_1 = array();
+  $signer_ecode = "";
+  $owner_ecode = "";
+  $index = 0; $privyidOwner = "";
+  foreach($signer as $vals) {
+
+   if ($index == 0) {
+     $privyidOwner = $vals;
+   }
+
+   $index += 1;
+
+    $signer_array_1[] = array(
+        "privyId" => $vals, 
+        "type" => "Signer", 
+        "enterpriseToken" => "41bc84b42c8543daf448d893c255be1dbdcc722e"
+
+    );
+  }
+
+  $owner_ecode = json_encode(array(
+    "privyId" =>  $privyidOwner, 
+    "enterpriseToken" => "41bc84b42c8543daf448d893c255be1dbdcc722e"
+  ));
+  $signer_ecode = json_encode($signer_array_1);
+
+  //echo $signer_ecode;
+
+  $payloadName = array(
+    'documentTitle' => $rfid,
+    'docType' => 'Serial',
+    'document'=> new CURLFILE('uploads/'.$nama_file),
+    'recipients' => $signer_ecode,
+    'owner' => $owner_ecode
+   );
+
+  //print_r($payloadName);
+  
+  $host = "https://api-sandbox.privy.id/v3/merchant/document/upload";
+  
+  $username = "wika_sandbox";
+  $password = "w9g7mmqcmrt3i400s4dy";
+  
+  /*
+  
+  $ch = curl_init($host);
+ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data', "Merchant-Key: 5mynfcqtfb8oss1pye25"));
+ curl_setopt($ch, CURLOPT_HEADER, 1);
+ curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+ curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+ curl_setopt($ch, CURLOPT_POST, 1);
+ curl_setopt($ch, CURLOPT_POSTFIELDS, $payloadName);
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+ $return = curl_exec($ch);
+ curl_close($ch);
+  
+  echo $return;
+  */
+  
+  
+  $curl = curl_init();
+
+curl_setopt_array($curl, array(
+ CURLOPT_URL => 'https://api-sandbox.privy.id/v3/merchant/document/upload',
+ CURLOPT_RETURNTRANSFER => true,
+ CURLOPT_USERPWD => $username . ":" . $password,
+ CURLOPT_ENCODING => '',
+ CURLOPT_MAXREDIRS => 10,
+ CURLOPT_TIMEOUT => 0,
+ CURLOPT_FOLLOWLOCATION => true,
+ CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+ CURLOPT_CUSTOMREQUEST => 'POST',
+ CURLOPT_POSTFIELDS => $payloadName,
+ CURLOPT_HTTPHEADER => array(
+   'Merchant-Key: 5mynfcqtfb8oss1pye25'
+ ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+}
+ 
+public function callback() {
+ 
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+    $data = file_get_contents("php://input");
+    $getjson = json_decode($data);
+    print_r($getjson);
+    
+  } else {			
+       print_r("Cannot ".$_SERVER["REQUEST_METHOD"]." ".$_SERVER["SCRIPT_NAME"]);
+  }
+  
+}
+
  public function panduan($params1 = ""){
   // show_404(); //sementara ini karena blm ada file guide manualnya
   switch ($params1) {
