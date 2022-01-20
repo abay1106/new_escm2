@@ -934,7 +934,6 @@
     $n = 0;
 
     $this->form_validation->set_rules("id", 'ID', 'required');
-
     foreach ($post as $key => $value) {
 
         if(is_array($value)){

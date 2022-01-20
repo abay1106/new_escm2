@@ -105,14 +105,61 @@
 
 	<script type="text/javascript">localStorage.setItem('dialogshow', "");</script>
 
-	<script>
+<script>
     function changeColorArrowBoard(className) {
         document.getElementById(className).parentNode.classList.add("bg-info")
         document.getElementById(className).parentNode.classList.add("text-white")
         document.getElementById(className).classList.remove("text-muted")
         document.getElementById(className).parentNode.parentNode.lastElementChild.style.borderLeft = "solid 1.2em #2F8BE6"
     }
-</script> 
+
+    const pembukaan = new Date(data["ptp_reg_opening_date"])
+    const aawijing = new Date(data["ptp_prebid_date"])
+    const penawaran = new Date(data["ptp_quot_opening_date"])
+    const evaluasi = new Date(data["ptp_doc_open_date"])
+    const negosiasi = new Date(data["ptp_negosiation_date"])
+    const uskep = new Date(data["ptp_uskep_date"])
+    const pengumuman = new Date(data["ptp_announcement_date"])
+    const sanggahan = new Date(data["ptp_disclaimer_date"])
+    const penunjukan = new Date(data["ptp_appointment_date"])
+
+    document.getElementById("mulai_pendaftaran").innerHTML = moment(pembukaan).format('LLL')
+    document.getElementById("ptp_prebid_date_").innerHTML = moment(aawijing).format('LLL')
+    document.getElementById("ptp_quot_opening_date_").innerHTML = moment(penawaran).format('LLL')
+    document.getElementById("ptp_doc_open_date_").innerHTML = moment(evaluasi).format('LLL')
+    document.getElementById("ptp_negosiation_date_").innerHTML = moment(negosiasi).format('LLL')
+    document.getElementById("ptp_uskep_date_").innerHTML = moment(uskep).format('LLL')
+    document.getElementById("ptp_announcement_date_").innerHTML = moment(pengumuman).format('LLL')
+    document.getElementById("ptp_disclaimer_date_").innerHTML = moment(sanggahan).format('LLL')
+    document.getElementById("ptp_appointment_date_").innerHTML = moment(penunjukan).format('LLL')
+    if (new Date() >= pembukaan) {
+        changeColorArrowBoard("mulai_pendaftaran")
+    }
+    if (new Date() >= aawijing) {
+        changeColorArrowBoard("ptp_prebid_date_")
+    }
+    if (new Date() >= penawaran) {
+        changeColorArrowBoard("ptp_quot_opening_date_")
+    }
+    if (new Date() >= evaluasi) {
+        changeColorArrowBoard("ptp_doc_open_date_")
+    }
+    if (new Date() >= negosiasi) {
+        changeColorArrowBoard("ptp_negosiation_date_")
+    }
+    if (new Date() >= uskep) {
+        changeColorArrowBoard("ptp_uskep_date_")
+    }
+    if (new Date() >= pengumuman) {
+        changeColorArrowBoard("ptp_announcement_date_")
+    }
+    if (new Date() >= sanggahan) {
+        changeColorArrowBoard("ptp_disclaimer_date_")
+    }
+    if (new Date() >= penunjukan) {
+        changeColorArrowBoard("ptp_appointment_date_")
+    }
+    </script>
 </div>
 
 <?php

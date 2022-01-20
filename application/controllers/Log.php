@@ -1301,6 +1301,7 @@ class Log extends Telescoope_Controller {
 				$data = $this->Administration_m->checkLogin($username,$password)->row_array();
 
 			//$data['id'] = 1;
+			
 
 				if(!empty($data)){
 					if(empty($data['is_locked']) && empty($data['status'])){
