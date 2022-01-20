@@ -55,7 +55,7 @@ if (isset($_POST['kota'])) {
 			'bakp_city' => $_POST['kota'],
 			'bakp_catatan' => implode(";", $_POST['catatan']),
 			'bakp_kpd_name' => implode(";", $_POST['panitia_name']),
-			'bakp_kpd_cat' => implode(";", $_POST['panitia_category']),
+			//'bakp_kpd_cat' => implode(";", $_POST['panitia_category']),
 			'bakp_kpd_as' => implode(";", $_POST['panitia_ketua']),
 			'bakp_catatan_penawran' => implode(";", $_POST['catatan_penawran']),
 		);
@@ -67,7 +67,7 @@ if (isset($_POST['kota'])) {
 			'bakp_city' => $_POST['kota'],
 			'bakp_catatan' => implode(";", $_POST['catatan']),
 			'bakp_kpd_name' => implode(";", $_POST['panitia_name']),
-			'bakp_kpd_cat' => implode(";", $_POST['panitia_category']),
+			//'bakp_kpd_cat' => implode(";", $_POST['panitia_category']),
 			'bakp_kpd_as' => implode(";", $_POST['panitia_ketua']),
 			'bakp_catatan_penawran' => implode(";", $_POST['catatan_penawran']),
 		));
@@ -102,18 +102,29 @@ $this->load->view($view,$data);
 
 
 $html = $this->output->get_output();
-$this->load->library('dompdf_gen');
+//$this->load->library('dompdf_gen');
 
 
-$dompdf=new Dompdf\Dompdf();
+$dompdf= new Dompdf\Dompdf();
 $dompdf->set_paper('a4');
 $dompdf->set_option('isHtml5ParserEnabled', true);
 $dompdf->set_option('isRemoteEnabled', true);   
 $dompdf->set_option("isPhpEnabled", true);
 $dompdf->load_html($html);
 $dompdf->render();
-$dompdf->stream("BAKP-".date('YmdHis').'-'.$rfq_id.'.pdf');
+//$dompdf->stream("BAKP-".date('YmdHis').'-'.$rfq_id.'.pdf');
+$filename = "BAKP-".date('YmdHis').'-'.$rfq_id.'.pdf';
+$output = $dompdf->output();
+file_put_contents('uploads/'.$filename, $output);
+//echo json_encode(array("message" => "PDF BAKP Berhasil Di Generete Dan Diupload Ke Privy", "url_file_mentah" => "https://escm.scmwika.com/uploads/".$filename));
 
+$name_doc = "BAKP";
+$full_url = base_url()."uploads/".$filename;
+$full_url_upload = base_url()."index.php/procurement/privyupload/".$filename;
 
+echo "<br><br><center><b>File PDF $name_doc Berhasil Dibuat</b></center><br><br>".
+"<center><a target='_blank' href = '$full_url'> Preview PDF  </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a target='_blank' href = '$full_url_upload'>Upload To Privy </a></center>";
+
+exit;
 
 
