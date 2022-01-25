@@ -128,8 +128,9 @@ $data=array(
 );
 
 //print_r($tender);
+$this->template($view,"BAPK",$data);
 
-$this->load->view($view,$data);
+//$this->load->view($view,$data);
 /*
 $html = $this->output->get_output();
 $this->load->library('dompdf_gen');

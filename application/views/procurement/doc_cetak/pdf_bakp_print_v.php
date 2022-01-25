@@ -328,7 +328,7 @@
 	<tr>
 		<th align="center">No</th>
 		<th align="center">Nama</th>
-		<th align="center"></th>
+		<!-- <th align="center"></th> -->
 		<th align="center">Tanda Tangan</th>
 		<th align="center">Keterangan</th>
 	</tr>

@@ -13,7 +13,7 @@
                   <div class="col-md-12">
                      <a href="<?php site_url();?>index.php/procurement/pdf_bakp/<?php echo $this->session->userdata('rfq_id'); ?>"
                         type="button" class="btn btn-sm pull-right" data-toggle="tooltip"
-                        title="Uskep Online" target="_blank"
+                        title="Uskep Online"
                         style="background-color:red;color:white;margin-right:5px">
                         <i class="fa fa-file-pdf-o"></i> USKEP ONLINE
                      </a>
@@ -56,6 +56,8 @@
       </div>
    </div>
 </div>
+
+
 
 <script type="text/javascript">
 reloadeval();
