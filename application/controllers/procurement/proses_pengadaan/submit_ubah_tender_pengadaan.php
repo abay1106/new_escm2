@@ -260,7 +260,7 @@
 
           $hps = $this->Procrfq_m->getHPSRFQ($ptm_number)->row_array();
 
-          if(count($invited_vendor) == 0 && $post['metode_pengadaan_inp'] != 2){
+          if(array(count($invited_vendor)) == 0 && $post['metode_pengadaan_inp'] != 2){
               $this->setMessage("Tidak ada vendor yang diundang");
               if(!$error){
                   $error = true;
@@ -969,7 +969,6 @@
 
     }
 
-
     if ($this->form_validation->run() == FALSE || $error){
 
         $this->renderMessage("error");
@@ -1443,7 +1442,6 @@
 
     }
 
-
     if($last_activity == 1090){
 
         $eval_id = $this->Procrfq_m->getPrepRFQ($ptm_number)->row()->evt_id;
@@ -1513,7 +1511,6 @@
         }
     }
 
-
     if($last_activity == 1073){
 
         $this->db
@@ -1535,7 +1532,6 @@
             $error = true;
         }
     }
-
 
     if ($last_activity == 1160) {
 

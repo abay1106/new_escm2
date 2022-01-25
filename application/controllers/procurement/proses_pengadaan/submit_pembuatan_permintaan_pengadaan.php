@@ -12,10 +12,7 @@ if(!$position){
 }
 
 $this->form_validation->set_rules("perencanaan_pengadaan_inp", "Nomor Perencanaan Pengadaan", 'required|max_length['.DEFAULT_MAXLENGTH.']');
-/*$this->form_validation->set_rules("lokasi_kebutuhan_inp", "Lokasi Kebutuhan", 'required|max_length['.DEFAULT_MAXLENGTH_TEXT.']');*/
-//haqim
-// $this->form_validation->set_rules("lokasi_pengiriman_inp", "Lokasi Pengiriman", 'required|max_length['.DEFAULT_MAXLENGTH.']');
-//end
+
 if ($post['status_inp'][0] == 287) {
   $this->form_validation->set_rules("tipe_pr", "Jenis PR", 'required|max_length['.DEFAULT_MAXLENGTH.']'); //y jenis pr
 }
@@ -116,7 +113,7 @@ foreach ($post as $key => $value) {
         $input_item[$key2]['ppi_quantity']=$post['item_jumlah'][$key2];
         $input_item[$key2]['ppi_unit']=$post['item_satuan'][$key2];
         $input_item[$key2]['ppi_price']=$post['item_harga_satuan'][$key2];
-		//$input_item[$key2]['ppi_pr_tujuan']=$post['item_tujuan'][$key2];
+		    //$input_item[$key2]['ppi_pr_tujuan']=$post['item_tujuan'][$key2];
 
         $input_item[$key2]['ppi_ppn']=$post['item_ppn_satuan'][$key2];
 
@@ -143,7 +140,7 @@ foreach ($post as $key => $value) {
           $com = $this->Commodity_m->getSrvCatalog($kode)->row_array();
         }
 
-      //$input_item[$n]['ppi_currency']=$com['currency'];
+        //$input_item[$n]['ppi_currency']=$com['currency'];
         $input_item[$key2]['ppi_currency']= "IDR";
         $input_item[$key2]['ppi_type']=$tipe;
 
@@ -158,43 +155,13 @@ foreach ($post as $key => $value) {
 }
 
 $error = false;
-if ($post['status_inp'][0] == 287) {
-  
-/*
-//y validasi tipe pr
-if($post['tipe_pr'] == "NON KONSOLIDASI" ){
-  if ($post['total_alokasi_ppn_inp'] > 25000000) {
-    $this->setMessage("Tipe Paket Pengadaan non konsolidasi harus <= 25 juta");
-    $error= true;
-  }
-}elseif ($post['tipe_pr'] == "KONSOLIDASI") {
-  if($post['total_alokasi_ppn_inp'] <= 25000000){
-    $this->setMessage("Tipe Paket Pengadaan konsolidasi harus > 25 juta");
-    $error = true;
-  }elseif ($post['total_alokasi_ppn_inp'] > 200000000000) {
-    $this->setMessage("Tipe Paket Pengadaan konsolidasi harus <= 200 milyar");
-    $error= true;
-  }
-}elseif ($post['tipe_pr'] == "MATERIAL STRATEGIS") {
-  if($input['pr_type_of_plan'] == "rkap" and $post['total_alokasi_ppn_inp'] < 20000000000){
-    $this->setMessage("Tipe Paket Pengadaan material strategis non proyek harus > 20 milyar");
-    $error = true;
-  }elseif ($input['pr_type_of_plan'] == "rkp" and $post['total_alokasi_ppn_inp'] < 200000000000) {
-    $this->setMessage("Tipe Paket Pengadaan material strategis proyek harus > 200 milyar");
-    $error = true;
-  }
-}else{
-  $this->setMessage("Tipe perencanaan harus dipilih");
-  $error = true;
-}
-//end
-*/
+if ($post['status_inp'][0] == 287) {  
 }
 
-  if($post['sisa_pagu_inp'] < 0){
-    $this->setMessage("Nilai HPS tidak boleh melebihi sisa anggaran");
-    $error = true;
-  }
+if($post['sisa_pagu_inp'] < 0){
+  $this->setMessage("Nilai HPS tidak boleh melebihi sisa anggaran");
+  $error = true;
+}
 
 if($input['pr_sisa_anggaran'] < 0){
   $this->setMessage("Sisa anggaran tidak boleh kurang dari 0");
@@ -243,8 +210,7 @@ if ($this->form_validation->run() == FALSE || $error){
       }
     }
 
-
-    $response =$post['status_inp'][0];
+    $response = $post['status_inp'][0];
 
     $com = $post['comment_inp'][0];
 
@@ -256,13 +222,12 @@ if ($this->form_validation->run() == FALSE || $error){
 
     $return = $this->Procedure_m->prc_pr_comment_complete($pr_number,$userdata['complete_name'],1000,$response,$com,$attachment,$last_id,$perencanaan_id,$userdata['employee_id'],$swakelola_inp,$perencanaan['ppm_type_of_plan'], "", "", "");
 
-
     if($return['nextactivity'] == 1010){
       $lasthist = $this->Procplan_m->getHist("", $perencanaan_id)->row_array();
       $hist = array(
                 'ppm_id' => $perencanaan_id,
                 'pph_main' => $lasthist['pph_remain'],
-                'pph_min' => $post['total_alokasi_ppn_inp'],
+                //'pph_min' => $post['total_alokasi_ppn_inp'],
                 'pph_remain' => $post['sisa_pagu_inp'],
                 'pph_date' => date("Y-m-d H:i:s"),
                 'pph_desc' => $return['nextactivity'],
@@ -276,35 +241,28 @@ if ($this->form_validation->run() == FALSE || $error){
 
       $check_vol = $this->Procplan_m->getVolumeHist("",$perencanaan_id)->result_array();
       if (count($check_vol) > 0) {
-              // foreach ($post as $key => $value) {
 
-              // if(is_array($value)){
+          foreach ($post['item_kode'] as $key2 => $value2) { 
 
-              foreach ($post['item_kode'] as $key2 => $value2) { 
+            $getVolumeHist = $this->Procplan_m->getVolumeHist($post['item_kode'][$key2],$perencanaan_id)->row_array();
 
-                $getVolumeHist = $this->Procplan_m->getVolumeHist($post['item_kode'][$key2],$perencanaan_id)->row_array();
+              $dataVolume = array(
+                'ppm_id' => $perencanaan_id,
+                'ppv_main' => $getVolumeHist['ppv_main'],
+                'ppv_minus' => $post['item_jumlah'][$key2],
+                'ppv_remain' => ($getVolumeHist['ppv_main'] - $post['item_jumlah'][$key2]),
+                'ppv_activity' => 1010,
+                'ppv_no' => $input['pr_number'],
+                'ppv_smbd_code' => $post['item_kode'][$key2],
+                'ppv_unit' => $getVolumeHist['ppv_unit'],
+                'ppv_prc' => "PR",
+                'created_datetime' => date("Y-m-d H:i:s"),
+              );
 
-                  $dataVolume = array(
-                    'ppm_id' => $perencanaan_id,
-                    'ppv_main' => $getVolumeHist['ppv_main'],
-                    'ppv_minus' => $post['item_jumlah'][$key2],
-                    'ppv_remain' => ($getVolumeHist['ppv_main'] - $post['item_jumlah'][$key2]),
-                    'ppv_activity' => 1010,
-                    'ppv_no' => $input['pr_number'],
-                    'ppv_smbd_code' => $post['item_kode'][$key2],
-                    'ppv_unit' => $getVolumeHist['ppv_unit'],
-                    'ppv_prc' => "PR",
-                    'created_datetime' => date("Y-m-d H:i:s"),
-                  );
+              $volumeHist = $this->Procplan_m->insertVolumeHist($dataVolume);
 
-                  $volumeHist = $this->Procplan_m->insertVolumeHist($dataVolume);
-
-                }
-              // }
-            // }
+          }
       }
-
-
 
     }
 
@@ -316,8 +274,8 @@ if ($this->form_validation->run() == FALSE || $error){
 
  }
 
- if ($this->db->trans_status() === FALSE)
- {
+if ($this->db->trans_status() === FALSE)
+{
   $this->setMessage("Gagal menambah data");
   $this->db->trans_rollback();
 }
