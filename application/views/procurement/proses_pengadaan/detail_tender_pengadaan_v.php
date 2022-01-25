@@ -13,9 +13,11 @@
 			if(!in_array($str, $loaded)){
 				include($str);
 				$loaded[] = $str;
+				//print_r($str);
+				
 			}
 		}
-
+		//exit;
 		?>
 
 
