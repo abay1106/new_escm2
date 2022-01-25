@@ -22,9 +22,8 @@
             <div id="chat" class="wrapper">
               <div class="container">
                 <div class="left">
-
                   <div class="top">
-                  <?php $isonline = ($user_aanwijzing[$userdata['complete_name']] == "Online"); ?>
+                    <?php $isonline = ($user_aanwijzing[$userdata['complete_name']] == "Online"); ?>
                     <h1>Chat <input type="checkbox" id="checkonline" <?php echo ($isonline) ? "checked" : "" ?> data-toggle="toggle"></h1>
                   </div>
                   <ul class="people">
@@ -58,23 +57,23 @@
                   <div class="top"></div>
 
                   <div class="chat" data-chat="chat-aanwijzing">
-                    <br/>
-                    <?php foreach ($chat_aanwijzing as $key => $value) {
-                      $isyou = ($userdata['complete_name'] == $value['name_ac']); ?>
-                      <div class='bubble <?php echo ($isyou) ? "me" : "you" ?>'>
-                        <?php if(!$isyou){ ?>
-                    <?php echo $value['name_ac'] ?><br/>
-                    <?php } ?>
-                    <?php echo $value['message_ac'] ?><br/><small>(<?php echo date("d/m/y H:i",strtotime($value['datetime_ac'])) ?>)</small>
-                      </div>
-                      <?php } ?>
-                    </div>
-
+                        <br/>
+                        <?php foreach ($chat_aanwijzing as $key => $value) {
+                            $isyou = ($userdata['complete_name'] == $value['name_ac']); ?>
+                            <div class='bubble <?php echo ($isyou) ? "me" : "you" ?>'>
+                                <?php if(!$isyou){ ?>
+                                <?php echo $value['name_ac'] ?><br/>
+                                <?php } ?>
+                                <?php echo $value['message_ac'] ?><br/><small>(<?php echo date("d/m/y H:i",strtotime($value['datetime_ac'])) ?>)</small>
+                            </div>
+                        <?php } ?>
                   </div>
+
                   <div class="write">
                     <input type="text" id="chat-input"/>
                     <a class="write-link send"></a>
                   </div>
+                  
                 </div>
               </div>
             </div>

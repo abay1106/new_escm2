@@ -83,7 +83,7 @@
 		<?php 
 
 		foreach ($content as $key => $value) {
-			include($value['awc_type']."/".$value['awc_file'].".php");
+			include($value['awc_type']."/".$value['awc_file'].".php");            
 		}
 
 		?>
@@ -94,11 +94,10 @@
 
 		<div class="card">				
 			<div class="card-content">
-				<div class="card-body">					
+				<div class="card-body">			
 					<?php echo buttonsubmit('procurement/daftar_pekerjaan',lang('back'),lang('save')) ?>
 				</div>
 			</div>
-
 		</div>
 
 	</form>
