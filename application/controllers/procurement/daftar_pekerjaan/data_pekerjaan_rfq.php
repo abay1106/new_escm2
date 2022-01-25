@@ -67,6 +67,7 @@ if(!empty($filtering) && $filtering == "approval"){
 $this->db->select("ptc_id");
 
 $this->db->where("ptm_status < ", 1901);
+$this->db->or_where("ptm_status = ", 9405);
 $data['total'] = $this->Procrfq_m->getPekerjaanRFQ($id,$userdata['employee_id'],"")->num_rows();
 
 
@@ -112,6 +113,7 @@ if(!empty($filtering) && $filtering == "approval"){
 $this->db->select("ptc_id,ptm_number,ptm_requester_name,ptm_subject_of_work,jenis_pengadaan,activity, waktu");
 //end
 $this->db->where("ptm_status < ", 1901);
+$this->db->or_where("ptm_status = ", 9405);
 $rows = $this->Procrfq_m->getPekerjaanRFQ($id,$userdata['employee_id'],"")->result_array();
 
 $status = array(1=>"Belum Disetujui",2=>"Telah Disetujui",3=>"Ditolak");
