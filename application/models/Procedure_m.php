@@ -1068,8 +1068,6 @@ class Procedure_m extends MY_Model {
 		}
 	}
 
-
-
 	public function prc_tender_comment_complete(
 		$ptm_number = "",
 		$name = "",
@@ -2391,7 +2389,7 @@ class Procedure_m extends MY_Model {
 									
 							$tunjuk_pemenang = true;
 
-							if (count($getdata_keu) != 0) {
+							if (array(count($getdata_keu)) != 0) {
 
 								$getdata_dsb = $this->getNextState(
 									"hap_pos_code",
@@ -3420,9 +3418,9 @@ class Procedure_m extends MY_Model {
 				"response"=>$response
 			);
 
-	return $ret;
+		return $ret;
 
-}
+	}
 
 }
 

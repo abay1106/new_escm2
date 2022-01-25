@@ -13,7 +13,13 @@ foreach ($content as $key => $value) {
 $i = 0;
 include(VIEWPATH."/comment_workflow_attachment_v.php") ?>
 
-<?php echo buttonsubmit('procurement/daftar_pekerjaan',lang('back'),lang('save')) ?>
+<div class="card">				
+  <div class="card-content">
+    <div class="card-body">			
+      <?php echo buttonsubmit('procurement/daftar_pekerjaan',lang('back'),lang('save')) ?>
+    </div>
+  </div>
+</div>
 
 </form>
 

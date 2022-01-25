@@ -237,8 +237,6 @@ class Comment_m extends CI_Model {
 
 	}
 
-
-
 	public function getProcurementRFQ($code = "",$id = ""){
 
 		$this->db->select("ptc_id as comment_id,
