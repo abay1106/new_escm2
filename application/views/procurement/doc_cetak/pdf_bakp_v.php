@@ -51,7 +51,7 @@
 <?php if ($tender['ptm_status'] == 1140) { ?>
 <?php //if ($tender['ptm_status'] == 1141) { ?>
 <br>
-<form method="POST" action="<?php echo base_url(); ?>index.php/procurement/pdf_bakp_print">
+<form method="POST" target="_blank" action="<?php echo base_url(); ?>index.php/procurement/pdf_bakp_print">
 <input type="hidden" name="id" value="<?php echo $ptm_id; ;?>">
 <?php $tgl_penetapan_pemenang = date('Y-m-d'); ?>
 

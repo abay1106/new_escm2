@@ -98,8 +98,8 @@ $data=array(
 
 //print_r($tender);
 
-//$this->load->view($view,$data);
-$this->template($view,"Generate PDF BAKP",$data);
+$this->load->view($view,$data);
+//$this->template($view,"Generate PDF BAKP",$data);
 
 
 $html = $this->output->get_output();
@@ -122,9 +122,10 @@ file_put_contents('uploads/'.$filename, $output);
 $name_doc = "BAKP";
 $full_url = base_url()."uploads/".$filename;
 $full_url_upload = base_url()."index.php/procurement/privyupload/".$rfq_id.'/'.$filename;
+redirect($full_url);
 
-echo "<br><br><center><b>File PDF $name_doc Berhasil Dibuat</b></center><br><br>".
-"<center><a target='_blank' href = '$full_url'> Preview PDF  </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a target='_blank' href = '$full_url_upload'>Upload To Privy </a></center>";
+// echo "<br><br><center><b>File PDF $name_doc Berhasil Dibuat</b></center><br><br>".
+// "<center><a target='_blank' href = '$full_url'> Preview PDF  </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a target='_blank' href = '$full_url_upload'>Upload To Privy </a></center>";
 
 exit;
 
