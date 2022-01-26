@@ -1225,7 +1225,24 @@ class Procedure_m extends MY_Model {
 		}
 		//end y code
 
-		if($activity == 1029){
+		if($response == url_title('Terminasi Lelang',"_",true)){
+
+			$getdata = $this->getNextState(
+				"hap_pos_code",
+				"hap_pos_name",
+				$view,
+				"hap_pos_code = (select distinct hap_pos_parent 
+				from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
+
+			$nextPosCode = $getdata['nextPosCode'];
+			$nextPosName = $getdata['nextPosName'];
+
+			$nextjobtitle = $this->getNextJobTitle($nextPosCode);
+
+
+			$nextActivity = 9405;
+
+		} else if($activity == 1029){
 
 			if($response == url_title('Lanjutkan',"_",true)){
 
@@ -1319,24 +1336,7 @@ class Procedure_m extends MY_Model {
 					
 				}
 
-			} else if($response == url_title('Terminasi Lelang',"_",true)){
-
-				$getdata = $this->getNextState(
-					"hap_pos_code",
-					"hap_pos_name",
-					$view,
-					"hap_pos_code = (select distinct hap_pos_parent 
-					from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
-
-				$nextPosCode = $getdata['nextPosCode'];
-				$nextPosName = $getdata['nextPosName'];
-
-				$nextjobtitle = $this->getNextJobTitle($nextPosCode);
-
-
-				$nextActivity = 9405;
-
-			}
+			} 
 
 		} else if($activity == 1041){
 
