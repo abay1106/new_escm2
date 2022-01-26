@@ -141,7 +141,7 @@
 						</div>
 						<?php $curval = (!empty($prep['ptp_aanwijzing_online'])) ? "checked" : ""; ?>
 						<label class="col-sm-2 text-right">Aanwijzing Online</label>
-						<div class="col-sm-4 checkbox">
+						<div class="col-sm-4">
 							<input type="checkbox" name="aanwijzing_online_inp" <?php echo $curval ?> value="1">
 						</div>
 					</div>

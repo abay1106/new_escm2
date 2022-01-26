@@ -2,7 +2,7 @@
 <div class="app-sidebar menu-fixed" data-background-color="info" data-image="<?php echo base_url('assets') ?>/app-assets/img/sidebar-bg/01.jpg" data-scroll-to-active="true">			
     <div class="sidebar-header">
       <div class="logo clearfix"><a class="logo-text float-left" href="index.html">
-          <div class="logo-img"><img src="<?php echo base_url('assets') ?>/app-assets/img/logo.png" alt="WIKA Logo" /></div><span class="text"><b>E-SCM</b></span>
+          <div class="logo-img"></div><span class="text"><b>E-SCM</b></span>
         </a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
     </div>
     <div class="sidebar-content main-menu-content">
