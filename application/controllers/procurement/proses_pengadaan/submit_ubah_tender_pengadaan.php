@@ -10,6 +10,8 @@
 
     $last_activity = (!empty($last_comment)) ? $last_comment['activity'] : 0;
 
+    var_dump($last_activity);die();
+
     $ptm_number = $last_comment['tender_id'];
 
     $tender = $this->Procrfq_m->getRFQ($last_comment['tender_id'])->row_array();

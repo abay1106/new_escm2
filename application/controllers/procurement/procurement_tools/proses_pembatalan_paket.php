@@ -51,5 +51,5 @@ $data['item'] = $this->Procpr_m->getItemPR("",$pr_number)->result_array();
 $data['redirect_back'] = 'procurement/procurement_tools/monitor_permintaan';
 
 $this->session->set_userdata("pr_id",$pr_number);
-//$this->template($view,$activity['awa_name'],$data);
+
 $this->template($view,"Detail Permintaan (".$activity['awa_name'].")",$data);
