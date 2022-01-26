@@ -19,7 +19,6 @@ if($data['perencanaan']['ppm_type_of_plan'] == "rkp_matgis"){
 
 $data['document'] = $this->Procplan_m->getDokumenPerencanaan("",$id)->result_array();
 
-// $data['item_perencanaan_pmcs'] = $this->Procplan_m->getItemPerencanaanPMCS($id)->result_array();
 $data['item_perencanaan_pmcs'] = $this->Procplan_m->getItemPMCS($id)->result_array();
 
 $next_pos = $this->db
