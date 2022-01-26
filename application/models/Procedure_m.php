@@ -1240,7 +1240,7 @@ class Procedure_m extends MY_Model {
 			$nextjobtitle = $this->getNextJobTitle($nextPosCode);
 
 
-			$nextActivity = 9405;
+			$nextActivity = 1900;
 
 		} else if($activity == 1029){
 
