@@ -10,8 +10,6 @@
 
     $last_activity = (!empty($last_comment)) ? $last_comment['activity'] : 0;
 
-    var_dump($last_activity);die();
-
     $ptm_number = $last_comment['tender_id'];
 
     $tender = $this->Procrfq_m->getRFQ($last_comment['tender_id'])->row_array();
@@ -36,6 +34,10 @@
 
     $ranked_index = [];
 
+    $contract = null;
+    
+    $number = null;
+
     $user_id = null;
 
     $userdata = $this->data['userdata'];
@@ -46,10 +48,11 @@
 
     $tender_name = (isset($tender['ptm_subject_of_work'])) ? $tender['ptm_subject_of_work'] : null;
 
+    $activity_terminasi = 1800;
+
     if(!$position){
     //$this->noAccess("Hanya PIC USER yang dapat membuat permintaan pengadaan");
     }
-
 
     $response = $post['status_inp'][0];
 
@@ -123,14 +126,13 @@
                 }
             }
         }
-    }
-
+    }    
 
     if($last_activity == 1029){
         $manajer_id = (isset($post['manager_inp'])) ? $post['manager_inp'] : "";
         $input['ptm_man_emp_id'] = $manajer_id;
         $user_id = $manajer_id;
-    }
+    }    
 
     if($last_activity == 1030){
 
@@ -1742,12 +1744,118 @@
     }
 
     $p = [
-    'set' => ($last_activity == 1040) ? (($panitia_id) ? $panitia_id : NULL) : ($method['adm_bid_committee'] ? $method['adm_bid_committee'] : NULL),
-    'panitia_id' => (isset($panitia_id)) ? $panitia_id : NULL
+        'set' => ($last_activity == 1040) ? (($panitia_id) ? $panitia_id : NULL) : ($method['adm_bid_committee'] ? $method['adm_bid_committee'] : NULL),
+        'panitia_id' => (isset($panitia_id)) ? $panitia_id : NULL
     ];
 
     $winner_quota = (isset($winner_quota) ? $winner_quota : NULL);
-    $return = $this->Procedure_m->prc_tender_comment_complete($ptm_number,$userdata['complete_name'],$last_activity,$response,$com,$attachment,$last_comment['comment_id'],$userdata['employee_id'],$tender['ptm_type_of_plan'],$ranked_index, $winner_quota, $p);
+    $return = $this->Procedure_m->prc_tender_comment_complete($ptm_number,$userdata['complete_name'],$last_activity,$response,$com,$attachment,$last_comment['comment_id'],$userdata['employee_id'],$tender['ptm_type_of_plan'],$ranked_index, $winner_quota, $p);    
+
+    if($last_activity == 1900){
+
+        $contract = $this->Procrfq_m->getCtrbyRFQ($tender['ptm_number']);
+
+        // foreach ($contract as $key => $value) {
+            
+        //     $number = ($value['contract_number'] == NULL) ? "pengadaan ".$tender['ptm_number'] : $value['contract_number'];
+
+        //     if ($tender['ptm_number'] != NULL && $value['ptm_number'] != NULL && $value['status'] != "2902") {
+        //         $this->setMessage("Kontrak dengan no ".$number." harus dibatalkan terlebih dulu");
+        //         $error = TRUE;
+        //     }	
+        // }
+
+        // if ($tender != NULL && $tender['ptm_status'] != "1902") {
+        //     $this->setMessage("Pengadaan dengan no ".$tender['ptm_number']." harus dibatalkan terlebih dulu");
+        //     $error = TRUE;
+        // }
+
+        $input_pr = array('pr_status'=>$activity_terminasi);
+        $input_rfq = array('ptm_status'=>$activity_terminasi);
+        $anggaran = 1; //$post['remain']+$post['hps'];
+
+        $updateanggaran = $this->Procplan_m->updateDataPerencanaanPengadaan(1, array('ppm_sisa_anggaran'=>$anggaran));
+
+        if ($updateanggaran) {
+
+            $planhist = [
+                'ppm_id' => 1,//$post['plan'],
+                'pph_main' => 1,//$post['remain'],
+                'pph_plus' => 1,//$post['hps'],
+                'pph_remain' => $anggaran,
+                'pph_date' => date("Y-m-d H:i:s"),
+                'pph_desc' => $activity_terminasi,
+                'pph_first' => $pr_number,
+                'pph_mod' => $pr_number
+            ];
+
+            $inserthist = $this->Procplan_m->insertHist($planhist);
+        }
+
+        $update_rfq = $this->Procrfq_m->updateDataRFQ($ptm_number,$input_rfq);   
+
+        $update_com = $this->db
+		->where(array("ptc_id"=>$last_comment['comment_id']))
+		->update("prc_tender_comment",array(
+			"ptc_response" => ucwords($return['response']),
+			"ptc_name" => $userdata['complete_name'],
+			"ptc_end_date" => date("Y-m-d H:i:s"),
+			"ptc_comment" => $post['comment_inp'][0],
+			"ptc_attachment" => $attachment,
+			"ptc_user" => $userdata['employee_id']
+		));
+
+        $update_pr = $this->Procpr_m->updateDataPR($getNoPR['pr_number'],$input_pr);
+
+        if($update_pr){
+
+            $this->db->order_by("ppc_id", "desc");
+            $com = $this->db->where("pr_number", $getNoPR['pr_number'])->get("prc_pr_comment")->row_array();
+
+            $input2['pr_number'] = $getNoPR['pr_number'];
+            $input2['ppc_pos_code'] = $userdata['pos_id'];
+            $input2['ppc_position'] =  $userdata['pos_name'];
+            $input2['ppc_name'] =  $userdata['complete_name'];
+            $input2['ppc_activity'] = $activity_terminasi;
+            $input2['ppc_comment'] = $post['comment_inp'][0];
+            $input2['ppc_start_date'] = date("Y-m-d H:i:s");
+            if ($com['ppc_user'] == NULL) {
+                $this->db->where("ppc_id", $com['ppc_id'])->update("prc_pr_comment", array("ppc_name"=>" ", "ppc_user"=>$userdata['employee_id']));
+            }
+
+            $this->db->insert("prc_pr_comment",$input2);
+
+        }
+
+        $check_vol = $this->Procplan_m->getVolumeHist("",1)->result_array();
+
+        $item = $this->Procpr_m->getItemPR("", $getNoPR['pr_number'])->result_array();
+
+        if (count($check_vol) > 0) {
+
+            foreach ($item as $key2 => $value2) { 
+
+                $getVolumeHist = $this->Procplan_m->getVolumeHist($value2['ppi_code'],1)->row_array();
+
+                $dataVolume = array(
+                    'ppm_id' => 1,//$post['plan'],
+                    'ppv_main' => $getVolumeHist['ppv_remain'],
+                    'ppv_plus' => $value2['ppi_quantity'],
+                    'ppv_minus' => 0,
+                    'ppv_remain' => ($getVolumeHist['ppv_main'] + $value2['ppi_quantity']),
+                    'ppv_activity' => $activity_terminasi,
+                    'ppv_no' => $getNoPR['pr_number'],
+                    'ppv_smbd_code' => $value2['ppi_code'],
+                    'ppv_unit' => $getVolumeHist['ppv_unit'],
+                    'ppv_prc' => "PR",
+                    'created_datetime' => date("Y-m-d H:i:s"),
+                );
+
+                $volumeHist = $this->Procplan_m->insertVolumeHist($dataVolume);
+            }
+        }        
+        
+    }
 
     if ($return['nextactivity'] == 1902) {
 
@@ -1831,7 +1939,7 @@
 
         $comment = $this->Comment_m->insertProcurementRFQ($ptm_number,$return['nextactivity'],"","","",$return['nextposcode'],$return['nextposname'],$user_id);
 
-    }
+    }    
 
     if(!$error){
 

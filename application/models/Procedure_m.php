@@ -1242,6 +1242,14 @@ class Procedure_m extends MY_Model {
 
 			$nextActivity = 1900;
 
+		} else if($activity == 1900){
+
+			if($response == url_title('Setuju',"_",true)){				
+
+				$nextActivity = 1800;
+
+			}
+
 		} else if($activity == 1029){
 
 			if($response == url_title('Lanjutkan',"_",true)){
