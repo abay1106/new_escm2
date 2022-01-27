@@ -40,9 +40,8 @@ if(!empty($limit)){
 }
 
 if (!empty($volume_awal)) {
- $this->db->where('ppv_activity', "0");
+  $this->db->where('ppv_activity', "0");
 }
-
 
 $data['total'] = $this->Comment_m->getVolumeHist($id)->num_rows();
 

@@ -482,11 +482,11 @@
     return data.length;
   }
   function totalPriceFormatter(data) {
-    var total = 0;
+    var total_price = 0;
     $.each(data, function (i, row) {
-      total += +(row.price.substring(1));
+      total_price += +(row.price.substring(1));
     });
-    return '$' + total;
+    return '$' + total_price;
   }
 
 </script>

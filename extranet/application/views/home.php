@@ -101,10 +101,10 @@
                                 </tr>
                                 <tr>
                                     <td>Terminasi Lelang</td>
-                                    <?php if($bast > 0){ ?>
-                                    <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('kontrak'); ?>"><?php echo $bast; ?></a></td>
+                                    <?php if($terminasi_lelang > 0){ ?>
+                                    <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('pengadaan/terminasi_lelang'); ?>"><?php echo $terminasi_lelang["jumlah"]; ?></a></td>
                                     <?php } else { ?>
-                                    <td style="text-align: center;"><?php echo $bast; ?></td>
+                                    <td style="text-align: center;"><?php echo $terminasi_lelang["jumlah"]; ?></td>
                                     <?php } ?>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>                                                                       

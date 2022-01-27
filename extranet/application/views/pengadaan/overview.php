@@ -9,16 +9,17 @@
 	</div>
 </div>
 
-<div class="wrapper wrapper-content animated fadeIn">
-	<div class="row">
-        <div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h5><?php echo $this->lang->line('Informasi Umum'); ?></h5>
-				</div>
-				<div class="ibox-content">
-					<table class="table">
-						
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Informasi Umum'); ?></h4>
+			</div>
+
+			<div class="card-content">
+				<div class="card-body">
+					<table class="table">						
 						<tr>
 							<th><?php echo $this->lang->line('Nomor Pengadaan'); ?></th>
 							<td><?php echo $header["ptm_number"] ?></td>
@@ -68,16 +69,21 @@
 					</table>
 				</div>
 			</div>
+
 		</div>
 	</div>
-	
-	<div class="row">
-        <div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h5><?php echo $this->lang->line('Item Pengadaan'); ?></h5>
-				</div>
-				<div class="ibox-content">
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Item Pengadaan'); ?></h4>
+			</div>
+
+			<div class="card-content">
+				<div class="card-body">
 					<table class="table table-striped table-bordered dataTables-examples" >
 						<thead>
 							<tr>
@@ -103,16 +109,21 @@
 					</table>
 				</div>
 			</div>
+
 		</div>
 	</div>
-	
-	<div class="row">
-        <div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h5><?php echo $this->lang->line('Dokumen Pengadaan'); ?></h5>
-				</div>
-				<div class="ibox-content">
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Dokumen Pengadaan'); ?></h4>
+			</div>
+
+			<div class="card-content">
+				<div class="card-body">
 					<table class="table table-striped table-bordered dataTables-examples" >
 						<thead>
 							<tr>
@@ -136,16 +147,21 @@
 					</table>
 				</div>
 			</div>
+
 		</div>
 	</div>
-	
-	<div class="row">
-        <div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h5><?php echo $this->lang->line('Informasi Umum'); ?></h5>
-				</div>
-				<div class="ibox-content">
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Informasi Umum'); ?></h4>
+			</div>
+
+			<div class="card-content">
+				<div class="card-body">
 					<table class="table">
 						
 						<tr>
@@ -227,63 +243,66 @@
 							<td><?php echo $curval ?></td>
 						</tr>
 						<?php } ?>
-						<!-- <tr>
-							<th><?php //echo $this->lang->line('Nilai PR'); ?></th>
-							<td><?php //echo number_format($header["nilai"], 2, '.', ',') ?></td>
-						</tr> -->
 					</table>
 				</div>
 			</div>
+
 		</div>
 	</div>
+</div>
 	
-	<?php if($submits) { ?>
+<?php if($submits) { ?>
 	<div class="row">
-        <div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-content text-center">
-					<form action="<?php echo site_url('pengadaan/daftar') ?>" method="POST" enctype='multipart/form-data'>
-						<input hidden id="ptm_number" name="ptm_number" value="<?php echo $header["ptm_number"] ?>">
-						<?php if(isset($lelang)) { ?>
-						<input hidden id="lelang" name="lelang" value="1">
-						<div class="form-group"><label class="col-sm-6 control-label"><?php echo $this->lang->line('Lampiran Prakualifikasi'); ?> <small>(Max 10MB)</small></label>
-							<div class="col-lg-6 m-l-n"><input id="lampiran_prakualifikasi" name="lampiran_prakualifikasi" type="file" class="file"></div>
-						</div>
-						<?php } ?>
-						<div class="form-group">
-							<div class="i-checks"><label> <input type="checkbox" id="term" name="term"> <i></i> <?php echo $this->lang->line('Dengan ini saya menyatakan telah membaca dan memahami isi Dokumen Pelelangan'); ?> </label></div>
-						</div>
-						<div class="form-group"><label class="col-sm-2 control-label"><?php echo $this->lang->line('Jawaban'); ?></label>
-							<div class="col-sm-2 m-l-n"><select class="form-control m-b" id="response" name="response" required>
-								<option value="">--<?php echo $this->lang->line('Pilih'); ?>--</option>
-								<option value="1"><?php echo $this->lang->line('Daftar'); ?></option>
-								<?php if(!isset($lelang)) { ?>
-								<option value="0"><?php echo $this->lang->line('Tidak Ikut'); ?></option>
-								<?php } ?>
-							</select>
+		<div class="col-12">
+			<div class="card">
+
+				<div class="card-content">
+					<div class="card-body">
+						<form action="<?php echo site_url('pengadaan/daftar') ?>" method="POST" enctype='multipart/form-data'>
+							<input hidden id="ptm_number" name="ptm_number" value="<?php echo $header["ptm_number"] ?>">
+							<?php if(isset($lelang)) { ?>
+							<input hidden id="lelang" name="lelang" value="1">
+							<div class="row form-group"><label class="col-sm-6 control-label"><?php echo $this->lang->line('Lampiran Prakualifikasi'); ?> <small>(Max 10MB)</small></label>
+								<div class="col-lg-6 m-l-n"><input id="lampiran_prakualifikasi" name="lampiran_prakualifikasi" type="file" class="file"></div>
 							</div>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-primary" type="submit"><?php echo $this->lang->line('Kirim'); ?></button>
-							<!-- haqim -->
-							<button class="btn btn-white" onclick="history.go(-1)"><?php echo $this->lang->line('Kembali'); ?></button>
-							<!-- end -->
-						</div>
-					</form>
+							<?php } ?>
+							<div class="row form-group">
+								<div class="i-checks"><label> <input type="checkbox" id="term" name="term"> <i></i> <?php echo $this->lang->line('Dengan ini saya menyatakan telah membaca dan memahami isi Dokumen Pelelangan'); ?> </label></div>
+							</div>
+							<div class="row form-group"><label class="col-sm-2 control-label"><?php echo $this->lang->line('Jawaban'); ?></label>
+								<div class="col-sm-2 m-l-n"><select class="form-control m-b" id="response" name="response" required>
+									<option value="">--<?php echo $this->lang->line('Pilih'); ?>--</option>
+									<option value="1"><?php echo $this->lang->line('Daftar'); ?></option>
+									<?php if(!isset($lelang)) { ?>
+									<option value="0"><?php echo $this->lang->line('Tidak Ikut'); ?></option>
+									<?php } ?>
+								</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<button class="btn btn-info" type="submit"><?php echo $this->lang->line('Kirim'); ?></button>
+								<!-- haqim -->
+								<button class="btn btn-white" onclick="history.go(-1)"><?php echo $this->lang->line('Kembali'); ?></button>
+								<!-- end -->
+							</div>
+						</form>
+					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
+
 	<script>
-	$(document).ready(function(){
-		$('.i-checks').iCheck({
-			checkboxClass: 'icheckbox_square-green',
-			radioClass: 'iradio_square-green',
+		$(document).ready(function(){
+			$('.i-checks').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
+			});
 		});
-	});
-</script>
-	<?php } ?>
-</div>
+	</script>
+
+<?php } ?>
 
 <script>
 	$(document).ready(function(){
