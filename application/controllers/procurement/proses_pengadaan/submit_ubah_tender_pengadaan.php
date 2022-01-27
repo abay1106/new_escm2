@@ -15,9 +15,7 @@
     $tender = $this->Procrfq_m->getRFQ($last_comment['tender_id'])->row_array();
 
     $this->db->select('pr_number');
-
     $this->db->where('ptm_number', $ptm_number);
-
     $getNoPR = $this->db->get('vw_prc_monitor')->row_array();
 
     $permintaan = $this->Procpr_m->getPR($getNoPR['pr_number'])->row_array();
@@ -1772,16 +1770,16 @@
 
         $input_pr = array('pr_status'=>$activity_terminasi);
         $input_rfq = array('ptm_status'=>$activity_terminasi);
-        $anggaran = 1; //$post['remain']+$post['hps'];
+        $anggaran = $post['remain']+$post['hps'];
 
-        $updateanggaran = $this->Procplan_m->updateDataPerencanaanPengadaan(1, array('ppm_sisa_anggaran'=>$anggaran));
+        $updateanggaran = $this->Procplan_m->updateDataPerencanaanPengadaan($post['plan'], array('ppm_sisa_anggaran'=>$anggaran));
 
         if ($updateanggaran) {
 
             $planhist = [
-                'ppm_id' => 1,//$post['plan'],
-                'pph_main' => 1,//$post['remain'],
-                'pph_plus' => 1,//$post['hps'],
+                'ppm_id' => $post['plan'],
+                'pph_main' => $post['remain'],
+                'pph_plus' => $post['hps'],
                 'pph_remain' => $anggaran,
                 'pph_date' => date("Y-m-d H:i:s"),
                 'pph_desc' => $activity_terminasi,
@@ -1827,7 +1825,7 @@
 
         }
 
-        $check_vol = $this->Procplan_m->getVolumeHist("",1)->result_array();
+        $check_vol = $this->Procplan_m->getVolumeHist("",$post['plan'])->result_array();
 
         $item = $this->Procpr_m->getItemPR("", $getNoPR['pr_number'])->result_array();
 
@@ -1838,7 +1836,7 @@
                 $getVolumeHist = $this->Procplan_m->getVolumeHist($value2['ppi_code'],1)->row_array();
 
                 $dataVolume = array(
-                    'ppm_id' => 1,//$post['plan'],
+                    'ppm_id' => $post['plan'],
                     'ppv_main' => $getVolumeHist['ppv_remain'],
                     'ppv_plus' => $value2['ppi_quantity'],
                     'ppv_minus' => 0,

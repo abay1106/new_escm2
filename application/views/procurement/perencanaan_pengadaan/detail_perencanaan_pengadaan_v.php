@@ -203,7 +203,7 @@
                         <td><?php echo $v["currency"]." ";
                                   echo inttomoney($v['price']) ?></td>
                         <td><?php echo $v["currency"]." ";
-                                  echo inttomoney($v['jumlah']) ?></td>
+                                  echo $v['jumlah'] ?></td>
                         </a></td>
                         <td><?php echo $v['periode_pengadaan'] ?></td>
                       </tr>

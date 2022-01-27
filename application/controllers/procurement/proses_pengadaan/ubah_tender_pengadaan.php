@@ -6,12 +6,6 @@ $view = 'procurement/proses_pengadaan/ubah_tender_pengadaan_v';
 
 $position = $this->Administration_m->getPosition("PIC USER");
 
-/*
-if(!$position){
-  $this->noAccess("Hanya PIC USER yang dapat membuat tender pengadaan");
-}
-*/
-
 $id = (isset($post['id'])) ? $post['id'] : $this->uri->segment(4, 0);
 
 $data['id'] = $id;
@@ -29,6 +23,14 @@ $latest_comment = $this->Comment_m->getProcurementRFQ("",$id)->row_array();
 $ptm_number = $latest_comment['tender_id'];
 
 $permintaan = $this->Procrfq_m->getRFQ($ptm_number)->row_array();
+
+$this->db->select('pr_number');
+$this->db->where('ptm_number', $ptm_number);
+$getNoPR = $this->db->get('vw_prc_monitor')->row_array();
+
+$data['permintaan_hide'] = $this->Procpr_m->getPR($getNoPR['pr_number'])->row_array();
+
+$data['perencanaan'] = $this->Procplan_m->getPerencanaanPengadaan($data['permintaan_hide']['ppm_id'])->row_array();
 
 $project_cost = $this->Procrfq_m->getProjectCost($ptm_number)->result_array();
 
@@ -71,10 +73,9 @@ $data['document'] = $this->Procrfq_m->getDokumenRFQ("",$ptm_number)->result_arra
 $this->db->select("tit_id,tit_code,tit_description,tit_quantity,tit_unit,tit_price,tit_currency,tit_type,tit_ppn,tit_pph,tit_tujuan,prc_tender_item.pr_number,COALESCE(pr_district_id, ptm_district_id) as pr_district_id, COALESCE(pr_district, ptm_district_name::text) as pr_district, COALESCE(pr_dept_id, ptm_dept_id) as pr_dept_id, COALESCE(pr_dept_name, ptm_dept_name) as pr_dept_name");
 
 $this->db->join("prc_pr_main","prc_pr_main.pr_number=prc_tender_item.pr_number","left");
+
 $this->db->join('prc_tender_main', 'prc_tender_main.ptm_number = prc_tender_item.ptm_number', 'left');
 
-//$this->db->order_by("tit_code","asc");
-//$this->db->order_by("pr_dept_name","asc");
 $this->db->order_by("pr_number","asc");
 
 $data['item'] = $this->Procrfq_m->getItemRFQ("",$ptm_number)->result_array();
@@ -93,7 +94,6 @@ if (count($submitted_item) > 0) {
     $data['submitted_item'][$value['tit_id']]['total_percent'] += $value["percentage"];
     $data['submitted_item'][$value['tit_id']][$value['vendor_id']]['weight'] = $value["weight"]; 
   }
-
 
 }
 
@@ -145,7 +145,6 @@ if ($winner == 1) {
 }
 
 $data['winner'] = $wins;
-// var_dump($wins);
 
 $pemb_dok_pen = $data['prep']['ptp_doc_open_date'];
 
@@ -195,15 +194,12 @@ if(in_array($activity_id, [1100,1120]) || $activity_id > 1100){
   ->where("a.ppm_id",$ptm_number)
   ->join("vnd_header b","b.vendor_id=a.vendor_id")
   ->join("prc_eauction_header f","f.id=a.eauction_id")
-  //->join("prc_eauction_history c","c.vendor_id=a.vendor_id AND c.ppm_id =a.ppm_id")
   ->join("prc_tender_item d","d.tit_id=a.tit_id AND d.ptm_number=f.ppm_id")
   ->order_by("a.tgl_bid","asc")
     ->order_by("tit_description","asc")
     ->order_by("tit_code","asc")
   ->get("prc_eauction_history_item a")
   ->result_array();
-
-  //echo $this->db->last_query();
 
   $e = [];
 
@@ -240,10 +236,7 @@ if(!empty($id_panitia)){
 $this->db->where("job_title","MANAJER PENGADAAN");
 $data['manajer_pengadaan'] = $this->Administration_m->getUserRule()->result_array();
 
-//if(isset($data['prep']['adm_bid_committee'])){
 $this->session->set_userdata("committee_id",$id_panitia);
-//}
-
 
 $data['hps'] = $this->Procrfq_m->getHPSRFQ($ptm_number)->row_array();
 
@@ -253,15 +246,10 @@ foreach ($vnd as $key => $value) {
   $temp[$value['vendor_id']] = $value;
 }
 
-//$data['bidder_msg'] = $this->Procrfq_m->getMessageRFQ($ptm_number)->result_array();
-
 $data['evaluation'] = $this->Procrfq_m->getEvalViewRFQ("",$ptm_number)->result_array();
 
 $data['penata_perencana'] = $this->Administration_m->getUserByJob("PENATA PERENCANAAN")->result_array();
 
-//$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan",3=>"Pembelian Langsung");
-
-//$data['metode'] = array(0=>"Penunjukkan Langsung",1=>"Pemilihan Langsung",2=>"Pelelangan");
 $data["metode"] = [
   2 => "Tender Umum",
   1 => "Ternder Terbatas",
@@ -354,5 +342,4 @@ foreach ($eauction_detail as $key => $value) {
 }
 
 $this->session->set_userdata("rfq_id",$ptm_number);
-//$this->template($view,$activity['awa_name'],$data);
 $this->template($view,$activity['awa_name']." (".$activity['awa_id'].")",$data);

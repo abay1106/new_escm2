@@ -57,7 +57,7 @@
 
   function operateFormatterV2(value, row, index) {
     return [
-    '<a class="btn btn-primary btn-xs dialog" data-url="<?php echo site_url(PROCUREMENT_VERIFIKASI_VENDOR_PATH) ?>/view/'+value+'" href="#">',
+    '<a class="btn btn-info btn-md dialog" data-url="<?php echo site_url(PROCUREMENT_VERIFIKASI_VENDOR_PATH) ?>/view/'+value+'" href="#">',
     'Lihat',
     '</a>  ',
   ].join('');
@@ -91,7 +91,7 @@ var $vendor_verifikasi_view = $('#vendor_verifikasi_view'),
       pageSize:100,
 
       columns: [
-    {
+      {
         field: 'pvs_vendor_code',
         title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
         align: 'center',
