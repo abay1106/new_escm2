@@ -302,9 +302,20 @@ $table_pekerjaan_pr.on('expand-row.bs.table', function (e, index, row, $detail) 
         align: 'center',
         valign: 'middle',
 
-      }, {
+      }, 
+      {
         field: 'ptm_subject_of_work',
         title: 'Nama Rencana Pengadaan',
+        sortable:true,
+        order:true,
+        searchable:true,
+        align: 'left',
+        valign: 'middle',
+
+      },
+      {
+        field: 'ptm_packet',
+        title: 'Nama Paket',
         sortable:true,
         order:true,
         searchable:true,
@@ -322,7 +333,7 @@ $table_pekerjaan_pr.on('expand-row.bs.table', function (e, index, row, $detail) 
         valign: 'middle',
 
       },
-     {
+      {
         field: 'activity',
         title: 'Aktifitas',
         sortable:true,

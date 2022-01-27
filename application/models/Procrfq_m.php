@@ -489,13 +489,13 @@ class Procrfq_m extends CI_Model {
 		}
 
 	}
-// haqim
+
+	// haqim
 	public function getPekerjaanRFQ($id = "",$user = null,$buyer = null){
 
 		if(!empty($id)){
 
 			$this->db->where("ptm_number",$id);
-			// $this->db->where("A.ptm_number",$id);
 
 		}
 
@@ -505,28 +505,14 @@ class Procrfq_m extends CI_Model {
 			
 		}
 
-		// $this->db->join("prc_tender_main B","B.ptm_number = A.ptm_number","left");
-
-		// $this->db->join("adm_wkf_activity C","C.awa_id = A.ptc_activity","left");
-
-		// $this->db->where(array("A.ptc_name"=>null,"A.ptc_end_date"=>null));
-
-		// $this->db->where_not_in("A.ptc_activity",array(1901,1903));
-
-		// $this->db->group_start();
-		// $this->db->where("A.ptc_user",null);
-		// $this->db->or_where("A.ptc_user",$user);
-		// $this->db->group_end();
 		$this->db->where("ptc_user",null);
 		$this->db->or_where("ptc_user",$user);
 
 		return $this->db->get("vw_daftar_pekerjaan_rfq");
-		// return $this->db->get("prc_tender_comment A");
-
-
 
 	}
-//end
+	// end
+
 	public function getDokumenRFQ($code = "",$tender = ""){
 
 		if(!empty($code)){

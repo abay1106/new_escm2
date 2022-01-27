@@ -10,7 +10,7 @@
           <div class="card-body">
               <?php $curval = $prep['ptp_tender_method']; ?>
               <div class="row form-group" id="metode_pengadaan_cont">
-                <label class="col-sm-2 control-label">Metode Pengadaan</label>
+                <label class="col-sm-2 control-label text-right">Metode Pengadaan</label>
                 <div class="col-sm-6">
                 <select disabled class="form-control" id="metode_pengadaan_inp" name="metode_pengadaan_inp" value="<?php echo $curval ?>">
                   <option value=""><?php echo lang('choose') ?></option>
@@ -27,7 +27,7 @@
               if(!empty($curval)){
               ?>
               <div class="row form-group" id="panitia_pelelangan_cont">
-                <label class="col-sm-2 control-label">Panitia Pelelangan</label>
+                <label class="col-sm-2 control-label text-right">Panitia Pelelangan</label>
                 <div class="col-sm-4">
                   <div class="input-group"> 
                   <input disabled readonly type="text" class="form-control" id="panitia_pelelangan_inp" name="panitia_pelelangan_inp" value="<?php echo $curval ?>">
@@ -39,7 +39,7 @@
 
             <?php $curval = $prep['ptp_submission_method']; ?>
             <div class="row form-group" id="sistem_sampul_cont">
-              <label class="col-sm-2 control-label">Sistem Sampul</label>
+              <label class="col-sm-2 control-label text-right">Sistem Sampul</label>
               <div class="col-sm-2">
               <?php foreach ($sampul as $key => $value) { 
                 if($curval == $key) {
@@ -48,13 +48,13 @@
                 <?php } } ?>
 
               </div>
-              <label class="col-sm-1 control-label">E-Auction</label>
+              <label class="col-sm-1 control-label text-right">E-Auction</label>
               <div class="col-sm-1">
                 <div class="">
                   <?php echo (!empty($prep['ptp_eauction']) && $prep['ptp_eauction'] == 1) ? "Ya" : "Tidak"; ?>
                 </div>
               </div>
-              <label class="col-sm-2 control-label pq_cont">Pra Kualifikasi</label>
+              <label class="col-sm-2 control-label text-right pq_cont">Pra Kualifikasi</label>
               <div class="col-sm-1 pq_cont">
                 <div class="">
                   <?php echo (!empty($prep['ptp_prequalify'])) ? "Ya" : "Tidak"; ?>
@@ -64,7 +64,7 @@
 
             <?php $curval = $prep['evt_description']; ?>
             <div class="row form-group" id="template_evaluasi_cont">
-              <label class="col-sm-2 control-label">Template Evaluasi</label>
+              <label class="col-sm-2 control-label text-right">Template Evaluasi</label>
               <div class="col-sm-4">
               <div class="form-control-static"> 
                   <a target="_blank" href="<?php echo site_url('procurement/procurement_tools/lihat_template_evaluasi/'.$prep['evt_id']) ?>"><?php echo $curval ?></a>
@@ -75,7 +75,7 @@
 
 
             <div class="row form-group" id="klasifikasi_peserta_cont">
-              <label class="col-sm-2 control-label">Klasifikasi Peserta</label>
+              <label class="col-sm-2 control-label text-right">Klasifikasi Peserta</label>
               <div class="col-sm-4">
                 <div class="">
                   <label>
@@ -95,7 +95,7 @@
             </div>
 
             <div class="row form-group" id="quo_type_peserta_cont">
-              <label class="col-sm-2 control-label">Tipe Penawaran</label>
+              <label class="col-sm-2 control-label text-right">Tipe Penawaran</label>
               <div class="col-sm-4">
                 <div class="">
                   <label>
@@ -128,7 +128,7 @@
 
             <?php $curval = $prep['ptp_inquiry_notes']; ?>
             <div class="row form-group" id="keterangan_metode_cont">
-              <label class="col-sm-2 control-label">Keterangan Tambahan</label>
+              <label class="col-sm-2 control-label text-right">Keterangan Tambahan</label>
               <div class="col-sm-6">
                 <textarea disabled class="form-control" name="keterangan_metode_inp" id="keterangan_metode_inp"><?php echo $curval ?></textarea>
               </div>
