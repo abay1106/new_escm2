@@ -51,7 +51,6 @@ if(!empty($next_pos) && $data['perencanaan']['ppm_status'] != 3){
 $data['anggaran_list'][0] = $this->Comment_m->getAnggaran($id)->result_array();
 
 $data['volume_hist'] = $this->Comment_m->getVolumeHist($id)->result_array();
-// echo $this->db->last_query();exit();
 
 $data['project_cost'] = $this->Procplan_m->getProjectCost($id)->result_array();
 
