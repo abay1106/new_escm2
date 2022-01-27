@@ -236,6 +236,7 @@
 								<li class="<?php echo $url == 'monitorpengadaan' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorpengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Pengadaan'); ?></span></a></li>
 								<li class="<?php echo $url == 'buatsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/buatsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Membuat Sanggahan'); ?></span></a></li>
 								<li class="<?php echo $url == 'monitorsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Sanggahan'); ?></span></a></li>
+								<li class="<?php echo $url == 'terminasi_lelang' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/terminasi_lelang"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Terminasi Lelang</span></a></li>
 							</ul>
 						</li>
 

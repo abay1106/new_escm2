@@ -1747,7 +1747,7 @@
     ];
 
     $winner_quota = (isset($winner_quota) ? $winner_quota : NULL);
-    $return = $this->Procedure_m->prc_tender_comment_complete($ptm_number,$userdata['complete_name'],$last_activity,$response,$com,$attachment,$last_comment['comment_id'],$userdata['employee_id'],$tender['ptm_type_of_plan'],$ranked_index, $winner_quota, $p);    
+    $return = $this->Procedure_m->prc_tender_comment_complete($ptm_number,$userdata['complete_name'],$last_activity,$response,$com,$attachment,$last_comment['comment_id'],$userdata['employee_id'],$tender['ptm_type_of_plan'],$ranked_index, $winner_quota, $p);        
 
     if($last_activity == 1900){
 
@@ -1783,8 +1783,8 @@
                 'pph_remain' => $anggaran,
                 'pph_date' => date("Y-m-d H:i:s"),
                 'pph_desc' => $activity_terminasi,
-                'pph_first' => $pr_number,
-                'pph_mod' => $pr_number
+                'pph_first' => $getNoPR['pr_number'],
+                'pph_mod' => $getNoPR['pr_number']
             ];
 
             $inserthist = $this->Procplan_m->insertHist($planhist);

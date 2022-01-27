@@ -44,7 +44,6 @@ class Procplan_m extends CI_Model {
 
 		}
 
-		$this->db->distinct();
 		return $this->db->get("vw_prc_plan_item_pmcs");
 
 	}
