@@ -35,8 +35,6 @@ if($proc['ptp_prequalify'] == 2){
   $this->db->where("pvs_pq_passed",1);
 }
 
-$this->db->distinct()->select("pvs_vendor_code");
-
 $data['total'] = $this->Procrfq_m->getVendorBidderRFQ($id)->num_rows();
 
 if(!empty($search)){
@@ -77,4 +75,3 @@ foreach ($rows as $key => $value) {
 $data['rows'] = $rows;
 
 echo json_encode($data);
-// echo $this->db->last_query();

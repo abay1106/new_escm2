@@ -67,6 +67,7 @@ if(!empty($filtering) && $filtering == "approval"){
 $this->db->select("ptc_id");
 
 $this->db->where("ptm_status < ", 1901);
+$this->db->where("ptm_status != ", 1800);
 $data['total'] = $this->Procrfq_m->getPekerjaanRFQ($id,$userdata['employee_id'],"")->num_rows();
 
 
@@ -106,12 +107,9 @@ if(!empty($filtering) && $filtering == "approval"){
   $this->db->where("ptm_status",1);
 }
 
-// $this->db->select("ptc_id,A.ptm_number,ptm_requester_name,ptm_subject_of_work,ptm_delivery_point,awa_name as activity,DATE_FORMAT(ptc_start_date,'%d/%m/%Y %H:%i') as waktu");
-//haqim
-// $this->db->select("ptc_id,ptm_number,ptm_requester_name,ptm_subject_of_work,ptm_delivery_point,activity, waktu");
-$this->db->select("ptc_id,ptm_number,ptm_requester_name,ptm_subject_of_work,jenis_pengadaan,activity, waktu");
-//end
+$this->db->select("ptc_id,ptm_number,ptm_requester_name,ptm_packet,ptm_subject_of_work,jenis_pengadaan,activity, waktu");
 $this->db->where("ptm_status < ", 1901);
+$this->db->where("ptm_status != ", 1800);
 $rows = $this->Procrfq_m->getPekerjaanRFQ($id,$userdata['employee_id'],"")->result_array();
 
 $status = array(1=>"Belum Disetujui",2=>"Telah Disetujui",3=>"Ditolak");
@@ -121,5 +119,4 @@ foreach ($rows as $key => $value) {
 }
 
 $data['rows'] = $rows;
-// echo $this->db->last_query();
 echo json_encode($data);
