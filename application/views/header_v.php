@@ -21,8 +21,43 @@
                </li>
                <?php } ?>
 
-               <li class="i18n-dropdown dropdown nav-item mr-2"><a class="nav-link d-flex align-items-center dropdown-toggle dropdown-language" id="dropdown-flag" href="javascript:;" data-toggle="dropdown"><img class="langimg selected-flag" src="<?php echo base_url('assets')?>/app-assets/img/flags/us.png" alt="flag"><span class="selected-language d-md-flex d-none">English</span></a>
-                     <div class="dropdown-menu dropdown-menu-right text-left" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="javascript:;" data-language="en"><img class="langimg mr-2" src="<?php echo base_url('assets')?>/app-assets/img/flags/us.png" alt="flag"><span class="font-small-3">English</span></a><a class="dropdown-item" href="javascript:;" data-language="es"><img class="langimg mr-2" src="<?php echo base_url('assets')?>/app-assets/img/flags/es.png" alt="flag"><span class="font-small-3">Spanish</span></a><a class="dropdown-item" href="javascript:;" data-language="pt"><img class="langimg mr-2" src="<?php echo base_url('assets')?>/app-assets/img/flags/pt.png" alt="flag"><span class="font-small-3">Portuguese</span></a></div>
+               <li class="i18n-dropdown dropdown nav-item mr-2">
+                  <a class="nav-link d-flex align-items-center dropdown-toggle dropdown-language" id="dropdown-flag" href="javascript:;" data-toggle="dropdown">
+                     <?php
+                        
+                        $siteLang = $this->session->userdata('site_lang');
+                        if($siteLang){
+                           if($siteLang === 'indonesian'){ ?>
+                              <img class="langimg selected-flag" src="<?php echo base_url('assets')?>/app-assets/img/flags/id.png" alt="flag">
+                              <span class="selected-language d-md-flex d-none">Indonesian</span>
+                           <?php
+                           }else if($siteLang === 'english'){ ?>
+                              <img class="langimg selected-flag" src="<?php echo base_url('assets')?>/app-assets/img/flags/us.png" alt="flag">
+                              <span class="selected-language d-md-flex d-none">English</span>
+                           <?php                              
+                           }else{ ?>
+                              <span class="selected-language d-md-flex d-none">Unknown</span>
+                           <?php
+                           }
+                        }else{
+                        ?>
+                           <img class="langimg selected-flag" src="<?php echo base_url('assets')?>/app-assets/img/flags/id.png" alt="flag">
+                           <span class="selected-language d-md-flex d-none">Indonesian</span>
+                        <?php
+                        }
+                     ?>
+                     
+                  </a>
+                     <div class="dropdown-menu dropdown-menu-right text-left" aria-labelledby="dropdown-flag">
+                        <a class="dropdown-item" href="<?php echo site_url('Language/setLang?lang=english') ?>" >
+                           <img class="langimg mr-2" src="<?php echo base_url('assets')?>/app-assets/img/flags/us.png" alt="flag">
+                           <span class="font-small-3">English</span>
+                        </a>
+                        <a class="dropdown-item" href="<?php echo site_url('Language/setLang?lang=indonesian') ?>" >
+                           <img class="langimg mr-2" src="<?php echo base_url('assets')?>/app-assets/img/flags/id.png" alt="flag">
+                           <span class="font-small-3">Indonesian</span>
+                        </a>
+                     </div>
                </li>    
                
                <li class="dropdown nav-item mr-2">
@@ -42,7 +77,7 @@
                      <?php } else { ?>
                         <a class="dropdown-item">
                            <div class="d-flex align-items-center">
-                              No data.
+                           <?php echo $this->lang->line('no_data'); ?>
                            </div>
                         </a>
                      <?php } ?>
@@ -54,7 +89,7 @@
                   <ul class="notification-dropdown dropdown-menu dropdown-menu-media dropdown-menu-right overflow-hidden">
                      <li class="dropdown-menu-header">
                         <div class="dropdown-header d-flex justify-content-between white bg-info">
-                              <div class="d-flex"><i class="ft-bell font-medium-3 d-flex align-items-center mr-2"></i><span class="noti-title"><?php echo count($jobs)?> Notification</span></div>
+                              <div class="d-flex"><i class="ft-bell font-medium-3 d-flex align-items-center mr-2"></i><span class="noti-title"><?php echo count($jobs)?> <?php echo $this->lang->line('notification'); ?></span></div>
                         </div>
                      </li>                        
                      <?php if(count($jobs) > 0 ) { ?>    
@@ -77,7 +112,7 @@
                      <?php if(count($jobs) > 5) { ?>                                    
                      <li class="dropdown-menu-footer">
                         <a href="<?php echo site_url('/log/alljob/')?>">                           
-                           <div class="noti-footer text-center cursor-pointer info border-top text-bold-400 py-1">Read All Notifications (<?php echo count($jobs)-5?>)</div>
+                           <div class="noti-footer text-center cursor-pointer info border-top text-bold-400 py-1"><?php echo $this->lang->line('read_all_notifications'); ?> (<?php echo count($jobs)-5?>)</div>
                         </a>
                      </li>
                      <?php } ?>
@@ -86,7 +121,7 @@
                         <div class="d-flex justify-content-between cursor-pointer read-notification">
                            <div class="media d-flex align-items-center">
                               <div class="media-body">
-                                 <h6 class="m-0"><small class="grey lighten-1 font-italic text-center">No data.</small></h6>
+                                 <h6 class="m-0"><small class="grey lighten-1 font-italic text-center"><?php echo     $this->lang->line('no_data'); ?></small></h6>
                               </div>
                            </div>
                         </div>
@@ -96,7 +131,7 @@
 
                <li class="dropdown nav-item mr-1">
                   <a class="nav-link count-info dropdown-toggle user-dropdown d-flex align-items-end" id="dropdownBasic2" href="javascript:;" data-toggle="dropdown">
-                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-users mr-1"></i>Ganti Posisi</span></div>
+                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-users mr-1"></i> <?php echo     $this->lang->line('gt'); ?> </span></div>
                   </a>
                   <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0" aria-labelledby="dropdownBasic2">
                      <?php foreach ($position as $key => $value) { ?>
@@ -109,13 +144,13 @@
 
                <li class="nav-item mr-1">
                   <a class="nav-link" href="<?php echo site_url('log/change_password') ?>">
-                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-lock mr-1"></i>Ubah Password</span></div>
+                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-lock mr-1"></i><?php echo     $this->lang->line('cp'); ?></span></div>
                   </a>
                </li>
 
                <li class="nav-item mr-1">
                   <a class="nav-link" href="<?php echo site_url('log/logout') ?>" id="logout">
-                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-log-out mr-1"></i>Logout</span></div>
+                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-log-out mr-1"></i><?php echo     $this->lang->line('lg'); ?></span></div>
                   </a>
                </li>
             </ul>

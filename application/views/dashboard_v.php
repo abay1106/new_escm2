@@ -10,7 +10,7 @@
 						<div class="media">
 							<div class="media-body text-left">
 								<h3 class="mb-1 danger">2 %</h3>
-								<span>Persentase Efisiensi</span>
+								<span><?php echo $this->lang->line('persentase_efisiensi'); ?></span>
 							</div>
 							<div class="media-right align-self-center">
 								<i class="ft-briefcase danger font-large-2 float-right"></i>
@@ -27,7 +27,7 @@
 						<div class="media">
 							<div class="media-body text-left">
 								<h3 class="mb-1 success">156</h3>
-								<span>Jumlah RFQ Aktif</span>
+								<span><?php echo $this->lang->line('jumlah_rfq_aktif'); ?></span>
 							</div>
 							<div class="media-right align-self-center">
 								<i class="ft-user success font-large-2 float-right"></i>
@@ -44,7 +44,7 @@
 						<div class="media">
 							<div class="media-body text-left">
 								<h3 class="mb-1 warning">249</h3>
-								<span>Jumlah Pengadaan</span>
+								<span><?php echo $this->lang->line('jumlah_pengadaan'); ?></span>
 							</div>
 							<div class="media-right align-self-center">
 								<i class="ft-pie-chart warning font-large-2 float-right"></i>
@@ -61,7 +61,7 @@
 						<div class="media">
 							<div class="media-body text-left">
 								<h3 class="mb-1 primary">730</h3>
-								<span>Jumlah Vendor Aktif</span>
+								<span><?php echo $this->lang->line('jumlah_vendor_aktif'); ?></span>
 							</div>
 							<div class="media-right align-self-center">
 								<i class="ft-life-buoy primary font-large-2 float-right"></i>
