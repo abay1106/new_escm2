@@ -212,7 +212,7 @@
 
 			<div class="sidebar-header">
                 <div class="logo clearfix"><a class="logo-text float-left" href="#">
-                        <div class="logo-img"><img src="<?php echo base_url(); ?>assets/app-assets/img/logo.png" alt="Apex Logo" /></div><span class="text-bold-700">ESCM</span>
+                        <div class="logo-img"></div><span class="text-bold-700">ESCM</span>
                     </a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
             </div>
 

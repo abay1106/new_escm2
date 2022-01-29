@@ -48,7 +48,7 @@
 								<td><?php echo $this->umum->show_tanggal($row["ptp_reg_closing_date"]) ?></td>
 								<td><?php echo $this->umum->show_tanggal($row["ptp_prebid_date"]) ?></td>
 								<td><?php echo $row["status"] ?></td>
-								<td style="text-align: center;"><button type="submit" class="btn btn-primary btn-sm"><?php echo $this->lang->line('Pilih'); ?></button></td>
+								<td style="text-align: center;"><button type="submit" class="btn btn-info btn-md"><?php echo $this->lang->line('Pilih'); ?></button></td>
 								</form>
 							</tr>
 							<?php } ?>
