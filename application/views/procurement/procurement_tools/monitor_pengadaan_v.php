@@ -144,26 +144,8 @@
         searchable:true,
         align: 'center',
         valign: 'middle'
-      },
+      },           
       {
-        field: 'ptm_requester_name',
-        title: 'User',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      }, {
-        field: 'ptm_subject_of_work',
-        title: 'Nama Rencana Pekerjaan',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle',
-        width:'30%',
-      },
-       {
         field: 'ptm_packet',
         title: 'Nama Paket',
         sortable:true,
@@ -172,18 +154,8 @@
         align: 'left',
         valign: 'middle',
         width:'30%',
-      },
+      },      
       {
-        // field: 'ptm_requester_pos_name',
-        field: 'ptm_dept_name',
-        title: 'Divisi/Departemen',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle'
-      },{
-        // field: 'ptm_requester_pos_name',
         field: 'jenis_pengadaan',
         title: 'Jenis Pengadaan',
         sortable:true,
@@ -191,6 +163,17 @@
         searchable:true,
         align: 'left',
         valign: 'middle'
+      },
+      {
+        field: 'ptm_pagu_anggaran',
+        title: 'Anggaran',
+        sortable:true,
+        order:true,
+        align: 'right',
+        valign: 'middle',
+        dataType: "number",
+        format: "#,##0;(#,##0)",
+        width:'20%',
       },
       {
         field: 'last_pos',
@@ -211,6 +194,23 @@
         align: 'center',
         valign: 'middle',
         width:'25%',
+      },
+      {
+        field: 'tender_metode',
+        title: 'Metode',
+        sortable:true,
+        order:true,
+        searchable:true,
+        align: 'center',
+        valign: 'middle',
+        width:'25%',
+      },
+      {
+        field: 'jml_bidder',
+        title: 'Bidder',
+        align: 'center',
+        width:'10%',
+        valign: 'middle'
       },
       ]
 
