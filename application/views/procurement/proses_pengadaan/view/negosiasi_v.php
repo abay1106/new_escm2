@@ -8,7 +8,7 @@
 
       <div class="card-content">
         <div class="card-body">
-            <div class="ibox-content">
+            <div class="table-responsive">
                 <table id="negosiasi_table" class="table table-bordered table-striped"></table>
             </div>
         </div>
