@@ -323,7 +323,8 @@
 	<script src="<?php echo base_url(); ?>assets/app-assets/js/core/app-menu.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/core/app.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/customizer.js"></script>
-    <script src="<?php echo base_url(); ?>assets/app-assets/js/scroll-top.js"></script>
+    <script src="<?php echo base_url(); ?>assets/app-assets/js/scroll-top.js"></script>	
+    <script src="<?php echo base_url(); ?>assets/app-assets/js/components-modal.min.js"></script>
 
 </body>
 </html>

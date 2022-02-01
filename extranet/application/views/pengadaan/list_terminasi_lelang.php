@@ -28,7 +28,6 @@
 								<th><?php echo $this->lang->line('Pembukaan Pendaftaran'); ?></th>
 								<th><?php echo $this->lang->line('Penutupan Pendaftaran'); ?></th>
 								<th>Aanwijzing</th>
-								<th><?php echo $this->lang->line('Status'); ?></th>
 								<th style="width: 5%; text-align: center;"><?php echo $this->lang->line('Aksi'); ?></th>
 							</tr>
 							</thead>
@@ -46,8 +45,7 @@
 									<td><?php echo $row["ptm_subject_of_work"]; ?></td>
 									<td><?php echo $this->umum->show_tanggal($row["ptp_reg_opening_date"]) ?></td>
 									<td><?php echo $this->umum->show_tanggal($row["ptp_reg_closing_date"]) ?></td>
-									<td><?php echo $this->umum->show_tanggal($row["ptp_prebid_date"]) ?></td>
-									<td><?php echo $row["status"] ?></td>
+									<td><?php echo $this->umum->show_tanggal($row["ptp_prebid_date"]) ?></td>									
 									<td class="text-center"><button type="submit" class="btn btn-info btn-md"><?php echo $this->lang->line('Pilih'); ?></button></td>
 								</form>
 							</tr>

@@ -88,7 +88,7 @@ class Home extends MY_Controller {
 		$vdp_status = 0;
 		$vdp_id = 0;
 
-		if (count(array($data_header))) {
+		if (count(array($data_header)) && isset($data_header) ) {
 			$vtm_id = $data_header->vtm_id;
 			$avd_id = $data_header->avd_id;
 			$vdp_status = $data_header->vdp_status;
