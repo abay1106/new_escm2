@@ -1,35 +1,24 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+  <div class="col-12">
+    <div class="card">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Daftar Kontrak</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+      <div class="card-header border-bottom pb-2">
+        <h4 class="card-title">Daftar Kontrak</h4>
+      </div>
 
-          </div>
-        </div>
-        <div class="ibox-content">
-
-          <div class="table-responsive">
-
-            <table id="table_pembatalan_kontrak" class="table table-bordered table-striped"></table>
-
-          </div>
-
+      <div class="card-content">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="table_pembatalan_kontrak" class="table table-bordered table-striped"></table>
+            </div>
         </div>
       </div>
 
     </div>
   </div>
-
 </div>
 
 <script type="text/javascript">
-
 
   jQuery.extend({
     getCustomJSON: function(url) {
@@ -70,24 +59,16 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('Contract/') ?>";
     return [
-    '<a class="btn btn-primary btn-xs dialog" href="#" data-url="'+link+'/proses_pembatalan_kontrak/'+value+'">',
+    '<a class="btn btn-info dialog" href="#" data-url="'+link+'/proses_pembatalan_kontrak/'+value+'">',
     'Ubah',
     '</a>  ',
     ].join('');
   }
   window.operateEvents = {
     'click .approval': function (e, value, row, index) {
-    //alert('You click approval action, row: ' + JSON.stringify(row));
   },
-  /*
-  'click .remove': function (e, value, row, index) {
-    $table_pembatalan_kontrak.bootstrapTable('remove', {
-      field: 'id',
-      values: [row.ptm_number]
-    });
-  }
-  */
 };
+
 function totalTextFormatter(data) {
   return 'Total';
 }
@@ -126,7 +107,6 @@ function totalPriceFormatter(data) {
         field: 'contract_id',
         title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
         align: 'center',
-        // width:'5%',
         valign: 'middle',
         events: operateEvents,
         formatter: operateFormatter,
@@ -194,14 +174,15 @@ function totalPriceFormatter(data) {
       ]
 
     });
-setTimeout(function () {
-  $table_pembatalan_kontrak.bootstrapTable('resetView');
-}, 200);
+    
+  setTimeout(function () {
+    $table_pembatalan_kontrak.bootstrapTable('resetView');
+  }, 200);
 
-$table_pembatalan_kontrak.on('expand-row.bs.table', function (e, index, row, $detail) {
-  $detail.html(detailFormatter(index,row,"alias_pembatalan_kontrak"));
-});
+  $table_pembatalan_kontrak.on('expand-row.bs.table', function (e, index, row, $detail) {
+    $detail.html(detailFormatter(index,row,"alias_pembatalan_kontrak"));
+  });
 
-});
+  });
 
 </script>

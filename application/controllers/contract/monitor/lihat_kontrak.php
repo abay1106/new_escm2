@@ -113,10 +113,9 @@ $data['kontrak'] = $kontrak;
 
 $eachhps = $this->Procrfq_m->getEachHPS($ptm_number, $kontrak['vendor_id'])->result_array();
 
-// echo $this->db->last_query();
-$totalhps = "";
+$totalhps = 0;
+
 foreach ($eachhps as $kh => $valhps) {
-	// var_dump($valhps);
 	$qty = $valhps['tit_quantity'];
 	$price = $valhps['tit_price'];
 	$totalhps += $qty * $price;
