@@ -17,7 +17,7 @@ class PrivyTest extends Telescoope_Controller {
         
     }
 
-    public function upload($rfqId)
+    public function test_upload($rfqId)
     {
         # code...
         $this->load->config('privy');
