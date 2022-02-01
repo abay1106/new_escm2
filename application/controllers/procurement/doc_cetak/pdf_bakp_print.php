@@ -117,6 +117,12 @@ $dompdf->render();
 $filename = "BAKP-".date('YmdHis').'-'.$rfq_id.'.pdf';
 $output = $dompdf->output();
 file_put_contents('uploads/'.$filename, $output);
+
+$data_update = array(
+	'filename' =>$filename
+);
+$this->Procrfq_m->updateDataUskep($rfq_id, $data_update);
+
 //echo json_encode(array("message" => "PDF BAKP Berhasil Di Generete Dan Diupload Ke Privy", "url_file_mentah" => "https://escm.scmwika.com/uploads/".$filename));
 
 $name_doc = "BAKP";

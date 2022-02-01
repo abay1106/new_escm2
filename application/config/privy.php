@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //ENDPOINT
-$config['URL_DEV'] = "https://stg-onpremise-hash-manage.privy.id/";
-$config['URL_LIVE'] = "";
+$config['URL_DEV_HASH'] = "https://stg-onpremise-hash-manage.privy.id/";
+$config['URL_LIVE_HASH'] = "";
 
 
 // CREDENTIAL DEVELOPMET

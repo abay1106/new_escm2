@@ -14,6 +14,11 @@ class Privy
         $this->datetime = date("c",strtotime(date('Y-m-d H:i:s')));
     }
 
+    public function signature()
+    {
+        # code...
+    }
+
     public function Auth()
     {
         # code...
