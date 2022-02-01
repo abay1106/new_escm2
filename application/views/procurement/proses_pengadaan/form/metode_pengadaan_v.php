@@ -39,13 +39,14 @@ if($prep['ptp_prequalify'] == 2){
                 </div>
               </div>
 
-              <?php $curval = (!empty($prep['ptp_syarat_penunjuk']) ? $prep['ptp_syarat_penunjuk'] : "" );?>
+              <?php $curval = (!empty($prep['ptp_syarat_penunjuk']) ? json_decode($prep['ptp_syarat_penunjuk']) : [] );?>
               <div class="row form-group d-none" id="syarat_penunjuk_langsung">
                 <label class="col-sm-2 control-label">Syarat Penunjuk langsung</label>
                 <div class="col-sm-6">
-                <select class="form-control multiselect" id="ptp_syarat_penunjuk" name="ptp_syarat_penunjuk[]" id="ptp_syarat_penunjuk"  multiple="multiple" required value="<?php echo $curval ?>">
-                  <?php foreach ($pilihan_syarat as $key => $value) { 
-                    $selected = ($curval == $key) ? "selected" : "";
+                <select class="form-control multiselect" id="ptp_syarat_penunjuk" name="ptp_syarat_penunjuk[]" id="ptp_syarat_penunjuk"  multiple="multiple" required >
+                  <?php 
+                  foreach ($pilihan_syarat as $key => $value) { 
+                    $selected = ( in_array($key,$curval)  ? "selected" : "");
                     ?>
                     <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
                     <?php } ?>
