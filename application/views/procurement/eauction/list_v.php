@@ -34,12 +34,12 @@
                                   <table id="table_peringkat_penawar" class="table table-bordered table-striped">
                                     <thead>
                                       <tr>
-                                        <th class="text-center">Online</th>
-                                        <th class="text-center">Peringkat</th>
-                                        <th class="text-center">Nama Vendor</th>
-                                        <th class="text-center">Penawaran Saat Ini</th>
-                                        <th class="text-center">Penawaran Sebelumnya</th>
-                                        <th class="text-center">Riwayat</th>
+                                        <th class="text-center" data-field='online'>Online</th>
+                                        <th class="text-center" data-field='peringkat'>Peringkat</th>
+                                        <th class="text-center" data-field='nama_vendor'>Nama Vendor</th>
+                                        <th class="text-center" data-field='penawaran_saat_ini'>Penawaran Saat Ini</th>
+                                        <th class="text-center" data-field='penawaran_sebelumnya'>Penawaran Sebelumnya</th>
+                                        <th class="text-center" data-field='riwayat'>Riwayat</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -51,7 +51,7 @@
                                         <td class="text-center">1.300.000.000</td>
                                         <td class="text-center"><a class="btn btn-primary bg-info btn-xs action" href="#"><i class="bi bi-eye"></i> Lihat</a></td>
                                       </tr>
-                                      <tr>
+                                      <!-- <tr>
                                         <td class="text-center"><i class="bi bi-circle-fill text-danger" ></i></td>
                                         <td class="text-center">2</td>
                                         <td class="text-center">PT. Maju Jaya 3</td>
@@ -74,7 +74,7 @@
                                         <td class="text-center">1.400.000.000</td>
                                         <td class="text-center">1.450.000.000</td>
                                         <td class="text-center"><a class="btn btn-primary bg-info btn-xs action" href="#"><i class="bi bi-eye"></i> Lihat</a></td>
-                                      </tr>
+                                      </tr> -->
                                     </tbody>
                                   </table>
 
@@ -218,7 +218,7 @@
 
                                 <div class="table-responsive">
 
-                                  <table id="table_peringkat_penawar" class="table table-bordered table-striped">
+                                  <table id="table_peringkat_penawar_aircompressor" class="table table-bordered table-striped">
                                     <thead>
                                       <tr>
                                         <th class="text-center">Online</th>
@@ -405,7 +405,7 @@
 
                                 <div class="table-responsive">
 
-                                  <table id="table_peringkat_penawar" class="table table-bordered table-striped">
+                                  <table id="table_peringkat_penawar_solenoid" class="table table-bordered table-striped">
                                     <thead>
                                       <tr>
                                         <th class="text-center">Online</th>
@@ -592,7 +592,7 @@
 
                                 <div class="table-responsive">
 
-                                  <table id="table_peringkat_penawar" class="table table-bordered table-striped">
+                                  <table id="table_peringkat_penawar_pressurepipe" class="table table-bordered table-striped">
                                     <thead>
                                       <tr>
                                         <th class="text-center">Online</th>
@@ -779,7 +779,7 @@
 
                                 <div class="table-responsive">
 
-                                  <table id="table_peringkat_penawar" class="table table-bordered table-striped">
+                                  <table id="table_peringkat_penawar_pressuregauge" class="table table-bordered table-striped">
                                     <thead>
                                       <tr>
                                         <th class="text-center">Online</th>
@@ -1151,160 +1151,64 @@
     </div>
   </div>
 
-
-
-
-
-
-
-
 </div>
 
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script type="text/javascript">
 
-
-  jQuery.extend({
-    getCustomJSON: function(url) {
-      var result = null;
-      $.ajax({
-        url: url,
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-          result = data;
-        }
-      });
-      return result;
+  //https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+  function makeid(length) {
+      var result           = '';
+      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-  });
-
-  function detailFormatter(index, row, url) {
-
-    var mydata = $.getCustomJSON("<?php echo site_url('procurement') ?>/"+url);
-
-    var html = [];
-    $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
-     });
-
-     if(typeof data[0] !== 'undefined'){
-
-       html.push('<p><b>' + data[0].alias + ':</b> ' + value + '</p>');
-     }
-   });
-
-    return html.join('');
-
+    return result;
   }
-  function operateFormatter(value, row, index) {
-    var link = "<?php echo site_url('procurement/procurement_tools/e_auction') ?>";
-    return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/proses/'+value+'">',
-    'Proses',
-    '</a>  ',
-  ].join('');
-}
 
-function totalTextFormatter(data) {
-  return 'Total';
-}
-function totalNameFormatter(data) {
-  return data.length;
-}
-function totalPriceFormatter(data) {
-  var total = 0;
-  $.each(data, function (i, row) {
-    total += +(row.price.substring(1));
-  });
-  return '$' + total;
-}
-
-</script>
-
-<script type="text/javascript">
-
-  var $table_monitor_pengadaan = $('#table_monitor_pengadaan'),
-  selections = [];
-
-</script>
-
-<script type="text/javascript">
 
   $(function () {
+    var table_peringkat_penawar = $('#table_peringkat_penawar')
 
-    $table_monitor_pengadaan.bootstrapTable({
-
-      url: "<?php echo site_url('procurement/data_eauction') ?>",
-      cookieIdTable:"monitor_pengadaan",
-      idField:"ptm_number",
-      <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
-      columns: [
-      {
-        field: 'ptm_number',
-        title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
-        align: 'center',
-        width:'10%',
-        formatter: operateFormatter,
-        valign: 'middle'
-      },
-      {
-        field: 'ptm_number',
-        title: 'No. Tender',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'ptm_requester_name',
-        title: 'User',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      }, {
-        field: 'ptm_subject_of_work',
-        title: 'Nama Rencana Pekerjaan',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle',
-        width:'30%',
-      },
-      {
-        field: 'ptm_requester_pos_name',
-        title: 'Divisi/Departemen',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle'
-      },
-           {
-        field: 'status',
-        title: 'Status',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle',
-        width:'25%',
-      },
-      ]
-
+    table_peringkat_penawar.bootstrapTable({
+      search:true,
     });
-setTimeout(function () {
-  $table_monitor_pengadaan.bootstrapTable('resetView');
-}, 200);
 
-$table_monitor_pengadaan.on('expand-row.bs.table', function (e, index, row, $detail) {
-  $detail.html(detailFormatter(index,row,"alias"));
-});
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('<?php $this->load->config("pusher"); echo $this->config->item('PUSHER_key');?>', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      table_peringkat_penawar.bootstrapTable('append', JSON.parse(data['message']))
+    });
+
+    setInterval(function () {
+      //Secara random ngepush event ke pusher
+      if(Math.floor(Math.random() * 11) < 5 ){
+
+        data = {
+                'online' : (Math.floor(Math.random() * 11) < 5) ? '<i class="bi bi-circle-fill text-info" ></i>' : '<i class="bi bi-circle-fill text-danger" ></i>',
+                'peringkat' : Math.floor(Math.random() * 10),
+                'nama_vendor' : `PT. ${makeid(10)}`,
+                'penawaran_saat_ini' : Math.floor(Math.random() * 100)  * 100000000,
+                'penawaran_sebelumnya' : Math.floor(Math.random() * 100)  * 100000000,
+                'riwayat' : '<a class="btn btn-primary bg-info btn-xs action" href="#"><i class="bi bi-eye"></i> Lihat</a>',
+        }
+        var formData = new FormData();
+        formData.append('message',JSON.stringify(data))
+        fetch("<?php echo site_url('pusher/sendMessage') ?>",
+          {
+              method: "POST",
+              body: formData
+          })
+        }
+
+    }, 500);
+
 
 });
 
