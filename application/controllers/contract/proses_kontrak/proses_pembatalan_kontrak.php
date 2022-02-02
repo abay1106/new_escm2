@@ -8,8 +8,6 @@ $contract_id =  $this->uri->segment(3, 0);
 
 $data['id'] = $contract_id;
 
-$data['id'] = $contract_id;
-
 $this->data['dir'] = CONTRACT_FOLDER;
 
 $data['del_point_list'] = $this->Administration_m->getDelPoint()->result_array();
@@ -34,7 +32,6 @@ $total_harga = array();
 
 foreach ($pqm as $key => $value) {
 
-	//$this->db->where("pvs_status",4);
 	$vnd = $this->Procrfq_m->getVendorStatusRFQ($value['ptv_vendor_code'],$ptm_number)->row_array();
 	
 	if(!empty($vnd)){
@@ -65,7 +62,6 @@ foreach ($myharga as $key => $value) {
 
 	}
 }
-
 
 $data['nilai_kontrak'] = $head; 
 
@@ -105,10 +101,8 @@ $data['kontrak'] = $kontrak;
 
 $eachhps = $this->Procrfq_m->getEachHPS($ptm_number, $kontrak['vendor_id'])->result_array();
 
-// echo $this->db->last_query();
-$totalhps = "";
+$totalhps = 0;
 foreach ($eachhps as $kh => $valhps) {
-	// var_dump($valhps);
 	$qty = $valhps['tit_quantity'];
 	$price = $valhps['tit_price'];
 	$totalhps += $qty * $price;

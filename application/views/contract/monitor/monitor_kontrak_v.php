@@ -1,35 +1,24 @@
-<div class="wrapper wrapper-content animated fadeInRight">
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Daftar Kontrak</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-
-          </div>
-        </div>
-        <div class="ibox-content">
-
-          <div class="table-responsive">
-
-            <table id="table_monitor_kontrak" class="table table-bordered table-striped"></table>
-
-          </div>
-
-        </div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
+          <h4 class="card-title">Daftar Kontrak</h4>
       </div>
 
+      <div class="card-content">
+        <div class="card-body">
+          <div class="table-responsive">
+              <table id="table_monitor_kontrak" class="table table-bordered table-striped"></table>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
-
 
   jQuery.extend({
     getCustomJSON: function(url) {
@@ -70,23 +59,14 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('contract/monitor/monitor_kontrak') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/lihat/'+value+'">',
+    '<a class="btn btn-info action" href="'+link+'/lihat/'+value+'">',
     'Lihat',
     '</a>  ',
     ].join('');
   }
   window.operateEvents = {
-    'click .approval': function (e, value, row, index) {
-    //alert('You click approval action, row: ' + JSON.stringify(row));
+    'click .approval': function (e, value, row, index) {    
   },
-  /*
-  'click .remove': function (e, value, row, index) {
-    $table_monitor_kontrak.bootstrapTable('remove', {
-      field: 'id',
-      values: [row.contract_id]
-    });
-  }
-  */
 };
 function totalTextFormatter(data) {
   return 'Total';
@@ -248,7 +228,7 @@ function totalPriceFormatter(data) {
 
     });
     $table_monitor_kontrak.on('all.bs.table', function (e, name, args) {
-  //console.log(name, args);
+  
 });
 
     function getIdSelections() {

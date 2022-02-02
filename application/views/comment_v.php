@@ -9,7 +9,7 @@
       <div class="card-content">
         <div class="card-body">
             <?php $curval = set_value("comment_inp[$i]"); ?>
-            <div class="form-group">
+            <div class="row form-group">
               <label class="col-sm-2 control-label"><?php echo lang('comment') ?> *</label>
               <div class="col-sm-10">
                 <textarea name="comment_inp[<?php echo $i ?>]" required class="form-control"><?php echo $curval ?></textarea>

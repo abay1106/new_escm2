@@ -6,124 +6,123 @@
             </div>  
 
             <div class="card-content">
-            <div class="col-12">
-		    <div class="card">
-				<div class="card-body col-md-12">
-					<?php $is_tgl_pembukaan = (strtotime($prep['ptp_reg_opening_date']) > 0) ? date("Y-m-d H:i", strtotime($prep['ptp_reg_opening_date'])) : ""; ?>
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body col-md-12">
+							<?php $is_tgl_pembukaan = (strtotime($prep['ptp_reg_opening_date']) > 0) ? date("Y-m-d H:i", strtotime($prep['ptp_reg_opening_date'])) : ""; ?>
 
-					<div class="row form-group ">
-						<label class="col-sm-2 text-right tgl_pembukaan">Tanggal Pembukaan Pendaftaran *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="tgl_pembukaan_pendaftaran_inp" class="form-control tgl_pembukaan_pendaftaran_inp" required id="tgl_pembukaan_pendaftaran_inp" value="">
+							<div class="row form-group ">
+								<label class="col-sm-2 text-right tgl_pembukaan">Tanggal Pembukaan Pendaftaran *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="tgl_pembukaan_pendaftaran_inp" class="form-control tgl_pembukaan_pendaftaran_inp" required id="tgl_pembukaan_pendaftaran_inp" value="">
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<div class="row form-group">
-						<label class="col-sm-2 text-right">Periode Tender *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<select disabled class="form-control periode_tender" name="periode_tender" id="periode_tender">
-									<option value="0">Pilih</option>
-									<?php foreach ($periodes as $key => $value) { ?>
-										<option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
-									<?php } ?>
-								</select>
+							<div class="row form-group">
+								<label class="col-sm-2 text-right">Periode Tender *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<select disabled class="form-control periode_tender" name="periode_tender" id="periode_tender">
+											<option value="0">Pilih</option>
+											<?php foreach ($periodes as $key => $value) { ?>
+												<option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row form-group ">
-						<label class="col-sm-2 text-right">Tanggal Penutupan Pendaftaran *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="tgl_penutupan_pendaftaran_inp" id="tgl_penutupan_pendaftaran_inp" required class="form-control  tgl_penutupan_pendaftaran_inp" value="<?= $prep['ptp_reg_closing_date']; ?>">
+							<div class="row form-group ">
+								<label class="col-sm-2 text-right">Tanggal Penutupan Pendaftaran *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="tgl_penutupan_pendaftaran_inp" id="tgl_penutupan_pendaftaran_inp" required class="form-control  tgl_penutupan_pendaftaran_inp" value="<?= $prep['ptp_reg_closing_date']; ?>">
+									</div>
+								</div>
+								<label class="col-sm-2 text-right toogle_hide ">Negosiasi *</label>
+								<div class="col-sm-4 toogle_hide ">
+									<div class="input-group date">
+										<input readonly  name="negosiasi" id="negosiasi" required class="form-control negosiasi" value="<?= $prep['ptp_quot_closing_date']; ?>">
+									</div>
+								</div>
 							</div>
-						</div>
-						<label class="col-sm-2 text-right toogle_hide ">Negosiasi *</label>
-						<div class="col-sm-4 toogle_hide ">
-							<div class="input-group date">
-								<input readonly  name="negosiasi" id="negosiasi" required class="form-control negosiasi" value="<?= $prep['ptp_quot_closing_date']; ?>">
-							</div>
-						</div>
-					</div>
 
-					<div class="row form-group toogle_hide ">
-						<label class="col-sm-2 text-right">Tanggal Aanwijzing *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="tgl_aanwijzing_inp" id="tgl_aanwijzing_inp" class="form-control tgl_aanwijzing_inp" required value="<?= $prep['ptp_prebid_date']; ?>">
+							<div class="row form-group toogle_hide ">
+								<label class="col-sm-2 text-right">Tanggal Aanwijzing *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="tgl_aanwijzing_inp" id="tgl_aanwijzing_inp" class="form-control tgl_aanwijzing_inp" required value="<?= $prep['ptp_prebid_date']; ?>">
+									</div>
+								</div>
+								<label class="col-sm-2 text-right">USKEP *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="uskep" id="uskep" required class="form-control uskep" value="<?= $prep['ptp_quot_closing_date']; ?>">
+									</div>
+								</div>
 							</div>
-						</div>
-						<label class="col-sm-2 text-right">USKEP *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="uskep" id="uskep" required class="form-control uskep" value="<?= $prep['ptp_quot_closing_date']; ?>">
-							</div>
-						</div>
-					</div>
 
-					<div class="row form-group toogle_hide ">
-						<label class="col-sm-2 text-right">Tanggal Mulai Kirim Penawaran *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="tgl_mulai_penawaran_inp" id="tgl_mulai_penawaran_inp" class="form-control  tgl_mulai_penawaran_inp" required value="">
-							</div>
-						</div>
+							<div class="row form-group toogle_hide ">
+								<label class="col-sm-2 text-right">Tanggal Mulai Kirim Penawaran *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="tgl_mulai_penawaran_inp" id="tgl_mulai_penawaran_inp" class="form-control  tgl_mulai_penawaran_inp" required value="">
+									</div>
+								</div>
 
-						<label class="col-sm-2 text-right">Pengumuman *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="pengumuman" id="pengumuman" required class="form-control pengumuman" value="<?= $prep['ptp_quot_closing_date']; ?>">
+								<label class="col-sm-2 text-right">Pengumuman *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="pengumuman" id="pengumuman" required class="form-control pengumuman" value="<?= $prep['ptp_quot_closing_date']; ?>">
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<div class="row form-group toogle_hide ">
-						<label class="col-sm-2 text-right">Tanggal Akhir Kirim Penawaran *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="tgl_akhir_penawaran_inp" id="tgl_akhir_penawaran_inp" required class="form-control tgl_akhir_penawaran_inp" value="<?= $prep['ptp_quot_closing_date']; ?>">
-							</div>
-						</div>
+							<div class="row form-group toogle_hide ">
+								<label class="col-sm-2 text-right">Tanggal Akhir Kirim Penawaran *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="tgl_akhir_penawaran_inp" id="tgl_akhir_penawaran_inp" required class="form-control tgl_akhir_penawaran_inp" value="<?= $prep['ptp_quot_closing_date']; ?>">
+									</div>
+								</div>
 
-						<label class="col-sm-2 text-right">Sanggahan *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="sanggahan" id="sanggahan" required class="form-control sanggahan" value="<?= $prep['ptp_quot_closing_date']; ?>">
+								<label class="col-sm-2 text-right">Sanggahan *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="sanggahan" id="sanggahan" required class="form-control sanggahan" value="<?= $prep['ptp_quot_closing_date']; ?>">
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row form-group toogle_hide ">
-						<label class="col-sm-2 text-right">Tanggal Pembukaan Dokumen Penawaran *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="tgl_pembukaan_dok_penawaran_inp" required class="form-control tgl_pembukaan_dok_penawaran_inp" id="tgl_pembukaan_dok_penawaran_inp" value="<?= $prep['ptp_doc_open_date']; ?>">
+							<div class="row form-group toogle_hide ">
+								<label class="col-sm-2 text-right">Tanggal Pembukaan Dokumen Penawaran *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="tgl_pembukaan_dok_penawaran_inp" required class="form-control tgl_pembukaan_dok_penawaran_inp" id="tgl_pembukaan_dok_penawaran_inp" value="<?= $prep['ptp_doc_open_date']; ?>">
+									</div>
+								</div>
+								<label class="col-sm-2 text-right"> Penunjukan *</label>
+								<div class="col-sm-4">
+									<div class="input-group date">
+										<input readonly  name="penunjukan" id="penunjukan" required class="form-control penunjukan" value="<?= $prep['ptp_quot_closing_date']; ?>">
+									</div>
+								</div>
 							</div>
-						</div>
-						<label class="col-sm-2 text-right"> Penunjukan *</label>
-						<div class="col-sm-4">
-							<div class="input-group date">
-								<input readonly  name="penunjukan" id="penunjukan" required class="form-control penunjukan" value="<?= $prep['ptp_quot_closing_date']; ?>">
+							<div class="row form-group">
+								<label class="col-sm-2 text-right">Lokasi Aanwijzing</label>
+								<div class="col-sm-4">
+									<textarea readonly class="form-control" id="lokasi_aanwijzing_inp" name="lokasi_aanwijzing_inp"><?= $prep['ptp_prebid_location']; ?></textarea>
+								</div>
+								<?php $curval = (!empty($prep['ptp_aanwijzing_online'])) ? "checked" : ""; ?>
+								<label class="col-sm-2 text-right">Aanwijzing Online</label>
+								<div class="col-sm-4">
+									<input readonly type="checkbox" name="aanwijzing_online_inp" <?php echo $curval ?> value="1">
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row form-group">
-						<label class="col-sm-2 text-right">Lokasi Aanwijzing</label>
-						<div class="col-sm-4">
-							<textarea readonly class="form-control" id="lokasi_aanwijzing_inp" name="lokasi_aanwijzing_inp"><?= $prep['ptp_prebid_location']; ?></textarea>
-						</div>
-						<?php $curval = (!empty($prep['ptp_aanwijzing_online'])) ? "checked" : ""; ?>
-						<label class="col-sm-2 text-right">Aanwijzing Online</label>
-						<div class="col-sm-4">
-							<input readonly type="checkbox" name="aanwijzing_online_inp" <?php echo $curval ?> value="1">
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-            </div>
         </div>
     </div>
 </div>
