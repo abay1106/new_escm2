@@ -70,6 +70,16 @@ class PrivyTest extends Telescoope_Controller {
 
     }
 
+    public function hook_upload()
+    {
+        # code...
+        print_r($_POST);
+        print_r($_GET);
+        exit;
+
+
+    }
+
 }
 
 /* End of file PrivyTest.php */
