@@ -78,33 +78,33 @@
 				<div class="card-content">
 					<div class="card-body">
 						<div class="card-header">
-							<h4 class="card-title">Jumlah Vendor Terverifikasi CQSMS / Vendor Terdaftar</h4>
+							<h4 class="card-title"><?php echo $this->lang->line('jumlah_vendor_terverifikasi'); ?></h4>
 						</div>
 						<div class="card-content">
 							<div class="card-body">
 								<ul class="list-group mb-3">
 									<li class="list-group-item">
-										<span>Jasa Sewa</span>
+										<span><?php echo $this->lang->line('jasa_sewa'); ?></span>
 										<span class="badge bg-light-gray float-right"><span style="color: #004899;" >85 </span> / <span style="color: #FF4800;" >  87</span></span>
 									</li>
 									<li class="list-group-item">
-										<span>Jasa Lainnya (transporter, dll di luar jasa konstruksi dan konsultan)</span>
+										<span><?php echo $this->lang->line('jasa_lainnya'); ?></span>
 										<span class="badge bg-light-gray float-right"><span style="color: #004899;">133</span> / <span style="color: #FF4800;" > 143</span></span>
 									</li>
 									<li class="list-group-item">
-										<span>Jasa Mandor</span>
+										<span><?php echo $this->lang->line('jasa_mandor'); ?></span>
 										<span class="badge bg-light-gray float-right"><span style="color: #004899;">50 </span>/ <span style="color: #FF4800;" > 68</span></span>
 									</li>
 									<li class="list-group-item">
-										<span>Jasa Konsultan</span>
+										<span><?php echo $this->lang->line('jasa_konsultan'); ?></span>
 										<span class="badge bg-light-gray float-right"><span style="color: #004899;">50</span> / <span style="color: #FF4800;" > 52</span></span>
 									</li>
 									<li class="list-group-item">
-										<span>Jasa Konstruksi (Subkon)</span>
+										<span><?php echo $this->lang->line('jasa_konstruksi'); ?></span>
 										<span class="badge bg-light-gray float-right"><span style="color: #004899;">130</span> / <span style="color: #FF4800;" > 146</span></span>
 									</li>
 									<li class="list-group-item">
-										<span>Barang (Vendor, Supplier)</span>
+										<span><?php echo $this->lang->line('barang'); ?></span>
 										<span class="badge bg-light-gray float-right"><span style="color: #004899;">200 </span>/ <span style="color: #FF4800;" > 234</span></span>
 									</li>
 								</ul>
@@ -117,7 +117,7 @@
 		<div class="col-xl-6 col-12">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title">Diagram Verifikasi CQSMS Vendor</h4>
+					<h4 class="card-title"><?php echo $this->lang->line('diagram_verifikasi'); ?></h4>
 				</div>
 				<div class="card-content">
 					<div class="card-body">
@@ -135,7 +135,7 @@
 						<div class="media">
 							<div class="media-body text-left">
 								<h3 class="mb-1 danger">2 Hari</h3>
-								<h5>Rata - Rata Waktu Pengadaan</h5>
+								<h5><?php echo $this->lang->line('rerata_waktu_pengadaan'); ?></h5>
 							</div>
 							<div class="media-right align-self-center">
 								<i class="ft-calendar danger font-large-2 float-right"></i>
@@ -152,7 +152,7 @@
 						<div class="media">
 							<div class="media-body text-left">
 								<h3 class="mb-1 info">Rp. 2.456.000.000</h3>
-								<h5>Nilai Kontrak</h5>
+								<h5><?php echo $this->lang->line('nilai_kontrak'); ?></h5>
 							</div>
 							<div class="media-right align-self-center">
 								<i class="ft-book-open info font-large-2 float-right"></i>
