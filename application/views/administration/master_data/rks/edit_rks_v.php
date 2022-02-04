@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <?php echo buttonsubmit('administration/master_data/rks',lang('back'),lang('save')) ?>
+    <?= buttonsubmit('administration/master_data/rks',lang('back'),lang('save')) ?>
 
   </form>
 </div>
