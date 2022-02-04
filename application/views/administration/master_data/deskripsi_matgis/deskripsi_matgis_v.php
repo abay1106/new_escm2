@@ -4,14 +4,15 @@
       <div class="card">
 
         <div class="card-header border-bottom pb-2">
-          <h4 class="card-title float-left">Data Deskripsi Matgis</h4>
-          <a class="btn btn-info float-right" href="<?php echo site_url('administration/master_data/deskripsi_matgis/tambah') ?>" role="button">Tambah</a>
+          <!-- <h4 class="card-title float-left">Data Deskripsi Matgis</h4> -->
         </div>
 
         <div class="card-content">
           <div class="card-body">
             <div class="table-responsive">
-              <table id="deskripsi_matgis" class="table table-bordered table-striped"></table>
+              <table id="deskripsi_matgis" class="table table-bordered table-striped">
+                <a class="btn btn-info" href="<?php echo site_url('administration/master_data/deskripsi_matgis/tambah') ?>" role="button"><i class="ft-plus mr-1"></i>Tambah</a>
+              </table>
             </div>
           </div>
         </div>
@@ -21,14 +22,12 @@
   </div>
 </section>
 
-
-
 <script type="text/javascript">
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/master_data/deskripsi_matgis') ?>";
     return [
-      '<a class="btn btn-sm btn-info ft ft-edit btn-xs action" href="' + link + '/ubah/' + value + '">',
-      'Ubah',
+      '<a class="btn btn-sm btn-info btn-xs action" href="' + link + '/ubah/' + value + '">',
+      '<i class="ft-edit mr-1"></i>Ubah',
       '</a>  '
     ].join('');
   }

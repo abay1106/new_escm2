@@ -448,6 +448,29 @@ class Administration extends Telescoope_Controller
 
         break;
 
+        case 'rks':
+
+          switch ($param2) {
+
+            case 'tambah':
+              $this->add_rks();
+              break;
+
+            case 'ubah':
+              $this->edit_rks($param3);
+              break;
+
+            case 'hapus':
+              $this->delete_rks($param3);
+              break;
+
+            default:
+              $this->rks();
+              break;
+          }
+
+          break;
+
       case 'kategori_pajak':
 
         switch ($param2) {
@@ -637,7 +660,7 @@ class Administration extends Telescoope_Controller
             $this->delegasi_tugas();
             break;
         }
-        //end 
+        //end
         break;
 
       case 'master_mdiv':
@@ -1533,6 +1556,41 @@ class Administration extends Telescoope_Controller
   public function picker_anggaran()
   {
     include("administration/master_data/anggaran/picker_anggaran.php");
+  }
+
+  public function rks()
+  {
+    include("administration/master_data/rks/rks.php");
+  }
+
+  public function data_rks()
+  {
+    include("administration/master_data/rks/data_rks.php");
+  }
+
+  public function add_rks()
+  {
+    include("administration/master_data/rks/add_rks.php");
+  }
+
+  public function submit_add_rks()
+  {
+    include("administration/master_data/rks/submit_add_rks.php");
+  }
+
+  public function edit_rks($id)
+  {
+    include("administration/master_data/rks/edit_rks.php");
+  }
+
+  public function submit_edit_rks()
+  {
+    include("administration/master_data/rks/submit_edit_rks.php");
+  }
+
+  public function delete_rks($id)
+  {
+    include("administration/master_data/rks/delete_rks.php");
   }
 
   public function currency()

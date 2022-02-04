@@ -4,14 +4,17 @@
       <div class="card">
 
         <div class="card-header border-bottom pb-2">
-          <h4 class="card-title float-left">Divisi/Departemen</h4>
-          <a class="btn btn-info float-right" href="<?php echo site_url('administration/master_data/divisi_departemen/add_divisi_departemen') ?>" role="button">Tambah</a>
+          <!-- <h4 class="card-title float-left">Divisi/Departemen</h4> -->
         </div>
 
         <div class="card-content">
           <div class="card-body">
             <div class="table-responsive">
-              <table id="divisi_departemen" class="table table-bordered table-striped"></table>
+              <table id="divisi_departemen" class="table table-bordered table-striped">
+                <a class="btn btn-info" href="<?= site_url('administration/master_data/divisi_departemen/add_divisi_departemen') ?>" role="button">
+                  <i class="ft-plus mr-1"></i>Tambah
+                </a>
+              </table>
             </div>
           </div>
         </div>
@@ -61,11 +64,11 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/master_data/divisi_departemen') ?>";
     return [
-      '<div class = "btn-group"> <a class="btn btn-sm btn-info ft ft-edit btn-xs action" href="' + link + '/ubah/' + value + '">',
-      'Ubah',
+      '<div class = "btn-group"> <a class="btn btn-sm btn-info btn-xs action" href="' + link + '/ubah/' + value + '">',
+      '<i class="ft-edit mr-1"></i>Ubah',
       '</a>  ',
-      '<a class="btn btn-sm btn-danger ft ft-trash btn-xs action" onclick="return confirm(\'Anda yakin ingin menonaktifkan data?\')" href="' + link + '/nonaktif/' + value + '">',
-      'Nonaktif',
+      '<a class="btn btn-sm btn-danger btn-xs action" onclick="return confirm(\'Anda yakin ingin menonaktifkan data?\')" href="' + link + '/nonaktif/' + value + '">',
+      '<i class="ft-power mr-1"></i>Nonaktif',
       '</a> </div> ',
     ].join('');
   }
@@ -105,7 +108,7 @@
           field: 'dept_id',
           title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
           align: 'center',
-          width: '10%',
+          width: '15%',
           formatter: operateFormatter,
         },
         {

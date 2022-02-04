@@ -1,3 +1,8 @@
+<style>
+  .bootstrap-table {
+    margin-top: 0px;
+  }
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
 
   <div style="display: none;" class="alert alert-notif" role="alert">
@@ -11,14 +16,14 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Daftar Seluruh Vendor</h5>
+          <!-- <h5>Daftar Seluruh Vendor</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
 
@@ -29,7 +34,7 @@
           <?php } ?>
 
 
-          <div class="table-responsive">            
+          <div class="table-responsive">
 
             <table id="daftar_seluruh_vendor" class="table table-bordered table-striped"></table>
 
@@ -68,8 +73,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -86,11 +91,11 @@
     var link = "<?php echo site_url('vendor/daftar_vendor') ?>";
     var link_vendor = "<?php echo site_url('vendor/sinkron_vendor') ?>";
     return [
-    '<a target="_blank" class="btn btn-primary btn-xs action" href="'+link+'/lihat_detail_vendor/'+value+'">',
-    'Lihat',
+    '<a target="_blank" class="btn btn-info btn-xs action" href="'+link+'/lihat_detail_vendor/'+value+'">',
+    '<i class="ft-eye mr-1"></i>Lihat',
     '</a>  ',
     '<a class="btn btn-primary btn-xs action" href="'+link_vendor+'/'+value+'">',
-    'Sync',
+    '<i class="ft-refresh-cw mr-1"></i>Sync',
     '</a>  '
     ].join('');
   }
@@ -138,20 +143,20 @@ function totalPriceFormatter(data) {
     $daftar_seluruh_vendor.bootstrapTable({
 
       url: "<?php echo site_url('Vendor/data_daftar_seluruh_vendor') ?>",
-      
+
       cookieIdTable:"vnd_header",
-      
+
       idField:"vendor_id",
-      
+
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
-      
+
       columns: [
       {
         field: 'vendor_id',
         title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
         align: 'center',
         valign: 'middle',
-        width: '10%',
+        width: '15%',
         events: operateEvents,
         formatter: operateFormatter,
       },
@@ -322,7 +327,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
            }
        }
    };
-   
+
    if(getUrlParameter('status') != typeof undefined){
 
 
@@ -348,7 +353,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
           var clean_uri = uri.substring(0, uri.indexOf("?"));
           window.history.replaceState({}, document.title, clean_uri);
       }
-      
+
 
    }
 

@@ -3,24 +3,23 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Daftar Pengguna Aplikasi</h5>
+          <!-- <h5>Daftar Pengguna Aplikasi</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
-
           <div class="table-responsive">
-          <a class="btn btn-primary" href="<?php echo site_url('administration/user_management/user_access/add_user_access') ?>" role="button">Tambah</a>               
-
-            <table id="user_access" class="table table-bordered table-striped"></table>
-
+            <table id="user_access" class="table table-bordered table-striped">
+              <a class="btn btn-info" href="<?php echo site_url('administration/user_management/user_access/add_user_access') ?>" role="button">
+                <i class="ft-plus mr-1"></i>Tambah
+              </a>
+            </table>
           </div>
-
         </div>
       </div>
 
@@ -54,8 +53,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -71,15 +70,17 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/user_management/user_access') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/ubah/'+value+'">',
-    'Ubah',
+    '<div class="btn-group">',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/ubah/'+value+'">',
+    '<i class="ft-edit mr-1"></i>Ubah',
     '</a>  ',
     '<a class="btn btn-danger btn-xs action" onclick="return confirm(\'Anda yakin ingin menghapus data?\')" href="'+link+'/hapus/'+value+'">',
-    'Hapus',
+    '<i class="ft-trash mr-1"></i>Hapus',
     '</a>  ',
+    '</div>',
     ].join('');
   }
-  
+
 function totalTextFormatter(data) {
   return 'Total';
 }

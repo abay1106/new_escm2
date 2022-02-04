@@ -86,7 +86,7 @@ class Vendor extends Telescoope_Controller
 
   public function verifikasi_dokumen_pq($id=""){
     if (!empty($id)) {
-     
+
       include("vendor/vendor_tools/verifikasi_dokumen_pq.php");
 
     }else{
@@ -855,6 +855,29 @@ class Vendor extends Telescoope_Controller
 
         break;
 
+      case 'catatan_vendor':
+
+        switch ($param2) {
+
+          case 'data':
+            include("vendor/vpi/catatan_vendor/data_catatan_vendor.php");
+            break;
+
+          // case 'export_vendor_award':
+          //   include("vendor/vpi/vendor_award/export_vendor_award.php");
+          //   break;
+          //
+          // case 'export_vendor_award_excel':
+          //   include("vendor/vpi/vendor_award/export_vendor_award_excel.php");
+          //   break;
+
+          default:
+            include("vendor/vpi/catatan_vendor/catatan_vendor.php");
+            break;
+        }
+
+        break;
+
       default:
         redirect(site_url(), 'refresh');
         break;
@@ -1004,7 +1027,7 @@ class Vendor extends Telescoope_Controller
   {
     include("mandor/update_status_mandor.php");
   }
-  
+
   public function lihat_detail_mandor()
   {
     include("mandor/lihat_detail_mandor.php");
@@ -1042,10 +1065,10 @@ class Vendor extends Telescoope_Controller
       // $post = $this->input->post();
 
       // $getDataSubBidang = $this->db->get_where('adm_master',[
-      //   'status'=> 'Y', 
+      //   'status'=> 'Y',
       //   'am_type' => 'sub_bidang_registration_mandor',
       //   'am_parent_code' => $post['bidang_code']])->result_array();
-      
+
       // $return['data'] = $getDataSubBidang;
 
       // echo json_encode($return);
@@ -1054,7 +1077,7 @@ class Vendor extends Telescoope_Controller
 				$this->db->select('*');
 				$this->db->from('adm_master');
 				$this->db->where([
-					'status'=> 'Y', 
+					'status'=> 'Y',
 					'am_type' => 'sub_bidang_registration_mandor',
 					'am_parent_code' => $post['bidang_code']]);
 				if(!empty($post['selected_sub_bidang'])){
@@ -1064,5 +1087,5 @@ class Vendor extends Telescoope_Controller
 
 				echo json_encode($return);
     }
-  
+
 }

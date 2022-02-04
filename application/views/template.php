@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><?php echo $judul ?></title>
+    <title><?= $judul ?></title>
 
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    <base href="<?php echo base_url() ?>"/>
+    <style>
+      @font-face {
+        font-family: 'Glyphicons Halflings';
+        src: url('../fonts/glyphicons-halflings-regular.eot');
+        src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+      }
+    </style>
 
-    <link rel="manifest" href="<?php echo base_url('manifest.json') ?>">    
+    <base href="<?= base_url() ?>"/>
+
+    <link rel="manifest" href="<?php echo base_url('manifest.json') ?>">
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/'.$site_favicon) ?>">
+    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/theme.css"/>
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +30,7 @@
 
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/bootstrap3-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"/>
     <link rel="stylesheet" href="assets/plugins/bootstrap-table/dist/bootstrap-table.min.css"/>
     <link rel="stylesheet" href="assets/plugins/dragtable/dragtable.css"/>
@@ -32,22 +41,21 @@
     <link href="assets/css/animate.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fonts.css"/>
     <link rel="stylesheet" href="assets/css/plugins/toastr/toastr.min.css"/>
-    <link href="assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />    
+    <link href="assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="assets/app-assets/vendors/js/vendors.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/app-assets/fonts/feather/style.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/perfect-scrollbar.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/toastr/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">    
+    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">
     <link rel="stylesheet" type="text/css" href="assets/assets/css/style.css">
 
     <!-- haqim -->
     <link rel="stylesheet" href="assets/css/chosen/chosen.min.css">
-    <!-- end -->        
+    <!-- end -->
     <script src='assets/plugins/fastclick/lib/fastclick.js'></script>
     <script src='assets/plugins/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'></script>
     <script src='assets/plugins/autoNumeric/autoNumeric.js'></script>
@@ -142,14 +150,14 @@
     <link rel="stylesheet" href="assets/plugins/angular-ui-tree/dist/angular-ui-tree.min.css">
     <script type="text/javascript" src="assets/plugins/angular-ui-tree/dist/angular-ui-tree.js"></script>
 
-    <script type="text/javascript">      
-      //y validasi input type number minimal 0   
+    <script type="text/javascript">
+      //y validasi input type number minimal 0
       $(document).ready(function(){
         $('input[type="number"]').attr({
           min:"0",
           oninput:"this.value = Math.abs(this.value)"
         });
-        
+
         $(".money").keypress( function(e) {
             var chr = String.fromCharCode(e.which);
             if ("0123456789.,".indexOf(chr) < 0)
@@ -163,7 +171,7 @@
         });
 
       });
-        
+
       var currenttime = '<?php echo date("F d, Y H:i:s")?>' //PHP method of getting server date
 
       var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
@@ -218,9 +226,9 @@
   "ng-app='$controller_name'" : "" ?>class="vertical-layout vertical-menu 2-columns navbar-sticky" data-menu="vertical-menu" data-col="2-columns">
 
   <?php include("header_v.php") ?>
-  
+
   <div class="wrapper">
-        
+
       <?php include("sidebar_v.php") ?>
 
       <?php include("content_v.php") ?>
@@ -231,8 +239,8 @@
 
       <?php include("filemanager_v.php") ?>
 
-      <?php include("footer_v.php"); ?>   
-    
+      <?php include("footer_v.php"); ?>
+
   </div>
 
   <div class="sidenav-overlay"></div>
@@ -243,7 +251,7 @@
   <script type="text/javascript" src="assets/js/angular/administration.js"></script>
   <script type="text/javascript" src="assets/js/bottom.js"></script>
   <div id="ajax-modal" class="modal fade" tabindex="-1"></div>
-  
+
   <script type="text/javascript" src="assets/app-assets/js/core/app-menu.js"></script>
   <script type="text/javascript" src="assets/app-assets/js/toastr/toastr.min.js"></script>
   <script type="text/javascript" src="assets/app-assets/js/toastr/abe-toast.js"></script>
@@ -253,10 +261,10 @@
   <script type="text/javascript" src="assets/app-assets/js/components-modal.min.js"></script>
   <script type="text/javascript" src="assets/app-assets/vendors/js/sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="assets/assets/js/scripts.js"></script>
-  
+
   <script type="text/javascript" src="assets/js/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="assets/plugins/bootstrap-table/dist/extensions/editable/x-editable.js"></script>
-  
+
   <script>
       $(".form-horizontal").validate();
   </script>
@@ -274,7 +282,7 @@
               })
           window.onbeforeunload=function(){
             if(!is_link){
-              return  "Apakah Anda yakin ingin meninggalkan laman ini?";                  
+              return  "Apakah Anda yakin ingin meninggalkan laman ini?";
             }
           }
         })

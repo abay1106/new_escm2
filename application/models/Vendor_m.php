@@ -21,7 +21,7 @@ class Vendor_m extends CI_Model {
 		if (!empty($id)) {
 			$this->db->where('vdp_id', $id);
 		}
-		
+
 		$this->db->where('vdp_status', "1");
 
 		return $this->db->get('vw_daftar_pekerjaan_doc_pq');
@@ -65,7 +65,7 @@ class Vendor_m extends CI_Model {
 		if (!empty($status)) {
 			$this->db->where('vdp_status', $status);
 		}
-		
+
 
 		$this->db->join('vnd_doc_pq', 'vnd_doc_pq.vdp_id = vnd_doc_pq_detail.vdp_id', 'left');
 		$this->db->join('vnd_type_master', 'vnd_type_master.vtm_id = vnd_doc_pq.vtm_id', 'left');
@@ -377,6 +377,10 @@ class Vendor_m extends CI_Model {
 		return $this->db->get('vw_vnd_award');
 	}
 
+	public function getVendorNote()
+	{
+		return $this->db->get('vnd_vpi_note')->result();
+	}
 
 	//vpi baru
 	//vpi header
@@ -611,7 +615,7 @@ class Vendor_m extends CI_Model {
 	public function insertVPIPelayananScore($data=array()){
 
 		$this->db->insert_batch('vnd_vpi_pelayanan_score', $data);
-		
+
 		return $this->db->affected_rows();
 
 	}
@@ -619,7 +623,7 @@ class Vendor_m extends CI_Model {
 	public function UpdateVPIPelayananScore($data=array()){
 
 		$this->db->update_batch('vnd_vpi_pelayanan_score', $data, 'vppa_id');
-		
+
 		return $this->db->affected_rows();
 
 	}
@@ -664,7 +668,7 @@ class Vendor_m extends CI_Model {
 	}
 
 	public function getAnotherDoc($vendor_id = ""){
-		if(!empty($vendor_id)){	
+		if(!empty($vendor_id)){
 			$this->db->where("vendor_id", $vendor_id);
 		}
 		return $this->db->get("vnd_docs");
@@ -678,14 +682,14 @@ class Vendor_m extends CI_Model {
 	}
 
 	public function getVndDoc($id = ""){
-		
+
 		if(!empty($id)){
 			$this->db->where("avd_id", $id);
 		}
 		$this->db->join('vnd_type_master vtm', 'vtm.vtm_id = adm_vnd_doc.vtm_id', 'left');
 		return $this->db->get("adm_vnd_doc");
 	}
-	
+
 	public function updateVndDoc($id = "",$data){
 
 		if (!empty($id)) {
@@ -693,7 +697,7 @@ class Vendor_m extends CI_Model {
 		}
 		return $this->db->update('adm_vnd_doc', $data);
 	}
-	
+
 	public function insertVndDocDetail($data){
 
 		$this->db->insert('adm_vnd_doc_detail', $data);
@@ -701,9 +705,9 @@ class Vendor_m extends CI_Model {
 		 $this->db->select('max(vdd_id)+1 as last_vdd_id');
 		 return $this->getVndDocDetail()->row()->last_vdd_id;
 	}
-	
+
 	public function getVndDocDetail($id = "", $avd = ""){
-		
+
 		if(!empty($id)){
 			$this->db->where("vdd_id", $id);
 		}
@@ -718,7 +722,7 @@ class Vendor_m extends CI_Model {
 
 		return $this->db->where('vdd_id', $id)->update('adm_vnd_doc_detail', $data);
 	}
-	
+
 	public function replaceVndDocDetail($id, $input){
 
 		if(!empty($id) && !empty($input)){
@@ -732,7 +736,7 @@ class Vendor_m extends CI_Model {
 				$this->insertVndDocDetail($input);
 				$last_id = $this->db->insert_id();
 			}
-			
+
 			return $last_id;
 		}else{
 			return 0;
@@ -753,4 +757,3 @@ class Vendor_m extends CI_Model {
 	}
 
 }
-

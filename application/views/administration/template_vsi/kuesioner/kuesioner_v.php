@@ -5,26 +5,26 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Template Kuesioner Kepuasan Vendor</h5>
+          <!-- <h5>Template Kuesioner Kepuasan Vendor</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
 
           <div class="table-responsive">
-            <button type="button" class="btn btn-primary" <?php if (!$editable) {  ?> disabled <?php } ?> data-toggle="modal" data-target="#modal_add_pertanyaan">
-              Tambah
+            <button type="button" class="btn btn-info" <?php if (!$editable) {  ?> disabled <?php } ?> data-toggle="modal" data-target="#modal_add_pertanyaan">
+              <i class="ft-plus mr-1"></i>Tambah
             </button>
-        
+
             <button id="remove" disabled type="button" class="btn btn-primary" onclick="return confirm('Apakah anda yakin?')">
               Aktif/Nonaktif
             </button>
-        
+
             <table id="kuesioner" class="table table-bordered table-striped"></table>
 
           </div>
@@ -63,8 +63,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -141,7 +141,7 @@ function totalPriceFormatter(data) {
         valign: 'middle',
         width: '36%',
         <?php if ($editable) {  ?>
-        editable: 
+        editable:
           {
             placement: 'right',
             type:  'text',
@@ -153,7 +153,7 @@ function totalPriceFormatter(data) {
                   url: "<?php echo site_url('administration/template_vsi/kuesioner/update?key=avk_quest&data=') ?>"+v,
                   type:"get"
                 });
- 
+
               };
             },
           },
@@ -240,7 +240,7 @@ $table.on('check.bs.table  check-all.bs.table', function () {
     data:param,
     type:"get"
   });
- 
+
   //set session avk_id
   $.ajax({
     url:"<?php echo site_url('administration/set_session/avk_id') ?>"+'/'+getIdSelections(),
@@ -308,7 +308,7 @@ function responseHandler(res) {
         </button>
       </div>
       <form method="post" action="<?php echo site_url('administration/template_vsi/kuesioner/submit_add') ?>" id="app_form" >
-       
+
       <div class="modal-body" style="height: 300px;overflow-y: auto;">
 
         <div id="form_template">
@@ -393,7 +393,7 @@ function responseHandler(res) {
     });
 
      $('#modal_add_pertanyaan').on('hidden.bs.modal', function () {
-      reset()        
+      reset()
     })
 
     function reset(){
@@ -422,7 +422,7 @@ function responseHandler(res) {
     $('#app_form').submit(function(e) {
        e.preventDefault(); // avoid to execute the actual submit of the form.
       $('#app_form').ajaxSubmit({
-        url: '<?php echo site_url('administration/template_vsi/kuesioner/submit_add') ?>', 
+        url: '<?php echo site_url('administration/template_vsi/kuesioner/submit_add') ?>',
         type: 'post',
         success: function(msg){
           alert(msg)
@@ -430,7 +430,7 @@ function responseHandler(res) {
           $table.bootstrapTable('refresh');
         }
       })
-    });  
+    });
 
    $remove.click(function(e) {
       e.preventDefault(); // avoid to execute the actual submit of the form.

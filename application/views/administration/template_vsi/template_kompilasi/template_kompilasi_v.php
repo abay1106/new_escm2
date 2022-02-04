@@ -1,16 +1,21 @@
+<style>
+  .bootstrap-table {
+    margin-top: 0px;
+  }
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Template Kuesioner Kepuasan Vendor</h5>
+          <!-- <h5>Template Kuesioner Kepuasan Vendor</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
 
@@ -49,8 +54,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -66,8 +71,8 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/template_vsi') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/template_kompilasi/lihat/'+value+'">',
-    'Lihat Hasil',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/template_kompilasi/lihat/'+value+'">',
+    '<i class="ft-eye mr-1"></i>Lihat Hasil',
     '</a>  ',
   ].join('');
   }
@@ -135,7 +140,7 @@ function totalPriceFormatter(data) {
         //           url: "<?php echo site_url('administration/template_vsi/template_kompilasi/update?key=atk_name&data=') ?>"+v,
         //           type:"get"
         //         });
- 
+
         //       };
         //   },
 
@@ -171,7 +176,7 @@ function totalPriceFormatter(data) {
         //           url: "<?php echo site_url('administration/template_vsi/template_kompilasi/update?key=category&data=') ?>"+v,
         //           type:"get"
         //         });
- 
+
         //       };
         //   },
 
@@ -295,7 +300,7 @@ function responseHandler(res) {
         <h4 class="modal-title" id="modal_add_tempalteLabel">Tambah Template</h4>
         </button>
       </div>
-      <form method="post" action="<?php 
+      <form method="post" action="<?php
       echo site_url('administration/template_vsi/template_kompilasi/submit_add') ?>"
       id="app_form" >
       <div class="modal-body" style="height: 300px;overflow-y: auto;">
@@ -304,7 +309,7 @@ function responseHandler(res) {
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Template Ke-1" name="name_inp[0]" data-no="0" required="required"/>
         </div>
-       
+
         <div style="text-align: center;">
           <button style="align-content: center;" disabled type="button" class="btn btn-primary">
             <!-- <span class="glyphicon glyphicon-trash"></span> -->
@@ -378,7 +383,7 @@ function responseHandler(res) {
     });
 
      $('#modal_add_tempalte').on('hidden.bs.modal', function () {
-      reset()        
+      reset()
     })
 
     function reset(){
@@ -406,7 +411,7 @@ function responseHandler(res) {
     $('#app_form').submit(function(e) {
        e.preventDefault(); // avoid to execute the actual submit of the form.
       $('#app_form').ajaxSubmit({
-        url: '<?php echo site_url('administration/template_vsi/template_kompilasi/submit_add') ?>', 
+        url: '<?php echo site_url('administration/template_vsi/template_kompilasi/submit_add') ?>',
         type: 'post',
         success: function(msg){
           alert(msg)
@@ -414,7 +419,7 @@ function responseHandler(res) {
           $table.bootstrapTable('refresh');
         }
       })
-    });  
+    });
 
    $remove.click(function(e) {
       e.preventDefault(); // avoid to execute the actual submit of the form.
