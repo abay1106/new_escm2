@@ -1,13 +1,9 @@
 <div class="row">
   <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
+  <div class="card">
+    <div class="ibox float-e-margins card-header border-bottom pb-2">
+      <div class="ibox-title card-title">
         <h5>ITEM EAUCTION</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-        </div>
       </div>
       <div class="ibox-content">
 
@@ -118,6 +114,8 @@
 
         </div>
 
+
+      </div>
 
       </div>
     </div>
