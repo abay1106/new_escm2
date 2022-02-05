@@ -29,9 +29,6 @@ else if ($filtering === "activeandfinish") {
   $this->db->group_end();
 }
 else if ($filtering === "monitor_kompilasi_vpi") {
-  // $this->db->group_start();
-  // $this->db->where('c.vk_response', "1");
-  // $this->db->group_end();
   $this->db->join('vw_vnd_vpi_header b', 'b.vvh_contract_id = vw_ctr_monitor.contract_id');
   $this->db->join('vnd_vpi_kompilasi c', 'b.vvh_id = c.vvh_id');
 }
@@ -55,7 +52,6 @@ if(!empty($search)){
   $this->db->or_like("LOWER(vw_ctr_monitor.contract_type)",$search);
   $this->db->or_like("LOWER(vw_ctr_monitor.vendor_name)",$search);
   $this->db->or_like("LOWER(vw_ctr_monitor.status_name)",$search);
-  // $this->db->or_where("contract_id",$search);
   $this->db->group_end();
 }
 
@@ -75,9 +71,6 @@ else if ($filtering === "activeandfinish") {
   $this->db->group_end();
 }
 else if ($filtering === "monitor_kompilasi_vpi") {
-  // $this->db->group_start();
-  // $this->db->where('c.vk_response', "1");
-  // $this->db->group_end();
   $this->db->join('vw_vnd_vpi_header b', 'b.vvh_contract_id = vw_ctr_monitor.contract_id');
   $this->db->join('vnd_vpi_kompilasi c', 'b.vvh_id = c.vvh_id');
 }
@@ -100,7 +93,6 @@ if(!empty($search)){
   $this->db->or_like("LOWER(vw_ctr_monitor.contract_type)",$search);
   $this->db->or_like("LOWER(vw_ctr_monitor.vendor_name)",$search);
   $this->db->or_like("LOWER(vw_ctr_monitor.status_name)",$search);
-  // $this->db->or_where("contract_id",$search);
   $this->db->group_end();
 }
 
@@ -113,7 +105,6 @@ if(!empty($limit)){
 }
 
 $rows = $this->Contract_m->getMonitor($id)->result_array();
-
 
 $status = array(1=>"Belum Disetujui",2=>"Telah Disetujui",3=>"Ditolak");
 
