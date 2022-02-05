@@ -15,18 +15,18 @@
 			<div class="tabs-container">
 
 				<div class="tabs-left">
-					<ul class="nav nav-tabs">
+					<ul class="nav section-tab nav-pills">
 						<li class="<?= $must_upload  ? "" : "active" ?>"><a class="nav-link active" data-toggle="tab" href="#tab-1"><?php echo $this->lang->line('Data Utama'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-2"><?php echo $this->lang->line('Data Legal'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-3"><?php echo $this->lang->line('Pengurus Perusahaan'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-4"><?php echo $this->lang->line('Data Keuangan'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-5"><?php echo $this->lang->line('Barang/Jasa'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-6"><?php echo $this->lang->line('SDM'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-7"><?php echo $this->lang->line('Sertifikasi'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-8"><?php echo $this->lang->line('Fasilitas/Peralatan'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-9"><?php echo $this->lang->line('Pengalaman Proyek'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-10"><?php echo $this->lang->line('Data Tambahan'); ?></a></li>
-						<li class=""><a class="nav-link" data-toggle="tab" href="#tab-11">Data Dokumen</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-2"><?php echo $this->lang->line('Data Legal'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-3"><?php echo $this->lang->line('Pengurus Perusahaan'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-4"><?php echo $this->lang->line('Data Keuangan'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-5"><?php echo $this->lang->line('Barang/Jasa'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-6"><?php echo $this->lang->line('SDM'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-7"><?php echo $this->lang->line('Sertifikasi'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-8"><?php echo $this->lang->line('Fasilitas/Peralatan'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-9"><?php echo $this->lang->line('Pengalaman Proyek'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-10"><?php echo $this->lang->line('Data Tambahan'); ?></a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-11">Data Dokumen</a></li>
 						<li class=" <?= $must_upload  ? "active" : "" ?> "><a class="nav-link" data-toggle="tab" href="#tab-12"><?php echo $this->lang->line('Upload Dokumen PQ'); ?></a></li>
 					</ul>
 
@@ -34,7 +34,7 @@
 						<div id="tab-1" class="tab-pane <?= $must_upload  ? "" : "active" ?>">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Nama Perusahaan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -80,7 +80,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Kontak Perusahaan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -125,7 +125,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Kontak Person'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -157,7 +157,7 @@
 						<div id="tab-2" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Akta Pendirian'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -198,7 +198,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Domisili Perusahaan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -245,7 +245,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Nilai Pokok Wajib Pajak (NPWP)'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -284,7 +284,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Jenis Mitra Kerja'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -299,7 +299,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Surat Izin Usaha Perusahaan (SIUP)'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -330,7 +330,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Izin Lain Lain'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -369,7 +369,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Tanda Daftar Perusahaan (TDP)'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -396,7 +396,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Surat Keagenan/Distributorship'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -436,7 +436,7 @@
 
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Angka Pengenal Importir'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -480,7 +480,7 @@
 						<div id="tab-3" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Dewan Komisaris'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -523,7 +523,7 @@
 								</div>
 
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Dewan Direksi'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -569,7 +569,7 @@
 						<div id="tab-4" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Rekening Bank'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -609,7 +609,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Modal Sesuai Data Terakhir'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -627,7 +627,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Informasi Laporan Keuangan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -667,7 +667,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Klasifikasi Perusahaan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -691,7 +691,7 @@
 						<div id="tab-5" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Barang yang Bisa Dipasok'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -731,7 +731,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Jasa yang Bisa Dipasok'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -775,7 +775,7 @@
 						<div id="tab-6" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Tenaga Ahli Utama'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -815,7 +815,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Tenaga Ahli Pendukung'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -859,7 +859,7 @@
 						<div id="tab-7" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Keterangan Sertifikasi'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -903,7 +903,7 @@
 						<div id="tab-8" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Keterangan Fasilitas/Peralatan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -945,7 +945,7 @@
 						<div id="tab-9" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Pengalaman Pekerjaan'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -995,7 +995,7 @@
 						<div id="tab-10" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Prinsipal'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -1039,7 +1039,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Afiliasi'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -1083,7 +1083,7 @@
 									</div>
 								</div>
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?php echo $this->lang->line('Subkontraktor'); ?>
 									</div>
 									<div style="padding: 15px;">
@@ -1132,7 +1132,7 @@
 						<div id="tab-11" class="tab-pane">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										Dokumen
 									</div>
 									<div style="padding: 15px;">
@@ -1170,7 +1170,7 @@
 						<div id="tab-12" class="tab-pane <?= $must_upload ? "active" : "" ?> ">
 							<div class="panel-body">
 								<div class="panel panel-info">
-									<div class="panel-heading">
+									<div class="panel-heading card-header">
 										<?= $this->lang->line('Dokumen PQ') ?>
 									</div>
 									<div style="padding: 15px;">
