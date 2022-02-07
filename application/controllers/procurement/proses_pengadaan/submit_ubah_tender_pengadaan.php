@@ -1310,7 +1310,7 @@
 
             $mail = $value['email_address'];
 
-            $email = $this->sendEmail($mail,"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
+            //$email = $this->sendEmail($mail,"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
 
             $inp = array("ptm_number"=>$ptm_number,"pvs_vendor_code"=>$value['pvs_vendor_code'],"pvs_status"=>1);
             $act2 = $this->Procrfq_m->replaceVendorStatusRFQ($inp);
@@ -1583,7 +1583,7 @@
             ".$msg2."
             Demikian disampaikan. Atas perhatian dan kerjasamanya kami ucapkan terima kasih";
 
-            $email = $this->sendEmail($vnd_email,"Pengumuman Pemenang Nomor $ptm_number - $tender_name",$msg);
+            //$email = $this->sendEmail($vnd_email,"Pengumuman Pemenang Nomor $ptm_number - $tender_name",$msg);
             $i++;
         }
     }
@@ -1612,7 +1612,7 @@
             <br>
             Gunakan username dan password yang telah Anda buat pada saat melakukan registrasi.";
 
-            $email = $this->sendEmail($vnd_email,"Pengumuman Penetapan Pemenang Nomor $ptm_number",$msg);
+            //$email = $this->sendEmail($vnd_email,"Pengumuman Penetapan Pemenang Nomor $ptm_number",$msg);
 
         }
 
@@ -1643,7 +1643,7 @@
             <br/>
             Demikian disampaikan. Atas perhatian dan kerjasamanya kami ucapkan terima kasih.";
 
-            $email = $this->sendEmail($vnd_not_win_email,"Pengumuman Pengadaan Nomor $ptm_number",$msg);
+            //$email = $this->sendEmail($vnd_not_win_email,"Pengumuman Pengadaan Nomor $ptm_number",$msg);
 
         }
     
@@ -1701,7 +1701,7 @@
 
             }
 
-            $email = $this->sendEmail($vnd_email,"Pengumuman Penetapan Pemenang Nomor $ptm_number",$msg);
+            //$email = $this->sendEmail($vnd_email,"Pengumuman Penetapan Pemenang Nomor $ptm_number",$msg);
 
         }
 
@@ -1733,7 +1733,7 @@
                 <br/>
                 Demikian disampaikan. Atas perhatian dan kerjasamanya kami ucapkan terima kasih.";
 
-                $email = $this->sendEmail($vnd_not_win_email,"Pengumuman Pengadaan Nomor $ptm_number",$msg);
+                //$email = $this->sendEmail($vnd_not_win_email,"Pengumuman Pengadaan Nomor $ptm_number",$msg);
 
             }
 

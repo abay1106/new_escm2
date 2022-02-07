@@ -224,15 +224,13 @@ class globalparam_m extends CI_Model {
 
         $data['bank_detail'] = $bank_detail;
 
-        //$header = $this->load->view("email_template","",true);
+        $header = $this->load->view("email_template","",true);
 
         $header = "<html><body>";
 
         $footer = "</body></html>";
 
         $status_list = $this->getStatusTrans("email");
-
-        //print_r($status_list);
 
         $email_cont = $email[$status_list[$status]];
 
@@ -249,12 +247,6 @@ class globalparam_m extends CI_Model {
         $this->email->send();
 
         $this->email->clear();
-
-        //echo $this->email->print_debugger();
-
-        //die();
-
-        //echo $html;
 
     }
     
