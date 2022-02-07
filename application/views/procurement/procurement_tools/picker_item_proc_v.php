@@ -1,25 +1,16 @@
-`<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-md-12">
+<div class="row">
+  <div class="col-12">
+    <div class="card">
 
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Item Pengadaan</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+      <div class="card-header border-bottom pb-2">
+        <h4 class="card-title">Item Pengadaan</h4>
+      </div>
 
-          </div>
-        </div>
-        <div class="ibox-content">
-
+      <div class="card-content">
+        <div class="card-body">
           <div class="table-responsive">
-
             <table id="daftar_item_pengadaan" class="table table-bordered table-striped"></table>
-
           </div>
-
         </div>
       </div>
 
