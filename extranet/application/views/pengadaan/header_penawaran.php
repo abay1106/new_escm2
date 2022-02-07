@@ -1,37 +1,30 @@
 <div class="row">
-	<div class="col-7">
-		<div class="content-header"><strong><?php echo $this->lang->line('Penawaran'); ?></strong></div>			
-	</div>
-	<div class="col-5">
-		<div class="content-header float-right">
-			<a class="text-muted text-xs block h5" id="servertime"></a>
-		</div>
-	</div>
-</div>
+	<div class="col-12">
+		<div class="card">
 
-<div class="row">
-	<div class="col-lg-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-title">
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Penawaran'); ?></h4>
 			</div>
-			<div class="ibox-content">
-				<form role="form" id="header" method="POST" action="<?php echo site_url($submit_url) ?>" class="form-horizontal">	
+
+			<div class="card-content">
+				<div class="card-body">
+					<form role="form" id="header" method="POST" action="<?php echo site_url($submit_url) ?>" class="form-horizontal">	
 					<input type="hidden" id="section" name="section" value="header">
 					<input type="hidden" id="pqmid" name="pqmid" value="<?php if(isset($header)){ echo $header["pqm_id"]; } ?>">
-					<div class="form-group">
-						<label class="col-sm-3 control-label">
+					<div class="row form-group">
+						<label class="col-sm-3 control-label text-right">
 							<?php echo $this->lang->line('Nomor Pengadaaan'); ?>
 						</label>
 						<div class="col-lg-6 m-l-n"><input readonly id="tenderid" name="tenderid" type="text" class="form-control" value="<?php echo $tenderid; ?>"></div>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">
+					<div class="row form-group">
+						<label class="col-sm-3 control-label text-right">
 							<?php echo $this->lang->line('Nomor Penawaran'); ?> *
 						</label>
 						<div class="col-lg-6 m-l-n"><input <?php echo $readonly ?> id="nopenawaran" name="nopenawaran" type="text" class="form-control" value="<?php if(isset($header)){ echo $header["pqm_number"]; } ?>" required></div>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">
+					<div class="row form-group">
+						<label class="col-sm-3 control-label text-right">
 							<?php echo $this->lang->line('Tipe Penawaran'); ?> *	
 						</label>
 						<div class="col-md-2 m-l-n">
@@ -57,15 +50,15 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group">
+							<label class="col-sm-3 control-label text-right">
 								<?php echo $this->lang->line('Kandungan Lokal'); ?>
 							</label>
 							<div class="col-md-2 m-l-n"><input <?php echo $readonly ?> id="kandunganlokal" name="kandunganlokal" placeholder="%" type="number" min="0" max="100" class="form-control" value="<?php if(isset($header)) { echo $header["pqm_local_content"]; } ?>"></div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group">
+							<label class="col-sm-3 control-label text-right">
 								Jangka Waktu Garansi/Pemeliharaan *
 							</label>
 							<div class="col-md-2 m-l-n"><input <?php echo $readonly ?> id="garansi_t" name="garansi_t" type="number" class="form-control" required value="<?php echo (isset($header['pqm_guarantee_time'])) ? $header["pqm_guarantee_time"] : "" ?>">
@@ -86,8 +79,8 @@
 							<?php } ?>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group">
+							<label class="col-sm-3 control-label text-right">
 								Jangka Waktu Penyerahan / Pelaksanaan *
 							</label>
 							<div class="col-md-2 m-l-n"><input <?php echo $readonly ?> id="penyerahan_t" name="penyerahan_t" type="number" class="form-control" required value="<?php echo (isset($header['pqm_deliverable_time'])) ? $header["pqm_deliverable_time"] : "" ?>">
@@ -108,17 +101,17 @@
 							<?php } ?>
 						</div>
 
-						<div class="form-group" id="selesai">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group" id="selesai">
+							<label class="col-sm-3 control-label text-right">
 								<?php echo $this->lang->line('Berlaku Hingga'); ?> *
 							</label>
 							<div class="col-md-4 m-l-n input-group date">
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input <?php echo $readonly ?> id="berlakuhingga" name="berlakuhingga" type="text" class="form-control" value="<?php if(isset($header)) { echo date("Y-m-d", strtotime($header["pqm_valid_thru"])); } ?>" required>
+								<input <?php echo $readonly ?> id="berlakuhingga" name="berlakuhingga" type="text" class="form-control" value="<?php if(isset($header)) { echo date("Y-m-d", strtotime($header["pqm_valid_thru"])); } ?>" required>
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group">
+							<label class="col-sm-3 control-label text-right">
 								<?php echo $this->lang->line('Lampiran Penawaran'); ?> *
 							</label>
 							<div class="col-lg-6 m-l-n">
@@ -141,14 +134,14 @@
 								<?php } ?>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group">
+							<label class="col-sm-3 control-label text-right">
 								<?php echo $this->lang->line('Catatan'); ?>
 							</label>
 							<div class="col-lg-6 m-l-n"><input <?php echo $readonly ?> id="catatan" name="catatan" type="text" class="form-control" value="<?php if(isset($header)) { echo $header["pqm_notes"]; } ?>"></div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">
+						<div class="row form-group">
+							<label class="col-sm-3 control-label text-right">
 								<?php echo $this->lang->line('Mata Uang'); ?>
 							</label>
 							<div class="col-md-4 m-l-n">
@@ -160,56 +153,58 @@
 								<input type="hidden" name="currency" value="<?php echo (isset($header)) ? $header["pqm_currency"] : "" ?>">
 							</div>
 						</div>
-					</form>		
+					</form>	
 				</div>
 			</div>
+
 		</div>
 	</div>
+</div>
 
-	<script type="text/javascript">
-		
-		$(document).ready(function(){
+<script type="text/javascript">
+	
+	$(document).ready(function(){
 
-		$('#lampiran_penawaran').bind('change', function(event) {
-		        $('#error_msg').remove();
-		        var ext = $(this).val().split('.').pop().toLowerCase();
-		        var files = event.target.files;      
-		         console.log(files)
-		        // alert(files[0].size)
-		        if (files[0].size > 10485760) {
-		          $(this).val('');
-		          $('#error').append("<span style='color:red' id='error_msg'>File tidak boleh lebih dari 10MB</span>");
-		        }else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
-		            $(this).val('');
-		            $('#error').append("<span style='color:red' id='error_msg'>Format file tidak sesuai</span>");
-		        }
-		    });
+	$('#lampiran_penawaran').bind('change', function(event) {
+			$('#error_msg').remove();
+			var ext = $(this).val().split('.').pop().toLowerCase();
+			var files = event.target.files;      
+				console.log(files)
+			// alert(files[0].size)
+			if (files[0].size > 10485760) {
+				$(this).val('');
+				$('#error').append("<span style='color:red' id='error_msg'>File tidak boleh lebih dari 10MB</span>");
+			}else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
+				$(this).val('');
+				$('#error').append("<span style='color:red' id='error_msg'>Format file tidak sesuai</span>");
+			}
+		});
 
-			$("#samakan_garansi").click(function(){
+		$("#samakan_garansi").click(function(){
 
-				var unit = $("#garansi_u").val();
-				var time = $("#garansi_t").val();
+			var unit = $("#garansi_u").val();
+			var time = $("#garansi_t").val();
 
-				$(".guarantee_time_item").val(time);
-				$(".guarantee_unit_item option:contains('"+unit+"')").prop("selected",true);
-
-			});
-
-			$("#samakan_penyerahan").click(function(){
-
-				var unit = $("#penyerahan_u").val();
-				var time = $("#penyerahan_t").val();
-
-				$(".deliverable_time_item").val(time);
-				$(".deliverable_unit_item option:contains('"+unit+"')").prop("selected",true);
-
-			});
-
-			
-			$('#tipepenawaran').change(function(event) {
-				$('#tipe_penawaran_item').val($('#tipepenawaran').val()).trigger('change');
-			});
+			$(".guarantee_time_item").val(time);
+			$(".guarantee_unit_item option:contains('"+unit+"')").prop("selected",true);
 
 		});
 
-	</script>
+		$("#samakan_penyerahan").click(function(){
+
+			var unit = $("#penyerahan_u").val();
+			var time = $("#penyerahan_t").val();
+
+			$(".deliverable_time_item").val(time);
+			$(".deliverable_unit_item option:contains('"+unit+"')").prop("selected",true);
+
+		});
+
+		
+		$('#tipepenawaran').change(function(event) {
+			$('#tipe_penawaran_item').val($('#tipepenawaran').val()).trigger('change');
+		});
+
+	});
+
+</script>
