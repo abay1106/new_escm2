@@ -19,89 +19,92 @@
       <?php } ?>
 
 
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>HEADER</h5>
-          <div class="ibox-tools">
+      <div class="card float-e-margins">
+        <div class="card-header">
+          <div class="card-title"> 
+            <h5>HEADER</h5>
+          </div>
+          <!-- <div class="card-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
-          </div>
+          </div> -->
         </div>
 
-        <div class="ibox-content">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
 
-          <div class="row">
-            <div class="col-lg-12">
+                <?php $curval = (isset($tender['ptm_number'])) ?  $tender["ptm_number"] : ""; ?>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Nomor Tender</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo $curval ?></p>
 
-              <?php $curval = (isset($tender['ptm_number'])) ?  $tender["ptm_number"] : ""; ?>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Nomor Tender</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static"><?php echo $curval ?></p>
-
+                  </div>
                 </div>
-              </div>
 
-              <?php $curval = (isset($tender['ptm_subject_of_work'])) ?  $tender["ptm_subject_of_work"] : ""; ?>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Deskripsi Tender</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                <?php $curval = (isset($tender['ptm_subject_of_work'])) ?  $tender["ptm_subject_of_work"] : ""; ?>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Deskripsi Tender</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo $curval ?></p>
+                  </div>
                 </div>
-              </div>
 
-              <?php $curval = (isset($tender['judul'])) ?  $tender["judul"] : ""; ?>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Judul E-Auction</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                <?php $curval = (isset($tender['judul'])) ?  $tender["judul"] : ""; ?>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Judul E-Auction</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo $curval ?></p>
+                  </div>
                 </div>
-              </div>
 
-              <?php $curval = (isset($tender['deskripsi'])) ?  $tender["deskripsi"] : ""; ?>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Deskripsi</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                <?php $curval = (isset($tender['deskripsi'])) ?  $tender["deskripsi"] : ""; ?>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Deskripsi</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo $curval ?></p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Waktu</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static">
-                    <?php echo date("d/m/Y H:i:s",$dari); ?>
-                    - 
-                    <?php echo date("d/m/Y H:i:s",$sampai); ?>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Waktu</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">
+                      <?php echo date("d/m/Y H:i:s",$dari); ?>
+                      - 
+                      <?php echo date("d/m/Y H:i:s",$sampai); ?>
 
-                  </p>
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Durasi</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static"><?php
-                   $time = gmdate("H:i:s", $sampai-$dari);
-                   $time = explode(':', $time);
-                   $no = 1;
-                   foreach ($time as $v) {
-                     if($no == 1){
-                        $word = 'jam';
-                      }else if($no == 2){
-                        $word = 'menit';
-                      }else{
-                        $word = 'detik';
-                      }
-                      echo $v.' '.$word.' ';
-                      $no++;
-                   }
-                   ?> </p>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Durasi</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static"><?php
+                    $time = gmdate("H:i:s", $sampai-$dari);
+                    $time = explode(':', $time);
+                    $no = 1;
+                    foreach ($time as $v) {
+                      if($no == 1){
+                          $word = 'jam';
+                        }else if($no == 2){
+                          $word = 'menit';
+                        }else{
+                          $word = 'detik';
+                        }
+                        echo $v.' '.$word.' ';
+                        $no++;
+                    }
+                    ?> </p>
 
+                  </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
@@ -111,13 +114,15 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>PENAWARAN TOTAL</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+      <div class="card float-e-margins">
+        <div class="card-header">
+          <div class="card-title">
+            <h5>PENAWARAN TOTAL</h5>
+            <!-- <div class="ibox-tools">
+              <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+              </a>
+            </div> -->
           </div>
         </div>
 
@@ -138,17 +143,15 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>ITEM</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+      <div class="card float-e-margins">
+        <div class="card-header">
+          <div class="card-title">
+            <h5>ITEM</h5>
           </div>
         </div>
 
-        <div class="ibox-content">
+        <div class="card-content">
+        <div class="card-body">
 
          <table class="table table-bordered">
           <thead>
@@ -211,9 +214,10 @@
           </tr>
           <?php $i++; } ?>
           <input type="hidden" id="num_item" name="num_item" value="<?php echo $i ?>">
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
+      </div>
     </div>
   </div>
 </div>
