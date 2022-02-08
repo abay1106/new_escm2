@@ -261,7 +261,7 @@
   toastr.options.timeOut = 0;
   toastr.options.tapToDismiss = false;
   toastr.info('<center><h4 id="waktu"></h4>Penawaran Terendah Saat Ini : <span class="lowest_bid" style="font-weight: bold;">-</span></center>');
-  $('#toast-container').css({'margin-top' : '4%',  'position' : 'absolute'});
+  $('#toast-container').css({'margin-top' : '4%',  'position' : 'fixed'});
 
   var deadline = '<?php echo date("Y-m-d H:i:s",$sampai) ?>';
   

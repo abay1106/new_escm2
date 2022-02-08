@@ -75,15 +75,17 @@ $rows = $this->db->query("
           GROUP BY prc_eauction_history.vendor_id, prc_eauction_history.ppm_id) a
      JOIN vnd_header b ON ((b.vendor_id = a.vendor_id)))".$order_query."")->result_array();
 
-$bid_before = $this->db->query("SELECT jumlah_bid as bid_before FROM prc_eauction_history pc where
-    pc.ppm_id = '".$ptm_number."' and pc.vendor_id = '39245'
+
+foreach ($rows as $key => $value) {
+  $bid_before = $this->db->query("SELECT jumlah_bid as bid_before, tgl_bid FROM prc_eauction_history pc where
+    pc.ppm_id = '".$ptm_number."' and pc.vendor_id = '".$rows[$key]['vendor_id']."'
     and pc.selected = 0
     order by id asc limit 1")->result();
 
-foreach ($rows as $key => $value) {
+  $rows[$key]['tgl_bid'] = !empty($bid_before[0]->tgl_bid) ? $bid_before[0]->tgl_bid : "-";
   $rows[$key]['jumlah_bid'] = inttomoney($rows[$key]['jumlah_bid']);
   $rows[$key]['bid_now'] = ($rows[$key]['jumlah_bid']);
-  $rows[$key]['bid_before'] = inttomoney($bid_before[0]->bid_before);
+  $rows[$key]['bid_before'] = !empty($bid_before[0]->bid_before) ? inttomoney($bid_before[0]->bid_before) : "-";
 }
 
 $data['rows'] = $rows;
