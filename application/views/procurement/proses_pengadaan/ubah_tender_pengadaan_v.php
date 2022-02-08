@@ -74,6 +74,13 @@
         </div>
     </div>
 </div>
+
+<div class="container-fluid">
+    <div class="row px-0 my-2" style="font-size: 10px">
+        <div id="servertime"></div>
+    </div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<form id="formtender" method="post" action="<?php echo site_url($controller_name."/submit_ubah_tender_pengadaan");?>"  class="form-horizontal ajaxform">
