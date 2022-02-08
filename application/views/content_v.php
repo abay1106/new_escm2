@@ -53,13 +53,13 @@
 
       <div class="row bg-breadcrumb">
         <div class="col-7">
-          <div class="content-header">
+          <div class="content-header pt-3">
             <strong><?= $mytitle; ?></strong>
           </div>
         </div>
         <div class="col-5">
-          <div class="content-header float-right">
-            <img src="<?= base_url('assets') ?>/app-assets/img/wika_employee.png" alt="WIKA Logo" / style="width:100px;">
+          <div class="float-right">
+            <img src="<?= base_url('assets') ?>/app-assets/img/wika_employee.png" alt="WIKA Logo" / style="width:200px;">
             <!-- <a class="text-muted text-xs block h5" id="servertime"></a> -->
           </div>
         </div>

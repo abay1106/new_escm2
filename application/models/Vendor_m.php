@@ -756,4 +756,136 @@ class Vendor_m extends CI_Model {
 		return $this->db->get('vnd_type_master');
 	}
 
+	public function get_vsi_summary($periode,$year) {
+		$q = $this->db->query("SELECT vsi_report_sum(".$periode.",'".$year."')");
+		$res = $q->row_array();
+
+		$ret = str_replace('(','',$res['vsi_report_sum']);
+		$ret = str_replace(')','',$ret);
+		$ret = explode(',',$ret);
+
+		$result['questionaire'] = $ret[0];
+		$result['responden'] = $ret[1];
+		$result['score_less_60'] = $ret[2];
+		$result['score_more_60'] = $ret[3];
+
+		return $result;
+	}
+
+	public function get_pertanyaan_label($type,$periode,$year)
+	{
+		$data = array();
+		$this->db->select('pertanyaan_name');
+		$this->db->where('pertanyaan_type_id', $type);
+		$this->db->where('periode', $periode);
+		$res = $this->db->get('vw_vsi_header_detail')->result_array();
+
+		if(count($res) > 0) {
+			foreach ($res as $key => $value) {
+				# code...
+				$data[$key] = $value['pertanyaan_name'];
+
+			}
+		}
+
+		return json_encode($data);
+	}
+
+	private function random_color_part() {
+		return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+	}
+
+	private function random_color() {
+		return $this->random_color_part() . $this->random_color_part() . $this->random_color_part();
+	}
+
+	public function get_satisfacation_map($periode,$year)
+	{
+		$q = "SELECT X.*,((X.sum_kepuasan::numeric / X.sum_kepentingan::numeric) * 100) as index_kinerja from (".
+			 " SELECT  p.pertanyaan_name as pertanyaan,".
+			 " (SELECT sum(answer_score) from vw_vsi_vendor_input where vsi_type = 1 and periode = ".$periode." and year = '".$year."' and pertanyaan = p.pertanyaan_name) as sum_kepuasan,".
+			 " (SELECT sum(answer_score) from vw_vsi_vendor_input where vsi_type = 2 and periode = ".$periode." and year = '".$year."' and pertanyaan = p.pertanyaan_name) as sum_kepentingan,".
+			 " (SELECT avg(answer_score) from vw_vsi_vendor_input where vsi_type = 1 and periode = ".$periode." and year = '".$year."' and pertanyaan = p.pertanyaan_name) as avg_x_kepuasan,".
+			 " (SELECT avg(answer_score) from vw_vsi_vendor_input where vsi_type = 2 and periode = ".$periode." and year = '".$year."' and pertanyaan = p.pertanyaan_name) as avg_y_kepentingan".
+			" FROM (SELECT P.pertanyaan_name from vw_vsi_header_detail P where p.periode = ".$periode." and P.YEAR = '".$year."' GROUP BY P.pertanyaan_name) as p ) as X ";
+
+		$res = $this->db->query($q)->result_array();
+
+		return $res;
+
+	}
+
+	public function get_asset_line_chart($vsiType,$periode,$year)
+	{
+		$data = array();
+		$this->db->select('vendor_id');
+		$this->db->select('vendor_name');
+
+
+		$this->db->where('periode', $periode);
+		$this->db->where('year', $year);
+		$this->db->where('vsi_type', $vsiType);
+
+		$this->db->group_by(array("vendor_id","vendor_name"));
+		$vendor = $this->db->get('vw_vsi_vendor_input')->result_array();
+
+		if(count($vendor) > 0) {
+
+			foreach ($vendor as $key => $value) {
+				# code...
+				$data[$key]['label'] = $value['vendor_name'];
+				$data[$key]['data'] = $this->get_datachart_vendor_answer_score($value['vendor_id'],$vsiType,$periode,$year);
+				$data[$key]['lineTension'] = 0;
+				$data[$key]['fill'] = 0;
+				$data[$key]['borderColor'] = "#".$this->random_color();
+				$data[$key]['pointBorderColor'] = "#".$this->random_color();
+				$data[$key]['pointBackgroundColor'] = "#FFF";
+				$data[$key]['pointBorderWidth'] = 2;
+				$data[$key]['pointHoverBorderWidth'] = 2;
+				$data[$key]['pointRadius'] = 4;
+
+			}
+		}
+
+		return json_encode($data);
+
+	}
+
+	public function get_dataset_scatter_chart($periode,$year)
+	{
+		$data = array();
+		$xy = array();
+
+		$map = $this->get_satisfacation_map($periode,$year);
+
+		foreach ($map as $key => $value) {
+				$xy[$key] = [
+					"x"=> $value['avg_x_kepuasan'],
+					"y"=> $value['avg_y_kepentingan']
+				];
+		}
+
+		$data[0]['label'] = "Pertanyaan";
+		$data[0]['data'] =$xy;
+		$data[0]['backgroundColor'] = "#".$this->random_color(); //"rgba(47, 139, 230, 0.6)";
+		$data[0]['borderColor'] = "transparent";
+		$data[0]['pointBorderColor'] = "#".$this->random_color();
+		$data[0]['pointBackgroundColor'] = "#FFF";
+		$data[0]['pointBorderWidth'] = 2;
+		$data[0]['pointHoverBorderWidth'] = 2;
+		$data[0]['pointRadius'] = 4;
+
+		return json_encode($data);
+	}
+
+	public function get_vsi_vendor_score($periode,$year)
+	{
+		# code...
+		$q = $this->db->query("SELECT vsi_report_score_vendor(".$periode.",'".$year."')");
+		$res = $q->row_array()["vsi_report_score_vendor"];
+
+		return json_decode($res);
+
+	}
+
 }

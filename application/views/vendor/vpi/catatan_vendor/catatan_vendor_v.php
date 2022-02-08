@@ -17,7 +17,11 @@
         </div>
         <!-- <div class="ibox-content"> -->
           <div class="table-responsive">
-            <table id="table_pekerjaan" class="table table-bordered table-striped"></table>
+            <div class="card">
+              <div class="card-body">
+                <table id="table_pekerjaan" class="table table-bordered table-striped"></table>
+              </div>
+            </div>
             <!-- <table class="table table-striped table-sm table-bordered long-field" style="width: 100%">
               <thead>
                 <tr>

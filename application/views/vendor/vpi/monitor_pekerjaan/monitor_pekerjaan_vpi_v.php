@@ -3,7 +3,6 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Daftar Pekerjaan Penilaian VPI</h5>
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
@@ -12,27 +11,29 @@
         </div>
 
         <div class="ibox-content">
-            <form method="get" class="form-horizontal">
+          <form method="get" class="form-horizontal" style="display:none;">
             <div class="form-group">
              <label class="col-sm-1 control-label">Vendor</label>
                 <div class="col-sm-4">
                   <div class="input-group">
                     <span class="input-group-btn">
                      <button type="button" id="klir" name="klir" class="btn btn-danger">Semua</button>
-                     <button type="button" id="btn_vnd" data-id="kode_vnd" data-url="<?php echo site_url('vendor/picker_seluruh_vendor') ?>" class="btn btn-primary picker">Pilih Vendor</button> 
+                     <button type="button" id="btn_vnd" data-id="kode_vnd" data-url="<?= site_url('vendor/picker_seluruh_vendor') ?>" class="btn btn-primary picker">Pilih Vendor</button>
                    </span>
                    <input type="text" class="form-control" id="kode_vnd" name="kode_vnd" value="" readonly>
                  </div>
 
                </div>
-                
+
             </div>
           </form>
-
-          <div class="table-responsive">
-            <table id="table_pekerjaan" class="table table-bordered table-striped"></table>
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive pt-4">
+                <table id="table_pekerjaan" class="table table-bordered table-striped"></table>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -41,11 +42,7 @@
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-  
-
-
-});
+$(document).ready(function() {});
 
   jQuery.extend({
     getCustomJSON: function(url) {
@@ -69,8 +66,8 @@ $(document).ready(function() {
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -87,7 +84,7 @@ $(document).ready(function() {
      var link = "<?php echo site_url('vendor/vpi/monitor_pekerjaan/penilaian_vpi/') ?>";
     return [
     '<a class="btn btn-primary btn-xs action" href="'+link+'/'+value+'">',
-    'Lihat',
+    '<i class="ft-search mr-1"></i>Lihat',
     '</a>  ',
     ].join('');
   }

@@ -884,6 +884,10 @@ class Vendor extends Telescoope_Controller
     }
   }
 
+  public function vsi() {
+    include("vendor/vsi/vsi.php");
+  }
+
   public function exportkpivendor($param)
   {
     switch ($param) {

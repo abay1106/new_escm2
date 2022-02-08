@@ -51,6 +51,7 @@
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/components.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">
+    <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/chartist.min.css">
     <link rel="stylesheet" type="text/css" href="assets/assets/css/style.css">
 
     <!-- haqim -->
@@ -95,6 +96,7 @@
     <script src="assets/plugins/bootstrap-table/dist/extensions/reorder-columns/bootstrap-table-reorder-columns.min.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
+    <script src="assets/app-assets/vendors/js/chartist.min.js"></script>
 
     <?php /*  INSPINIA */ ?>
 
