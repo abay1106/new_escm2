@@ -3,7 +3,6 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Vendor Award</h5>
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
@@ -11,36 +10,33 @@
           </div>
         </div>
         <div class="ibox-content">
-          <div class="row">
-          <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive pt-2">
+                <div class="col-md-12">
+                  <btn data-url="<?php echo site_url();?>/vendor/vpi/vendor_award/export_vendor_award/pdf" data-tipe="rekap"
+                    class="btn btn-sm btnExport" data-toggle="tooltip" title="Export PDF" target="_blank"
+                    style="background-color:red;color:white;margin-right:5px">
+                    <i class="fa fa-file-pdf-o"></i> Export PDF
+                  </btn>
 
-                <btn data-url="<?php echo site_url();?>/vendor/vpi/vendor_award/export_vendor_award/pdf" data-tipe="rekap"
-                  class="btn btn-sm pull-right btnExport" data-toggle="tooltip" title="Export PDF" target="_blank"
-                  style="background-color:red;color:white;margin-right:5px">
-                  <i class="fa fa-file-pdf-o"></i> Export PDF
-                </btn>
-
-                <btn data-url="<?php echo site_url();?>/vendor/vpi/vendor_award/export_vendor_award_excel" data-tipe="rekap"
-                  class="btn btn-sm pull-right btnExport" data-toggle="tooltip" title="Export Excel" target="_blank"
-                  style="background-color:green;color:white;margin-right:5px">
-                  <i class="fa fa-file-excel-o"></i> Export Excel
-                </btn>
+                  <btn data-url="<?php echo site_url();?>/vendor/vpi/vendor_award/export_vendor_award_excel" data-tipe="rekap"
+                    class="btn btn-sm btnExport" data-toggle="tooltip" title="Export Excel" target="_blank"
+                    style="background-color:green;color:white;margin-right:5px">
+                    <i class="fa fa-file-excel-o"></i> Export Excel
+                  </btn>
+                </div>
+                <table id="table_pekerjaan" class="table table-bordered table-striped"></table>
+              </div>
             </div>
-        </div>
-          <div class="table-responsive">
-            <table id="table_pekerjaan" class="table table-bordered table-striped"></table>
           </div>
-
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
 <script type="text/javascript">
-
-
   jQuery.extend({
     getCustomJSON: function(url) {
       var result = null;
@@ -63,8 +59,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -204,7 +200,7 @@
           valign: 'middle',
           width:'10%',
         },
-        
+
 
       ]
 
@@ -218,11 +214,11 @@
     });
 
     $('.btnExport').click(function(){
-    
+
       var url = $(this).attr("data-url")
-      
+
       window.open(url ,'_blank');
-      
+
 
     })
 

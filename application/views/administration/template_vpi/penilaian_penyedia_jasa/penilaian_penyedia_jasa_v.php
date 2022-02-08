@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
-  <?php $msg_status = $this->session->flashdata('status_submit_vpi'); 
+  <?php $msg_status = $this->session->flashdata('status_submit_vpi');
         $msg_status = (empty($msg_status)) ? "" : $msg_status;
         if(!empty($msg_status)){ ?>
         <div class="alert <?php echo $msg_status == 'success' ? 'alert-info' : 'alert-danger' ?>" role="alert">
@@ -15,22 +15,22 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Template Penilaian Penyedia Jasa</h5>
+          <!-- <h5>Template Penilaian Penyedia Jasa</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
 
-          <div class="table-responsive"> 
-          <a class="pull-right btn btn-primary edit-btn" style="margin-bottom: 10px"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+          <div class="table-responsive">
+          <a class="pull-left btn btn-info edit-btn" style="margin-bottom: 10px"><i class="ft-edit mr-1"></i>Edit</a>
 
           <form  method="post" id="template_form"  action="<?php echo site_url($controller_name."/template_vpi/penilaian_penyedia_jasa");?>">
-            <input type="hidden" name="mode" value="">          
+            <input type="hidden" name="mode" value="">
           <table class="table table-bordered table-responsive"  style="text-align: center;">
           <thead>
             <tr>
@@ -125,16 +125,16 @@
                 <!-- <a class="input_required target target_5r"> -->
                   <span class="edit-hide">
                     <?php echo $data_bobot['target_5r'] ?>
-                  </span>   
-                  <input type="text" name="target_5r" value="<?php echo $data_bobot['target_5r'] ?>" class="form-control edit-show" required> 
+                  </span>
+                  <input type="text" name="target_5r" value="<?php echo $data_bobot['target_5r'] ?>" class="form-control edit-show" required>
                 <!-- </a> -->
               </td>
               <td>
                 <!-- <a class="input_required bobot bobot_5r"> -->
                   <span class="edit-hide">
                     <?php echo $data_bobot['bobot_5r'] ?>
-                  </span>  
-                  <input type="text" name="bobot_5r" value="<?php echo $data_bobot['bobot_5r'] ?>" class="bobot form-control edit-show" required> 
+                  </span>
+                  <input type="text" name="bobot_5r" value="<?php echo $data_bobot['bobot_5r'] ?>" class="bobot form-control edit-show" required>
                 <!-- </a> -->
               </td>
             </tr>
@@ -150,16 +150,16 @@
                 <!-- <a class="input_required target target_pengamanan"> -->
                   <span class="edit-hide">
                     <?php echo $data_bobot['target_pengamanan'] ?>
-                  </span> 
-                  <input type="text" name="target_pengamanan" value="<?php echo $data_bobot['target_pengamanan'] ?>" class="form-control edit-show" required>  
+                  </span>
+                  <input type="text" name="target_pengamanan" value="<?php echo $data_bobot['target_pengamanan'] ?>" class="form-control edit-show" required>
                 <!-- </a> -->
               </td>
               <td>
                 <!-- <a class="input_required bobot bobot_pengamanan"> -->
                   <span class="edit-hide">
                     <?php echo $data_bobot['bobot_pengamanan'] ?>
-                  </span> 
-                  <input type="text" name="bobot_pengamanan" value="<?php echo $data_bobot['bobot_pengamanan'] ?>" class="form-control edit-show bobot" required>  
+                  </span>
+                  <input type="text" name="bobot_pengamanan" value="<?php echo $data_bobot['bobot_pengamanan'] ?>" class="form-control edit-show bobot" required>
                 <!-- </a> -->
               </td>
             </tr>
@@ -172,7 +172,7 @@
                 <?php echo $total_bobot ?>
               </td>
             </tr>
-              
+
           </tbody>
         </table>
 
@@ -195,7 +195,7 @@
             <button type="submit" class="btn btn-primary btn-lg pull-right"><?php echo lang('save') ?></button>
           </div>
         </div>
-      </div>          
+      </div>
     </div>
   </div>
 </div>
@@ -217,7 +217,7 @@
 
     $('input').css('text-align', 'center');
 
-    
+
      var prev_total_bobot;
      var prev_total_target;
      var prev_target_ketepatan_progress;
@@ -324,13 +324,13 @@
         }
 
         $('.bobot_total').text(total_bobot)
-        
+
     });
 
     $('.form-control').autoNumeric({
       vMin : 0,
       aSep: '.',
-      aDec: ',', 
+      aDec: ',',
       aSign: '',
       mDec: '2'
     });
@@ -341,7 +341,7 @@
 <!-- tidak digunakan -->
 <script type="text/javascript">
 $(document).ready(function() {
-  
+
   var $target_ketepatan_progress = $('.target_ketepatan_progress'),
   $target_hasil_mutu_pekerjaan = $('.target_hasil_mutu_pekerjaan'),
   $target_k3l = $('.target_k3l'),
@@ -578,7 +578,7 @@ $(document).ready(function() {
   $('.input-sm').autoNumeric({
        vMin : 0,
       aSep: '.',
-      aDec: ',', 
+      aDec: ',',
       aSign: '',
       mDec: '0'
     });
@@ -598,7 +598,7 @@ $(document).ready(function() {
     });
        total = current_total
        total -= parseFloat(current_val.toString().replace(',','.'))
-       total += parseFloat(newValue.replace(',','.')) 
+       total += parseFloat(newValue.replace(',','.'))
 
     if (total > 100) {
       return "false";
@@ -625,10 +625,10 @@ $(document).ready(function() {
     });
     total = current_total
     total -= parseFloat(current_val.toString().replace(',','.'))
-    total += parseFloat(newValue.replace(',','.')) 
+    total += parseFloat(newValue.replace(',','.'))
 
     return total;
-    
+
   }
 
 
@@ -639,11 +639,11 @@ $(document).ready(function() {
   });
     total = current_total
     total -= parseFloat(current_val.toString().replace(',','.'))
-    total += parseFloat(newValue.replace(',','.')) 
+    total += parseFloat(newValue.replace(',','.'))
 
       $('.target_total').text(total)
       return total;
-    
+
   }
 
 });

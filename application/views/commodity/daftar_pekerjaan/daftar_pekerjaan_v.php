@@ -1,3 +1,8 @@
+<style>
+  .bootstrap-table {
+    margin-top: 0px;
+  }
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
     <div class="col-lg-12">
@@ -205,8 +210,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -221,8 +226,8 @@
 
   function operateFormatter(value, row, index) {
     return [
-    '<a class="btn btn-primary btn-xs approval" href="'+value+'" title="Approval">',
-    'Proses',
+    '<a class="btn btn-success btn-xs approval" href="'+value+'" title="Approval">',
+    '<i class="ft-arrow-up-right mr-1"></i>Proses',
     '</a>  ',
   /*
   '<a class="remove" href="javascript:void(0)" title="Remove">',
@@ -344,7 +349,7 @@ $table_kat_brg.on('expand-row.bs.table', function (e, index, row, $detail) {
 });
 
 
- //table pekerjaan sumberdaya 
+ //table pekerjaan sumberdaya
  $(function () {
 
     $table_kat_brg_smbd.bootstrapTable({
@@ -421,7 +426,7 @@ $table_kat_brg_smbd.on('expand-row.bs.table', function (e, index, row, $detail) 
 });
 
 });
-  
+
 
 </script>
 
@@ -565,7 +570,7 @@ $table_kat_jasa_smbd.on('expand-row.bs.table', function (e, index, row, $detail)
   $(function () {
 
     $table_hrg_brg.bootstrapTable({
-      
+
       url: "<?php echo site_url('commodity/data_hrg_brg/approval') ?>",
       cookieIdTable:"hrg_brg",
       idField:"hrg_brg_code",
@@ -643,7 +648,7 @@ $table_hrg_brg.on('expand-row.bs.table', function (e, index, row, $detail) {
   $(function () {
 
     $table_hrg_brg_smbd.bootstrapTable({
-      
+
       url: "<?php echo site_url('commodity/data_hrg_brg_smbd/approval') ?>",
       cookieIdTable:"hrg_brg",
       idField:"hrg_brg_code",
@@ -722,7 +727,7 @@ $table_hrg_brg_smbd.on('expand-row.bs.table', function (e, index, row, $detail) 
 $(function () {
 
     $table_hrg_jasa.bootstrapTable({
-      
+
       url: "<?php echo site_url('commodity/data_hrg_jasa/approval') ?>",
       cookieIdTable:"hrg_jasa",
       idField:"hrg_jasa_code",
@@ -799,7 +804,7 @@ $table_hrg_jasa.on('expand-row.bs.table', function (e, index, row, $detail) {
   $(function () {
 
     $table_hrg_jasa_smbd.bootstrapTable({
-      
+
       url: "<?php echo site_url('commodity/data_hrg_jasa_smbd/approval') ?>",
       cookieIdTable:"hrg_jasa",
       idField:"hrg_jasa_code",

@@ -4,7 +4,7 @@
       <div class="card">
 
         <div class="card-header border-bottom pb-2">
-          <h4 class="card-title float-left">Hirarki Menu</h4>
+          <!-- <h4 class="card-title float-left">Hirarki Menu</h4> -->
         </div>
 
         <div class="card-content">
@@ -25,7 +25,7 @@
           <?php if (!empty($current_jobtitle)) { ?>
             <div class="card-content">
               <div class="card-body">
-                <button type="button" data-loading-text="Loading..." class="save_menu btn btn-success btn-block">Simpan</button>
+                <button type="button" data-loading-text="Loading..." class="save_menu btn btn-info btn-block">Simpan</button>
               </div>
             </div>
             <div id="treex">
@@ -34,7 +34,7 @@
 
             <br />
             <div class="card-body">
-              <button type="button" data-loading-text="Loading..." class="save_menu btn btn-success btn-block">Simpan</button>
+              <button type="button" data-loading-text="Loading..." class="save_menu btn btn-info btn-block">Simpan</button>
             </div>
           <?php } ?>
         </div>

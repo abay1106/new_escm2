@@ -3,19 +3,21 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Posisi</h5>
+          <!-- <h5>Posisi</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
 
           <div class="table-responsive">
-          <a class="btn btn-primary" href="<?php echo site_url('administration/admin_tools/position/add_position') ?>" role="button">Tambah</a>               
+          <a class="btn btn-info" href="<?php echo site_url('administration/admin_tools/position/add_position') ?>" role="button">
+            <i class="ft-plus mr-1"></i>Tambah
+          </a>
 
             <table id="position" class="table table-bordered table-striped"></table>
 
@@ -54,8 +56,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -71,8 +73,8 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/admin_tools/position') ?>";
     return [
-    '<a class="btn btn-primary btn-xs action" href="'+link+'/ubah/'+value+'">',
-    'Ubah',
+    '<a class="btn btn-info btn-xs action" href="'+link+'/ubah/'+value+'">',
+    '<i class="ft-edit mr-1"></i>Ubah',
     '</a>  ',
     ].join('');
   }

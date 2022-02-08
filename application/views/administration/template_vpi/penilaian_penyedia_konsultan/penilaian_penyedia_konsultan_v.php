@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
-  <?php $msg_status = $this->session->flashdata('status_submit_vpi'); 
+  <?php $msg_status = $this->session->flashdata('status_submit_vpi');
         $msg_status = (empty($msg_status)) ? "" : $msg_status;
         if(!empty($msg_status)){ ?>
         <div class="alert <?php echo $msg_status == 'success' ? 'alert-info' : 'alert-danger' ?>" role="alert">
@@ -10,27 +10,27 @@
           </button>
         </div>
      <?php } ?>
-  
+
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Template Penilaian Penyedia Konsultan</h5>
+          <!-- <h5>Template Penilaian Penyedia Konsultan</h5> -->
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
 
           </div>
-        </div>        
+        </div>
 
         <div class="ibox-content">
 
-          <div class="table-responsive">  
-          <a class="pull-right btn btn-primary edit-btn" style="margin-bottom: 10px"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
+          <div class="table-responsive">
+          <a class="pull-left btn btn-info edit-btn" style="margin-bottom: 10px"><i class="ft-edit mr-1"></i>Edit</a>
 
           <form  method="post" id="template_form"  action="<?php echo site_url($controller_name."/template_vpi/penilaian_penyedia_konsultan");?>">
-            <input type="hidden" name="mode" value="">  
+            <input type="hidden" name="mode" value="">
 
           <table class="table table-bordered table-responsive"  style="text-align: center;">
           <thead>
@@ -172,7 +172,7 @@
             <button type="submit" class="btn btn-primary btn-lg pull-right"><?php echo lang('save') ?></button>
           </div>
         </div>
-      </div>          
+      </div>
     </div>
   </div>
 </div>
@@ -193,7 +193,7 @@
 
     $('input').css('text-align', 'center');
 
-    
+
      var prev_total_bobot;
      var prev_total_target;
      var prev_target_ketepatan_progress;
@@ -222,7 +222,7 @@
       prev_bobot_mutu_personal = parseFloat($('[name=bobot_mutu_personal]').val());
       prev_target_pelayanan = parseFloat($('[name=target_pelayanan]').val());
       prev_bobot_pelayanan = parseFloat($('[name=bobot_pelayanan]').val());
-      
+
       // alert($('[name=mode]').val())
     });
 
@@ -294,13 +294,13 @@
         }
 
         $('.bobot_total').text(total_bobot)
-        
+
     });
 
     $('.form-control').autoNumeric({
       vMin : 0,
       aSep: '.',
-      aDec: ',', 
+      aDec: ',',
       aSign: '',
       mDec: '2'
     });
@@ -311,7 +311,7 @@
 <!-- Tidak digunakan -->
 <script type="text/javascript">
 $(document).ready(function() {
-  
+
   var $table = $('#aspek_penilaian_pelayanan'),
   $remove = $('#remove'),
   $activate = $('#activate'),
@@ -424,7 +424,7 @@ $(document).ready(function() {
               if(!v){ return 'Required field!'}
           },
           success: function(response, newValue) {
-            
+
               total = total_target(current_val_target_mutu_personal,newValue)
               $.ajax({
                   url: url+"key=target_mutu_personal&data="+newValue+"&total="+total+"&type=konsultan",
@@ -511,7 +511,7 @@ $('.input_required').click(function(event) {
   $('.input-sm').autoNumeric({
       vMin : 0,
       aSep: '.',
-      aDec: ',', 
+      aDec: ',',
       aSign: '',
       mDec: '0'
     });
@@ -523,7 +523,7 @@ $('.input_required').click(function(event) {
     }
   });
 });
-  
+
 
   function check_total_bobot(current_val,newValue){
     var current_total = 0;
@@ -533,8 +533,8 @@ $('.input_required').click(function(event) {
     console.log('current_total ', current_total);
     console.log('current_val ', current_val);
     console.log('newValue ', newValue);
-    total = current_total 
-    total -= parseFloat(current_val.toString().replace(',','.')) 
+    total = current_total
+    total -= parseFloat(current_val.toString().replace(',','.'))
     total += parseFloat(newValue.replace(',','.'))
     console.log('total ', total);
 
@@ -561,12 +561,12 @@ $('.input_required').click(function(event) {
     $('.bobot').each(function(){
       current_total += parseFloat($(this).text().replace(',','.'))
   });
-    total = current_total 
-    total -= parseFloat(current_val.toString().replace(',','.')) 
+    total = current_total
+    total -= parseFloat(current_val.toString().replace(',','.'))
     total += parseFloat(newValue.replace(',','.'))
 
       return total;
-    
+
   }
 
   function total_target(current_val,newValue){
@@ -574,13 +574,13 @@ $('.input_required').click(function(event) {
   $('.target').each(function(){
       current_total += parseFloat($(this).text().replace(',','.'))
   });
-    total = current_total 
-    total -= parseFloat(current_val.toString().replace(',','.')) 
+    total = current_total
+    total -= parseFloat(current_val.toString().replace(',','.'))
     total += parseFloat(newValue.replace(',','.'))
 
       $('.target_total').text(total)
       return total;
-    
+
   }
 
 });
