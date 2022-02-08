@@ -1,35 +1,40 @@
 <?php
 
-$userdata = $this->data['userdata'];
+	$userdata = $this->data['userdata'];
 
-$error = false;
+	$error = false;
 
-$post = $this->input->post();
+	$post = $this->input->post();
 
-$input = array();
+	$input = array();
 
-$this->db->trans_begin();
+	var_dump($input);die();
 
-$input['cad_contract_id'] = $post['cad_contract_id'];
-$input['cad_ptm_number'] = $post['cad_ptm_number'];
-$input['cad_comment'] = $post['cad_comment'];
-$input['cad_user_id'] = $userdata['pos_id'];
-$input['cad_position'] =  $userdata['pos_name'];
-$input['cad_user_name'] =  $userdata['complete_name'];
-$input['cad_created_date'] = date("Y-m-d H:i:s");
+	$this->db->trans_begin();
 
-$this->db->insert("ctr_comment_all_div", $input);
+	$input['cad_contract_id'] = $post['cad_contract_id'];
+	$input['cad_ptm_number'] = $post['cad_ptm_number'];
+	$input['cad_comment'] = $post['cad_comment'];
+	$input['cad_user_id'] = $userdata['pos_id'];
+	$input['cad_position'] =  $userdata['pos_name'];
+	$input['cad_user_name'] =  $userdata['complete_name'];
+	$input['cad_created_date'] = date("Y-m-d H:i:s");
 
-if ($this->db->trans_status() === FALSE)
-{
-	$this->db->trans_rollback();
-	$this->setMessage("Gagal mengubah data");
-	$this->renderMessage("error");
-}
+	$act = $this->db->insert("ctr_comment_all_div", $input);	
 
-else
-{
-	$this->db->trans_commit();
-	$this->setMessage("Berhasil mengubah data");
-	$this->renderMessage("success", site_url("procurement/daftar_pekerjaan"));
-}
+	if ($this->db->trans_status() === FALSE)
+	{
+		$this->db->trans_rollback();
+		$this->setMessage("Gagal mengubah data");
+		$this->renderMessage("error");
+	}
+
+	else
+	{
+		$this->db->trans_commit();
+		$this->setMessage("Berhasil mengubah data");
+		$this->renderMessage("success");		
+		redirect(site_url("contract/monitor/monitor_kontrak/lihat/" . $post['cad_contract_id']));
+	}
+
+?>
