@@ -18,7 +18,7 @@
 
 		?>
 
-		<div class="row" id="form-komentar">
+		<div class="row" id="form-comment">
 			<div class="col-12">        
 				<div class="card">
 					<div class="card-header border-bottom pb-2">
@@ -37,6 +37,11 @@
 												<li class="list-group-item">
 													<span class="badge badge-info mr-2"><?php echo strtoupper($value['cad_user_name'][0]); ?></span> <?php echo $value['cad_user_name']; ?> 
 													<span class="text-muted ml-2"><?php echo date("D, d/m/Y - H:i:s", strtotime($value['cad_created_date'])); ?></span>												
+
+													<?php if ($pos["job_title"] == "PIC USER") { ?>
+														<a href="<?php echo site_url('contract/submit_delete_comment/' . $value['id']); ?>" onclick="return confirm('Apakah Anda yakin akan hapus data ini?')" class="text-danger"><i class="ft-x-circle"></i></a>													
+													<?php } ?>
+
 													<p class="m-2 ml-4"><?php echo $value['cad_comment']; ?></p>
 												</li>
 											</ul>
@@ -78,7 +83,7 @@
 					</button>
 				</div>
 
-				<form action="<?php echo site_url($controller_name . '/submit_comment_contract');?>" method="POST">
+				<form action="<?php echo site_url($controller_name . '/submit_comment_contract#form-comment');?>" method="POST">
 					<div class="modal-body">
 
 						<?php $ptm_number = (isset($kontrak['ptm_number'])) ? $kontrak['ptm_number'] : ""; ?>
