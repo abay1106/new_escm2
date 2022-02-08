@@ -50,8 +50,8 @@
 
 <?php if ($tender['ptm_status'] == 1140) { ?>
 <?php //if ($tender['ptm_status'] == 1141) { ?>
-
-<form method="POST" action="<?php echo base_url(); ?>index.php/procurement/pdf_bakp_print">
+<br>
+<form method="POST" target="_blank" action="<?php echo base_url(); ?>index.php/procurement/pdf_bakp_print">
 <input type="hidden" name="id" value="<?php echo $ptm_id; ;?>">
 <?php $tgl_penetapan_pemenang = date('Y-m-d'); ?>
 
@@ -358,7 +358,7 @@
 		<th align="center">No</th>
 		<th align="center">Nama</th>
 		<!-- <th align="center">Kategori</th> -->
-		<th align="center">Sebgai</th>
+		<th align="center">Sebagai</th>
 		<th align="center">Tanda Tangan</th>
 		<th align="center">Keterangan</th>
 		<!-- <th align="center"></th> -->
@@ -393,7 +393,7 @@
 		foreach ($bakp_kpd_name as $value) {
 			$total = $par;
 			$id_tr = 'tr_ttd_' . $total;
-			echo '<tr id="'.$id_tr.'" class="cat"><td width="1%;" class="number-catatan">'.($total+1).'</td><td ><select name="panitia_name[]"><option>'.$value.'</option></select></td><td ><select name="panitia_category[]"><option>'.$bakp_kpd_cat[$par].'</option></select></td><td ><select name="panitia_ketua[]"><option>'.$bakp_kpd_as[$par].'</option></select></td><td >......................</td><td></td><td><img style="cursor: pointer;" width="15" height="15" src="'.base_url('assets/img/remove.png') .'" onclick="remove_ttd('.$id_tr.')"/></td></tr>';
+			echo '<tr id="'.$id_tr.'" class="cat"><td width="1%;" class="number-catatan">'.($total+1).'</td><td ><select name="panitia_name[]"><option>'.$value.'</option></select></td><td ><select name="panitia_ketua[]"><option>'.$bakp_kpd_as[$par].'</option></select></td><td >......................</td><td></td></tr>';
 
 			$par += 1;
 		}
@@ -437,9 +437,9 @@
 
 
 	<div id="form_other" style="display:<?php echo ($data_uskep) ? '' : 'none'; ?>;" >
-	<a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_penawaran_harga/".$ptm_id; ?>" class="button" style="margin: 5px;">DEPKN FORM</a>
+	<a  href="<?php echo base_url()."index.php/procurement/pdf_penawaran_harga/".$ptm_id; ?>" class="button" style="margin: 5px;">DEPKN FORM</a>
 
-	<a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_penilaian/".$ptm_id; ?>" class="button" style="margin: 5px;">PENILAIAN FORM</a>
+	<a  href="<?php echo base_url()."index.php/procurement/pdf_penilaian/".$ptm_id; ?>" class="button" style="margin: 5px;">PENILAIAN FORM</a>
 
 	</div>
 
@@ -461,13 +461,13 @@
 	<center><h1>USKEP ONLINE</h1></center>
 	<hr>
 	<center>
-	<a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_bakp_print/".$ptm_id; ?>" class="button" style="margin: 5px;">BAKP PDF</a>
+	<a  href="<?php echo base_url()."index.php/procurement/pdf_bakp_print/".$ptm_id; ?>" class="button" style="margin: 5px;">BAKP PDF</a>
 
-	<a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_penawaran_harga_print/".$ptm_id; ?>" class="button" style="margin: 5px;">DEPKN PDF</a>
+	<a  href="<?php echo base_url()."index.php/procurement/pdf_penawaran_harga_print/".$ptm_id; ?>" class="button" style="margin: 5px;">DEPKN PDF</a>
 
-	<a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_penilaian_print/".$ptm_id; ?>" class="button" style="margin: 5px;">PENILAIAN PDF</a>
+	<a href="<?php echo base_url()."index.php/procurement/pdf_penilaian_print/".$ptm_id; ?>" class="button" style="margin: 5px;">PENILAIAN PDF</a>
 		
-		<a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_merge_print/".$ptm_id; ?>" class="button" style="margin: 5px;">MERGE PDF</a>
+		<!-- <a target="_blank" href="<?php echo base_url()."index.php/procurement/pdf_merge_print/".$ptm_id; ?>" class="button" style="margin: 5px;">MERGE PDF</a> -->
 	</center>
 
 <?php } ?>

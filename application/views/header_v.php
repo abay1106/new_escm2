@@ -50,7 +50,7 @@
                      <?php } else { ?>
                         <a class="dropdown-item">
                            <div class="d-flex align-items-center">
-                              No data.
+                           <?php echo $this->lang->line('no_data'); ?>
                            </div>
                         </a>
                      <?php } ?>
@@ -62,7 +62,7 @@
                   <ul class="notification-dropdown dropdown-menu dropdown-menu-media dropdown-menu-right overflow-hidden">
                      <li class="dropdown-menu-header">
                         <div class="dropdown-header d-flex justify-content-between white bg-info">
-                              <div class="d-flex"><i class="ft-bell font-medium-3 d-flex align-items-center mr-2"></i><span class="noti-title"><?php echo count($jobs)?> Notification</span></div>
+                              <div class="d-flex"><i class="ft-bell font-medium-3 d-flex align-items-center mr-2"></i><span class="noti-title"><?php echo count($jobs)?> <?php echo $this->lang->line('notification'); ?></span></div>
                         </div>
                      </li>
                      <?php if(count($jobs) > 0 ) { ?>
@@ -94,7 +94,7 @@
                         <div class="d-flex justify-content-between cursor-pointer read-notification">
                            <div class="media d-flex align-items-center">
                               <div class="media-body">
-                                 <h6 class="m-0"><small class="grey lighten-1 font-italic text-center">No data.</small></h6>
+                                 <h6 class="m-0"><small class="grey lighten-1 font-italic text-center"><?php echo     $this->lang->line('no_data'); ?></small></h6>
                               </div>
                            </div>
                         </div>
@@ -104,7 +104,7 @@
 
                <li class="dropdown nav-item mr-1">
                   <a class="nav-link count-info dropdown-toggle user-dropdown d-flex align-items-end" id="dropdownBasic2" href="javascript:;" data-toggle="dropdown">
-                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-users mr-1"></i>Ganti Posisi</span></div>
+                     <div class="user d-md-flex d-none"><span class="text-right"><i class="ft-users mr-1"></i> <?php echo     $this->lang->line('gt'); ?> </span></div>
                   </a>
                   <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0" aria-labelledby="dropdownBasic2">
                      <?php foreach ($position as $key => $value) { ?>
@@ -113,11 +113,12 @@
                         </a>
                      <?php } ?>
                   </div>
+
                </li>
 
                <li class="dropdown nav-item mr-1">
                   <a class="nav-link dropdown-toggle" id="dropdownBasic2" href="javascript:;" data-toggle="dropdown">
-                    <i class="ft-menu mr-1"></i>
+                    <i class="ft-menu mr-1"></i>               
                   </a>
                   <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0" aria-labelledby="dropdownBasic2">
                      <a class="nav-link" href="<?php echo site_url('log/change_password') ?>">

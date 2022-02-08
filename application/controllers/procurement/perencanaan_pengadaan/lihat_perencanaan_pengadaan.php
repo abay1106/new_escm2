@@ -19,7 +19,6 @@ if($data['perencanaan']['ppm_type_of_plan'] == "rkp_matgis"){
 
 $data['document'] = $this->Procplan_m->getDokumenPerencanaan("",$id)->result_array();
 
-// $data['item_perencanaan_pmcs'] = $this->Procplan_m->getItemPerencanaanPMCS($id)->result_array();
 $data['item_perencanaan_pmcs'] = $this->Procplan_m->getItemPMCS($id)->result_array();
 
 $next_pos = $this->db
@@ -52,7 +51,6 @@ if(!empty($next_pos) && $data['perencanaan']['ppm_status'] != 3){
 $data['anggaran_list'][0] = $this->Comment_m->getAnggaran($id)->result_array();
 
 $data['volume_hist'] = $this->Comment_m->getVolumeHist($id)->result_array();
-// echo $this->db->last_query();exit();
 
 $data['project_cost'] = $this->Procplan_m->getProjectCost($id)->result_array();
 

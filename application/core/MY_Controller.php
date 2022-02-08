@@ -106,8 +106,8 @@ class Telescoope_Controller extends CI_Controller {
 
     $config['protocol'] = 'smtp';
     $config['smtp_host'] = 'mx-gw.wika.co.id';
-    //$config['smtp_user'] = 'admin@wikamail.id';
-    //$config['smtp_crypto'] = "tls";
+    $config['smtp_user'] = 'admin@wikamail.id';
+    $config['smtp_crypto'] = "tls";
     $config['smtp_port'] = 26;
     $config['mailtype'] = 'html';
     $config['wordwrap'] = TRUE;
@@ -139,7 +139,7 @@ class Telescoope_Controller extends CI_Controller {
 
     $email = $this->email->send();
 
-    //$this->email->clear();
+    $this->email->clear();
 
     if($email){
 
@@ -158,8 +158,6 @@ class Telescoope_Controller extends CI_Controller {
     $this->setMessage($msg);
     $this->renderMessage("error","");
     $this->error_page = true;
-    //$this->template("","Sorry",array());
-
   }
 
   public function selection($selector){

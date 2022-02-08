@@ -1,5 +1,6 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<section>
   <div class="row">
+
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
@@ -24,11 +25,9 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <script type="text/javascript">
-
-
   jQuery.extend({
     getCustomJSON: function(url) {
       var result = null;
@@ -47,19 +46,20 @@
 
   function detailFormatter(index, row, url) {
 
-    var mydata = $.getCustomJSON("<?php echo site_url('administration') ?>/"+url);
+    var mydata = $.getCustomJSON("<?php echo site_url('administration') ?>/" + url);
 
     var html = [];
+    
     $.each(row, function (key, value) {
      var data = $.grep(mydata, function(e){
        return e.field == key;
      });
 
-     if(typeof data[0] !== 'undefined'){
+      if (typeof data[0] !== 'undefined') {
 
-       html.push('<p><b>' + data[0].alias + ':</b> ' + value + '</p>');
-     }
-   });
+        html.push('<p><b>' + data[0].alias + ':</b> ' + value + '</p>');
+      }
+    });
 
     return html.join('');
 
@@ -78,120 +78,116 @@
     '</div>',
     ].join('');
   }
-function totalTextFormatter(data) {
-  return 'Total';
-}
-function totalNameFormatter(data) {
-  return data.length;
-}
-function totalPriceFormatter(data) {
-  var total = 0;
-  $.each(data, function (i, row) {
-    total += +(row.price.substring(1));
-  });
-  return '$' + total;
-}
 
+  function totalTextFormatter(data) {
+    return 'Total';
+  }
+
+  function totalNameFormatter(data) {
+    return data.length;
+  }
+
+  function totalPriceFormatter(data) {
+    var total = 0;
+    $.each(data, function(i, row) {
+      total += +(row.price.substring(1));
+    });
+    return '$' + total;
+  }
 </script>
 
 <script type="text/javascript">
-
   var $employee = $('#employee'),
-  selections = [];
-
+    selections = [];
 </script>
 
 <script type="text/javascript">
-
-  $(function () {
+  $(function() {
 
     $employee.bootstrapTable({
 
       url: "<?php echo site_url('administration/data_employee') ?>",
-      cookieIdTable:"adm_employee",
-      idField:"id",
+      cookieIdTable: "adm_employee",
+      idField: "id",
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
-      columns: [
-      {
-        field: 'id',
-        title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
-        align: 'center',
-        formatter: operateFormatter,
-      },
-      {
-        field: 'fullname',
-        title: 'Nama Lengkap',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'email',
-        title: 'Email',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'phone',
-        title: 'Telepon',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'pos_name',
-        title: 'Posisi',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'district_name',
-        title: 'Kantor',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-            {
-        field: 'employee_type_name',
-        title: 'Tipe',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'status',
-        title: 'Status',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
+      columns: [{
+          field: 'id',
+          title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
+          align: 'center',
+          formatter: operateFormatter,
+        },
+        {
+          field: 'fullname',
+          title: 'Nama Lengkap',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'email',
+          title: 'Email',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'phone',
+          title: 'Telepon',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'pos_name',
+          title: 'Posisi',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'district_name',
+          title: 'Kantor',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'employee_type_name',
+          title: 'Tipe',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'status',
+          title: 'Status',
+          sortable: true,
+          order: true,
+          searchable: true,
+          align: 'center',
+          valign: 'middle'
+        },
       ]
 
     });
-setTimeout(function () {
-  $employee.bootstrapTable('resetView');
-}, 200);
+    setTimeout(function() {
+      $employee.bootstrapTable('resetView');
+    }, 200);
 
-$employee.on('expand-row.bs.table', function (e, index, row, $detail) {
-  $detail.html(detailFormatter(index,row,"alias_employee"));
-});
-
-});
+    $employee.on('expand-row.bs.table', function(e, index, row, $detail) {
+      $detail.html(detailFormatter(index, row, "alias_employee"));
+    });
 
 </script>

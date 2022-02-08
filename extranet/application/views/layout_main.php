@@ -212,7 +212,7 @@
 
 			<div class="sidebar-header">
                 <div class="logo clearfix"><a class="logo-text float-left" href="#">
-                        <div class="logo-img"><img src="<?php echo base_url(); ?>assets/app-assets/img/logo.png" alt="Apex Logo" /></div><span class="text-bold-700">ESCM</span>
+                        <div class="logo-img"></div><span class="text-bold-700">ESCM</span>
                     </a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
             </div>
 
@@ -236,6 +236,7 @@
 								<li class="<?php echo $url == 'monitorpengadaan' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorpengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Pengadaan'); ?></span></a></li>
 								<li class="<?php echo $url == 'buatsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/buatsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Membuat Sanggahan'); ?></span></a></li>
 								<li class="<?php echo $url == 'monitorsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Sanggahan'); ?></span></a></li>
+								<li class="<?php echo $url == 'terminasi_lelang' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/terminasi_lelang"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Terminasi Lelang</span></a></li>
 							</ul>
 						</li>
 
@@ -322,7 +323,8 @@
 	<script src="<?php echo base_url(); ?>assets/app-assets/js/core/app-menu.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/core/app.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/customizer.js"></script>
-    <script src="<?php echo base_url(); ?>assets/app-assets/js/scroll-top.js"></script>
+    <script src="<?php echo base_url(); ?>assets/app-assets/js/scroll-top.js"></script>	
+    <script src="<?php echo base_url(); ?>assets/app-assets/js/components-modal.min.js"></script>
 
 </body>
 </html>

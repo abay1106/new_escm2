@@ -37,6 +37,7 @@
                                     <?php } else { ?>
                                     <td style="text-align: center;"><?php echo $undangan["jumlah"]; ?></td>
                                     <?php } ?>
+
                                     <td><?php echo $this->lang->line('Negosiasi Pengadaan'); ?></td>
                                     <?php if($negosiasi["jumlah"] > 0){ ?>
                                     <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("negosiasi"), 'enkrip')); ?>"><?php echo $negosiasi["jumlah"]; ?></a></td>
@@ -50,6 +51,7 @@
                                     <?php } else { ?>
                                     <td style="text-align: center;"><?php echo $penawaran_dikirim["jumlah"]; ?></td>
                                     <?php } ?>
+
                                     <td><?php echo $this->lang->line('Award Announcement'); ?></td>
                                     <?php if($award["jumlah"] > 0){ ?>
                                     <td style="text-align: center; background-color: paleturquoise;"><a href="<?php echo site_url('pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("award"), 'enkrip')); ?>"><?php echo $award["jumlah"]; ?></a></td>
@@ -64,6 +66,7 @@
                                     <?php } else { ?>
                                     <td style="text-align: center;"><?php echo $menunggu_penawaran["jumlah"]; ?></td>
                                     <?php } ?>
+
                                     <td><?php echo $this->lang->line('Pengadaan yang Sedang Dievaluasi'); ?></td>
                                     <?php if($penawaran_dievaluasi["jumlah"] > 0){ ?>
                                     <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("penawarandievaluasi"), 'enkrip')); ?>"><?php echo $penawaran_dievaluasi["jumlah"]; ?></a></td>
@@ -78,6 +81,7 @@
                                     <?php } else { ?>
                                     <td style="text-align: center;"><?php echo $aanwijzing_online; ?></td>
                                     <?php } ?>
+
                                     <td>E-Auction</td>
                                     <?php if($eauction > 0){ ?>
                                     <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("eauction"), 'enkrip')); ?>"><?php echo $eauction; ?></a></td>
@@ -92,6 +96,7 @@
                                     <?php } else { ?>
                                     <td style="text-align: center;"><?php echo $bast; ?></td>
                                     <?php } ?>
+
                                     <td>Tagihan</td>
                                     <?php if($tagihan > 0){ ?>
                                     <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('kontrak'); ?>"><?php echo $tagihan; ?></a></td>
@@ -101,10 +106,10 @@
                                 </tr>
                                 <tr>
                                     <td>Terminasi Lelang</td>
-                                    <?php if($bast > 0){ ?>
-                                    <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('kontrak'); ?>"><?php echo $bast; ?></a></td>
+                                    <?php if($terminasi_lelang["jumlah"] > 0){ ?>
+                                    <td style="text-align: center; background-color: moccasin;"><a href="<?php echo site_url('pengadaan/terminasi_lelang'); ?>"><?php echo $terminasi_lelang["jumlah"]; ?></a></td>
                                     <?php } else { ?>
-                                    <td style="text-align: center;"><?php echo $bast; ?></td>
+                                    <td style="text-align: center;"><?php echo $terminasi_lelang["jumlah"]; ?></td>
                                     <?php } ?>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>                                                                       

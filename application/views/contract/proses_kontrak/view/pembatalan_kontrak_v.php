@@ -32,7 +32,7 @@
 
 	<center>
 		<button type="button" class="btn btn-light" data-dismiss="modal">Kembali</button>
-		<button type="button" id="batalkan_kontrak_btn" class="btn btn-primary">Simpan</button>
+		<button type="button" id="batalkan_kontrak_btn" class="btn btn-info">Simpan</button>
 	</center>
 
 </div>

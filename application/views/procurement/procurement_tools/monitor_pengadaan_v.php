@@ -1,64 +1,44 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+  <div class="col-12">
+    <div class="card">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Daftar Permintaan</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+      <div class="card-header border-bottom pb-2">
+        <h4 class="card-title">Daftar Permintaan</h4>
+      </div>
 
-          </div>
-        </div>
-        <div class="ibox-content">
-
+      <div class="card-content">
+        <div class="card-body">
           <div class="table-responsive">
-
             <table id="table_monitor_pr" class="table table-bordered table-striped"></table>
-
           </div>
-
         </div>
       </div>
 
-
     </div>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Daftar Pengadaan</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
 
-          </div>
-        </div>
-        <div class="ibox-content">
+      <div class="card-header border-bottom pb-2">
+        <h4 class="card-title">Daftar Pengadaan</h4>
+      </div>
 
+      <div class="card-content">
+        <div class="card-body">
           <div class="table-responsive">
-
             <table id="table_monitor_pengadaan" class="table table-bordered table-striped"></table>
-
           </div>
-
         </div>
       </div>
 
-
     </div>
   </div>
-
-
 </div>
 
 <script type="text/javascript">
-
 
   jQuery.extend({
     getCustomJSON: function(url) {
@@ -98,7 +78,7 @@
   function operateFormatter2(value, row, index) {
     var link = "<?php echo site_url('procurement/procurement_tools/monitor_pengadaan') ?>";
     return [
-    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat_permintaan/'+value+'">',
+    '<a class="btn btn-info btn-md action" target="_blank" href="'+link+'/lihat_permintaan/'+value+'">',
     'Lihat',
     '</a>  ',
     ].join('');
@@ -107,7 +87,7 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('procurement/procurement_tools/monitor_pengadaan') ?>";
     return [
-    '<a class="btn btn-info btn-xs action" href="'+link+'/lihat/'+value+'">',
+    '<a class="btn btn-info btn-md action" target="_blank" href="'+link+'/lihat/'+value+'">',
     'Lihat',
     '</a>  ',
     ].join('');
@@ -164,26 +144,8 @@
         searchable:true,
         align: 'center',
         valign: 'middle'
-      },
+      },           
       {
-        field: 'ptm_requester_name',
-        title: 'User',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      }, {
-        field: 'ptm_subject_of_work',
-        title: 'Nama Rencana Pekerjaan',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle',
-        width:'30%',
-      },
-       {
         field: 'ptm_packet',
         title: 'Nama Paket',
         sortable:true,
@@ -192,18 +154,8 @@
         align: 'left',
         valign: 'middle',
         width:'30%',
-      },
+      },      
       {
-        // field: 'ptm_requester_pos_name',
-        field: 'ptm_dept_name',
-        title: 'Divisi/Departemen',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle'
-      },{
-        // field: 'ptm_requester_pos_name',
         field: 'jenis_pengadaan',
         title: 'Jenis Pengadaan',
         sortable:true,
@@ -211,6 +163,17 @@
         searchable:true,
         align: 'left',
         valign: 'middle'
+      },
+      {
+        field: 'ptm_pagu_anggaran',
+        title: 'Anggaran',
+        sortable:true,
+        order:true,
+        align: 'right',
+        valign: 'middle',
+        dataType: "number",
+        format: "#,##0;(#,##0)",
+        width:'20%',
       },
       {
         field: 'last_pos',
@@ -231,6 +194,23 @@
         align: 'center',
         valign: 'middle',
         width:'25%',
+      },
+      {
+        field: 'tender_metode',
+        title: 'Metode',
+        sortable:true,
+        order:true,
+        searchable:true,
+        align: 'center',
+        valign: 'middle',
+        width:'25%',
+      },
+      {
+        field: 'jml_bidder',
+        title: 'Bidder',
+        align: 'center',
+        width:'10%',
+        valign: 'middle'
       },
       ]
 

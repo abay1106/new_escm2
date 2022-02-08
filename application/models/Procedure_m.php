@@ -514,7 +514,7 @@ class Procedure_m extends MY_Model {
 		$msg = auto_link($msg);
 
 
-		$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Perencanaan Pengadaan Nomor $ppm_id",$msg);
+		//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Perencanaan Pengadaan Nomor $ppm_id",$msg);
 		return false;
 
 	}
@@ -1038,7 +1038,7 @@ class Procedure_m extends MY_Model {
 				$msg = auto_link($msg);
 				//end
 
-				$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Permintaan Pengadaan Nomor $pr_number",$msg);
+				//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Permintaan Pengadaan Nomor $pr_number",$msg);
 
 
 				$ret = array(
@@ -1067,8 +1067,6 @@ class Procedure_m extends MY_Model {
 
 		}
 	}
-
-
 
 	public function prc_tender_comment_complete(
 		$ptm_number = "",
@@ -1227,7 +1225,32 @@ class Procedure_m extends MY_Model {
 		}
 		//end y code
 
-		if($activity == 1029){
+		if($response == url_title('Terminasi Lelang',"_",true)){
+
+			$getdata = $this->getNextState(
+				"hap_pos_code",
+				"hap_pos_name",
+				$view,
+				"hap_pos_code = (select distinct hap_pos_parent 
+				from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
+
+			$nextPosCode = $getdata['nextPosCode'];
+			$nextPosName = $getdata['nextPosName'];
+
+			$nextjobtitle = $this->getNextJobTitle($nextPosCode);
+
+
+			$nextActivity = 1900;
+
+		} else if($activity == 1900){
+
+			if($response == url_title('Setuju',"_",true)){				
+
+				$nextActivity = 1800;
+
+			}
+
+		} else if($activity == 1029){
 
 			if($response == url_title('Lanjutkan',"_",true)){
 
@@ -1321,24 +1344,7 @@ class Procedure_m extends MY_Model {
 					
 				}
 
-			} else if($response == url_title('Terminasi Lelang',"_",true)){
-
-				$getdata = $this->getNextState(
-					"hap_pos_code",
-					"hap_pos_name",
-					$view,
-					"hap_pos_code = (select distinct hap_pos_parent 
-					from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
-
-				$nextPosCode = $getdata['nextPosCode'];
-				$nextPosName = $getdata['nextPosName'];
-
-				$nextjobtitle = $this->getNextJobTitle($nextPosCode);
-
-
-				$nextActivity = 9405;
-
-			}
+			} 
 
 		} else if($activity == 1041){
 
@@ -2391,7 +2397,7 @@ class Procedure_m extends MY_Model {
 									
 							$tunjuk_pemenang = true;
 
-							if (count($getdata_keu) != 0) {
+							if (array(count($getdata_keu)) != 0) {
 
 								$getdata_dsb = $this->getNextState(
 									"hap_pos_code",
@@ -3370,7 +3376,7 @@ class Procedure_m extends MY_Model {
 			    //$msg = auto_link($msg); di komen
 				//end
 
-				$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
+				//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
 
 			}
 			//==================================
@@ -3420,9 +3426,9 @@ class Procedure_m extends MY_Model {
 				"response"=>$response
 			);
 
-	return $ret;
+		return $ret;
 
-}
+	}
 
 }
 

@@ -13,9 +13,11 @@
 			if(!in_array($str, $loaded)){
 				include($str);
 				$loaded[] = $str;
+				//print_r($str);
+				
 			}
 		}
-
+		//exit;
 		?>
 
 
@@ -23,7 +25,13 @@
 		$i = 0;
 		include(VIEWPATH."/comment_view_attachment_v.php") ?>
 
-		<?php echo buttonback($redirect_back,lang('back'),lang('save')) ?>
+		<div class="card">				
+			<div class="card-content">
+				<div class="card-body">			      
+					<?php echo buttonback($redirect_back,lang('back'),lang('save')) ?>
+				</div>
+			</div>
+		</div>
 
 	</form>
 

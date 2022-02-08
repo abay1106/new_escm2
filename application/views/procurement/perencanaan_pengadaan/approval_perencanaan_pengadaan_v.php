@@ -207,8 +207,13 @@
 $i = 0;
 include(VIEWPATH."/comment_workflow_v.php") ?>
 
-  <?php echo buttonsubmit('procurement/perencanaan_pengadaan/daftar_perencanaan_pengadaan',lang('back'),lang('save')) ?>
-
+<div class="card">				
+  <div class="card-content">
+    <div class="card-body">			      
+      <?php echo buttonsubmit('procurement/perencanaan_pengadaan/daftar_perencanaan_pengadaan',lang('back'),lang('save')) ?>					
+    </div>
+  </div>
+</div>
 
 </form>
 </div>

@@ -31,8 +31,7 @@ class Home extends MY_Controller {
 		$data["negosiasi"] = $this->db->query("select count(prc_tender_vendor_status.ptm_number) as jumlah from prc_tender_vendor_status
 			LEFT JOIN prc_tender_main ON prc_tender_main.ptm_number=prc_tender_vendor_status.ptm_number
 			where pvs_vendor_code = '".$userid."' and pvs_status = '10' AND ptm_status=1140")->row_array();
-		$data["penawaran_dikirim"] = $this->db->query("select count(ptm_number) as jumlah from prc_tender_vendor_status where pvs_vendor_code = '".$userid."' and pvs_status in (3, 21)")->row_array();
-
+		$data["penawaran_dikirim"] = $this->db->query("select count(ptm_number) as jumlah from prc_tender_vendor_status where pvs_vendor_code = '".$userid."' and pvs_status in (3, 21)")->row_array();		
 		$data["award"] = $this->db->query("select count(ptm_number) as jumlah from prc_tender_vendor_status where pvs_vendor_code = '".$userid."' and pvs_status = '11'")->row_array();
 		//start code hlmifzi
 		$data["menunggu_penawaran"] = $this->db->query("select count(a.ptm_number) as jumlah from prc_tender_vendor_status a join prc_tender_prep b on a.ptm_number = b.ptm_number where a.pvs_vendor_code = '".$userid."' and pvs_status in (2, 20, 12) and (b.ptp_quot_closing_date > now() or b.ptp_bid_closing2 > now())")->row_array();
@@ -54,6 +53,7 @@ class Home extends MY_Controller {
 			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id 
 			WHERE a.vendor_id='".$userid."' AND progress_percentage='100' AND COALESCE(bastp_status::integer,0) IN (0,99) AND bastp_number IS NULL")
 		->num_rows();
+		$data["terminasi_lelang"] = $this->db->query("select count(a.ptm_number) as jumlah from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number join prc_tender_vendor_status c on b.ptm_number = c.ptm_number join z_bidder_status d on c.pvs_status = d.lkp_id  where ptm_status = '1800' AND c.pvs_vendor_code = '".$userid."'")->row_array();
 
 		//start code hlmifzi
 		$data['tagihan'] = $this->db
@@ -88,7 +88,7 @@ class Home extends MY_Controller {
 		$vdp_status = 0;
 		$vdp_id = 0;
 
-		if (count(array($data_header))) {
+		if (count(array($data_header)) && isset($data_header) ) {
 			$vtm_id = $data_header->vtm_id;
 			$avd_id = $data_header->avd_id;
 			$vdp_status = $data_header->vdp_status;

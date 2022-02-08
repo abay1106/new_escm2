@@ -1,142 +1,138 @@
 <?php if($prep['ptp_eauction']){ ?>
+
 <div class="row" id="matgis_form">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>E-Auction 
-          <?php echo ($permintaan['ptm_type_of_plan'] == "rkp_matgis") ? "MATERIAL STRATEGIS" : "NON MATERIAL STRATEGIS" ?>
-        </h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
+    <div class="col-12">
+        <div class="card">        
+            <div class="card-header border-bottom pb-2">
+                <h4 class="card-title">E-Auction 
+                  <?php echo ($permintaan['ptm_type_of_plan'] == "rkp_matgis") ? "MATERIAL STRATEGIS" : "NON MATERIAL STRATEGIS" ?>
+                </h4>
+            </div>
+
+            <div class="card-content">
+                <div class="card-body">
+                    <?php $curval = (isset($eauction_header['judul'])) ? $eauction_header['judul'] : set_value("judul_eauction_inp") ?>
+                    <div class="row form-group">
+                      <label class="col-sm-2 control-label text-right">Judul E-Auction</label>
+                      <div class="col-sm-7">
+                        <input type="text" class="form-control" required name="judul_eauction_inp" id="judul_eauction_inp" value="<?php echo $curval ?>">
+                      </div>
+
+                    </div>
+
+                    <?php $curval = (isset($eauction_header['deskripsi'])) ? $eauction_header['deskripsi'] : set_value("deskripsi_eauction_inp") ?>
+                    <div class="row form-group">
+                      <label class="col-sm-2 control-label text-right">Deskripsi E-Auction</label>
+                      <div class="col-sm-8">
+                        <textarea name="deskripsi_eauction_inp" id="deskripsi_eauction_inp" required class="form-control"><?php 
+                        echo $curval; ?></textarea>
+                      </div>
+                    </div>
+
+                    <div class="row form-group" id="batas_persentase">
+                        <?php $persenbb = (isset($eauction_header['batas_bawah_percent'])) ? $eauction_header['batas_bawah_percent'] : set_value("b_bawah_eauction_percent_inp"); ?>
+                        <label class="col-sm-2 control-label text-right">Batas Bawah (%)</label>
+                        <div class="col-sm-3">
+                          <div class="input-group">
+                            <input type="text" class="form-control money" id="b_bawah" name="b_bawah_eauction_percent_inp" value="<?php echo $persenbb ?>" maxlength="6">
+                            <span class="input-group-addon">%</span>
+                          </div>
+                        </div>
+                        <?php $persenba = (isset($eauction_header['batas_atas_percent'])) ? $eauction_header['batas_atas_percent'] : set_value("b_atas_eauction_percent_inp"); ?>
+                        <label class="col-sm-2 control-label text-right">Batas Atas (%)</label>
+                        <div class="col-sm-3">
+                          <div class="input-group">
+                            <input type="text" class="form-control money" id="b_atas" name="b_atas_eauction_percent_inp" value="<?php echo $persenba ?>" maxlength="6">
+                            <span class="input-group-addon">%</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                        <p class="form-control-static" style="display: none;" id="b_eauction_label"></p>
+                        <?php $curval = (isset($eauction_header['batas_atas'])) ? $eauction_header['batas_atas'] : set_value("b_atas_eauction_money_inp"); ?>
+                        <input type="hidden" name="b_atas_eauction_money_inp" id="b_atas_eauction_money_inp_h" value="<?php echo $curval ?>">
+                        <?php $curval = (isset($eauction_header['batas_bawah'])) ? $eauction_header['batas_bawah'] : set_value("b_bawah_eauction_money_inp"); ?>
+                        <input type="hidden" name="b_bawah_eauction_money_inp" id="b_bawah_eauction_money_inp_h" value="<?php echo $curval ?>">
+                      </div>
+                    </div>
+
+                    <div class="row form-group" id="batas_nominal">
+                      <?php $curval = (isset($eauction_header['batas_bawah'])) ? $eauction_header['batas_bawah'] : set_value("b_bawah_eauction_money_inp"); ?>
+                      <label class="col-sm-2 control-label text-right">Batas Bawah (Nominal)</label>
+                      <div class="col-sm-3">
+                        <div class="input-group">                          
+                          <input type="text" class="form-control money" id="b_bawah_eauction_money_inp" name="b_bawah_eauction_money_inp" value="<?php echo $curval ?>">
+                        </div>
+                      </div>
+                      <?php $curval = (isset($eauction_header['batas_atas'])) ? $eauction_header['batas_atas'] : set_value("b_atas_eauction_money_inp"); ?>
+                      <label class="col-sm-2 control-label text-right">Batas Atas (Nominal)</label>
+                      <div class="col-sm-3">
+                        <div class="input-group">                          
+                          <input type="text" class="form-control money" id="b_atas_eauction_money_inp" name="b_atas_eauction_money_inp" value="<?php echo $curval ?>">
+
+                        </div>
+                      </div>
+
+                      <div class="col-sm-2">
+                      <p class="form-control-static" style="display: none;" id="b_eauction_label"></p>
+                      <?php $curval = (isset($eauction_header['batas_atas_percent'])) ? $eauction_header['batas_atas_percent'] : $persenba; ?>
+                      <input type="hidden" name="b_atas_eauction_percent_inp_h" id="b_atas" value="<?php echo $curval ?>">
+                      <?php $curval = (isset($eauction_header['batas_bawah_percent'])) ? $eauction_header['batas_bawah_percent'] : $persenbb ?>
+                      <input type="hidden" id="b_bawah" name="b_bawah_eauction_percent_inp_h"  value="<?php echo $curval ?>">
+                    </div>
+                    </div>
+
+                    <div class="row form-group">
+                      <label class="col-sm-2 control-label text-right">Tanggal Mulai</label>
+                      <div class="col-sm-3">
+                        <?php $curval = (isset($eauction_header['tanggal_mulai'])) ? $eauction_header['tanggal_mulai'] : set_value("tgl_mulai_eauction_inp") ?>
+                        <input type="text" class="form-control datetimepicker" required name="tgl_mulai_eauction_inp" id="tgl_mulai_eauction_inp" value="<?php echo $curval ?>">
+                      </div>
+                      <label class="col-sm-2 control-label text-right">Tanggal Selesai</label>
+                      <div class="col-sm-3">
+                        <?php $curval = (isset($eauction_header['tanggal_berakhir'])) ? $eauction_header['tanggal_berakhir'] : set_value("tgl_selesai_eauction_inp"); ?>
+                        <input type="text" class="form-control datetimepicker" required name="tgl_selesai_eauction_inp" id="tgl_selesai_eauction_inp" value="<?php echo $curval ?>">
+                      </div>
+                    </div>
+
+                    <div class="row form-group">
+                      <label class="col-sm-2 control-label text-right">Tipe</label>
+                      <div class="col-sm-3">
+
+                        <?php $curval = (isset($eauction_header['tipe'])) ? $eauction_header['tipe'] : "B" ?>
+
+                        <?php if($permintaan['ptm_type_of_plan'] == "rkp_matgis"){ ?>
+
+                          <input type="hidden" name="tipe_eauction_inp" value="<?php echo $curval ?>">
+                          <p class="form-control-static">Itemize</p>
+
+                        <?php } else { ?>
+
+                          <select name="tipe_eauction_inp" id="tipe_eauction_inp" class="form-control">
+                            <option selected disabled>Pilih</option>
+                            <option <?php echo ($curval == "A") ? "selected" : "" ?> value="A">Paket</option>
+                            <option <?php echo ($curval == "B") ? "selected" : "" ?> value="B">Itemize</option>
+                          </select>
+
+                        <?php } ?>
+
+                      </div>
+                      <label class="col-sm-2 control-label text-right type_a">Minimum Penurunan</label>
+                      <div class="col-sm-2 type_a">
+                        <?php $curval = (isset($eauction_header['minimal_penurunan'])) ? $eauction_header['minimal_penurunan'] : set_value("penurunan_eauction_inp"); ?>
+                        <input type="text" class="form-control money target" name="penurunan_eauction_inp" value="<?php echo $curval ?>">
+                      </div>
+                      <label class="col-sm-2 control-label text-right">Ulangi E-Auction</label>
+                      <div class="col-sm-1">
+                        <div class="">
+                          <input type="checkbox" name="reset_inp" value="1">
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="ibox-content">
-
-        <?php $curval = (isset($eauction_header['judul'])) ? $eauction_header['judul'] : set_value("judul_eauction_inp") ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Judul E-Auction</label>
-          <div class="col-sm-7">
-            <input type="text" class="form-control" required name="judul_eauction_inp" id="judul_eauction_inp" value="<?php echo $curval ?>">
-          </div>
-
-        </div>
-
-        <?php $curval = (isset($eauction_header['deskripsi'])) ? $eauction_header['deskripsi'] : set_value("deskripsi_eauction_inp") ?>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Deskripsi E-Auction</label>
-          <div class="col-sm-8">
-            <textarea name="deskripsi_eauction_inp" id="deskripsi_eauction_inp" required class="form-control"><?php 
-            echo $curval; ?></textarea>
-          </div>
-        </div>
-
-<div class="form-group" id="batas_persentase">
-    <?php $persenbb = (isset($eauction_header['batas_bawah_percent'])) ? $eauction_header['batas_bawah_percent'] : set_value("b_bawah_eauction_percent_inp"); ?>
-    <label class="col-sm-2 control-label">Batas Bawah (%)</label>
-    <div class="col-sm-3">
-      <div class="input-group">
-        <input type="text" class="form-control money" id="b_bawah" name="b_bawah_eauction_percent_inp" value="<?php echo $persenbb ?>" maxlength="6">
-        <span class="input-group-addon">%</span>
-      </div>
     </div>
-    <?php $persenba = (isset($eauction_header['batas_atas_percent'])) ? $eauction_header['batas_atas_percent'] : set_value("b_atas_eauction_percent_inp"); ?>
-    <label class="col-sm-2 control-label">Batas Atas (%)</label>
-    <div class="col-sm-3">
-      <div class="input-group">
-        <input type="text" class="form-control money" id="b_atas" name="b_atas_eauction_percent_inp" value="<?php echo $persenba ?>" maxlength="6">
-        <span class="input-group-addon">%</span>
-      </div>
-    </div>
-    <div class="col-sm-4">
-     <p class="form-control-static" style="display: none;" id="b_eauction_label"></p>
-     <?php $curval = (isset($eauction_header['batas_atas'])) ? $eauction_header['batas_atas'] : set_value("b_atas_eauction_money_inp"); ?>
-     <input type="hidden" name="b_atas_eauction_money_inp" id="b_atas_eauction_money_inp_h" value="<?php echo $curval ?>">
-     <?php $curval = (isset($eauction_header['batas_bawah'])) ? $eauction_header['batas_bawah'] : set_value("b_bawah_eauction_money_inp"); ?>
-     <input type="hidden" name="b_bawah_eauction_money_inp" id="b_bawah_eauction_money_inp_h" value="<?php echo $curval ?>">
-   </div>
- </div>
-
- <div class="form-group" id="batas_nominal">
-   <?php $curval = (isset($eauction_header['batas_bawah'])) ? $eauction_header['batas_bawah'] : set_value("b_bawah_eauction_money_inp"); ?>
-   <label class="col-sm-2 control-label">Batas Bawah (Nominal)</label>
-   <div class="col-sm-3">
-    <div class="input-group">
-      <span class="input-group-addon">IDR</span>
-      <input type="text" class="form-control money" id="b_bawah_eauction_money_inp" name="b_bawah_eauction_money_inp" value="<?php echo $curval ?>">
-    </div>
-  </div>
-  <?php $curval = (isset($eauction_header['batas_atas'])) ? $eauction_header['batas_atas'] : set_value("b_atas_eauction_money_inp"); ?>
-  <label class="col-sm-2 control-label">Batas Atas (Nominal)</label>
-  <div class="col-sm-3">
-    <div class="input-group">
-      <span class="input-group-addon">IDR</span>
-      <input type="text" class="form-control money" id="b_atas_eauction_money_inp" name="b_atas_eauction_money_inp" value="<?php echo $curval ?>">
-
-    </div>
-  </div>
-
-  <div class="col-sm-2">
-   <p class="form-control-static" style="display: none;" id="b_eauction_label"></p>
-   <?php $curval = (isset($eauction_header['batas_atas_percent'])) ? $eauction_header['batas_atas_percent'] : $persenba; ?>
-   <input type="hidden" name="b_atas_eauction_percent_inp_h" id="b_atas" value="<?php echo $curval ?>">
-   <?php $curval = (isset($eauction_header['batas_bawah_percent'])) ? $eauction_header['batas_bawah_percent'] : $persenbb ?>
-   <input type="hidden" id="b_bawah" name="b_bawah_eauction_percent_inp_h"  value="<?php echo $curval ?>">
- </div>
-</div>
-
-<div class="form-group">
-  <label class="col-sm-2 control-label">Tanggal Mulai</label>
-  <div class="col-sm-3">
-    <?php $curval = (isset($eauction_header['tanggal_mulai'])) ? $eauction_header['tanggal_mulai'] : set_value("tgl_mulai_eauction_inp") ?>
-    <input type="text" class="form-control datetimepicker" required name="tgl_mulai_eauction_inp" id="tgl_mulai_eauction_inp" value="<?php echo $curval ?>">
-  </div>
-  <label class="col-sm-2 control-label">Tanggal Selesai</label>
-  <div class="col-sm-3">
-    <?php $curval = (isset($eauction_header['tanggal_berakhir'])) ? $eauction_header['tanggal_berakhir'] : set_value("tgl_selesai_eauction_inp"); ?>
-    <input type="text" class="form-control datetimepicker" required name="tgl_selesai_eauction_inp" id="tgl_selesai_eauction_inp" value="<?php echo $curval ?>">
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-sm-2 control-label">Tipe</label>
-  <div class="col-sm-2">
-
-    <?php $curval = (isset($eauction_header['tipe'])) ? $eauction_header['tipe'] : "B" ?>
-
-    <?php if($permintaan['ptm_type_of_plan'] == "rkp_matgis"){ ?>
-
-      <input type="hidden" name="tipe_eauction_inp" value="<?php echo $curval ?>">
-      <p class="form-control-static">Itemize</p>
-
-    <?php } else { ?>
-
-      <select name="tipe_eauction_inp" id="tipe_eauction_inp" class="form-control">
-        <option selected disabled>Pilih</option>
-        <option <?php echo ($curval == "A") ? "selected" : "" ?> value="A">Paket</option>
-        <option <?php echo ($curval == "B") ? "selected" : "" ?> value="B">Itemize</option>
-      </select>
-
-    <?php } ?>
-
-  </div>
-  <label class="col-sm-2 control-label type_a">Minimum Penurunan</label>
-  <div class="col-sm-2 type_a">
-    <?php $curval = (isset($eauction_header['minimal_penurunan'])) ? $eauction_header['minimal_penurunan'] : set_value("penurunan_eauction_inp"); ?>
-    <input type="text" class="form-control money target" name="penurunan_eauction_inp" value="<?php echo $curval ?>">
-  </div>
-  <label class="col-sm-2 control-label">Ulangi E-Auction</label>
-  <div class="col-sm-1">
-    <div class="checkbox">
-      <input type="checkbox" name="reset_inp" value="1">
-    </div>
-  </div>
-</div>
-
-</div>
-</div>
-</div>
 </div>
 
 <script type="text/javascript">

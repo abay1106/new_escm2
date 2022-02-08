@@ -113,10 +113,9 @@ $data['kontrak'] = $kontrak;
 
 $eachhps = $this->Procrfq_m->getEachHPS($ptm_number, $kontrak['vendor_id'])->result_array();
 
-// echo $this->db->last_query();
-$totalhps = "";
+$totalhps = 0;
+
 foreach ($eachhps as $kh => $valhps) {
-	// var_dump($valhps);
 	$qty = $valhps['tit_quantity'];
 	$price = $valhps['tit_price'];
 	$totalhps += $qty * $price;
@@ -144,6 +143,13 @@ $data["comment_list"][0] = $this->Comment_m->getContractActive($ptm_number, "", 
 
 //hlmifzi
 $data['penilaian']= $this->db->get('adm_question_kpi_vendor')->result_array();
+
+// comment
+$this->db->where('cad_contract_id', $kontrak['contract_id']);
+$komentar = $this->db->get('ctr_comment_all_div');
+
+$data['komentar'] = $komentar->result_array();
+$data['com_num'] = $komentar->num_rows();
 
 $this->session->set_userdata("rfq_id",$ptm_number);
 

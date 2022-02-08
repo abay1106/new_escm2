@@ -43,8 +43,6 @@ class Kontrak extends MY_Controller {
 
 	public function submit_addendum(){
 
-
-
 		$nextActivity = 2901;
 
 		$contract_id = $this->input->post("contract_id");
@@ -229,28 +227,6 @@ class Kontrak extends MY_Controller {
 		->get("ctr_contract_milestone a")
 		->result_array();
 
-		//start code hlmifzi
-		// $data["list_wo"] = $this->db
-		// ->select("a.po_id,po_number,contract_number,po_notes,subject_work,contract_type,awa_name,
-		// 	CASE e.status::integer
-		// 	WHEN 1 THEN 'Persetujuan Progress PO'
-		// 	WHEN 2 THEN 'Persetujuan Progress PO'
-		// 	WHEN 3 THEN 'Persetujuan Progress PO'
-		// 	WHEN 4 THEN 'Persetujuan Progress PO'
-		// 	WHEN 5 THEN 'Persetujuan Progress PO'
-		// 	WHEN 6 THEN 'Persetujuan Progress PO'
-		// 	WHEN 99 THEN 'Revisi'
-		// 	ELSE 'Aktif' END AS activity")
-		// ->where(array("a.vendor_id"=>$this->session->userdata("userid"),"cwo_end_date"=>null,"cwo_activity"=>2013,"COALESCE(e.status,null)"=>99))
-		// ->join("ctr_po_header a","a.po_id=b.po_id")
-		// ->join("ctr_contract_header c","c.contract_id=a.contract_id")
-		// ->join("adm_wkf_activity d","d.awa_id=b.cwo_activity")
-		// ->join("ctr_po_progress_header e","e.po_id=a.po_id","left")
-		// ->get("ctr_po_comment b")
-		// ->result_array();
-		//endcode
-
-
 		//y my code
 		$data['list_wo'] = $this->db->query("
 			SELECT
@@ -293,7 +269,6 @@ class Kontrak extends MY_Controller {
 
 		//y end my code
 
-
 		$data['list_bast'] = $this->db
 		->query("SELECT po_id as id, contract_number,po_notes as description,b.vendor_name,progress_percentage,'Mengajukan BAST' as activity, 'PO' as type FROM ctr_po_header b
 			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id
@@ -311,8 +286,6 @@ class Kontrak extends MY_Controller {
 			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id
 			WHERE a.vendor_id='".$this->session->userdata("userid")."' AND progress_percentage='100' AND COALESCE(bastp_status,'0')::INTEGER = 99 AND bastp_number IS NOT NULL")
 		->result_array();
-
-		//start code hlmifzi
 
 		$data['list_invoice'] = $this->db
 		->query("
@@ -346,26 +319,17 @@ class Kontrak extends MY_Controller {
 			")
 		->result_array();
 
-
-//WHERE b.vendor_id='".$this->session->userdata("userid")."' AND invoice_status = 99 AND invoice_number is not null
-		//end
-
 		//show by Transporter
-		//$data["list_si"]=$this->Contract_m->get_si_matgis($this->session->userdata("userid"));
 		//Show By Vendor
 		$vendor=$this->session->userdata("userid");
 		$data["list_po_approve"]=$this->Contract_m->get_po_matgis_approve($vendor);
 		$data["list_si"]=$this->Contract_m->get_si_matgis($vendor);
 		$data["list_sppm"]=$this->Contract_m->get_sppm_matgis($vendor);
-		//print_r($data["list_sppm"]);die;
 		$data["list_do"]=$this->Contract_m->get_do_matgis($vendor);
 		$data["list_sj"]=$this->Contract_m->get_sj_matgis($vendor);
 		$data["list_bapb"]=$this->Contract_m->get_bapb_matgis($vendor);
 		$data["list_bapb_invoice"]=$this->Contract_m->get_bapb_invoice_matgis($vendor);
-		//echo $this->db->last_query();die;
-
 		$this->layout->view('listpekerjaankontrak', $data);
-
 	}
 
 	public function monitor_bast(){
@@ -401,6 +365,8 @@ class Kontrak extends MY_Controller {
 
 	public function monitor()
 	{
+
+		$data['message'] = $this->session->userdata("message");
 
 		$data['list'] = $this->db->select("a.contract_id, a.ptm_number, a.contract_number, a.vendor_name, a.start_date, a.end_date, a.subject_work, a.contract_type, a.currency, c.total_ppn, b.awa_name as status")
 		->join("adm_wkf_activity b","b.awa_id=a.status")
@@ -439,7 +405,18 @@ class Kontrak extends MY_Controller {
 							))
 						->get("vw_prc_quotation_item")->result_array();
 
-		$head = '';
+		$get_data = $this->db->select("*")
+						->where(array(
+								"vendor_id"=> $data['header']['vendor_id'],
+								"ptm_number" => $data['header']['ptm_number'],
+								"contract_number" => $data['header']['contract_number']
+							))
+						->get("ctr_terminasi_vendor");
+
+		$data['trm_row'] = $get_data->row_array();
+		$data['trm_num'] = $get_data->num_rows();
+
+		$head = 0;
 		foreach ($data['kontrak'] as $key => $value) {
 				$head += ($value['pqi_price']*$value['pqi_quantity']) + (($value['pqi_price']*$value['pqi_quantity']) * (($value['pqi_ppn'])/100)) + (($value['pqi_price']*$value['pqi_quantity']) * (($value['pqi_pph'])/100));
 		}
@@ -525,7 +502,7 @@ class Kontrak extends MY_Controller {
 
 	}
 
-//start code hlmifzi
+	//start code hlmifzi
 	public function process_tagihan(){
 
 		$post = $this->input->post();
@@ -1734,5 +1711,76 @@ class Kontrak extends MY_Controller {
 
 
 		$this->layout->view('listinvoice', $data);
+	}
+
+	public function submit_terminasi(){
+		
+		$post = $this->input->post();
+		
+		$error = false;
+
+		$this->db->trans_begin();
+		
+		$sess = $this->session->all_userdata();
+
+//		var_dump($sess);die();
+
+		$input = array (
+			"vendor_id" => $sess["userid"],
+			"ptm_number" => $post['ptm_number'],
+			"contract_number" => $post['contract_number'],
+			"reason" => $post['reason'],
+			"created_date" => date("Y-m-d H:i:s"),
+		);
+
+		$this->db->insert("ctr_terminasi_vendor",$input);
+
+		// start proses pembatalan kontrak
+
+		$contract_id = $post['contract_id'];
+
+		$activity = 2902;
+
+		$input_ctr = array();
+		$input2 = array('status'=>$activity);
+
+		$update = $this->db->where('contract_id',$contract_id)->update('ctr_contract_header',$input2);
+
+		if($update){
+
+			$this->db->order_by("ccc_id", "desc");
+			$com = $this->db->where("contract_id", $contract_id)->get("ctr_contract_comment")->row_array();
+
+			$input_ctr['contract_id'] = $contract_id;
+			$input_ctr['ptm_number'] = $post['ptm_number'];
+			$input_ctr['ccc_name'] =  $sess['nama_vendor'];
+			$input_ctr['ccc_activity'] = $activity;
+			$input_ctr['ccc_comment'] = $post['reason'];
+			$input_ctr['ccc_start_date'] = date("Y-m-d H:i:s");
+			$input_ctr['ccc_response'] = "Pembatalan kontrak melalui vendor";
+			
+			if ($com['ccc_user'] == NULL) {
+				$this->db->where("ccc_id", $com['ccc_id'])->update("ctr_contract_comment", array("ccc_name"=>" ", "ccc_user"=>$sess["userid"]));
+			}
+
+			$this->db->insert("ctr_contract_comment",$input_ctr);
+
+		}
+
+		// end proses pembatalan kontrak
+
+		if ($this->db->trans_status() === FALSE || $error)
+		{
+			$this->db->trans_rollback();
+			$this->session->set_userdata("message","Error - Gagal terminasi kontrak.");
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$this->session->set_userdata("message","Berhasil terminasi kontrak.");
+		}
+
+		redirect(site_url("kontrak/monitor"));
+
 	}
 }

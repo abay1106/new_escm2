@@ -103,7 +103,9 @@ $data=array(
 
 //print_r($tender);
 
-$this->load->view($view,$data);
+// $this->load->view($view,$data);
+$this->template($view,"PENILAIAN",$data);
+
 /*
 $html = $this->output->get_output();
 $this->load->library('dompdf_gen');

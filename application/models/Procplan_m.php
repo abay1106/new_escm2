@@ -27,6 +27,7 @@ class Procplan_m extends CI_Model {
 			$this->db->where("a.phc_id",$id);
 
 		}
+
 		$this->db->select('a.phc_id,a.phc_name,a.phc_status,a.dept_id,c.dept_name,a.phc_type,a.phc_user_update, a.phc_created_date,COALESCE(a.phc_updated_date,a.phc_created_date) update_date, d.durasi');
 		$this->db->join('vw_rata_durasi_history_car d', 'd.phc_id = a.phc_id');
 		$this->db->join('adm_dept c', 'c.dept_id = a.dept_id');
@@ -43,7 +44,7 @@ class Procplan_m extends CI_Model {
 
 		}
 
-		return $this->db->get("vw_prc_plan_item_pmcs",10,20);
+		return $this->db->get("vw_prc_plan_item_pmcs");
 
 	}
 	
@@ -56,7 +57,7 @@ class Procplan_m extends CI_Model {
 
 		}
 
-		return $this->db->get("vw_prc_plan_periode_pmcs",10,20);
+		return $this->db->get("vw_prc_plan_periode_pmcs");
 
 	}
 
@@ -79,18 +80,12 @@ class Procplan_m extends CI_Model {
 
 		}
 		$this->db->where('ppm_project_id is not null');
-		return $this->db->get('vw_prc_plan_main',10,20);
-		// $this->db->join('prc_plan_main b', 'b.ppm_project_id = a.kode_spk');
-		// return $this->db->get('project_info a');
+		return $this->db->get('vw_prc_plan_main');
 
 	}
 
 	public function getListPolaBelanja(){
-		// if(!empty($id)){
 
-		// 	$this->db->where("d.ppm_id",$id);
-
-		// }
 		$this->db->where('ppm_project_id is not null');
 		return $this->db->get('vw_prc_plan_main');
 
@@ -118,7 +113,7 @@ class Procplan_m extends CI_Model {
 
 		$this->db->order_by("phc_id","desc");
 
-		return $this->db->get("prc_history_car_main",1,0);
+		return $this->db->get("prc_history_car_main");
 
 	}
 
@@ -299,10 +294,6 @@ class Procplan_m extends CI_Model {
 		$input['hcp_start_date'] = $dateopen;
 		$input['hcp_end_date'] = $dateopen;
 		$input['hcp_user_update'] = $userdata['complete_name'];
-		// $input['response'] = $response;
-		// $input['pos_id'] = $userdata['pos_id'];
-		// $input['pos_name'] = $userdata['pos_name'];
-		// $input['next_pos_id'] = $nextjobtitle;
 
 		$this->db->insert("prc_history_car_progress",$input);
 
@@ -489,7 +480,6 @@ class Procplan_m extends CI_Model {
 
 		}
 
-	     // $this->db->distinct();
 		$this->db->limit(1);
 		$this->db->order_by('ppv_id', 'desc');
 		return $this->db->get("prc_plan_volume");

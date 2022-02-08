@@ -894,6 +894,7 @@ class Administration_m extends CI_Model {
 			$this->db->or_where("vw_job_all.employee_id", null);
 			$this->db->group_end();
 			$this->db->join("vw_adm_pos_v1", "vw_adm_pos_v1.pos_id = vw_job_all.pos_id");
+			$this->db->where("activity !=", "Terminasi Lelang Disetujui");
 			$x = $this->db->get("vw_job_all");
 			return $x;
 		}

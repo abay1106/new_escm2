@@ -79,11 +79,14 @@
 	<form id="formtender" method="post" action="<?php echo site_url($controller_name."/submit_ubah_tender_pengadaan");?>"  class="form-horizontal ajaxform">
 
 		<input type="hidden" name="id" value="<?php echo $id ?>">
+		<input type="hidden" name="hps" value="<?php echo $permintaan_hide['nilai'] ?>">
+		<input type="hidden" name="plan" value="<?php echo $perencanaan['ppm_id'] ?>">
+		<input type="hidden" name="remain" value="<?php echo $perencanaan['ppm_sisa_anggaran'] ?>">
 
 		<?php 
 
 		foreach ($content as $key => $value) {
-			include($value['awc_type']."/".$value['awc_file'].".php");
+			include($value['awc_type']."/".$value['awc_file'].".php");            
 		}
 
 		?>
@@ -94,11 +97,10 @@
 
 		<div class="card">				
 			<div class="card-content">
-				<div class="card-body">					
+				<div class="card-body">			
 					<?php echo buttonsubmit('procurement/daftar_pekerjaan',lang('back'),lang('save')) ?>
 				</div>
 			</div>
-
 		</div>
 
 	</form>

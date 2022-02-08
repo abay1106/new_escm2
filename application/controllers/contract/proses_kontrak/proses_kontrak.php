@@ -162,7 +162,7 @@ $kontrak['contract_number'] = $this->Contract_m->getUrut("",$kontrak['contract_t
 
 	$hps = $this->Procrfq_m->getEachHPS($ptm_number, $kontrak['vendor_id'])->result_array();
 
-	$totalhps = "";
+	$totalhps = 0;
 
 	foreach ($hps as $kh => $valhps) {
 

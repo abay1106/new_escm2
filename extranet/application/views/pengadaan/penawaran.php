@@ -11,6 +11,7 @@ else{
 	$readonly = "";
 }
 ?>
+
 <div class="row">
 	<div class="col-7">
 		<div class="content-header"><strong><?php echo $this->lang->line('Item Administrasi'); ?></strong></div>			
@@ -22,18 +23,21 @@ else{
 	</div>
 </div>
 
-<div class="wrapper wrapper-content animated fadeIn">
-	<?php 
+<?php 
 	$submit_url = "pengadaan/submitquo";
 	include("header_penawaran.php");
-	?>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h5><?php echo $this->lang->line('Item Administrasi'); ?></h5>
-				</div>
-				<div class="ibox-content">
+?>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Item Administrasi'); ?></h4>
+			</div>
+
+			<div class="card-content">
+				<div class="card-body">
 					<form role="form" id="adm" method="POST" action="<?php echo site_url($submit_url) ?>" class="form-horizontal" enctype='multipart/form-data'>	
 						<input type="hidden" id="section" name="section" value="adm">
 						<table class="table table-striped">
@@ -77,253 +81,253 @@ else{
 								<?php
 								if(isset($header)) { 
 									$i = 1; foreach($template as $row) { if($row["pqt_weight"] == "") {
-										?>
-										<tr>
-											<td style="text-align: center"><?php echo $i; ?></td>
-											<td><?php echo $row["pqt_item"]; ?></td>
-											<input type="hidden" name="desks_<?php echo $i ?>" id="desks_<?php echo $i ?>" value="<?php echo $row["pqt_item"]; ?>">
-											<input type="hidden" name="pqtids_<?php echo $i ?>" id="pqtids_<?php echo $i ?>" value="<?php echo $row["pqt_id"]; ?>">
-											<td>
-												<div class="i-checks">
-													<label for="radio_<?php echo $i; ?>"><input <?php echo $readonly ?> type="radio" id="radio_<?php echo $i; ?>" value="1" name="radio_<?php echo $i; ?>" required <?php if(($row["pqt_check_vendor"] == "1")){ echo "checked";} ?>> <?php echo $this->lang->line('Ada'); ?>
+								?>
+								<tr>
+									<td style="text-align: center"><?php echo $i; ?></td>
+									<td><?php echo $row["pqt_item"]; ?></td>
+									<input type="hidden" name="desks_<?php echo $i ?>" id="desks_<?php echo $i ?>" value="<?php echo $row["pqt_item"]; ?>">
+									<input type="hidden" name="pqtids_<?php echo $i ?>" id="pqtids_<?php echo $i ?>" value="<?php echo $row["pqt_id"]; ?>">
+									<td>
+										<div class="i-checks">
+											<label for="radio_<?php echo $i; ?>"><input <?php echo $readonly ?> type="radio" id="radio_<?php echo $i; ?>" value="1" name="radio_<?php echo $i; ?>" required <?php if(($row["pqt_check_vendor"] == "1")){ echo "checked";} ?>> <?php echo $this->lang->line('Ada'); ?>
 
-													</label>
-												</div>
-												<div class="i-checks">
-													<label for="radio_<?php echo $i; ?>"><input <?php echo $readonly ?> type="radio" id="radio_<?php echo $i; ?>" value="0" name="radio_<?php echo $i; ?>" <?php if(($row["pqt_check_vendor"] == "0")){ echo "checked";} ?>> <?php echo $this->lang->line('Tidak Ada'); ?>
+											</label>
+										</div>
+										<div class="i-checks">
+											<label for="radio_<?php echo $i; ?>"><input <?php echo $readonly ?> type="radio" id="radio_<?php echo $i; ?>" value="0" name="radio_<?php echo $i; ?>" <?php if(($row["pqt_check_vendor"] == "0")){ echo "checked";} ?>> <?php echo $this->lang->line('Tidak Ada'); ?>
 
-													</label>
-												</div>
-											</td>
-											<td>
-												<?php if(empty($readonly)){ ?>
-												<input <?php echo $readonly ?> id="lampiran_adm_<?php echo $i; ?>" name="lampiran_adm_<?php echo $i; ?>" type="file" class="file adm_attach_1" accept="<?php echo ALLOWED_EXT_FILES ?>">
-												<?php } ?>
-												<div class="col-sm-0" style="font-size: 11px">
-								                        <i>Max file 5 MB 
-								                        <br>
-								                          Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
-								                        </i>
-								                 </div>
+											</label>
+										</div>
+									</td>
+									<td>
+										<?php if(empty($readonly)){ ?>
+										<input <?php echo $readonly ?> id="lampiran_adm_<?php echo $i; ?>" name="lampiran_adm_<?php echo $i; ?>" type="file" class="file adm_attach_1" accept="<?php echo ALLOWED_EXT_FILES ?>">
+										<?php } ?>
+										<div class="col-sm-0" style="font-size: 11px">
+												<i>Max file 5 MB 
+												<br>
+													Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
+												</i>
+											</div>
 
-												<a target="_blank" href="<?php echo site_url('pengadaan/download/administrasi/'.$this->umum->forbidden($this->encryption->encrypt($row["pqt_attachment"]), 'enkrip')); ?>"><?php echo $row["pqt_attachment"]; ?></a>
-												</td>
-											</tr>
-											<?php $i++; }}} ?>
-											<input type="hidden" name="num_adm" id="num_adm" value="<?php echo $i ?>">
-										</tbody>
-									</table>	
-								</form>		
-							</div>
-						</div>
-					</div>
+										<a target="_blank" href="<?php echo site_url('pengadaan/download/administrasi/'.$this->umum->forbidden($this->encryption->encrypt($row["pqt_attachment"]), 'enkrip')); ?>"><?php echo $row["pqt_attachment"]; ?></a>
+									</td>
+								</tr>
+								<?php $i++; }}} ?>
+								<input type="hidden" name="num_adm" id="num_adm" value="<?php echo $i ?>">
+							</tbody>
+						</table>	
+					</form>		
 				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-								<h5><?php echo $this->lang->line('Item Teknis'); ?></h5>
-							</div>
-							<div class="ibox-content">
-								<form role="form" id="teknis" method="POST" action="<?php echo site_url($submit_url) ?>" class="form-horizontal" enctype='multipart/form-data'>	
-									<input type="hidden" id="section" name="section" value="teknis">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th style="text-align: center"><?php echo $this->lang->line('Nomor'); ?></th>
-												<th style="width: 40%; text-align: center"><?php echo $this->lang->line('Deskripsi'); ?></th>
-												<th style="text-align: center"><?php echo $this->lang->line('Bobot'); ?></th>
-												<th style="text-align: center"><?php echo $this->lang->line('Respon Vendor'); ?></th>
-												<th style="text-align: center"><?php echo $this->lang->line('Lampiran'); ?></th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php if(!isset($header)) { $i = 1; foreach($template as $row) { if($row["etd_mode"] == "1") {?>
-											<tr>
-												<td style="text-align: center"><?php echo $i; ?></td>
-												<td><?php echo $row["etd_item"]; ?></td>
-												<td style="text-align: center"><?php echo $row["etd_weight"]."%"; ?></td>
-												<input type="hidden" name="desk_<?php echo $i ?>" id="desk_<?php echo $i ?>" value="<?php echo $row["etd_item"]; ?>">
-												<input type="hidden" name="weight_<?php echo $i ?>" id="weight_<?php echo $i ?>" value="<?php echo $row["etd_weight"]; ?>">
-												<td><input <?php echo $readonly ?> type="text" class="form-control" name="respon_<?php echo $i ?>" id="respon_<?php echo $i ?>" required></td>
-												<td><input id="lampiran_tek_<?php echo $i; ?>" name="lampiran_tek_<?php echo $i; ?>" type="file" class="file tek_attach" accept="<?php echo ALLOWED_EXT_FILES ?>">
-												<div class="col-sm-0" style="font-size: 11px">
-								                        <i>Max file 5 MB 
-								                        <br>
-								                          Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
-								                        </i>
-								                 </div>
-												</td>
-											</tr>
-											<?php $i++;}} }?>
-											<?php
-											if(isset($header)) { 
-												$i = 1; foreach($template as $row) { if($row["pqt_weight"] != "") {
-													?>
-													<tr>
-														<td style="text-align: center"><?php echo $i; ?></td>
-														<td><?php echo $row["pqt_item"]; ?></td>
-														<td style="text-align: center"><?php echo $row["pqt_weight"]."%"; ?></td>
-														<input type="hidden" name="desk_<?php echo $i ?>" id="desk_<?php echo $i ?>" value="<?php echo $row["pqt_item"]; ?>">
-														<input type="hidden" name="pqtid_<?php echo $i ?>" id="pqtid_<?php echo $i ?>" value="<?php echo $row["pqt_id"]; ?>">
-														<td><input <?php echo $readonly ?> type="text" class="form-control" name="respon_<?php echo $i ?>" id="respon_<?php echo $i ?>" required value="<?php echo $row["pqt_vendor_desc"] ?>"></td>
-														<td>
-															<?php if(empty($readonly)){ ?>
-															<input <?php echo $readonly ?> id="lampiran_tek_<?php echo $i; ?>" name="lampiran_tek_<?php echo $i; ?>" type="file" class="file tek_attach_1">
-															<?php } ?>
-															<div class="col-sm-0" style="font-size: 11px">
-										                        <i>Max file 5 MB 
-										                        <br>
-										                          Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
-										                        </i>
-										                 </div>
-															<a target="_blank" href="<?php echo site_url('pengadaan/download/teknis/'.$this->umum->forbidden($this->encryption->encrypt($row["pqt_attachment"]), 'enkrip')); ?>">
-																<?php echo $row["pqt_attachment"]; ?>
-															</a>
-														</td>
-													</tr>
-													<?php $i++; }}} ?>
-													<input type="hidden" name="num_tek" id="num_tek" value="<?php echo $i ?>">
-												</tbody>
-											</table>	
-										</form>		
-									</div>
-								</div>
-							</div>
-						</div>
+			</div>
 
-						<?php 
-						include("item_komersil_penawaran.php");
-						?>
+		</div>
+	</div>
+</div>
 
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="ibox float-e-margins">
-									<div class="ibox-content text-center">
-										<?php if(empty($readonly)) { ?>
+<div class="row">
+	<div class="col-12">
+		<div class="card">
 
-										<button class="btn btn-primary" type="submit" id="submitBtn"><?php echo $this->lang->line('Kirim Penawaran'); ?></button>
+			<div class="card-header border-bottom pb-2">
+				<h4 class="card-title"><?php echo $this->lang->line('Item Teknis'); ?></h4>
+			</div>
 
-										<button style="display: none;" type="submit" id="submitDraftBtn" class="btn btn-success btn-outline"><?php echo $this->lang->line('Simpan Sebagai Draft'); ?></button>
+			<div class="card-content">
+				<div class="card-body">
+					<form role="form" id="teknis" method="POST" action="<?php echo site_url($submit_url) ?>" class="form-horizontal" enctype='multipart/form-data'>	
+						<input type="hidden" id="section" name="section" value="teknis">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th style="text-align: center"><?php echo $this->lang->line('Nomor'); ?></th>
+									<th style="width: 40%; text-align: center"><?php echo $this->lang->line('Deskripsi'); ?></th>
+									<th style="text-align: center"><?php echo $this->lang->line('Bobot'); ?></th>
+									<th style="text-align: center"><?php echo $this->lang->line('Respon Vendor'); ?></th>
+									<th style="text-align: center"><?php echo $this->lang->line('Lampiran'); ?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php if(!isset($header)) { $i = 1; foreach($template as $row) { if($row["etd_mode"] == "1") {?>
+								<tr>
+									<td style="text-align: center"><?php echo $i; ?></td>
+									<td><?php echo $row["etd_item"]; ?></td>
+									<td style="text-align: center"><?php echo $row["etd_weight"]."%"; ?></td>
+									<input type="hidden" name="desk_<?php echo $i ?>" id="desk_<?php echo $i ?>" value="<?php echo $row["etd_item"]; ?>">
+									<input type="hidden" name="weight_<?php echo $i ?>" id="weight_<?php echo $i ?>" value="<?php echo $row["etd_weight"]; ?>">
+									<td><input <?php echo $readonly ?> type="text" class="form-control" name="respon_<?php echo $i ?>" id="respon_<?php echo $i ?>" required></td>
+									<td><input id="lampiran_tek_<?php echo $i; ?>" name="lampiran_tek_<?php echo $i; ?>" type="file" class="file tek_attach" accept="<?php echo ALLOWED_EXT_FILES ?>">
+									<div class="col-sm-0" style="font-size: 11px">
+											<i>Max file 5 MB 
+											<br>
+												Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
+											</i>
+										</div>
+									</td>
+								</tr>
+								<?php $i++;}} }?>
+								<?php
+								if(isset($header)) { 
+									$i = 1; foreach($template as $row) { if($row["pqt_weight"] != "") {
+								?>
+									<tr>
+										<td style="text-align: center"><?php echo $i; ?></td>
+										<td><?php echo $row["pqt_item"]; ?></td>
+										<td style="text-align: center"><?php echo $row["pqt_weight"]."%"; ?></td>
+										<input type="hidden" name="desk_<?php echo $i ?>" id="desk_<?php echo $i ?>" value="<?php echo $row["pqt_item"]; ?>">
+										<input type="hidden" name="pqtid_<?php echo $i ?>" id="pqtid_<?php echo $i ?>" value="<?php echo $row["pqt_id"]; ?>">
+										<td><input <?php echo $readonly ?> type="text" class="form-control" name="respon_<?php echo $i ?>" id="respon_<?php echo $i ?>" required value="<?php echo $row["pqt_vendor_desc"] ?>"></td>
+										<td>
+											<?php if(empty($readonly)){ ?>
+											<input <?php echo $readonly ?> id="lampiran_tek_<?php echo $i; ?>" name="lampiran_tek_<?php echo $i; ?>" type="file" class="file tek_attach_1">
+											<?php } ?>
+											<div class="col-sm-0" style="font-size: 11px">
+												<i>Max file 5 MB 
+												<br>
+													Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
+												</i>
+											</div>
+											<a target="_blank" href="<?php echo site_url('pengadaan/download/teknis/'.$this->umum->forbidden($this->encryption->encrypt($row["pqt_attachment"]), 'enkrip')); ?>">
+												<?php echo $row["pqt_attachment"]; ?>
+											</a>
+										</td>
+									</tr>
+								<?php $i++; }}} ?>
+								<input type="hidden" name="num_tek" id="num_tek" value="<?php echo $i ?>">
+							</tbody>
+						</table>	
+					</form>		
+				</div>
+			</div>
 
-										<button class="btn btn-white" id="backBtn"><?php echo $this->lang->line('Kembali'); ?></button>
+		</div>
+	</div>
+</div>
 
-										<?php } else { ?>
-										<button class="btn btn-white" id="backBtn"><?php echo $this->lang->line('Kembali'); ?></button>	
-										<?php } ?>
-										<?php if(isset($winner)) { ?>
-										<p class="text-danger" style="font-size:150%;"><?php echo $this->lang->line('Selamat, Anda dinyatakan sebagai pemenang pengadaan ini'); ?></p>
-										<?php } ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+<?php 
+	include("item_komersil_penawaran.php");
+?>
 
-					<script type="text/javascript">
-						$(document).ready(function(){
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-content">
+				<div class="card-body text-center">
+					<?php if(empty($readonly)) { ?>
+					<button class="btn btn-primary" type="submit" id="submitBtn"><?php echo $this->lang->line('Kirim Penawaran'); ?></button>
+					<button style="display: none;" type="submit" id="submitDraftBtn" class="btn btn-success btn-outline"><?php echo $this->lang->line('Simpan Sebagai Draft'); ?></button>
+					<button class="btn btn-secondary" id="backBtn"><?php echo $this->lang->line('Kembali'); ?></button>
+					<?php } else { ?>
+					<button class="btn btn-secondary" id="backBtn"><?php echo $this->lang->line('Kembali'); ?></button>	
+					<?php } ?>
+					<?php if(isset($winner)) { ?>
+					<p class="text-danger mt-2" style="font-size:150%;"><?php echo $this->lang->line('Selamat, Anda dinyatakan sebagai pemenang pengadaan ini'); ?></p>
+					<?php } ?>
+				</div>
+			</div>
 
+		</div>
+	</div>
+</div>					
 
-						if ($("[name='modo']").val() == 'insert' || $("[name='submitStatus']").val() == 'draft') {
-							$('#submitDraftBtn').css('display', 'inline');;
-						}
+<script type="text/javascript">
+	$(document).ready(function(){
 
+		if ($("[name='modo']").val() == 'insert' || $("[name='submitStatus']").val() == 'draft') {
+			$('#submitDraftBtn').css('display', 'inline');;
+		}
 
-							var total_adm_attach = $('.adm_attach').length;
-							var i ;
-							for (i = 1; i <= total_adm_attach; i++) {
-								$('#lampiran_adm_'+i).bind('change', function(event) {
-							        var ext = $(this).val().split('.').pop().toLowerCase();
-							        var files = event.target.files;      
-							         // console.log(files)
-							        // alert(files[0].size)
-							        if (files[0].size > 5242880) {
-							          $(this).val('');
-							          alert('File tidak boleh lebih dari 5MB');
-							        }else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
-							            $(this).val('');
-							            alert('Format file tidak sesuai');
-							        }
-							    });
-							}
+		var total_adm_attach = $('.adm_attach').length;
+		var i ;
+		for (i = 1; i <= total_adm_attach; i++) {
+			$('#lampiran_adm_'+i).bind('change', function(event) {
+				var ext = $(this).val().split('.').pop().toLowerCase();
+				var files = event.target.files;     
 
-							var total_adm_attach_1 = $('.adm_attach_1').length;
-							var i ;
-							for (i = 1; i <= total_adm_attach_1; i++) {
-								$('#lampiran_adm_'+i).bind('change', function(event) {
-							        var ext = $(this).val().split('.').pop().toLowerCase();
-							        var files = event.target.files;      
-							         // console.log(files)
-							        // alert(files[0].size)
-							        if (files[0].size > 5242880) {
-							          $(this).val('');
-							          alert('File tidak boleh lebih dari 5MB');
-							        }else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
-							            $(this).val('');
-							            alert('Format file tidak sesuai');
-							        }
-							    });
-							}
+				if (files[0].size > 5242880) {
+					$(this).val('');
+					alert('File tidak boleh lebih dari 5MB');
+				}else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
+					$(this).val('');
+					alert('Format file tidak sesuai');
+				}
+			});
+		}
 
-							var total_tek_attach = $('.tek_attach').length;
-							var i ;
-							for (i = 1; i <= total_tek_attach; i++) {
-								$('#lampiran_tek_'+i).bind('change', function(event) {
-							        var ext = $(this).val().split('.').pop().toLowerCase();
-							        var files = event.target.files;      
-							         // console.log(files)
-							        // alert(files[0].size)
-							        if (files[0].size > 5242880) {
-							          $(this).val('');
-							          alert('File tidak boleh lebih dari 5MB');
-							        }else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
-							            $(this).val('');
-							            alert('Format file tidak sesuai');
-							        }
-							    });
-							}
+		var total_adm_attach_1 = $('.adm_attach_1').length;
+		var i ;
+		for (i = 1; i <= total_adm_attach_1; i++) {
+			$('#lampiran_adm_'+i).bind('change', function(event) {
+				var ext = $(this).val().split('.').pop().toLowerCase();
+				var files = event.target.files;    
 
-							var total_tek_attach_1 = $('.tek_attach_1').length;
-							var i ;
-							for (i = 1; i <= total_tek_attach_1; i++) {
-								$('#lampiran_tek_'+i).bind('change', function(event) {
-							        $('#error_msg_'+i).remove();
-							        var ext = $(this).val().split('.').pop().toLowerCase();
-							        var files = event.target.files;      
-							         // console.log(files)
-							        // alert(files[0].size)
-							        if (files[0].size > 5242880) {
-							          $(this).val('');
-							          alert('File tidak boleh lebih dari 5MB');
-							        }else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
-							            $(this).val('');
-							            alert('Format file tidak sesuai');
-							        }
-							    });
-							}
+				if (files[0].size > 5242880) {
+					$(this).val('');
+					alert('File tidak boleh lebih dari 5MB');
+				}else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
+					$(this).val('');
+					alert('Format file tidak sesuai');
+				}
+			});
+		}
 
-							$("#backBtn").click(function(){
-								window.history.back();
-							});
+		var total_tek_attach = $('.tek_attach').length;
+		var i ;
+		for (i = 1; i <= total_tek_attach; i++) {
+			$('#lampiran_tek_'+i).bind('change', function(event) {
+				var ext = $(this).val().split('.').pop().toLowerCase();
+				var files = event.target.files;      
 
-							var cur = "Rp";
-							set_field_ontipepenawaran();
+				if (files[0].size > 5242880) {
+					$(this).val('');
+					alert('File tidak boleh lebih dari 5MB');
+				}else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
+					$(this).val('');
+					alert('Format file tidak sesuai');
+				}
+			});
+		}
 
-							// $('#bid_bond').focus();
-							$('#bid_bond').blur();
+		var total_tek_attach_1 = $('.tek_attach_1').length;
+		var i ;
+		for (i = 1; i <= total_tek_attach_1; i++) {
+			$('#lampiran_tek_'+i).bind('change', function(event) {
+				$('#error_msg_'+i).remove();
+				var ext = $(this).val().split('.').pop().toLowerCase();
+				var files = event.target.files;      
 
-							$('.i-checks').iCheck({
-								checkboxClass: 'icheckbox_square-green',
-								radioClass: 'iradio_square-green',
-							});
+				if (files[0].size > 5242880) {
+					$(this).val('');
+					alert('File tidak boleh lebih dari 5MB');
+				}else if($.inArray(ext, ['doc', 'docx', "xls", 'xlsx', 'ppt', 'pptx', 'pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'tgz', '7zip', 'tar']) == -1) {
+					$(this).val('');
+					alert('Format file tidak sesuai');
+				}
+			});
+		}
 
-							$('#selesai .input-group.date').datepicker({
-								keyboardNavigation: false,
-								forceParse: false,
-								autoclose: true,
-								startDate: '+1d',
-								format: "yyyy-mm-dd"
-							});
+		$("#backBtn").click(function(){
+			window.history.back();
+		});
+
+		var cur = "Rp";
+		set_field_ontipepenawaran();
+
+		// $('#bid_bond').focus();
+		$('#bid_bond').blur();
+
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+
+		$('#selesai .input-group.date').datepicker({
+			keyboardNavigation: false,
+			forceParse: false,
+			autoclose: true,
+			startDate: '+1d',
+			format: "yyyy-mm-dd"
+		});
 
 		//Ubah Blocked Item Komersial Field
 		$('#tipepenawaran').change(function(){
@@ -375,7 +379,7 @@ else{
 				$("[name='submitStatus']").val('permanent');
 			}
 
-		//validate scroll to field
+			//validate scroll to field
 			var scrollme
 			 $('input[name^="respon_"]').each(function() {
 			     var respon = $(this).val();
@@ -412,7 +416,7 @@ else{
 				scroll_teknis()
 			}
 		
-		//end validate
+			//end validate
 
 			//Submit All Form
 			if($("#header").validate().form() && $("#adm").validate().form() 
@@ -522,24 +526,24 @@ else{
 			});
 		}
 	};
-	});
+});
 
-function fnChange(id,param){
-	var check = "_"+id;
-	if(id == ""){
-		check = "";
-	}
+	function fnChange(id,param){
+		var check = "_"+id;
+		if(id == ""){
+			check = "";
+		}
 
-	var cur = $('#currency').val()+" ";
-	var current_val = parseFloat(accounting.unformat($("#"+param+check).val()));
-	var nonformat = current_val;
-	var format = accounting.formatNumber(current_val, 2, ",");
+		var cur = $('#currency').val()+" ";
+		var current_val = parseFloat(accounting.unformat($("#"+param+check).val()));
+		var nonformat = current_val;
+		var format = accounting.formatNumber(current_val, 2, ",");
 
 
-	$("#"+param+check).val(format);
-	$("#"+param+check+"_input").val(nonformat);
+		$("#"+param+check).val(format);
+		$("#"+param+check+"_input").val(nonformat);
 
-	if(param == "qty" || param == "price"){
+		if(param == "qty" || param == "price"){
 			//Ubah Total Per Item
 			var total = $("#qty"+check+"_input").val() * $("#price"+check+"_input").val();
 			var format = accounting.formatNumber(total, 2, ",");

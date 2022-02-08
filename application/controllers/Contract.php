@@ -93,6 +93,14 @@ public function proses_pembatalan_kontrak(){
   include("contract/proses_kontrak/proses_pembatalan_kontrak.php");
 }
 
+public function submit_comment_contract(){
+  include("contract/monitor/submit_comment_contract.php");
+}
+
+public function submit_delete_comment($id = ""){
+  include("contract/monitor/submit_delete_comment.php");
+}
+
 public function submit_pembatalan_kontrak(){
   include("contract/proses_kontrak/submit_pembatalan_kontrak.php");
 }
