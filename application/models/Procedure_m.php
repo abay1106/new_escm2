@@ -514,7 +514,7 @@ class Procedure_m extends MY_Model {
 		$msg = auto_link($msg);
 
 
-		$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Perencanaan Pengadaan Nomor $ppm_id",$msg);
+		//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Perencanaan Pengadaan Nomor $ppm_id",$msg);
 		return false;
 
 	}
@@ -1038,7 +1038,7 @@ class Procedure_m extends MY_Model {
 				$msg = auto_link($msg);
 				//end
 
-				$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Permintaan Pengadaan Nomor $pr_number",$msg);
+				//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Permintaan Pengadaan Nomor $pr_number",$msg);
 
 
 				$ret = array(
@@ -3376,7 +3376,7 @@ class Procedure_m extends MY_Model {
 			    //$msg = auto_link($msg); di komen
 				//end
 
-				$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
+				//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
 
 			}
 			//==================================

@@ -2,13 +2,15 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PrivyTest extends Telescoope_Controller {
+class PrivyTest extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
         //Do your magic here
         $this->load->model(array("Procrfq_m", "Vendor_m", "Procedure_m", "Comment_m", "Procpanitia_m", "Contract_m"));
+        $this->load->config('privy');
+
     }
 
 
@@ -19,9 +21,11 @@ class PrivyTest extends Telescoope_Controller {
 
     public function test_upload($rfqId)
     {
+        
         # code...
-        $this->load->config('privy');
-        $URL =  $this->config->item('URL_DEV_HASH').'document/upload';
+        $timestamp = date("c",strtotime(date('Y-m-d H:i:s')));
+
+        $URL =  $this->config->item('URL_DEV_HASH').'/document/upload';
         $config['MERCHANT_KEY'] = $this->config->item('MERCHANT_KEY');
 		$config['USERNAME'] = $this->config->item('USERNAME');
         $config['PASSWORD'] = $this->config->item('PASSWORD');
@@ -34,23 +38,26 @@ class PrivyTest extends Telescoope_Controller {
         $path = base_url()."uploads/".$getDataUskep['filename'];
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $base64 = 'data:application/' . $type . ';base64,' . base64_encode($data);
         
-        $dataUploadPrivy['title'] = "testupload123";
+        //$dataUploadPrivy['title'] = "testupload123";
         $dataUploadPrivy['document'] = $base64;
 
-        $dataUploadPrivy['recipients']['identifier'] = "DEVOK3079";
-        $dataUploadPrivy['recipients']['type'] = "signer";
-        $dataUploadPrivy['recipients']['pos_x'] = "184";
-        $dataUploadPrivy['recipients']['pos_y'] = "184";
-        $dataUploadPrivy['recipients']['page'] = "2";
+        // $dataUploadPrivy['recipients']['identifier'] = "DEVOK3079";
+        // $dataUploadPrivy['recipients']['type'] = "signer";
+        // $dataUploadPrivy['recipients']['pos_x'] = "184";
+        // $dataUploadPrivy['recipients']['pos_y'] = "184";
+        // $dataUploadPrivy['recipients']['page'] = "2";
+
+       
+        
+        $signature = $this->signature($dataUploadPrivy,'POST',$timestamp);
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
         CURLOPT_URL => $URL,
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_USERPWD => $config['USERNAME'] . ":" . $config['PASSWORD'],
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
@@ -59,6 +66,10 @@ class PrivyTest extends Telescoope_Controller {
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => json_encode($dataUploadPrivy),
         CURLOPT_HTTPHEADER => array(
+        'X-Authorization-Signature : '.$signature,
+        'X-Authorization-Timestamp: '.$timestamp,
+        'X-Flow-Process: stepping',
+        'Content-Type: application/json',
         'Merchant-Key:'.$config['MERCHANT_KEY']
         ),
         ));
@@ -67,6 +78,26 @@ class PrivyTest extends Telescoope_Controller {
 
         curl_close($curl);
         echo $response;
+
+    }
+
+    public function signature($jsonBody,$method,$timestamp)
+    {
+        # code...
+        //$timestamp = date("c",strtotime(date('Y-m-d H:i:s')));
+        $clientId = $this->config->item('CLIENT_ID');
+        $clientSecret = $this->config->item('CLIENT_SECRET');
+        $bodyMD5 = md5(json_encode($jsonBody),true);
+        //$bodyMD5 = base64_encode($bodyMD5);
+        
+        $hmac_signature = $timestamp.":".$clientId.":".$method.":".$bodyMD5;
+        $hmac = hash_hmac('sha256',$hmac_signature,$clientSecret,true);
+        $hmac_base64 = base64_encode($hmac);
+
+        $signature = "#".$clientId.":#".base64_encode($hmac);
+        $signature = base64_encode($signature);
+
+        return $signature;
 
     }
 
