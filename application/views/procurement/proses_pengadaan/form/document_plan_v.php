@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-lg-12">
     <center>
-      <a class="btn btn-primary tambah_dok">Tambah Lampiran</a>
+      <a class="btn btn-primary tambah_dok">Tambah Dokument</a>
       <br/>
       <br/>
     </center>

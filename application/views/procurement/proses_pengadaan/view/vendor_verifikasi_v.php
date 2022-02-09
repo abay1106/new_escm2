@@ -3,7 +3,7 @@
     <div class="card">
       
       <div class="card-header border-bottom pb-2">
-          <h4 class="card-title">Verifikasi Vendor</h4>
+          <h4 class="card-title">Evaluasi Administrasi</h4>
       </div>
 
       <div class="card-content">
@@ -118,7 +118,7 @@ var $vendor_verifikasi_view = $('#vendor_verifikasi_view'),
       },
        {
         field: 'pvs_technical_status',
-        title: 'Status Penawaran',
+        title: 'Status Administrasi',
         sortable:true,
         order:true,
         searchable:true,
