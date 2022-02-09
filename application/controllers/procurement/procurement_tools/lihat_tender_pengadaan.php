@@ -77,6 +77,10 @@ $data['winner_weight'] = $winner_weight;
 
 $data['prep'] = $this->Procrfq_m->getPrepRFQ($ptm_number)->row_array();
 
+$data['data'] = $this->Procevaltemp_m->getTemplateEvaluasi($data['prep']['evt_id'])->row_array();
+
+$data['detail'] = $this->Procevaltemp_m->getTemplateEvaluasiDetail($data['prep']['evt_id'])->result_array();
+
 if(isset($data['prep']['adm_bid_committee'])){
   $this->session->set_userdata("committee_id",$data['prep']['adm_bid_committee']);
 }
@@ -108,7 +112,6 @@ if(in_array($activity_id, [1100,1120]) || $activity_id > 1100){
   ->where("a.ppm_id",$ptm_number)
   ->join("vnd_header b","b.vendor_id=a.vendor_id")
   ->join("prc_eauction_header f","f.ppm_id=a.ppm_id")
-  //->join("prc_eauction_history c","c.vendor_id=a.vendor_id AND c.ppm_id =a.ppm_id")
   ->join("prc_tender_item d","d.tit_id=a.tit_id AND d.ptm_number=f.ppm_id")
   ->order_by("a.tgl_bid","asc")
   ->get("prc_eauction_history_item a")
@@ -224,5 +227,4 @@ $this->session->set_userdata("uri_string",uri_string());
 $this->session->set_userdata("selection_vendor_tender",$vendor);
 
 $this->session->set_userdata("rfq_id",$ptm_number);
-//$this->template($view,$activity['awa_name'],$data);
 $this->template($view,"Detail Pengadaan (".$activity['awa_name'].")",$data);

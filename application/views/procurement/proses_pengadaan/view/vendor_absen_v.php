@@ -3,7 +3,12 @@
     <div class="card">
       
       <div class="card-header border-bottom pb-2">
-          <h4 class="card-title">Aanwijzing</h4>
+          <h4 class="card-title float-left">Aanwijzing</h4>
+          <?php if(isset($beritaAcaraAanwijzing) && !empty($beritaAcaraAanwijzing)){ ?>
+          <span class="float-right">
+              <p class="form-control-static"><?php echo $beritaAcaraAanwijzing ; ?></p>            
+          </span>
+          <?php } ?>          
       </div>
 
       <div class="card-content">
