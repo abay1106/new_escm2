@@ -109,7 +109,7 @@ var $vendor_verifikasi_view = $('#vendor_verifikasi_view'),
       },
             {
         field: 'pvs_status',
-        title: 'Status Vendor',
+        title: 'Status Evaluasi',
         sortable:true,
         order:true,
         searchable:true,
