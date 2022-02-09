@@ -71,14 +71,6 @@
         </div>
       <?php  }
       ?>
-      <?php if(isset($beritaAcaraAanwijzing) && !empty($beritaAcaraAanwijzing)){ ?>
-      <div class="row form-group">
-        <label class="col-sm-2 control-label text-right">Download Berita Acara Aanwijzing</label>
-        <div class="col-sm-10">
-          <p class="form-control-static"><?php echo $beritaAcaraAanwijzing ?></p>
-        </div>
-      </div>
-      <?php } ?>
       <!-- end -->
 
       <?php if ($permintaan['isjoin'] != 1) { ?>
