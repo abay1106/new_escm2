@@ -242,12 +242,12 @@
 			<div class="card">
 
 				<div class="card-header border-bottom pb-2">
-					<h4 class="card-title">Form Terminasi</h4>
+					<h4 class="card-title">Form Mengundurkan Diri</h4>
 				</div>
 
 				<div class="card-content">
 					<div class="card-body">
-						<div class="row form-group"><label class="col-sm-2 control-label text-right text-bold-700">Alasan Terminasi</label>
+						<div class="row form-group"><label class="col-sm-2 control-label text-right text-bold-700">Alasan Mengundurkan Diri</label>
 							<div class="col-lg-6">: <?php echo $trm_row["reason"]; ?></div>
 						</div>
 						<div class="row form-group"><label class="col-sm-2 control-label text-right text-bold-700">Tanggal/Waktu</label>
@@ -270,7 +270,7 @@
 						<div class="col-sm"></div>
 						<div class="col-sm">
 							<a href="#" class="btn btn-danger btn-block text-bold-700" data-toggle="modal" data-target="#large">
-								Terminasi Kontrak 
+								Mengundurkan Diri 
 							</a>
 						</div>
 						<div class="col-sm"></div>
@@ -288,16 +288,16 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Terminasi Kontrak</h4>
+				<h4 class="modal-title">Mengundurkan Diri</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
 				</button>
 			</div>
 			<form action="<?php echo site_url('kontrak/submit_terminasi');?>" method="POST">
 				<div class="modal-body">
-					<h5>Apakah Anda yakin akan Terminasi Kontrak?</h5>					
+					<h5>Apakah Anda yakin akan Mengundurkan Diri?</h5>					
 					<hr/>
-					<h5>Alasan Terminasi : </h5>
+					<h5>Alasan : </h5>
 					<input type="hidden" name="ptm_number" value="<?php echo $header["ptm_number"]; ?>">
 					<input type="hidden" name="contract_number" value="<?php echo $header["contract_number"]; ?>">
 					<input type="hidden" name="contract_id" value="<?php echo $header["contract_id"]; ?>">
