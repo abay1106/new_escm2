@@ -11,13 +11,16 @@
         src: url('../fonts/glyphicons-halflings-regular.eot');
         src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
       }
+
+      .bootstrap-table {
+        margin-top: 0px !important;
+      }
     </style>
 
     <base href="<?= base_url() ?>"/>
 
     <link rel="manifest" href="<?php echo base_url('manifest.json') ?>">
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/'.$site_favicon) ?>">
-    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/plugins/jquery-ui/themes/ui-lightness/theme.css"/>
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -46,12 +49,13 @@
     <script type="text/javascript" src="assets/app-assets/vendors/js/vendors.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/app-assets/fonts/feather/style.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/perfect-scrollbar.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/toastr/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/components.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">
-    <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/chartist.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/chartist.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/assets/css/style.css">
 
     <!-- haqim -->
@@ -96,7 +100,7 @@
     <script src="assets/plugins/bootstrap-table/dist/extensions/reorder-columns/bootstrap-table-reorder-columns.min.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
-    <script src="assets/app-assets/vendors/js/chartist.min.js"></script>
+    <!-- <script src="assets/app-assets/vendors/js/chartist.min.js"></script> -->
 
     <?php /*  INSPINIA */ ?>
 
