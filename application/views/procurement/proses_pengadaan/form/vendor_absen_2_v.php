@@ -99,7 +99,7 @@ $val = (in_array($value['pvs_vendor_code'], $list_vnd)) ? 1 : 0;
 
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
 
-           pageSize:100,
+      pageSize:100,
       pageList:[100],
 
       columns: [

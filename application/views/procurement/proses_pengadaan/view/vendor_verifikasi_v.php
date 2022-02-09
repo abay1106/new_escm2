@@ -124,17 +124,8 @@ var $vendor_verifikasi_view = $('#vendor_verifikasi_view'),
         searchable:true,
         align: 'center',
         valign: 'middle'
-      },
+      },     
       {
-        field: 'is_attend',
-        title: 'Hadir',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle'
-      },
-            {
         field: 'pvs_technical_remark',
         title: 'Catatan',
         sortable:true,
