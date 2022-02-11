@@ -30,6 +30,12 @@
     border-radius: 20px;
   }
 
+  .btn-secondary {
+    background-color: #EC9929;
+    border-color: #EC9929;
+    border-radius: 20px;
+  }
+
   .btn-success {
     background-color: #56E9AE;
     border-color: #56E9AE;
