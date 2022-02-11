@@ -11,9 +11,7 @@
       <div class="card-content">
         <div class="card-body">
             <div class="table-responsive">
-                <!-- <table id="riwayat_eauction" class="table table-bordered table-striped"></table> -->
-
-                <table id="table_peringkat_penawar" class="table table-bordered table-striped">
+                <table id="riwayat_eauction" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th class="text-center" data-field='online'>Online</th>
@@ -48,12 +46,7 @@ function makeid(length) {
 
 
   $(function () {
-    var table_peringkat_penawar = $('#table_peringkat_penawar')
-
-    table_peringkat_penawar.bootstrapTable({
-      search:true,
-    });
-
+    var table_peringkat_penawar = $('#riwayat_eauction')
     Pusher.logToConsole = true;
 
     var pusher = new Pusher('<?php $this->load->config("pusher"); echo $this->config->item('PUSHER_key');?>', {
@@ -62,36 +55,15 @@ function makeid(length) {
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-      table_peringkat_penawar.bootstrapTable('append', JSON.parse(data['message']))
+      console.log(data);
+      table_peringkat_penawar.bootstrapTable('refresh', {
+        useCurrentPage: false,
+        includeHiddenRows: true,
+        unfiltered: true
+      });
+      //table_peringkat_penawar.bootstrapTable('append', JSON.parse(data['message']))
     });
 
-    setInterval(function () {
-      //Secara random ngepush event ke pusher
-      if(Math.floor(Math.random() * 11) < 5 ){
-
-        data = {
-          'online' : (Math.floor(Math.random() * 11) < 5) ? '<i class="bi bi-circle-fill text-info" ></i>' : '<i class="bi bi-circle-fill text-danger" ></i>',
-          'peringkat' : Math.floor(Math.random() * 10),
-          'nama_vendor' : `PT. ${makeid(10)}`,
-          'penawaran_saat_ini' : Math.floor(Math.random() * 100)  * 100000000,
-          'penawaran_sebelumnya' : Math.floor(Math.random() * 100)  * 100000000,
-          'riwayat' : '<a class="btn btn-primary bg-info btn-xs action" href="#"><i class="bi bi-eye"></i> Zoom</a>',
-        }
-        //console.log(data);
-        var formData = new FormData();
-
-        formData.append('message',JSON.stringify(data))
-
-        //console.log(formData);
-
-        fetch("<?php echo site_url('pusher/sendMessage') ?>",
-          {
-              method: "POST",
-              body: formData
-          })
-        }
-
-    }, 2500);
 
 
 });
@@ -141,9 +113,6 @@ function makeid(length) {
   var $riwayat_eauction = $('#riwayat_eauction'),
   selections = [];
 
-</script>
-
-<script type="text/javascript">
 
   $(function () {
     var urls = "<?php echo site_url('Procurement/data_vendor_eauction') ?>";
@@ -207,7 +176,7 @@ function makeid(length) {
       $riwayat_eauction.bootstrapTable('resetView');
     }, 200);
 
-    setInterval(function(){
+    //setInterval(function(){
       /* $riwayat_eauction.bootstrapTable('refresh', {
         useCurrentPage: false,
         includeHiddenRows: true,
@@ -216,21 +185,11 @@ function makeid(length) {
       //$riwayat_eauction.bootstrapTable('refreshOptions', {}).
       //console.log("data");
 
-    },2000);
+    //},2000);
   
     $riwayat_eauction.on('expand-row.bs.table', function (e, index, row, $detail) {
       $detail.html(detailFormatter(index,row,"alias_vendor"));
     });
 
-  });
-
-  var pusher = new Pusher("<?php echo $this->config->item('PUSHER_key');?>", {
-    cluster: "<?php echo $this->config->item('PUSHER_cluster');?>",
-  });
-  var channel = pusher.subscribe('my-channel');
-
-  channel.bind('my-event', function(ress) {
-    console.log(ress);
-    $riwayat_eauction.bootstrapTable('append', JSON.parse(ress['message']))
   });
 </script>
