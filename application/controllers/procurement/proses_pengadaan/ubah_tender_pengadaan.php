@@ -106,6 +106,10 @@ $pecah = [];
 
 $data['prep'] = $this->Procrfq_m->getPrepRFQ($ptm_number)->row_array();
 
+$data['data'] = $this->Procevaltemp_m->getTemplateEvaluasi($data['prep']['evt_id'])->row_array();
+
+$data['detail'] = $this->Procevaltemp_m->getTemplateEvaluasiDetail($data['prep']['evt_id'])->result_array();
+
 $data["periodes"] = [
   7 => "7 Hari Kalender",
   14 => "14 Hari Kalender",

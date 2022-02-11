@@ -3,7 +3,7 @@
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
-        <h5>Daftar Vendor yang Hadir Tahap 2</h5>
+        <h5>Aanwijzing Tahap 2</h5>
         <div class="ibox-tools">
           <a class="collapse-link">
             <i class="fa fa-chevron-up"></i>
@@ -99,7 +99,7 @@ $val = (in_array($value['pvs_vendor_code'], $list_vnd)) ? 1 : 0;
 
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
 
-           pageSize:100,
+      pageSize:100,
       pageList:[100],
 
       columns: [

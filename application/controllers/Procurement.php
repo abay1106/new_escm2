@@ -657,6 +657,10 @@ public function data_riwayat_eauction(){
 public function data_peringkat_vendor_eauction(){
   include("procurement/eauction/data_peringkat_vendor.php");
 }
+
+public function data_vendor_eauction(){
+  include("procurement/eauction/data_vendor_eauction.php");
+}
 //y
 public function monitor_anggaran(){
   include("procurement/procurement_tools/monitor_anggaran.php");

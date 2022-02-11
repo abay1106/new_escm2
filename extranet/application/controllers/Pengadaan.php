@@ -447,7 +447,7 @@ class Pengadaan extends MY_Controller {
 			->select("b.*, d.ppm_id, d.value_min, c.ptm_number, e.tit_code, e.tit_unit")
 			->where(array("c.ptm_number"=>"$tenderid", "c.ptv_vendor_code" => $userdata['userid']))
 			->join("prc_tender_quo_main c", "b.pqm_id = c.pqm_id", "left")
-			->join("prc_eauction_item d", "c.ptm_number = d.ppm_id and 'b.tit_id'::text='c.tit_id'::text", "left")
+			->join("prc_eauction_item d", "c.ptm_number = d.ppm_id", "left")
 			->join("prc_tender_item e", "e.tit_id = b.tit_id", "left")
 			->get("prc_tender_quo_item b")
 			->result_array();

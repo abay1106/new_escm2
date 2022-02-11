@@ -29,7 +29,7 @@
             <tr>
               <th>No</th>
               <th>Nama Vendor</th>
-              <th>Status Vendor</th>
+              <th>Status Evaluasi</th>
               <th>Jumlah Penawaran</th>
               <th>Penawaran</th>
             </tr>

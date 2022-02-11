@@ -1,18 +1,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
         <div class="row">
           <div class="col-9">
+            <div id="servertime"></div>
             
             <div class="row mb-1">
               <div class="col-12">
                 <div class="card">        
                   <div class="card-header border-bottom pb-2">
-                      <h4 class="card-title font-weight-bold">Perbaikan Distribusi Air di Gedung Wika</h4>
+                      <h4 class="card-title font-weight-bold">Perbaikan Distribusi Air di Gedung Wika 123</h4>
                   </div>
                   <div class="card-content">
                     <div class="card-body">
@@ -22,7 +23,7 @@
                             <div class="ibox float-e-margins">
                               <div class="ibox-title">
                                 <div class="ibox-tools">
-                                  <a class="collapse-link">Peringkat Penawar
+                                  <a class="collapse-link">Peringkat Penawar disini
                                     <i class="fa fa-chevron-up"></i>
                                   </a>
                                 </div>
@@ -945,8 +946,6 @@
 
           </div>
           <div class="col-3">
-            
-                        
             <div class="row">
                 <div class="col-12">
                   <div class="card">        
@@ -1150,7 +1149,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -1196,9 +1194,12 @@
                 'nama_vendor' : `PT. ${makeid(10)}`,
                 'penawaran_saat_ini' : Math.floor(Math.random() * 100)  * 100000000,
                 'penawaran_sebelumnya' : Math.floor(Math.random() * 100)  * 100000000,
-                'riwayat' : '<a class="btn btn-primary bg-info btn-xs action" href="#"><i class="bi bi-eye"></i> Lihat</a>',
+                'riwayat' : '<a class="btn btn-primary bg-info btn-xs action" href="#"><i class="bi bi-eye"></i> Zoom</a>',
         }
+        //console.log(data);
         var formData = new FormData();
+        //console.log(JSON.stringify(data));
+
         formData.append('message',JSON.stringify(data))
         fetch("<?php echo site_url('pusher/sendMessage') ?>",
           {
@@ -1207,7 +1208,7 @@
           })
         }
 
-    }, 500);
+    }, 1500);
 
 
 });

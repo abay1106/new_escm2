@@ -167,12 +167,27 @@
 	</script>
 
 	<style>
+		.goog-te-combo{
+			padding : 10px !important;
+			border : 1px solid white;
+			border-radius: 5px;
+		}
         .content-header {
             color : #2b71c6;
         }
         th {
             white-space: nowrap;
         }
+		.goog-te-banner-frame.skiptranslate {
+        	display: none !important;
+		} 
+		body {
+			top: 0px !important; 
+		}
+
+		.goog-te-gadget span {
+			display: none !important;
+		}
     </style>
 
 </head>
@@ -192,7 +207,11 @@
                     <ul class="navbar-nav">                        
                         <li class="nav-item mr-1">
 							<a class="nav-link d-flex align-items-end" href="javascript:;">
-                                <div class="d-md-flex d-none mr-1"><span class="text-right"><?php echo $this->lang->line('Selamat Datang di Aplikasi eSCM '.COMPANY_NAME); ?></span></div>
+                               <!--  <div class="d-md-flex d-none mr-1"><span class="text-right"><?php echo $this->lang->line('Selamat Datang di Aplikasi eSCM '.COMPANY_NAME); ?></span></div> -->
+							   <div class="d-md-flex d-none mr-1"><span class="text-right"></span>
+							   <div id="google_translate_element"></div>
+
+								</div>
                             </a>							
                         </li>
 						<li class="nav-item mr-1">
@@ -327,4 +346,12 @@
     <script src="<?php echo base_url(); ?>assets/app-assets/js/components-modal.min.js"></script>
 
 </body>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </html>

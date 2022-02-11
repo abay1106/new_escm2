@@ -74,6 +74,7 @@
             <p class="form-control-static"><?php echo $beritaAcaraAanwijzing ?></p>
           </div>
         </div>
+
         <?php } ?>
         <!-- end -->
 

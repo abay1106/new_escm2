@@ -34,5 +34,4 @@ class Pusher extends Telescoope_Controller {
         $data['message'] = $post['message'];
         $pusher->trigger('my-channel', 'my-event', $data);
 	}   
-
 }
