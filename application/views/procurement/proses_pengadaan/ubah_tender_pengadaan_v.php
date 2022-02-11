@@ -2,71 +2,86 @@
     .segitiga2 {
         height: 0px;
         width: 0px;
-        border-left: solid 1.2em white;
+        border-left: 1.2em solid rgb(42 171 226) !important;
         border-top: solid 2.3em transparent;
         border-bottom: solid 2.3em transparent;
     }
+    .bg-info {
+      background-color: #2AABE2 !important;
+    }
+    .step {
+      font-size: 11px;
+      margin:auto;
+      box-shadow: 0 0 11px rgba(33,33,33,.2);
+      padding-top: 15px;
+      padding-bottom: 10px;
+      padding-left: 20px !important;
+      border-radius: 10px;
+    }
+    .card {
+      border-radius: 1.35rem;
+    }
 </style>
 <div class="container-fluid">
-    <div class="row px-0 my-2" style="font-size: 10px">
+    <div class="row px-0 my-2 step">
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Mulai Pendaftaran</p>
                 <small class="text-muted" id="mulai_pendaftaran"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Aanwijing</p>
                 <small class="text-muted" id="ptp_prebid_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Penawaran</p>
                 <small class="text-muted" id="ptp_quot_opening_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Evaluasi</p>
                 <small class="text-muted" id="ptp_doc_open_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Negosiasi</p>
                 <small class="text-muted" id="ptp_negosiation_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">USKEP</p>
                 <small class="text-muted" id="ptp_uskep_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Pengumuman</p>
                 <small class="text-muted" id="ptp_announcement_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Sanggahan</p>
                 <small class="text-muted" id="ptp_disclaimer_date_"></small>
             </div>
             <div class="segitiga2"></div>
         </div>
         <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;">
+            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
                 <p class="mb-1 font-weight-bold">Penunjukan</p>
                 <small class="text-muted" id="ptp_appointment_date_"></small>
             </div>
@@ -83,21 +98,21 @@
 		<input type="hidden" name="plan" value="<?php echo $perencanaan['ppm_id'] ?>">
 		<input type="hidden" name="remain" value="<?php echo $perencanaan['ppm_sisa_anggaran'] ?>">
 
-		<?php 
+		<?php
 
 		foreach ($content as $key => $value) {
-			include($value['awc_type']."/".$value['awc_file'].".php");            
+			include($value['awc_type']."/".$value['awc_file'].".php");
 		}
 
 		?>
 
-		<?php 
+		<?php
 		$i = 0;
 		include(VIEWPATH."/comment_workflow_attachment_v.php") ?>
 
-		<div class="card">				
+		<div class="card">
 			<div class="card-content">
-				<div class="card-body">			
+				<div class="card-body">
 					<?php echo buttonsubmit('procurement/daftar_pekerjaan',lang('back'),lang('save')) ?>
 				</div>
 			</div>
