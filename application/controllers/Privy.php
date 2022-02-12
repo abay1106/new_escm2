@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PrivyTest extends CI_Controller {
+class Privy extends CI_Controller {
 
     public function __construct()
     {
@@ -19,7 +19,7 @@ class PrivyTest extends CI_Controller {
         
     }
 
-    public function test_upload($rfqId)
+    public function upload_doc($rfqId)
     {
         
         # code...
@@ -96,7 +96,7 @@ class PrivyTest extends CI_Controller {
 
     }
 
-    public function signature($jsonBody, $method, $timestamp)
+    private function signature($jsonBody, $method, $timestamp)
     {
         # code...
         $clientId = $this->config->item('CLIENT_ID');

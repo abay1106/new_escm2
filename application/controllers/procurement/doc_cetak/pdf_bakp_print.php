@@ -119,7 +119,8 @@ $output = $dompdf->output();
 file_put_contents('uploads/'.$filename, $output);
 
 $data_update = array(
-	'filename' =>$filename
+	'filename' =>$filename,
+	'is_generate'=>1,
 );
 $this->Procrfq_m->updateDataUskep($rfq_id, $data_update);
 

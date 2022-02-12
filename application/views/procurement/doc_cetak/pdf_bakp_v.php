@@ -106,7 +106,7 @@
 
 <table style="width:100%;" class="is-content">
 	<tr>
-		<th align="center">No</th>
+		<th width="10px"  align="center">No</th>
 		<th align="center">Nama Penyedia yang Diundang</th>
 		<th align="center">Daftar (Ya/Tidak)</th>
 		<th align="center">Memasukan Penawaran (Ya/Tidak)</th>
@@ -150,7 +150,7 @@
 
 <table style="width:100%;margin-left: 10px;" class="is-content">
 	<tr>
-		<th align="center">No</th>
+		<th width="10px" align="center">No</th>
 		<th align="center">Nama Rekanan</th>
 		<th align="center">Lulus</th>
 		<th align="center">Tidak Lulus</th>
@@ -188,7 +188,7 @@
 
 <table style="width:100%;margin-left: 10px;" class="is-content">
 	<tr>
-		<th align="center">No</th>
+		<th width="10px"  align="center">No</th>
 		<th align="center">Nama Rekanan</th>
 		<th align="center">Nilai</th>
 		<th align="center">Nilai x Bobot</th>
@@ -219,7 +219,7 @@
 
 <table style="width:100%;margin-left: 10px;" class="is-content">
 	<tr>
-		<th align="center">No</th>
+		<th width="10px"  align="center">No</th>
 		<th align="center">Nama Rekanan</th>
 		<th align="center">Harga Negosiasi</th>
 		<th align="center">Efisiensi</th>
@@ -251,7 +251,7 @@
 
 <table style="width:100%;margin-left: 10px;" class="is-content">
 	<tr>
-		<th align="center">No</th>
+		<th width="10px"  align="center">No</th>
 		<th align="center">Nama Rekanan</th>
 		<th align="center">Total Nilai</th>
 		<th align="center">Peringkat</th>
@@ -437,10 +437,11 @@
 
 
 	<div id="form_other" style="display:<?php echo ($data_uskep) ? '' : 'none'; ?>;" >
+	<a  href="<?php echo base_url()."index.php/Privy/upload_doc/".$ptm_id; ?>" class="button" style="margin: 5px;">Upload & Share E-Sign</a>
+
 	<a  href="<?php echo base_url()."index.php/procurement/pdf_penawaran_harga/".$ptm_id; ?>" class="button" style="margin: 5px;">DEPKN FORM</a>
 
 	<a  href="<?php echo base_url()."index.php/procurement/pdf_penilaian/".$ptm_id; ?>" class="button" style="margin: 5px;">PENILAIAN FORM</a>
-
 	</div>
 
 <?php } ?>
@@ -462,6 +463,8 @@
 	<hr>
 	<center>
 	<a  href="<?php echo base_url()."index.php/procurement/pdf_bakp_print/".$ptm_id; ?>" class="button" style="margin: 5px;">BAKP PDF</a>
+	
+
 
 	<a  href="<?php echo base_url()."index.php/procurement/pdf_penawaran_harga_print/".$ptm_id; ?>" class="button" style="margin: 5px;">DEPKN PDF</a>
 

@@ -57,6 +57,7 @@ if ($getDataUskep) {
 
 		$nama_array = explode(" - ", $value);
 
+		
 		if ($bakp_kpd_cat[$par] == "Menyetujui") {
 
 			array_push($menyetujui_name, $nama_array[0]);

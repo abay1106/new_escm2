@@ -8,6 +8,44 @@ class Procedure_m extends MY_Model {
 
 	}
 
+	public function get_ppm_id_by_pr($pr_mumber) {
+
+		$this->db->select('ppm_id');
+		$this->db->where('pr_number', $pr_mumber);
+		$query = $this->db->get('prc_pr_main');
+
+		if ($query->num_rows() > 0) {
+			$data = $query->row();
+			return $data->ppm_id;
+		} else {
+			return "0";
+		}
+
+	}
+
+	public function get_manager_user($ppm_id) {
+
+		$name = "";
+		$posisi = "";
+		//$query;
+
+		$this->db->select('comment_name, pos_name');
+		$this->db->where('ppm_id', $ppm_id);
+		$this->db->order_by('comment_id', "ASC");
+		$this->db->offset(1);
+		$this->db->limit(1);
+		$query = $this->db->get('prc_plan_comment');
+
+		if ($query->num_rows() > 0) {
+			$data = $query->row();
+			$name = $data->comment_name;
+			$posisi = $data->pos_name;
+		} 
+
+		return ["name" => $name, "posisi" => $posisi];
+
+	}
+
 	public function setMessage($message){
 
 		$current_message = $this->session->userdata("message");
@@ -332,6 +370,7 @@ class Procedure_m extends MY_Model {
 		return $this->db->get("adm_wkf_response");
 	}
 
+
 	public function getResponseList($code){
 		$data = $this->getResponse("",$code)->result_array();
 		$ret = array();
@@ -364,9 +403,6 @@ class Procedure_m extends MY_Model {
 		$getdata = $this->db
 		->select($code_field." as nextPosCode,".$name_field." as nextPosName")
 		->get($table)->row_array();
-		
-		//$td = $this->db->last_query($getdata);print_r($td);die;
-		
 
 		if(empty($getdata)){
 			//$this->setMessage("ERROR : PROSES TIDAK NAIK. SEGERA CEK POSISI DAN USER YANG TERLIBAT");
@@ -514,7 +550,7 @@ class Procedure_m extends MY_Model {
 		$msg = auto_link($msg);
 
 
-		//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Perencanaan Pengadaan Nomor $ppm_id",$msg);
+		$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Perencanaan Pengadaan Nomor $ppm_id",$msg);
 		return false;
 
 	}
@@ -758,7 +794,7 @@ class Procedure_m extends MY_Model {
 								"pos_id",
 								"pos_name",
 								"vw_adm_pos",
-								array("job_title"=>"MANAJER USER", "dept_name"=>"DIVISI SUPPLY CHAIN MANAGEMENT", "pos_name"=>"Dispatcher"),
+								array("job_title"=>"MANAJER USER", "dept_name"=>"SUPPLY CHAIN MANAGEMENT", "pos_name"=>"Dispatcher"),
 								"job_title = 'MANAJER USER' and dept_name = 'SCM' and pos_name = 'Dispatcher'");
 							
 							$nextPosCode = $getdata['nextPosCode'];
@@ -1038,7 +1074,7 @@ class Procedure_m extends MY_Model {
 				$msg = auto_link($msg);
 				//end
 
-				//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Permintaan Pengadaan Nomor $pr_number",$msg);
+				$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Permintaan Pengadaan Nomor $pr_number",$msg);
 
 
 				$ret = array(
@@ -1067,6 +1103,8 @@ class Procedure_m extends MY_Model {
 
 		}
 	}
+
+
 
 	public function prc_tender_comment_complete(
 		$ptm_number = "",
@@ -1109,17 +1147,20 @@ class Procedure_m extends MY_Model {
 			$view_kontrak = 'vw_prc_hierarchy_approval_11';
 		}
 
-		$this->db->select('ptm_dept_id,ptm_buyer_pos_code');
+		$this->db->select('ptm_dept_id');
 		$this->db->where('ptm_number', $ptm_number);
 		$get_dept_id = $this->db->get('prc_tender_main')->row_array();
 		$dept_id = $get_dept_id['ptm_dept_id'];
-		$posid = $get_dept_id['ptm_buyer_pos_code'];
 
 		if(is_numeric($response)){
 			$response_real = $this->getResponseName($response);
 			$response = url_title($response_real,"_",true);
 		}
-
+/*
+		echo "ACTIVITY : ".$activity;
+		echo "<br/>";
+		echo "RESPONSE : ".$response;
+*/
 		$message = "";
 		$nextPosCode = "";
 		$nextPosName = "";
@@ -1143,6 +1184,10 @@ class Procedure_m extends MY_Model {
 		->num_rows();
 
 		if($anyIncompleteComment > 0){
+/*
+			echo "<br/>";
+		echo "WKF START";
+*/
 
 		$this->db->where(array(
 			"ptm_number"=>$ptm_number,
@@ -1167,24 +1212,27 @@ class Procedure_m extends MY_Model {
 		$nextPosCode = $lastPosCode;
 		$nextPosName = $lastPosName;
 		
-		// completing tender comment
+				//completing tender comment
 
-		$totalOE = $this->db->select("sum((tit_price*tit_quantity)*(1+(COALESCE(tit_pph::double precision,0)/100)+(COALESCE(tit_ppn::integer,0)/100))) as total")->from("prc_tender_item")		
+		$totalOE = $this->db->select("sum((tit_price*tit_quantity)*(1+(COALESCE(tit_pph::double precision,0)/100)+(COALESCE(tit_ppn::integer,0)/100))) as total")->from("prc_tender_item")
 		->where("ptm_number",$ptm_number)->get()->row()->total;
 
+		// $max_amount = $this->db->select("max_amount")->from("adm_auth_hie")
+		// $max_amount = $this->db->select("max_amount")->from("adm_auth_hie_pr_non_proyek")
 		$max_amount = $this->db->select("max_amount")->from($tbl)
 		->where("pos_id",$lastPosCode)->get()->row();
 
-		// start code hlmifzi
+		//start code hlmifzi
+		// $max_amount_2 = $this->db->select("max_amount")->from("adm_auth_hie_rfq_non_proyek")
 		$max_amount_2 = $this->db->select("max_amount")->from($tbl_pemenang)
 		->where("pos_id",$lastPosCode)->get()->row();
-		// ubah $pr_number jadi ptm_number
+// ubah $pr_number jadi ptm_number
 		$totalOE_2 = $this->db
 		->select("sum((tit_price*tit_quantity)*(1+(COALESCE(tit_pph::double precision,0)/100)+(COALESCE(tit_ppn::integer,0)/100))) as total")
 		->from("prc_tender_item")
 		->where("ptm_number",$ptm_number)
 		->get()->row()->total;
-		// end
+		//end
 
 		$max_amount = (isset($max_amount->max_amount)) ? $max_amount->max_amount : 0;
 
@@ -1205,7 +1253,8 @@ class Procedure_m extends MY_Model {
 			"ptm_status" => $lastActivity,
 		));
 
-		// ganti ketua panitia sebagai manajer pengadaan
+
+		//ganti ketua panitia sebagai manajer pengadaan
 		$lastcom = $this->db
 					->where(array("ptc_id"=>$ptcId))
 					->get("prc_tender_comment")
@@ -1225,32 +1274,8 @@ class Procedure_m extends MY_Model {
 		}
 		//end y code
 
-		if($response == url_title('Terminasi Lelang',"_",true)){
 
-			$getdata = $this->getNextState(
-				"hap_pos_code",
-				"hap_pos_name",
-				$view,
-				"hap_pos_code = (select distinct hap_pos_parent 
-				from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
-
-			$nextPosCode = $getdata['nextPosCode'];
-			$nextPosName = $getdata['nextPosName'];
-
-			$nextjobtitle = $this->getNextJobTitle($nextPosCode);
-
-
-			$nextActivity = 1900;
-
-		} else if($activity == 1900){
-
-			if($response == url_title('Setuju',"_",true)){				
-
-				$nextActivity = 1800;
-
-			}
-
-		} else if($activity == 1029){
+		if($activity == 1029){
 
 			if($response == url_title('Lanjutkan',"_",true)){
 
@@ -1272,6 +1297,7 @@ class Procedure_m extends MY_Model {
 		} else if($activity == 1030){
 
 			//Penunjukkan Pelaksana Pengadaan
+
 
 			if($response == url_title('Lanjutkan',"_",true)){
 
@@ -1299,7 +1325,7 @@ class Procedure_m extends MY_Model {
 			} else if($response == url_title('Lanjutkan ke Persetujuan',"_",true)){
 
 				$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)
-				
+				// ->get('vw_prc_hierarchy_approval_2')
 				->get($view)
 				->row_array();
 
@@ -1310,7 +1336,13 @@ class Procedure_m extends MY_Model {
 				}
 
 				if($totalOE > $next_hap){
-					
+
+					// $getdata = $this->getNextState(
+					// 	"hap_pos_code",
+					// 	"hap_pos_name",
+					// 	"vw_prc_hierarchy_approval_2",
+					// 	"hap_pos_code = (select distinct hap_pos_parent 
+					// 		from vw_prc_hierarchy_approval_2 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
 					$getdata = $this->getNextState(
 						"hap_pos_code",
 						"hap_pos_name",
@@ -1340,11 +1372,20 @@ class Procedure_m extends MY_Model {
 					$nextPosCode = $getdata['nextPosCode'];
 					$nextPosName = $getdata['nextPosName'];
 
+					// $getdata = $this->getNextState(
+					// 	"pos_id",
+					// 	"pos_name",
+					// 	"adm_pos",
+					// 	array("job_title"=>$nextjobtitle));
+
+					// $nextPosCode = $getdata['nextPosCode'];
+					// $nextPosName = $getdata['nextPosName'];
+
 					$nextActivity = 1050;	
 					
 				}
 
-			} 
+			}
 
 		} else if($activity == 1041){
 
@@ -1355,77 +1396,111 @@ class Procedure_m extends MY_Model {
 				->where("ptm_number",$ptm_number)
 				->get("prc_tender_prep")->row_array();
 
-				$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)
+				/*
+				$committee_id = $getdata['adm_bid_committee'];
 
-				->get($view)
-				->row_array();
+				if(!empty($committee_id)){
 
-				$next_hap = 0;
+					//TAMBAH COMMENT KE KETUA
 
-				if(!empty($hap)){
-					$next_hap = $hap['hap_amount'];
-				}
+					$getdata = $this->db
+					->where(array("committee_id"=>$committee_id))
+					->order_by("committee_type", "desc")
+					->get("vw_adm_bid_committee")
+					->result_array();
 
-				if($totalOE > $next_hap){
+					foreach ($getdata as $key => $value) {
+						$type = $value['committee_type'];
+						$next = ($type == 1) ? 1051 : 1052;
+						$comment = $this->Comment_m->insertProcurementRFQ($ptm_number,$next,"","","",$value['pos_id'],$value['pos_name'],$value['employee_id']);
 
-					$getdata = $this->getNextState(
-						"hap_pos_code",
-						"hap_pos_name",
-						$view,
-						"hap_pos_code = (select distinct hap_pos_parent 
-						from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
-
-					$nextPosName = $getdata['nextPosName'];
-					$nextPosCode = $getdata['nextPosCode'];
-
-					//y rfq dari buyer ke staff scm
-					if($nextPosCode == NULL){
-						$getdatastaf = $this->getNextState(
-							"ptm_requester_pos_code",
-							"ptm_requester_pos_name",
-							"prc_tender_main",
-							array("ptm_number"=>$ptm_number));
-
-						$nextPosName = $getdatastaf['nextPosName'];
-						$nextPosCode = $getdatastaf['nextPosCode'];
 					}
-					//y end
-
-					$nextjobtitle = $this->getNextJobTitle($nextPosCode);
-
-					$nextActivity = 1041;
 
 				} else {
+					*/
 
-					$proc = $this->db
-					->where(array("ptm_number"=>$ptm_number))
-					->get("prc_tender_prep")->row_array();
+					$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)
+					// ->get('vw_prc_hierarchy_approval_2')
+					->get($view)
+					->row_array();
 
-					$getdata = $this->getNextState(
-						"ptm_buyer_pos_code",
-						"ptm_buyer_pos_name",
-						"prc_tender_main",
-						array("ptm_number"=>$ptm_number));
+					$next_hap = 0;
 
-					$nextPosName = $getdata['nextPosName'];
-					$nextPosCode = $getdata['nextPosCode'];
+					if(!empty($hap)){
+						$next_hap = $hap['hap_amount'];
+					}
 
-					if($proc['ptp_prequalify'] == 2){
-						//start code hlmifzi
-						$nextActivity = 1060;
-						//end code
-					} else if($proc['ptp_tender_method'] == 2){
+					if($totalOE > $next_hap){
 
-						$nextActivity = 1070;
+						// $getdata = $this->getNextState(
+						// 	"hap_pos_code",
+						// 	"hap_pos_name",
+						// 	"vw_prc_hierarchy_approval_2",
+						// 	"hap_pos_code = (select distinct hap_pos_parent 
+						// 		from vw_prc_hierarchy_approval_2 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
+						$getdata = $this->getNextState(
+							"hap_pos_code",
+							"hap_pos_name",
+							$view,
+							"hap_pos_code = (select distinct hap_pos_parent 
+							from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
+
+						$nextPosName = $getdata['nextPosName'];
+						$nextPosCode = $getdata['nextPosCode'];
+
+						//y rfq dari buyer ke staff scm
+						if($nextPosCode == NULL){
+							$getdatastaf = $this->getNextState(
+								"ptm_requester_pos_code",
+								"ptm_requester_pos_name",
+								"prc_tender_main",
+								array("ptm_number"=>$ptm_number));
+
+							$nextPosName = $getdatastaf['nextPosName'];
+							$nextPosCode = $getdatastaf['nextPosCode'];
+						}
+						//y end
+
+						$nextjobtitle = $this->getNextJobTitle($nextPosCode);
+
+						$nextActivity = 1041;
 
 					} else {
 
-						$nextActivity = 1060;	
+						$proc = $this->db
+						->where(array("ptm_number"=>$ptm_number))
+						->get("prc_tender_prep")->row_array();
 
+						$getdata = $this->getNextState(
+							"ptm_buyer_pos_code",
+							"ptm_buyer_pos_name",
+							"prc_tender_main",
+							array("ptm_number"=>$ptm_number));
+
+						$nextPosName = $getdata['nextPosName'];
+						$nextPosCode = $getdata['nextPosCode'];
+
+						if($proc['ptp_prequalify'] == 2){
+							//start code hlmifzi
+							$nextActivity = 1060;
+							//end code
+						} else if($proc['ptp_tender_method'] == 2){
+
+							$nextActivity = 1070;
+
+						} else {
+
+							$nextActivity = 1060;	
+
+						}
+						
 					}
 					
-				}
-					
+
+				//}
+
+
+
 			} else if($response == url_title('Revisi',"_",true)){
 
 				$getdata = $this->getNextState(
@@ -1436,11 +1511,12 @@ class Procedure_m extends MY_Model {
 
 				$nextPosName = $getdata['nextPosName'];
 				$nextPosCode = $getdata['nextPosCode'];
+
 				$nextActivity = 1040;
 
 			}
 
-		} else if ($activity == 1050){
+		} else if($activity == 1050){
 
 			//Persetujuan Dokumen Pengadaan Non Panitia
 
@@ -1466,7 +1542,8 @@ class Procedure_m extends MY_Model {
 
 				$tender_method = $getdata['ptp_tender_method'];
 
-				$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)				
+				$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)
+				// ->get('vw_prc_hierarchy_approval_2')
 				->get($view)
 				->row_array();
 
@@ -1478,6 +1555,10 @@ class Procedure_m extends MY_Model {
 
 				if(($totalOE > $next_hap) && !empty($getdata) && !($tender_method != 0 && $getdata['hap_pos_job'] == "DIREKTUR USER")){
 
+					// $getdata = $this->db
+					// ->where("hap_pos_code = (select distinct hap_pos_parent from vw_prc_hierarchy_approval_2 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)")
+					// ->get("vw_prc_hierarchy_approval_2")
+					// ->row_array();
 					$getdata = $this->db
 					->where("hap_pos_code = (select distinct hap_pos_parent from ".$view." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)")
 					->get($view)
@@ -1500,6 +1581,8 @@ class Procedure_m extends MY_Model {
 
 					$nextPosName = $getdata['nextPosName'];
 					$nextPosCode = $getdata['nextPosCode'];
+					//$newNumber = $this->movePRtoRFQ($pr_number);
+
 					$nextActivity = (!empty($tender_method) && $tender_method == 2) ? 1070 : 1060;
 
 				}
@@ -1566,43 +1649,74 @@ class Procedure_m extends MY_Model {
 
 		} else if($activity == 1060){
 
-			$getdata = $this->getNextState(
-				"ptm_buyer_pos_code",
-				"ptm_buyer_pos_name",
-				"prc_tender_main",
-				array("ptm_number"=>$ptm_number));
+			//if($response == url_title('Kirim Undangan',"_",true)){
 
-			$nextPosName = $getdata['nextPosName'];
-			$nextPosCode = $getdata['nextPosCode'];
+				/*
 
-			$nextActivity = 1080;
+				$getdata = $this->db
+				->select("adm_bid_committee,ptp_tender_method")
+				->where("ptm_number",$ptm_number)
+				->get("prc_tender_prep")->row_array();
 
-		} else if($activity == 1070){
+				$nextActivity = (!empty($getdata['ptp_tender_method']) && $getdata['ptp_tender_method'] == 2) ? 1080 : 1080;
 
-			$proc = $this->db
-			->where(array("ptm_number"=>$ptm_number))
-			->get("prc_tender_prep")->row_array();
+				if(!empty($getdata['adm_bid_committee'])){
 
-			$getdata = $this->getNextState(
-				"ptm_buyer_pos_code",
-				"ptm_buyer_pos_name",
-				"prc_tender_main",
-				array("ptm_number"=>$ptm_number));
+					$getdata = $this->getNextState(
+						"pos_id",
+						"committee_pos",
+						"adm_bid_committee",
+						array("committee_id"=>$getdata['adm_bid_committee'],"committee_type"=>2));
 
-			$nextPosName = $getdata['nextPosName'];
-			$nextPosCode = $getdata['nextPosCode'];
+					$nextPosName = $getdata['nextPosName'];
+					$nextPosCode = $getdata['nextPosCode'];
 
-			if($proc['ptp_prequalify'] == 1){
-				
-				$nextActivity = 1071;
+				} else {
 
-			} else {
+					*/
 
-				$nextActivity = 1080;
+					$getdata = $this->getNextState(
+						"ptm_buyer_pos_code",
+						"ptm_buyer_pos_name",
+						"prc_tender_main",
+						array("ptm_number"=>$ptm_number));
 
-			}
+					$nextPosName = $getdata['nextPosName'];
+					$nextPosCode = $getdata['nextPosCode'];
 
-		}  else if($activity == 1071){
+					$nextActivity = 1080;
+
+				//}
+
+				//}
+
+				} else if($activity == 1070){
+
+
+					$proc = $this->db
+					->where(array("ptm_number"=>$ptm_number))
+					->get("prc_tender_prep")->row_array();
+
+					$getdata = $this->getNextState(
+						"ptm_buyer_pos_code",
+						"ptm_buyer_pos_name",
+						"prc_tender_main",
+						array("ptm_number"=>$ptm_number));
+
+					$nextPosName = $getdata['nextPosName'];
+					$nextPosCode = $getdata['nextPosCode'];
+
+					if($proc['ptp_prequalify'] == 1){
+						
+						$nextActivity = 1071;
+
+					} else {
+
+						$nextActivity = 1080;
+
+					}
+
+				}  else if($activity == 1071){
 
 					if($response == url_title('Simpan dan Lanjut',"_",true)){
 
@@ -1796,6 +1910,33 @@ class Procedure_m extends MY_Model {
 						->where("ptm_number",$ptm_number)
 						->get("prc_tender_prep")->row_array();
 
+						/*
+						if(!empty($getdata['adm_bid_committee'])){
+
+							$committee_id = $getdata['adm_bid_committee'];
+
+							$getdata = $this->db
+							->where(array("committee_id"=>$committee_id))
+							->get("vw_adm_bid_committee")
+							->result_array();
+
+							foreach ($getdata as $key => $value) {
+								$type = $value['committee_type'];
+								$next = ($type == 1) ? 1131 : 1132;
+								$comment = $this->Comment_m->insertProcurementRFQ($ptm_number,$next,"","","",$value['pos_id'],$value['pos_name'],$value['employee_id']);
+							}
+
+						} else { 
+							*/
+
+							// // $nextjobtitle = 'MANAJER PENGADAAN';
+
+							// $getdata = $this->getNextState(
+							// 	"pos_id",
+							// 	"pos_name",
+							// 	"adm_pos",
+							// 	array("job_title"=>$nextjobtitle));
+
 							$getdata = $this->getNextState(
 								"hap_pos_code",
 								"hap_pos_name",
@@ -1808,7 +1949,13 @@ class Procedure_m extends MY_Model {
 
 							$nextjobtitle = $this->getNextJobTitle($nextPosCode);
 
+							// $nextPosCode = $getdata['nextPosCode'];
+							// $nextPosName = $getdata['nextPosName'];
+
 							$nextActivity = 1102;	
+							// $nextActivity = 1101;	
+
+						// }
 
 					} else if($response == url_title('Ulangi Proses Pengadaan',"_",true)){
 						
@@ -1834,6 +1981,11 @@ class Procedure_m extends MY_Model {
 
 							$nextjobtitle = 'VP PENGADAAN';
 
+							// $getdata = $this->getNextState(
+							// 	"pos_id",
+							// 	"pos_name",
+							// 	"adm_pos",
+							// 	array("job_title"=>$nextjobtitle));
 							$this->db->join($view." a", 'a.hap_pos_code = b.pos_id');
 							$getdata = $this->getNextState(
 								"a.hap_pos_code",
@@ -1866,7 +2018,9 @@ class Procedure_m extends MY_Model {
 							}
 						}
 
-						//end						
+						//end
+
+						
 
 					} else {
 
@@ -1883,7 +2037,7 @@ class Procedure_m extends MY_Model {
 
 					}
 
-				} else if($activity == 1102){
+				}else if($activity == 1102){
 
 					$getdata = $this->getNextState(
 						"ptm_buyer_pos_code",
@@ -2004,6 +2158,17 @@ class Procedure_m extends MY_Model {
 					$nextActivity = 1903;
 				}
 
+				// $getdata = $this->getNextState(
+				// 	"ptm_buyer_pos_code",
+				// 	"ptm_buyer_pos_name",
+				// 	"prc_tender_main",
+				// 	array("ptm_number"=>$ptm_number));
+
+				// $nextPosName = $getdata['nextPosName'];
+				// $nextPosCode = $getdata['nextPosCode'];
+
+				// $nextActivity = 1120;
+
 			}  else if($activity == 1120){
 
 				if($response == url_title('Lanjutkan ke Persetujuan Evaluasi',"_",true)){
@@ -2019,8 +2184,16 @@ class Procedure_m extends MY_Model {
 
 					);
 
+					// $getdata = $this->getNextState(
+					// 	"pos_id",
+					// 	"pos_name",
+					// 	"adm_pos",
+					// 	array("job_title"=>$nextjobtitle));
+
 					$nextPosCode = $getdata['nextPosCode'];
 					$nextPosName = $getdata['nextPosName'];
+
+					// $nextActivity = 1121;
 					$nextActivity = 1122;
 					
 				} else if($response == url_title('Ulangi Proses Pengadaan',"_",true)) {
@@ -2043,10 +2216,31 @@ class Procedure_m extends MY_Model {
 
 					if(!empty($getdata['adm_bid_committee'])){
 
+/*
+						$committee_id = $getdata['adm_bid_committee'];
+
+						$getdata = $this->db
+						->where(array("committee_id"=>$committee_id))
+						->get("vw_adm_bid_committee")
+						->result_array();
+
+						foreach ($getdata as $key => $value) {
+							$type = $value['committee_type'];
+							$next = ($type == 1) ? 1131 : 1132;
+							$comment = $this->Comment_m->insertProcurementRFQ($ptm_number,$next,"","","",$value['pos_id'],$value['pos_name'],$value['employee_id']);
+						}
+						*/
+
 					} else {
 
 						$nextjobtitle = 'VP PENGADAAN';
 						
+						// $getdata = $this->getNextState(
+						// 	"pos_id",
+						// 	"pos_name",
+						// 	"adm_pos",
+						// 	array("job_title"=>$nextjobtitle));
+						// $this->db->join($view." a", 'a.hap_pos_code = b.pos_id');
 						$getdata = $this->getNextState(
 							"pos_id",
 							"pos_name",
@@ -2074,6 +2268,27 @@ class Procedure_m extends MY_Model {
 					->where("ptm_number",$ptm_number)
 					->get("prc_tender_prep")->row_array();
 
+					/*
+					if(!empty($getdata['adm_bid_committee'])){
+
+
+						$committee_id = $getdata['adm_bid_committee'];
+
+						$getdata = $this->db
+						->where(array("committee_id"=>$committee_id))
+						->get("vw_adm_bid_committee")
+						->result_array();
+
+						foreach ($getdata as $key => $value) {
+							$type = $value['committee_type'];
+							$next = ($type == 1) ? 1131 : 1132;
+							$comment = $this->Comment_m->insertProcurementRFQ($ptm_number,$next,"","","",$value['pos_id'],$value['pos_name'],$value['employee_id']);
+						}
+						
+
+					} else {
+						*/
+
 						$getdata = $this->getNextState(
 							"ptm_buyer_pos_code",
 							"ptm_buyer_pos_name",
@@ -2084,6 +2299,8 @@ class Procedure_m extends MY_Model {
 						$nextPosName = $getdata['nextPosName'];
 
 						$nextActivity = 1140;	
+
+					// }
 
 				}elseif($response == url_title('Revisi',"_",true)){
 
@@ -2134,6 +2351,12 @@ class Procedure_m extends MY_Model {
 
 					if($totalOE > $max_amount){
 
+						// $getdata = $this->getNextState(
+						// 	"hap_pos_code",
+						// 	"hap_pos_name",
+						// 	"vw_prc_hierarchy_approval_2",
+						// 	"hap_pos_code = (select distinct hap_pos_parent 
+						// 		from vw_prc_hierarchy_approval_2 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
 						$getdata = $this->getNextState(
 							"hap_pos_code",
 							"hap_pos_name",
@@ -2158,6 +2381,8 @@ class Procedure_m extends MY_Model {
 
 						$nextPosName = $getdata['nextPosName'];
 						$nextPosCode = $getdata['nextPosCode'];
+					//$newNumber = $this->movePRtoRFQ($pr_number);
+
 						$nextActivity = 1140;
 
 					}
@@ -2188,7 +2413,7 @@ class Procedure_m extends MY_Model {
 
 				} else if($response == url_title('Setuju',"_",true)){
 
-					//CEK REVIEW SUDAH DIISI SUDAH SEMUA ATAU BELUM
+				//CEK REVIEW SUDAH DIISI SUDAH SEMUA ATAU BELUM
 					$check = $this->db->where(array("ptc_end_date"=>null,"ptc_name"=>null,"ptm_number
 						"=>$ptm_number,"ptc_activity"=>1132))->get("prc_tender_comment")->num_rows();
 
@@ -2250,6 +2475,25 @@ class Procedure_m extends MY_Model {
 
 				if($response == url_title('Lanjutkan ke Persetujuan Calon Pelaksana Pekerjaan',"_",true)){
 
+					/*
+
+					$getdata = $this->getNextState(
+						"pos_id",
+						"pos_name",
+						"adm_pos",
+						array("job_title"=>"VP PENGADAAN"));
+
+					$nextPosCode = $getdata['nextPosCode'];
+					$nextPosName = $getdata['nextPosName'];
+
+	*/
+					// $getdata = $this->getNextState(
+					// 	"hap_pos_code",
+					// 	"hap_pos_name",
+					// 	"vw_prc_hierarchy_approval_2",
+					// 	"hap_pos_code = (select distinct hap_pos_parent 
+					// 		from vw_prc_hierarchy_approval_2 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
+
 					$getdata = $this->getNextState(
 						"hap_pos_code",
 						"hap_pos_name",
@@ -2279,30 +2523,44 @@ class Procedure_m extends MY_Model {
 					->select("adm_bid_committee")
 					->where("ptm_number",$ptm_number)
 					->get("prc_tender_prep")->row_array();
-						
-						//new update menambahkan kondisi perbandingan amount next approval
-						$prnt = $this->db->query("select hap_pos_parent 
-							from ".$view_pemenang." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL")->row_array();
-							
-						$prnt_id = $prnt['hap_pos_parent'];
-						
-						$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)
-						->get($view_pemenang)
-						->row_array();
-						
-						$next_hap = $this->db->select('hap_amount')->where('hap_pos_code',$prnt_id)						
-						->get($view_pemenang)
-						->row_array();
-						
-						if($totalOE < $next_hap['hap_amount']){
-							$x = $this->db->query("select distinct hap_pos_parent 
-								from ".$view_pemenang." where hap_pos_code = ".$prnt_id." AND hap_pos_parent IS NOT NULL")->result_array();								
-						}else{
-							$x = $this->db->query("select distinct hap_pos_parent 
-								from ".$view_pemenang." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL")->result_array();								
+
+					/*
+					if(!empty($getdata['adm_bid_committee'])){
+
+						echo "ADA KOMITE";
+
+						$committee_id = $getdata['adm_bid_committee'];
+
+						$getdata = $this->db
+						->where(array("committee_id"=>$committee_id))
+						->get("vw_adm_bid_committee")
+						->result_array();
+
+						foreach ($getdata as $key => $value) {
+							$type = $value['committee_type'];
+							$next = ($type == 1) ? 1151 : 1152;
+							$comment = $this->Comment_m->insertProcurementRFQ($ptm_number,$next,"","","",$value['pos_id'],$value['pos_name'],$value['employee_id']);
 						}
-						//end update
-						
+
+					} else {
+						*/
+
+						$hap = $this->db->select('hap_amount')->where('hap_pos_code',$lastPosCode)
+						// ->get('vw_prc_hierarchy_approval_3')
+						->get($view_pemenang)
+						->row_array();
+
+						$next_hap = 0;
+
+						if(!empty($hap)){
+							$next_hap = $hap['hap_amount'];
+						}
+
+						// $x = $this->db->query("select distinct hap_pos_parent 
+						// 	from vw_prc_hierarchy_approval_3 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL")->result_array();
+						$x = $this->db->query("select distinct hap_pos_parent 
+							from ".$view_pemenang." where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL")->result_array();
+
 						$y = $this->db->where('pos_id',$lastPosCode)
 						->get('vw_adm_pos')
 						->row_array();
@@ -2313,7 +2571,6 @@ class Procedure_m extends MY_Model {
 							foreach ($x as $key => $value) {
 								if(!$poscode){
 									$get_user = $this->db->where("pos_id",$value['hap_pos_parent'])->get("vw_adm_pos")->row_array();
-
 									if($get_user['dept_id'] == $y['dept_id']){
 										$poscode = $get_user['pos_id'];
 									}
@@ -2326,6 +2583,12 @@ class Procedure_m extends MY_Model {
 						
 							$poscode = $x[0]['hap_pos_parent'];
 						} 
+
+						// $getdata = $this->getNextState(
+						// 	"hap_pos_code",
+						// 	"hap_pos_name",
+						// 	"vw_prc_hierarchy_approval_3",
+						// 	"hap_pos_code = $poscode");
 						
 						$pos = $this->Administration_m->getPos($lastPosCode)->row_array();
 
@@ -2367,126 +2630,137 @@ class Procedure_m extends MY_Model {
 							$nextPosName = $getdata['nextPosName'];
 							$nextPosCode = $getdata['nextPosCode'];
 
-						} else { 	// aproval berjenjang
+						}else{ 											// aproval berjenjang
 							$getdata = $this->getNextState(
 								"hap_pos_code",
 								"hap_pos_name",
 								$view_pemenang,
 								"hap_pos_code = $poscode");
-					
+
 							$nextPosName = $getdata['nextPosName'];
 							$nextPosCode = $getdata['nextPosCode'];
 						}
 
 
-						if($totalOE > $next_hap['hap_amount']){
+						if($totalOE > $next_hap){
 
 							$nextActivity = 1141;
 
 						} else {
-							// $nextActivity = 1150;
-							//approval ke dbs
-							$this->db->order_by('pos_name', 'asc');
-							$this->db->limit(1);
-							$this->db->join("$tbl_pemenang b", 'b.pos_id = adm_pos.pos_id');
-							$getdata_keu = $this->getNextState(
-								"adm_pos.pos_id",
-								"adm_pos.pos_name",
-								'adm_pos',
-								"adm_pos.pos_id = 50");
-									
-							$tunjuk_pemenang = true;
 
-							if (array(count($getdata_keu)) != 0) {
-
-								$getdata_dsb = $this->getNextState(
-									"hap_pos_code",
-									"hap_pos_name",
-									$view_pemenang,
-									"hap_pos_parent = ".$getdata_keu['nextPosCode']);
-
-								if ($lastPosCode !=  $getdata_dsb['nextPosCode'] AND $lastPosCode != $getdata_keu['nextPosCode']) {
-
-									$nextPosName = "Kepala Divisi Keuangan";
-									$nextPosCode = 50;
-									$tunjuk_pemenang = false;
-									
-									$last_end_date = $this->db
-									->where("ptm_number",$ptm_number)
-									->where("ptc_end_date !=",null)
-									->order_by("ptc_id","desc")
-									->limit(1)
-									->get("prc_tender_comment")
-									->row_array();
-
-									$input['ptm_number'] = $ptm_number;
-									$input['ptc_pos_code'] = 257;
-									$input['ptc_position'] = "Kepala Divisi SCM";
-									$input['ptc_name'] = "Susila";
-									$input['ptc_user'] = 3;
-									$input['ptc_activity'] = 1153;
-									$input['ptc_comment'] = "Review Selesai";
-									$input['ptc_start_date'] = $last_end_date['ptc_end_date'];
-									$input['ptc_end_date'] = date("Y-m-d H:i:s");
-									$input['ptc_attachment'] = "";
-									$input['ptc_response'] = "Review Selesai";
-
-									$this->db->insert("prc_tender_comment",$input);
-
-									$nextActivity = 1154;
-								}else{
-
-									$tunjuk_pemenang = true;
-
-								}
-
-
-							}
-
-							if ($tunjuk_pemenang) {
-
-								$getdata = $this->db
-								->select("ptp_tender_method")
+							//approval panitia pengadaan
+						/*	
+							$getdata = $this->db
+								->select("adm_bid_committee,ptp_tender_method")
 								->where("ptm_number",$ptm_number)
 								->get("prc_tender_prep")->row_array();
 
-								if($getdata['ptp_tender_method'] == 0){
+							if(!empty($getdata['adm_bid_committee'])){
+								
 
-									$nextjobtitle = 'VP PENGADAAN';
+								$getdata = $this->getNextState(
+									"pos_id",
+									"pos_name",
+									"vw_adm_bid_committee",
+									array("committee_id"=>$getdata['adm_bid_committee'],"committee_type"=>1));
 
-									$this->db->join($view_pemenang." a", 'a.hap_pos_code = b.pos_id');
-									$getdata = $this->getNextState(
-										"a.hap_pos_code",
-										"a.hap_pos_name",
-										"adm_pos b",
-										array("b.job_title"=>$nextjobtitle,'b.dept_id'=>$dept_id));
+								$nextPosName = $getdata['nextPosName']." (PANITIA PENGADAAN)";
+								$nextPosCode = $getdata['nextPosCode'];
+								$nextActivity = 1144;
 
-									$nextPosCode = $getdata['nextPosCode'];
-									$nextPosName = $getdata['nextPosName'];
+							//end
 
-									$wintype = $this->Procrfq_m->getRFQ($ptm_number)->row_array();
+							}else{
+								*/
 
-									if ($wintype["ptm_winner"] == 2) {
-										$nextActivity = 1181;
+								// $nextActivity = 1150;
+							//approval ke dbs
+								$this->db->order_by('pos_name', 'asc');
+								$this->db->limit(1);
+								$this->db->join("$tbl_pemenang b", 'b.pos_id = adm_pos.pos_id');
+								$getdata_keu = $this->getNextState(
+									"adm_pos.pos_id",
+									"adm_pos.pos_name",
+									'adm_pos',
+									"job_title = 'PIC ANGGARAN'");
+
+								$tunjuk_pemenang = true;
+
+								if (count($getdata_keu) != 0) {
+
+									$getdata_dsb = $this->getNextState(
+										"hap_pos_code",
+										"hap_pos_name",
+										$view_pemenang,
+										"hap_pos_parent = ".$getdata_keu['nextPosCode']);
+
+									if ($lastPosCode !=  $getdata_dsb['nextPosCode'] AND $lastPosCode != $getdata_keu['nextPosCode']) {
+
+										$nextPosName = $getdata_dsb['nextPosName'];
+										$nextPosCode = $getdata_dsb['nextPosCode'];
+										$tunjuk_pemenang = false;
+										$nextActivity = 1153;
+
 									}else{
-										$nextActivity = 1180;
+
+										$tunjuk_pemenang = true;
+
 									}
 
-								} else {
 
-									$getdata = $this->getNextState(
-										"ptm_buyer_pos_code",
-										"ptm_buyer_pos_name",
-										"prc_tender_main",
-										array("ptm_number"=>$ptm_number));
-
-									$nextPosName = $getdata['nextPosName'];
-									$nextPosCode = $getdata['nextPosCode'];
-									$nextActivity = 1160;
 								}
 
-							}
+								if ($tunjuk_pemenang) {
+
+									$getdata = $this->db
+									->select("ptp_tender_method")
+									->where("ptm_number",$ptm_number)
+									->get("prc_tender_prep")->row_array();
+
+									if($getdata['ptp_tender_method'] == 0){
+
+										$nextjobtitle = 'VP PENGADAAN';
+
+										$this->db->join($view_pemenang." a", 'a.hap_pos_code = b.pos_id');
+										$getdata = $this->getNextState(
+											"a.hap_pos_code",
+											"a.hap_pos_name",
+											"adm_pos b",
+											array("b.job_title"=>$nextjobtitle,'b.dept_id'=>$dept_id));
+
+										$nextPosCode = $getdata['nextPosCode'];
+										$nextPosName = $getdata['nextPosName'];
+
+										$wintype = $this->Procrfq_m->getRFQ($ptm_number)->row_array();
+
+										if ($wintype["ptm_winner"] == 2) {
+											$nextActivity = 1181;
+										}else{
+											$nextActivity = 1180;
+										}
+
+									} else {
+
+										$getdata = $this->getNextState(
+											"ptm_buyer_pos_code",
+											"ptm_buyer_pos_name",
+											"prc_tender_main",
+											array("ptm_number"=>$ptm_number));
+
+										$nextPosName = $getdata['nextPosName'];
+										$nextPosCode = $getdata['nextPosCode'];
+										$nextActivity = 1160;
+									}
+
+								}
+							// }
+
+						//end
+
+
 						}
+
+					// }
 
 				} else if($response == url_title('Ulangi Proses Pengadaan',"_",true)) {
 
@@ -2597,7 +2871,7 @@ class Procedure_m extends MY_Model {
 					"adm_pos.pos_id",
 					"adm_pos.pos_name",
 					'adm_pos',
-					"adm_pos.pos_id = 50");
+					"job_title = 'PIC ANGGARAN'");
 				$nextPosName = $getdata_keu['nextPosName'];
 				$nextPosCode = $getdata_keu['nextPosCode'];
 				$nextActivity = 1154;
@@ -2611,18 +2885,18 @@ class Procedure_m extends MY_Model {
 
 				if($getdata['ptp_tender_method'] == 0){
 
-					$nextjobtitle = 'PELAKSANA PENGADAAN';
+					$nextjobtitle = 'VP PENGADAAN';
 
 					$this->db->join($view_pemenang." a", 'a.hap_pos_code = b.pos_id');
 					$getdata = $this->getNextState(
 						"a.hap_pos_code",
 						"a.hap_pos_name",
 						"adm_pos b",
-						array("b.job_title"=>$nextjobtitle,'b.pos_id'=>$posid));
+						array("b.job_title"=>$nextjobtitle,'b.dept_id'=>$dept_id));
 
 					$nextPosCode = $getdata['nextPosCode'];
 					$nextPosName = $getdata['nextPosName'];
-					
+
 					$wintype = $this->Procrfq_m->getRFQ($ptm_number)->row_array();
 
 
@@ -2648,7 +2922,7 @@ class Procedure_m extends MY_Model {
 
 			} else if($activity == 1150){
 
-				//Persetujuan Calon Pemenang Evaluasi
+			//Persetujuan Calon Pemenang Evaluasi
 
 				if($response == url_title('Tidak Setuju',"_",true)){
 
@@ -2666,6 +2940,13 @@ class Procedure_m extends MY_Model {
 				} else if($response == url_title('Setuju',"_",true)){
 
 					if($totalOE_2 > $max_amount_2){
+
+						// $getdata = $this->getNextState(
+						// 	"hap_pos_code",
+						// 	"hap_pos_name",
+						// 	"vw_prc_hierarchy_approval_2",
+						// 	"hap_pos_code = (select distinct hap_pos_parent 
+						// 		from vw_prc_hierarchy_approval_2 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
 
 						$getdata = $this->getNextState(
 							"hap_pos_code",
@@ -2691,6 +2972,7 @@ class Procedure_m extends MY_Model {
 
 						$nextPosName = $getdata['nextPosName'];
 						$nextPosCode = $getdata['nextPosCode'];
+					//$newNumber = $this->movePRtoRFQ($pr_number);
 
 						$getdata = $this->db
 						->select("ptp_tender_method")
@@ -2700,6 +2982,11 @@ class Procedure_m extends MY_Model {
 						if($getdata['ptp_tender_method'] == 0){
 
 							$nextjobtitle = 'VP PENGADAAN';
+							// $getdata = $this->getNextState(
+							// 	"pos_id",
+							// 	"pos_name",
+							// 	"adm_pos",
+							// 	array("job_title"=>$nextjobtitle));
 
 							$this->db->join($view_pemenang." a", 'a.hap_pos_code = b.pos_id');
 							$getdata = $this->getNextState(
@@ -2732,7 +3019,7 @@ class Procedure_m extends MY_Model {
 
 			} else if($activity == 1151){
 
-				//Persetujuan Calon Pemenang Ketua
+			//Persetujuan Calon Pemenang Ketua
 
 				if($response == url_title('Revisi',"_",true)){
 
@@ -2845,6 +3132,16 @@ class Procedure_m extends MY_Model {
 					$this->batalkanPengadaan($ptm_number);
 
 				} else {
+					/*
+					$getdata = $this->getNextState(
+						"ptm_buyer_pos_code",
+						"ptm_buyer_pos_name",
+						"prc_tender_main",
+						array("ptm_number"=>$ptm_number));
+
+					$nextPosName = $getdata['nextPosName'];
+					$nextPosCode = $getdata['nextPosCode'];
+					*/
 
 					$nextjobtitle = 'VP PENGADAAN';
 					$this->db->join($view_pemenang." a", 'a.hap_pos_code = b.pos_id');
@@ -2852,7 +3149,12 @@ class Procedure_m extends MY_Model {
 						"a.hap_pos_code",
 						"a.hap_pos_name",
 						"adm_pos b",
-						array("b.job_title"=>$nextjobtitle,'b.dept_id'=>$dept_id));			
+						array("b.job_title"=>$nextjobtitle,'b.dept_id'=>$dept_id));
+					// $getdata = $this->getNextState(
+					// 	"pos_id",
+					// 	"pos_name",
+					// 	"adm_pos",
+					// 	array("job_title"=>$nextjobtitle));
 
 					$nextPosCode = $getdata['nextPosCode'];
 					$nextPosName = $getdata['nextPosName'];
@@ -2917,6 +3219,28 @@ class Procedure_m extends MY_Model {
 								"dept_id"=>$dept_id
 							);
 						} else {
+							/*
+							$spew = array(
+								"job_title"=>"PENGELOLA KONTRAK",
+								"district_id"=>$district_id,
+								"dept_name"=>"SUPPLY CHAIN MANAGEMENT"
+							);
+							$or_spew = array(
+								"job_title"=>"PENGELOLA KONTRAK",
+								"district_id"=>$district_id,
+								"dept_name"=>"SCM"
+							);
+							$spem = array(
+								"job_title"=>"MANAJER PENGADAAN",
+								"district_id"=>$district_id,
+								"dept_name"=>"SUPPLY CHAIN MANAGEMENT"
+							);
+							$or_spem = array(
+								"job_title"=>"MANAJER PENGADAAN",
+								"district_id"=>$district_id,
+								"dept_name"=>"SCM"
+							);
+							*/
 							$spew = "job_title = 'PENGELOLA KONTRAK' AND district_id = $district_id AND dept_name = 'SUPPLY CHAIN MANAGEMENT'";
 							$or_spew = "job_title = 'PENGELOLA KONTRAK' AND district_id = $district_id AND dept_name = 'SCM'";
 							$spem = "job_title = 'MANAJER KONTRAK' AND district_id = $district_id AND dept_name = 'SUPPLY CHAIN MANAGEMENT'";
@@ -2926,6 +3250,10 @@ class Procedure_m extends MY_Model {
 						if (isset($or_spem) AND !empty($or_spem)) {
 							$this->db->or_where($or_spem);	
 						}
+						// $getman = $this->db->select("pos_id, pos_name, employee_id")
+						// ->where($spem)
+						// ->get("user_login_rule")
+						// ->row_array();
 
 						$this->db->select("pos_id, pos_name, employee_id");
 						$this->db->or_where($spem);						
@@ -2934,6 +3262,10 @@ class Procedure_m extends MY_Model {
 						if (isset($or_spew) AND !empty($or_spew)) {
 							$this->db->or_where($or_spew);	
 						}
+						// $getspe = $this->db->select("pos_id, pos_name, employee_id")
+						// ->where($spew)
+						// ->get("user_login_rule")
+						// ->row_array();
 
 						$this->db->select("pos_id, pos_name, employee_id");
 						$this->db->or_where($spew);
@@ -2944,6 +3276,8 @@ class Procedure_m extends MY_Model {
                         $typeplan = ($check['ptm_type_of_plan'] == "rkp") ? "proyek" : "departemen";
                         
                         $input['type_of_plan'] = $typeplan;
+
+						// $input['type_of_plan'] = 'departemen';
 
 						$input['ctr_is_matgis'] = $is_matgis ? 1 : 0;
 
@@ -3059,6 +3393,112 @@ class Procedure_m extends MY_Model {
 
 					//haqim
 					//move rfq to contract
+					$this->load->model('Contract_m');
+
+					$check = $this->db
+					->query("SELECT * FROM vw_prc_monitor WHERE ptm_number = '".$ptm_number."' AND last_status = 1180")
+					->row_array();
+
+					// haqim
+					$this->db->join($view_kontrak." a", 'a.hap_pos_code = b.pos_id');
+					$getdata = $this->db->select("a.hap_pos_code as pos_id,a.hap_pos_name as pos_name")
+					->where(array("b.job_title"=>"PENGELOLA KONTRAK","b.dept_id"=>$dept_id)) //vp pengadaan
+					->get("adm_pos b")->row_array();
+					// end
+
+					$vendor = $this->db->where('vendor_id', $winner)->get('vnd_header')->row_array();
+					
+					//y manager kontrak
+					//haqim		
+					$this->db->join($view_kontrak." a", 'a.hap_pos_code = b.pos_id');
+					$getpos = $this->db->select('a.hap_pos_code as pos_id, a.hap_pos_name as pos_name')
+					->where(array('b.job_title'=>'MANAJER PENGADAAN',"b.dept_id"=>$dept_id))
+					->get('adm_pos b')->row_array();
+
+					$this->db->select('pos_id, pos_name, employee_id');
+					$this->db->where('pos_id', $getpos['pos_id']);
+					$getman = $this->db->get('adm_employee_pos')->row_array();
+
+					// end
+
+					//y pengelola kontrak
+					//haqim
+					$this->db->join($view_kontrak." a", 'a.hap_pos_code = b.pos_id');
+					$getpos = $this->db->select('a.hap_pos_code as pos_id, a.hap_pos_name as pos_name')
+					->where(array('b.job_title'=>'PENGELOLA KONTRAK',"b.dept_id"=>$dept_id))
+					->get('adm_pos b')->row_array();
+
+					$this->db->select('pos_id, pos_name, employee_id');
+					$this->db->where('pos_id', $getpos['pos_id']);
+					$getspe = $this->db->get('adm_employee_pos')->row_array();
+					//end
+
+					//contract header
+					$input['ptm_number'] = $check['ptm_number'];
+					$input['currency'] = $check['pqm_currency'];
+					$input['vendor_id'] = $vendor['vendor_id'];
+					$input['vendor_name'] = $vendor['vendor_name'];
+					$input['subject_work'] = $check['ptm_subject_of_work'];
+					$input['scope_work'] = $check['ptm_scope_of_work'];
+					$input['contract_type'] = $check['ptm_contract_type'];
+					$input['completed_tender_date'] = $check['ptm_completed_date'];
+					$input['contract_amount'] = $check['total_contract'];
+
+					//y insert manager kontrak dan pengelola kontrak
+					$input['ctr_spe_employee'] = $getspe['employee_id'];
+					$input['ctr_spe_pos'] = $getspe['pos_id'];
+					$input['ctr_spe_pos_name'] = $getspe['pos_name'];
+
+					$input['ctr_man_employee'] = $getman['employee_id'];
+					$input['ctr_man_pos'] = $getman['pos_id'];
+					$input['ctr_man_pos_name'] = $getman['pos_name'];
+
+					$typeplan = ($check['ptm_type_of_plan'] == "Proyek") ? "proyek" : "departemen";
+					$input['type_of_plan'] = $typeplan;
+					$input['spk_code'] = $check['spk_code'];
+					$input['dept_code'] = $check['dept_code'];
+					$input['dept_id'] = $check['ptm_dept_id'];
+					//y end
+
+					$this->db->insert("ctr_contract_header",$input);
+
+					$contract_id = $this->db->insert_id();
+
+					$vendor_id = $check['vendor_id'];
+					$this->db->where("vendor_id",$vendor_id);
+					$quo_item = $this->Procrfq_m->getViewVendorQuoComRFQ("","",$check['ptm_number'])->result_array();
+
+					//contract item
+					foreach ($quo_item as $key => $value) {
+						$short = (!empty($value['short_description'])) ? $value['short_description'] : $value['pqi_description'];
+						$inp = array(
+							"tit_id"=>$value['tit_id'],
+							"contract_id"=>$contract_id,
+							"item_code"=>$value['tit_code'],
+							"short_description"=>$short,
+							"long_description"=>$value['pqi_description'],
+							"price"=>$value['pqi_price'],
+							"qty"=>$value['pqi_quantity'],
+							"uom"=>$value['tit_unit'],
+							"min_qty"=>1,
+							"max_qty"=>$value['pqi_quantity'],
+							"ppn"=>$value['pqi_ppn'],
+							"pph"=>$value['pqi_pph'],
+							// "vendor_code"=>$value['vendor_win'],
+						);
+						
+						$act = $this->Contract_m->insertItem($inp);
+					}
+
+					//contract comment
+					$this->db->insert("ctr_contract_comment",array(
+						"ptm_number"=>$check['ptm_number'],
+						"contract_id"=>$contract_id,
+									"ccc_activity"=>2010, //2000
+									"ccc_position"=>$getdata['pos_name'],
+									"ccc_pos_code"=>$getdata['pos_id'],
+									"ccc_start_date"=>date("Y-m-d H:i:s"),
+								));
 					*/
 
 				} else if($response == url_title('Batalkan Pengadaan',"_",true)){
@@ -3128,9 +3568,12 @@ class Procedure_m extends MY_Model {
 									'weight' => $y['weight']
 								];
 
-								$d = array_merge($fw, $pw);								
+								$d = array_merge($fw, $pw);
+								
+								//$vend_item[$y['vendor_id']."-".$d['pr_dept_id']][trim($d['tit_code'])] = $d;
 
-								$vend_item[$y['vendor_id']][trim($d['tit_code'])] = $d;								
+								$vend_item[$y['vendor_id']][trim($d['tit_code'])] = $d;
+								// $vend_item[$y['vendor_id']] = $d;
 							}
 						}
 
@@ -3164,6 +3607,7 @@ class Procedure_m extends MY_Model {
 
 									$i = array(
 										"tit_id"=>$a['tit_id'],
+									//"contract_id"=>$contract_id,
 										"item_code"=>trim($a['tit_code']),
 										"short_description"=>$short,
 										"long_description"=>$quo_item['pqi_description'],
@@ -3173,13 +3617,15 @@ class Procedure_m extends MY_Model {
 										"min_qty"=>1,
 										"max_qty"=>$weight,
 										"ppn"=>($quo_item['pqi_ppn']) ? $quo_item['pqi_ppn'] : 0,
-										"pph"=>($quo_item['pqi_pph']) ? $quo_item['pqi_pph'] : 0,										
+										"pph"=>($quo_item['pqi_pph']) ? $quo_item['pqi_pph'] : 0,
+										// "sub_total"=>$sub_total,
 										'vendor_code'=>$vendor_id
 									);
 
 									$sub_total = $i['qty']*$i['price']*((100+$i['pph']+$i['ppn'])/100);
 
 									$i['sub_total'] = $sub_total;
+									// var_dump($i['sub_total']);
 									$item_cont[] = $i;
 
 									$total_contract += $sub_total;
@@ -3202,6 +3648,28 @@ class Procedure_m extends MY_Model {
 										"dept_id"=>$dept_id
 									);
 								} else {
+									/*
+									$spew = array(
+										"job_title"=>"PENGELOLA KONTRAK",
+										"district_id"=>$district_id,
+										"dept_name"=>"SUPPLY CHAIN MANAGEMENT"
+									);
+									$or_spew = array(
+										"job_title"=>"PENGELOLA KONTRAK",
+										"district_id"=>$district_id,
+										"dept_name"=>"SCM"
+									);
+									$spem = array(
+										"job_title"=>"MANAJER PENGADAAN",
+										"district_id"=>$district_id,
+										"dept_name"=>"SUPPLY CHAIN MANAGEMENT"
+									);
+									$or_spem = array(
+										"job_title"=>"MANAJER PENGADAAN",
+										"district_id"=>$district_id,
+										"dept_name"=>"SCM"
+									);
+									*/
 									$spew = "job_title = 'PENGELOLA KONTRAK' AND district_id = $district_id AND dept_name = 'SUPPLY CHAIN MANAGEMENT'";
 									$or_spew = "job_title = 'PENGELOLA KONTRAK' AND district_id = $district_id AND dept_name = 'SCM'";
 									$spem = "job_title = 'MANAJER KONTRAK' AND district_id = $district_id AND dept_name = 'SUPPLY CHAIN MANAGEMENT'";
@@ -3211,6 +3679,11 @@ class Procedure_m extends MY_Model {
 						if (isset($or_spem) AND !empty($or_spem)) {
 							$this->db->or_where($or_spem);	
 						}
+						// $getman = $this->db->select("pos_id, pos_name, employee_id")
+						// ->where($spem)
+						// ->get("user_login_rule")
+						// ->row_array();
+
 						$this->db->select("pos_id, pos_name, employee_id");
 						$this->db->or_where($spem);						
 						$getman = $this->db->get("user_login_rule")->row_array();
@@ -3219,6 +3692,10 @@ class Procedure_m extends MY_Model {
 						if (isset($or_spew) AND !empty($or_spew)) {
 							$this->db->or_where($or_spew);	
 						}
+						// $getspe = $this->db->select("pos_id, pos_name, employee_id")
+						// ->where($spew)
+						// ->get("user_login_rule")
+						// ->row_array();
 
 						$this->db->select("pos_id, pos_name, employee_id");
 						$this->db->or_where($spew);						
@@ -3230,6 +3707,8 @@ class Procedure_m extends MY_Model {
             		            $typeplan = ($check['ptm_type_of_plan'] == "rkp") ? "proyek" : "departemen";
         	                
 		                        $input['type_of_plan'] = $typeplan;
+
+								// $input['type_of_plan'] = 'departemen';
 
 								$input['ctr_is_matgis'] = $is_matgis ? 1 : 0;
 
@@ -3317,7 +3796,149 @@ class Procedure_m extends MY_Model {
 					DIMATIKAN SEMENTARA KARENA FUNGSI AUTOCREATE DIBUAT
 
 					//haqim
-					//move rfq to contract	
+					//move rfq to contract
+					$this->load->model('Contract_m');
+
+					$check = $this->db
+					->query("SELECT * FROM vw_prc_monitor WHERE ptm_number = '".$ptm_number."' AND last_status = 1181")
+					->row_array();
+
+					// haqim
+					$this->db->join($view_kontrak." a", 'a.hap_pos_code = b.pos_id');
+					$getdata = $this->db->select("a.hap_pos_code as pos_id,a.hap_pos_name as pos_name")
+					->where(array("b.job_title"=>"PENGELOLA KONTRAK","b.dept_id"=>$dept_id)) //vp pengadaan
+					->get("adm_pos b")->row_array();
+					// end
+
+					// $vendor = $this->db->where('vendor_id', $winner)->get('vnd_header')->row_array();
+					
+					//y manager kontrak
+					//haqim		
+					$this->db->join($view_kontrak." a", 'a.hap_pos_code = b.pos_id');
+					$getpos = $this->db->select('a.hap_pos_code as pos_id, a.hap_pos_name as pos_name')
+					->where(array('b.job_title'=>'MANAJER PENGADAAN',"b.dept_id"=>$dept_id))
+					->get('adm_pos b')->row_array();
+
+					$this->db->select('pos_id, pos_name, employee_id');
+					$this->db->where('pos_id', $getpos['pos_id']);
+					$getman = $this->db->get('adm_employee_pos')->row_array();
+
+					// end
+
+					//y pengelola kontrak
+					//haqim
+					$this->db->join($view_kontrak." a", 'a.hap_pos_code = b.pos_id');
+					$getpos = $this->db->select('a.hap_pos_code as pos_id, a.hap_pos_name as pos_name')
+					->where(array('b.job_title'=>'PENGELOLA KONTRAK',"b.dept_id"=>$dept_id))
+					->get('adm_pos b')->row_array();
+
+					$this->db->select('pos_id, pos_name, employee_id');
+					$this->db->where('pos_id', $getpos['pos_id']);
+					$getspe = $this->db->get('adm_employee_pos')->row_array();
+					//end
+
+					$vend = [];
+					$winner = array_values($winner);
+
+					foreach ($winner as $ky => $vd) {
+						$vend[$ky]['vendor'] = $this->db->select("vendor_id, vendor_name")->where('vendor_id', $vd)->get('vnd_header')->row_array();
+
+						$this->db->join("prc_tender_item c", "c.tit_id = a.tit_id");
+						$this->db->join("prc_tender_quo_main b", "b.pqm_id=a.pqm_id and b.ptv_vendor_code=c.ptv_vendor_code");
+						$this->db->where(array('c.ptv_vendor_code'=>$vd, 'b.ptm_number'=>$check['ptm_number']));
+						$this->db->select("pqi_price, pqi_id, a.tit_id, pqi_quantity");
+
+						$ctrprice = "";
+						$amountctr = "";
+						$vend[$ky]['quoitem'] = $this->db->get("prc_tender_quo_item a")->result_array();
+						foreach ($vend[$ky]['quoitem'] as $key => $value) {
+							$price = $value['pqi_price'];
+							$qty = $value['pqi_quantity'];
+							$amountctr += $price * $qty; 
+							// $ctrqty	
+						}
+
+						$vend[$ky]['vendor']['vendorquo'] = $amountctr;
+						// var_dump($amountctr);
+					}
+
+					foreach ($winner as $key => $value) {
+						$input['ptm_number'] = $check['ptm_number'];
+						$input['currency'] = $check['pqm_currency'];
+						$input['vendor_id'] = $vend[$key]['vendor']['vendor_id'];
+						$input['vendor_name'] = $vend[$key]['vendor']['vendor_name'];
+						$input['subject_work'] = $check['ptm_subject_of_work'];
+						$input['scope_work'] = $check['ptm_scope_of_work'];
+						$input['contract_type'] = $check['ptm_contract_type'];
+						$input['completed_tender_date'] = $check['ptm_completed_date'];
+						$input['contract_amount'] = $vend[$key]['vendor']['vendorquo'];
+
+						//y insert manager kontrak dan pengelola kontrak
+						$input['ctr_spe_employee'] = $getspe['employee_id'];
+						$input['ctr_spe_pos'] = $getspe['pos_id'];
+						$input['ctr_spe_pos_name'] = $getspe['pos_name'];
+
+						$input['ctr_man_employee'] = $getman['employee_id'];
+						$input['ctr_man_pos'] = $getman['pos_id'];
+						$input['ctr_man_pos_name'] = $getman['pos_name'];
+						//y end
+						$typeplan = ($check['ptm_type_of_plan'] == "Proyek") ? "proyek" : "departemen";
+						$input['type_of_plan'] = $typeplan;
+						$input['spk_code'] = $check['spk_code'];
+						$input['dept_code'] = $check['dept_code'];
+						$input['dept_id'] = $check['ptm_dept_id'];
+						// var_dump($input);
+
+						$this->db->insert("ctr_contract_header",$input);
+
+						$contract_id = $this->db->insert_id();
+						// var_dump($contract_id);
+
+						$vendor_id = $vend[$key]['vendor']['vendor_id'];
+						$this->db->join("prc_tender_item", "prc_tender_item.ptv_vendor_code = vw_prc_quotation_item.vendor_id and prc_tender_item.tit_id=vw_prc_quotation_item.tit_id");
+						$this->db->where("vw_prc_quotation_item.vendor_id",$vendor_id);
+						$quo_item = $this->Procrfq_m->getViewVendorQuoComRFQ("","",$check['ptm_number'])->result_array();
+						// var_dump($quo_item[$key]['tit_id']);
+						// echo $this->db->last_query();
+						// var_dump($vendor_id);
+						// exit();
+						//contract item
+						foreach ($quo_item as $keys => $value) {
+							$short = (!empty($value['short_description'])) ? $value['short_description'] : $value['pqi_description'];
+							$inp = array(
+								"tit_id"=>$value['tit_id'],
+								"contract_id"=>$contract_id,
+								"item_code"=>$value['tit_code'],
+								"short_description"=>$short,
+								"long_description"=>$value['pqi_description'],
+								"price"=>$value['pqi_price'],
+								"qty"=>$value['pqi_quantity'],
+								"uom"=>$value['tit_unit'],
+								"min_qty"=>1,
+								"max_qty"=>$value['pqi_quantity'],
+								"ppn"=>$value['pqi_ppn'],
+								"pph"=>$value['pqi_pph'],
+								"vendor_code"=>$vend[$key]['vendor']['vendor_id']
+							);
+							// echo "<pre>";
+							// var_dump($value['tit_code']);
+							// var_dump($quo_item);
+							// var_dump($vend[$key]['vendor']['vendor_id']);
+
+							$act = $this->Contract_m->insertItem($inp);
+						}
+						// var_dump($winner);
+
+						//contract comment
+						$this->db->insert("ctr_contract_comment",array(
+							"ptm_number"=>$check['ptm_number'],
+							"contract_id"=>$contract_id,
+										"ccc_activity"=>2010, //2000
+										"ccc_position"=>$getdata['pos_name'],
+										"ccc_pos_code"=>$getdata['pos_id'],
+										"ccc_start_date"=>date("Y-m-d H:i:s"),
+									));
+					}			
 
 					*/						
 
@@ -3343,15 +3964,24 @@ class Procedure_m extends MY_Model {
 				} 
 
 			}
-			
-			//====tambah=====
-			if(!empty($getdata['nextPosCode'])){
+
+			if(!empty($getdata['nextPosCode'])){//====tambah=====
 
 				$nama_proses = $this->db->select("awa_name")->where("awa_id",$nextActivity)->get("adm_wkf_activity")->row()->awa_name;
 
 				$tender_name = $this->db->select("ptm_subject_of_work")->where("ptm_number",$ptm_number)->get("prc_tender_main")->row()->ptm_subject_of_work;
 
-				$email_list = $this->db->distinct()->select("email")->where("pos_id",$nextPosCode)->get("vw_user_access_2")->result_array();			
+				// $email_list = $this->db->distinct()->select("email")->where("pos_id",$getdata['nextPosCode'])->get("vw_user_access")->result_array();
+				$email_list = $this->db->distinct()->select("email")->where("pos_id",$nextPosCode)->get("vw_user_access_2")->result_array();
+				// $getEmpId = $this->db->select('employee_id')
+				// 			->where("pos_id", $nextPosCode)
+				// 			->get('adm_employee_pos')->row_array();
+				// $email_list = $this->db->select('email')
+				// 			->where("id", $getEmpId['employee_id'])
+				// 			->get('adm_employee')->result_array();
+
+				// 			var_dump($nextPosCode);die();
+
 
 				$e = array();
 
@@ -3376,10 +4006,9 @@ class Procedure_m extends MY_Model {
 			    //$msg = auto_link($msg); di komen
 				//end
 
-				//$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
+				$email = $this->sendEmail(implode(",", $e),"Pemberitahuan Pengadaan Nomor $ptm_number",$msg);
 
-			}
-			//==================================
+			}//==================================
 
 			if(empty($nextjobtitle) && !empty($nextPosCode)){
 				$nextjobtitle = $this->getNextJobTitle($nextPosCode);
@@ -3426,9 +4055,14 @@ class Procedure_m extends MY_Model {
 				"response"=>$response
 			);
 
-		return $ret;
+/*
+	echo "<pre>";
+	print_r($ret);
+	echo "</pre>";
+*/
+	return $ret;
 
-	}
+}
 
 }
 
