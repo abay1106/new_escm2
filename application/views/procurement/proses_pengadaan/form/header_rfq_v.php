@@ -1,8 +1,8 @@
-<section>		
+<section>
   <div class="row">
     <div class="col-12">
       <div class="card">
-        
+
         <div class="card-header border-bottom pb-2">
             <h4 class="card-title">Headline</h4>
         </div>
@@ -52,7 +52,7 @@
               </div>
 
               <!-- haqim -->
-              <?php $curval = (isset($permintaan['ptm_project_name'])) ? $permintaan["ptm_project_name"] : set_value("nama_proyek"); 
+              <?php $curval = (isset($permintaan['ptm_project_name'])) ? $permintaan["ptm_project_name"] : set_value("nama_proyek");
               if (isset($permintaan['ptm_project_name'])) { ?>
               <div class="row form-group">
               <label class="col-sm-2 control-label text-right">Nama Proyek</label>
@@ -67,10 +67,10 @@
 
               <?php if ($permintaan['isjoin'] != 1) { ?>
 
-              <?php 
+              <?php
               $code = (isset($permintaan['ptm_mata_anggaran']) && !empty($permintaan['ptm_mata_anggaran'])) ? $permintaan['ptm_mata_anggaran'] : null;
               $label = (isset($permintaan['ptm_nama_mata_anggaran']) && !empty($permintaan['ptm_nama_mata_anggaran'])) ? $permintaan['ptm_nama_mata_anggaran'] : null;
-              $curval = (!empty($code) && !empty($label)) ? $code." ".$label : null; 
+              $curval = (!empty($code) && !empty($label)) ? $code." ".$label : null;
               ?>
 
               <?php if(!empty($curval)){ ?>
@@ -94,7 +94,7 @@
               <div class="row form-group">
               <label class="col-sm-2 control-label text-right">Sub Mata Anggaran</label>
               <div class="col-sm-10">
-                <p class="form-control-static" id="sub_mata_anggaran"><?php 
+                <p class="form-control-static" id="sub_mata_anggaran"><?php
 
                 if (isset($code)) {
                   foreach (array_combine($code, $name) as $code => $name ) {
@@ -106,7 +106,7 @@
                 }
               }else{
                 echo $curval;
-              } 
+              }
 
               ?></p>
               </div>
@@ -147,8 +147,8 @@
               <?php } ?>
               <!-- end -->
 
-              <?php $curval = (isset($permintaan['ptm_contract_type'])) ?  $permintaan["ptm_contract_type"] : set_value("jenis_kontrak_inp"); 
-              $isdisable = ($permintaan['ptm_status'] == 1141) ? "disabled" : ""; 
+              <?php $curval = (isset($permintaan['ptm_contract_type'])) ?  $permintaan["ptm_contract_type"] : set_value("jenis_kontrak_inp");
+              $isdisable = ($permintaan['ptm_status'] == 1141) ? "disabled" : "";
               ?>
               <div class="row form-group">
               <label class="col-sm-2 control-label text-right">Jenis Kontrak *</label>
@@ -156,7 +156,7 @@
               <select <?php echo $isdisable ?> class="form-control" required name="jenis_kontrak_inp" value="<?php echo $curval ?>">
               <option  value=""><?php echo lang('choose') ?></option>
               <?php foreach($contract_type as $key => $val){
-                $selected = ($key == $curval) ? "selected" : ""; 
+                $selected = ($key == $curval) ? "selected" : "";
                 ?>
                 <option <?php echo $selected ?> value="<?php echo $key ?>"><?php echo $val ?></option>
               <?php } ?>
@@ -164,7 +164,7 @@
               </div>
               </div>
 
-              <?php if($permintaan['ptm_status'] >= 1141) { 
+              <?php if($permintaan['ptm_status'] >= 1141) {
               $curval = (isset($permintaan['ptm_winner'])) ? $permintaan["ptm_winner"] : set_value("winner_type_inp");
               ?>
               <div class="row form-group sentralisasi" style="display: inline">
@@ -173,23 +173,23 @@
               <div class="checkbox">
                 <?php $curval = set_value("multiwin"); ?>
                 <div class="i-checks col-lg-3">
-                  <label class=""> 
+                  <label class="">
                     <div class="<?php echo $winner['clascheck'] ?>" style="position: relative;">
                       <input type="checkbox" <?php echo $winner['disable'] ?> value="1" name="winner_type_inp" id="tipe" data-tipe="sw" style="position: absolute; opacity: 0;" <?php echo $winner['check']; ?>>
                       <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
                       </ins>
                     </div>
-                    <i></i>&nbsp;&nbsp; Single Winner 
+                    <i></i>&nbsp;&nbsp; Single Winner
                   </label>
                 </div>
                 <div class="i-checks col-lg-3">
-                  <label class=""> 
+                  <label class="">
                     <div class="<?php echo $winner['clascheck2'] ?>" style="position: relative;">
                       <input type="checkbox" value="2" <?php echo $winner['disable'] ?> name="winner_type_inp" id="tipe" data-tipe="mw" style="position: absolute; opacity: 0;" <?php echo $winner['check2']; ?>>
                       <ins class="iCheck-helper" checked style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
                       </ins>
-                    </div> 
-                    <i></i>&nbsp;&nbsp; Multiple Winner 
+                    </div>
+                    <i></i>&nbsp;&nbsp; Multiple Winner
                   </label>
                 </div>
               </div>

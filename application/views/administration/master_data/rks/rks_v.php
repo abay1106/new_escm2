@@ -7,7 +7,12 @@
           <div class="card-body">
             <div class="table-responsive">
               <table id="rks" class="table table-bordered table-striped">
-                <a class="btn btn-info" href="<?php echo site_url('administration/master_data/rks/tambah') ?>" role="button"><i class="ft-plus mr-1"></i>Tambah</a>
+                <!-- <a class="btn btn-info" href="<?php echo site_url('administration/master_data/rks/tambah') ?>" role="button"><i class="ft-plus mr-1"></i>Tambah</a> -->
+                <a href="#" class="btn btn-info btn-sm mr-3" data-toggle="modal" data-target="#rksHeader"><i class="ft ft-plus"></i>Header</a>
+  							<?php if ($header > 0) { ?>
+  								<a href="#" class="btn btn-info btn-sm mr-3" data-toggle="modal" data-target="#rksSub"><i class="ft ft-plus"></i>Sub Header</a>
+  								<a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#rksDesc"><i class="ft ft-plus"></i>Description</a>
+  							<?php } ?>
               </table>
             </div>
           </div>
@@ -17,6 +22,128 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade text-left" id="rksHeader" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title modal-judul">Tambah Header RKS</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
+				</button>
+			</div>
+			<form action="<?php echo base_url('administration/master_data/rks/submit_add_rks_header'); ?>" method="POST">
+				<div class="modal-body">
+
+					<label class="text-bold-700">Header Main <span class="text-danger text-bold-700">(*)</span></label>
+					<div class="form-group position-relative has-icon-left">
+						<input type="text" maxlength="100" name="header_main" placeholder="Masukan Header" class="form-control" required>
+						<div class="form-control-position">
+							<i class="ft-airplay font-medium-2 text-muted"></i>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Tutup">
+					<input type="submit" onclick="return confirm('Apakah Anda yakin simpan data ini?')" class="btn btn-info" value="Simpan">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal-add-header-sub -->
+<div class="modal fade text-left" id="rksSub" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title modal-judul">Tambah Header Sub RKS</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
+				</button>
+			</div>
+			<form action="<?php echo base_url('administration/master_data/rks/submit_add_rks_header_sub'); ?>" method="POST">
+				<div class="modal-body">
+
+					<label class="text-bold-700">Header Main <span class="text-danger text-bold-700">(*)</span></label>
+					<div class="form-group">
+                        <select class="form-control" name="header_main" required>
+                            <option value="">Pilih</option>
+                            <?php foreach ($rks_header as $v) { ?>
+                                <option value="<?php echo $v['header_main']?>"><?php echo $v['header_main']?></option>
+                            <?php } ?>
+                        </select>
+					</div>
+
+					<label class="text-bold-700">Header Sub <span class="text-danger text-bold-700">(*)</span></label>
+					<div class="form-group position-relative has-icon-left">
+						<input type="text" maxlength="200" name="header_sub" placeholder="Masukan Header Sub" class="form-control" required>
+						<div class="form-control-position">
+							<i class="ft-airplay font-medium-2 text-muted"></i>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Tutup">
+					<input type="submit" onclick="return confirm('Apakah Anda yakin simpan data ini?')" class="btn btn-info" value="Simpan">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal-add-description -->
+<div class="modal fade text-left" id="rksDesc" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title modal-judul">Tambah Description RKS</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
+				</button>
+			</div>
+			<form action="<?php echo base_url('administration/master_data/rks/submit_add_rks_description'); ?>" method="POST">
+				<div class="modal-body">
+
+                    <label class="text-bold-700">Header Main <span class="text-danger text-bold-700">(*)</span></label>
+					<div class="form-group">
+                        <select class="form-control" name="header_main" required>
+                            <option value="">Pilih</option>
+                            <?php foreach ($rks_header as $v) { ?>
+                                <option value="<?php echo $v['header_main']?>"><?php echo $v['header_main']?></option>
+                            <?php } ?>
+                        </select>
+					</div>
+
+                    <label class="text-bold-700">Header Sub <span class="text-danger text-bold-700">(*)</span></label>
+					<div class="form-group">
+                        <select class="form-control" name="header_sub" required>
+                            <option value="">Pilih</option>
+                            <?php foreach ($rks_header_sub as $v) { ?>
+                                <option value="<?php echo $v['header_sub']?>"><?php echo $v['header_sub']?></option>
+                            <?php } ?>
+                        </select>
+					</div>
+
+					<label class="text-bold-700">Description <span class="text-danger text-bold-700">(*)</span></label>
+					<div class="form-group position-relative has-icon-left">
+						<textarea rows="6" class="form-control round" name="description" placeholder="Masukan Description" required></textarea>
+						<div class="form-control-position">
+							<i class="ft-airplay font-medium-2 text-muted"></i>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Tutup">
+					<input type="submit" onclick="return confirm('Apakah Anda yakin simpan data ini?')" class="btn btn-info" value="Simpan">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
   jQuery.extend({
