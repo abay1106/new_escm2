@@ -39,40 +39,55 @@ class PrivyTest extends CI_Controller {
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $base64 = 'data:application/' . $type . ';base64,' . base64_encode($data);
-        
-        //$dataUploadPrivy['title'] = "testupload123";
+        $dataUploadPrivy['title'] = "Test Document Upload and Share 13";
         $dataUploadPrivy['document'] = $base64;
 
-        // $dataUploadPrivy['recipients']['identifier'] = "DEVOK3079";
-        // $dataUploadPrivy['recipients']['type'] = "signer";
-        // $dataUploadPrivy['recipients']['pos_x'] = "184";
-        // $dataUploadPrivy['recipients']['pos_y'] = "184";
-        // $dataUploadPrivy['recipients']['page'] = "2";
+        $recipients = [
+            [
+                'identifier' => 'DEVOK3079',
+                'type' => 'signer',
+                'pos_x' => 60,
+                'pos_y' => 440,
+                'page' => 1
+            ],
+            [
+                'identifier' => 'DEVPA2079',
+                'type' => 'signer',
+                'pos_x' => 455,
+                'pos_y' => 440,
+                'page' => 1
+            ]
+        ];
 
-       
-        
-        $signature = $this->signature($dataUploadPrivy,'POST',$timestamp);
+        $dataUploadPrivy['recipients'] = $recipients;
+        $body = [$dataUploadPrivy];
+        $signature = $this->signature($body, 'POST', $timestamp);
+
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => $URL,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => json_encode($dataUploadPrivy),
-        CURLOPT_HTTPHEADER => array(
-        'X-Authorization-Signature : '.$signature,
-        'X-Authorization-Timestamp: '.$timestamp,
-        'X-Flow-Process: stepping',
-        'Content-Type: application/json',
-        'Merchant-Key:'.$config['MERCHANT_KEY']
-        ),
+            CURLOPT_URL => $URL,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_POST => 1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($body),
+            CURLOPT_HTTPHEADER => array(
+                'X-Authorization-Signature: ' . $signature,
+                'X-Authorization-Timestamp: ' . $timestamp,
+                'X-Flow-Process: default',
+                'cache-control: no-cache',
+                'Content-Type: application/json',
+                'Merchant-Key:' . $config['MERCHANT_KEY'],
+                'User-Agent: wika/1.0'
+            ),
         ));
+
 
         $response = curl_exec($curl);
 
@@ -81,24 +96,26 @@ class PrivyTest extends CI_Controller {
 
     }
 
-    public function signature($jsonBody,$method,$timestamp)
+    public function signature($jsonBody, $method, $timestamp)
     {
         # code...
-        //$timestamp = date("c",strtotime(date('Y-m-d H:i:s')));
         $clientId = $this->config->item('CLIENT_ID');
         $clientSecret = $this->config->item('CLIENT_SECRET');
-        $bodyMD5 = md5(json_encode($jsonBody),true);
-        //$bodyMD5 = base64_encode($bodyMD5);
-        
-        $hmac_signature = $timestamp.":".$clientId.":".$method.":".$bodyMD5;
-        $hmac = hash_hmac('sha256',$hmac_signature,$clientSecret,true);
+        $jsonBody2 = json_encode($jsonBody);
+        $jsonBody2 = trim(preg_replace('/\s/', '', $jsonBody2));
+        $jsonBody2 = trim(preg_replace('/\n/', '', $jsonBody2));
+        $jsonBody2 = trim(str_replace('\\', '', $jsonBody2));
+        $bodyMD5 = md5($jsonBody2, true);
+        $bodyMD5 = base64_encode($bodyMD5);
+
+        $hmac_signature = $timestamp . ":" . $clientId . ":" . $method . ":" . $bodyMD5;
+        $hmac = hash_hmac('sha256', $hmac_signature, $clientSecret, true);
         $hmac_base64 = base64_encode($hmac);
 
-        $signature = "#".$clientId.":#".base64_encode($hmac);
+        $signature = "#" . $clientId . ":#" . $hmac_base64;
         $signature = base64_encode($signature);
 
         return $signature;
-
     }
 
     public function hook_upload()

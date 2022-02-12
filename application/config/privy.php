@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //ENDPOINT
-$config['URL_DEV_HASH'] = "https://stg-onpremise-hash-manage.privy.id/v2";
+$config['URL_DEV_HASH'] = "https://stg-onpremise-hash-manage.privy.id/v1";
 $config['URL_LIVE_HASH'] = "";
 
 
