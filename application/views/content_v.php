@@ -50,6 +50,10 @@
     color: #2AACE3;
     background-color: transparent;
   }
+
+  .modal-judul {
+    font-family: Montserrat,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
 </style>
 <div class="main-panel">
   <!-- BEGIN : Main Content-->

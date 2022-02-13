@@ -85,7 +85,7 @@
     <script src="assets/plugins/dragtable/jquery.dragtable.js"></script>
     <script src="assets/plugins/TableDnD/dist/jquery.tablednd.min.js"></script>
     <script src="assets/plugins/colResizable-1.5.min.js"></script>
-    <script src="assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="assets/plugins/bootstrap-table/dist/bootstrap-table.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.min.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/editable/bootstrap-table-editable.min.js"></script>
     <script src="assets/plugins/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js"></script>

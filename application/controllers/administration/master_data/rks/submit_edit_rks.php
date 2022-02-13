@@ -1,7 +1,6 @@
 <?php
 
-$post= $this->input->post();
-$id = $post['id'];
+$id = $this->input->post('id');
 
 $data = array(
 	'header_main' => $post['header_main'],
@@ -16,4 +15,4 @@ if($update){
 	$this->setMessage("Berhasil mengubah data rks");
 }
 
-redirect(site_url('administration/master_data/ruangan'));
+redirect(site_url('administration/master_data/rks'));
