@@ -231,12 +231,12 @@
         searchTimeOut: 500,
         searchText: '',
         iconSize: undefined,
-        iconsPrefix: 'glyphicon', // glyphicon of fa (font awesome)
+        iconsPrefix: 'ft', // glyphicon of fa (font awesome)
         icons: {
             paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
             paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
-            refresh: 'glyphicon-refresh icon-refresh',
-            toggle: 'glyphicon-list-alt icon-list-alt',
+            refresh: 'ft-refresh-ccw',
+            toggle: 'ft-list',
             columns: 'glyphicon-th icon-th'
         },
 
@@ -3439,7 +3439,7 @@
                     }];
                 }
             }
-            
+
             if (that.options.sortPriority !== null) {
                 if ($rows.length < that.options.sortPriority.length && typeof that.options.sortPriority === 'object') {
                     for (var i = 0; i < that.options.sortPriority.length; i++) {
@@ -3557,7 +3557,7 @@
 
     BootstrapTable.prototype.onMultipleSort = function() {
         var that = this;
-        
+
         var cmp = function(x, y) {
             return x > y ? 1 : x < y ? -1 : 0;
         };
@@ -4170,7 +4170,7 @@ function alphanum(a, b) {
     $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales);
 
     var BootstrapTable = $.fn.bootstrapTable.Constructor,
-        _initToolbar = BootstrapTable.prototype.initToolbar,        
+        _initToolbar = BootstrapTable.prototype.initToolbar,
         _load = BootstrapTable.prototype.load,
         _initSearch = BootstrapTable.prototype.initSearch;
 
