@@ -8,7 +8,7 @@
 
       <div class="card-content">
         <div class="card-body">
-          <div class="row" style="line-height:0px;">
+          <div class="row">
               <div class="col-md">
                   <div class="card-content">
                     <?php $curval = $permintaan['ptm_number']; ?>
@@ -54,7 +54,7 @@
                     <div class="row form-group">
                       <label class="col-sm-4 control-label text-right">Deskripsi Pekerjaan</label>
                       <div class="col-sm-8">
-                        <p class="form-control-static" id="deskripsi_pekerjaan"><?php echo $curval ?></p>
+                        <p class="form-control-static" id="deskripsi_pekerjaan" style="line-height:20px;margin-top:-10px;"><?php echo $curval ?></p>
                       </div>
                     </div>
 
@@ -151,7 +151,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Nilai Anggaran</label>
                   <div class="col-sm-8">
-                    <p class="form-control-static" id="nama_paket" style="line-height:20px;margin-top:-10px;"><?= $curval ?></p>
+                    <p class="form-control-static" id="nama_paket" style="line-height:20px;margin-top:-10px;"><?php echo $curval ?></p>
                   </div>
                 </div>
 
@@ -174,7 +174,7 @@
                           <div class="row form-group">
                             <label class="col-sm-4 control-label text-right">Nama Paket</label>
                             <div class="col-sm-8">
-                              <p class="form-control-static" id="nama_paket"><?php echo $curval ?></p>
+                              <p class="form-control-static" id="nama_paket" style="line-height:20px;margin-top:-10px;"><?php echo $curval ?></p>
                             </div>
                           </div>
                       <?php } ?>
