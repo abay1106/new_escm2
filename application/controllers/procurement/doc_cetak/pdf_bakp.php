@@ -16,23 +16,23 @@ $UserByDepartment = $this->Procrfq_m->getListEmployeByDepartment($tender['ptm_de
 
 $nama_user_approval = array();
 foreach ($prDataComent as $value) {
-	if ($value['ppc_name'] != '') 
+	if ($value['ppc_name'] != '')
 	array_push($nama_user_approval, trim($value['ppc_name'])." - ".trim($value['ppc_position']));
 }
 
 
 foreach ($PlainDataComent as $value) {
-	if ($value['comment_name'] != '') 
+	if ($value['comment_name'] != '')
 	array_push($nama_user_approval, trim($value['comment_name'])." - ".trim($value['pos_name']));
 }
 
 foreach ($TenderDataComent as $value) {
-	if ($value['ptc_name'] != '') 
+	if ($value['ptc_name'] != '')
 	array_push($nama_user_approval, trim($value['ptc_name'])." - ".trim($value['ptc_position']));
 }
 
 foreach ($UserByDepartment as $value) {
-	if ($value['fullname'] != '') 
+	if ($value['fullname'] != '')
 	array_push($nama_user_approval, trim($value['fullname'])." - ".trim($value['pos_name']));
 }
 
@@ -124,11 +124,11 @@ $data=array(
 	'nama_user_approval' => $nama_user_approval,
 	'ttd_list' => $listTtd,
 
-	
+
 );
 
 //print_r($tender);
-$this->template($view,"BAKP",$data);
+$this->template($view,"BERITA ACARA KEPUTUSAN PEMENANG",$data);
 
 //$this->load->view($view,$data);
 /*
@@ -137,16 +137,15 @@ $this->load->library('dompdf_gen');
 
 $dompdf=new Dompdf\Dompdf();
 $dompdf->set_option('isHtml5ParserEnabled', true);
-$dompdf->set_option('isRemoteEnabled', true);   
+$dompdf->set_option('isRemoteEnabled', true);
 $dompdf->load_html($html);
 $dompdf->render();
 $dompdf->stream("BAKP-".date('YmdHis').'-'.$rfq_id.'.pdf');
 */
 function get_matriks_kewenangan()
 {
-	
-	
-	
-	
-}
 
+
+
+
+}
