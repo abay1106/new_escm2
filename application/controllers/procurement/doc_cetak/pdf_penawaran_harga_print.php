@@ -128,7 +128,7 @@ $this->load->view($view, $data);
 
 
 $html = $this->output->get_output();
-$this->load->library('dompdf_gen');
+//$this->load->library('dompdf_gen');
 
 $dompdf=new Dompdf\Dompdf();
 $dompdf->set_paper('a3', 'landscape');
