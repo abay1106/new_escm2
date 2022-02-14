@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <div class="card">
-      
+
       <div class="card-header border-bottom pb-2">
           <h4 class="card-title">Paket Pengadaan Proyek</h4>
       </div>
@@ -151,7 +151,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Nilai Anggaran</label>
                   <div class="col-sm-8">
-                    <p class="form-control-static" id="nama_paket" style="line-height:20px;margin-top:-10px;"><?php echo $curval ?></p>
+                    <p class="form-control-static" id="nama_paket" style="line-height:20px;margin-top:-10px;"><?= $curval ?></p>
                   </div>
                 </div>
 
