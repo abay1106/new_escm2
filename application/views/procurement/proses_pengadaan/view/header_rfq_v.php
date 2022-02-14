@@ -166,7 +166,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-left">Nama Paket</label>
                   <div class="col-sm-8">
-                    <p class="form-control-static" id="nama_paket"><?php echo $curval ?></p>
+                    <p class="form-control-static" id="nama_paket" style="line-height:20px;margin-top:-10px;"><?php echo $curval ?></p>
                   </div>
                 </div>
             <?php } ?>
