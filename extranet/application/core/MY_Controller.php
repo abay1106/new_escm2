@@ -21,38 +21,40 @@ class MY_Controller extends CI_Controller {
 			$this->db->query("UPDATE vnd_session SET last_access = NOW() WHERE login_id = '".$this->session->userdata('login_id')."'");
 		}
 	}
+
 	public function setMessage($message){
 
-	$current_message = $this->session->userdata("message");
+		$current_message = $this->session->userdata("message");
 
 
-	if(!empty($message)){
-		if(is_array($message)){
-		$message = implode("<br/>", $message);
+		if(!empty($message)){
+			if(is_array($message)){
+			$message = implode("<br/>", $message);
+			}
+			$this->session->set_userdata("message",$message."<br/>".$current_message);
 		}
-		$this->session->set_userdata("message",$message."<br/>".$current_message);
-	}
 
 	}
 
 	public function renderMessage($status,$redirect = ""){
 
-	$this->form_validation->set_error_delimiters('<p>', '</p>');
+		$this->form_validation->set_error_delimiters('<p>', '</p>');
 
-	$message = validation_errors();
-	$message .= $this->session->userdata("message");
+		$message = validation_errors();
+		$message .= $this->session->userdata("message");
 
-	if($this->input->is_ajax_request()){
+		if($this->input->is_ajax_request()){
 
-		$this->output
-		->set_content_type('application/json')
-		->set_output(json_encode(array('message' => $message, "status"=>$status, "redirect"=>$redirect)));
+			$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode(array('message' => $message, "status"=>$status, "redirect"=>$redirect)));
 
-		$this->session->unset_userdata("message");
+			$this->session->unset_userdata("message");
 
-	} else {
-		$this->template("","Sorry",array());
-	}
+		} else {
+			//$this->template("","Sorry",array());
+			header('Location: '.$_SERVER['REQUEST_URI']);
+		}
 
 	}
 
@@ -60,10 +62,10 @@ class MY_Controller extends CI_Controller {
 		$config['upload_path']          = 'attachment/'.$tenderid.'/'.$job;
 		//start code hlmifi
 		if($job != "penawaran" || $job != "prakualifikasi"){
-			$config['max_size']             = 10250;
+			$config['max_size'] = 10250;
 		}
 		else{
-			$config['max_size']             = 10250;
+			$config['max_size'] = 10250;
 		}
 		//endcode
 		$config['allowed_types'] = '*';
