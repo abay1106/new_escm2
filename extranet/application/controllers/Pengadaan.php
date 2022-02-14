@@ -260,6 +260,9 @@ class Pengadaan extends MY_Controller {
 		$post = $this->input->post();
 		$data['post'] = $post;
 
+		$protocol = $_SERVER['PROTOCOL'] = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+		$urls = $protocol.'://'.$_SERVER['HTTP_HOST'].'/index.php/pusher/sendMessage/';
+
 		$data['message'] = null;
 
 		if(empty($post)){
@@ -277,11 +280,11 @@ class Pengadaan extends MY_Controller {
 		$last_state = (isset($userdata['last_state'])) ? $userdata['last_state'] : $post['state'] ;
 
 		$prep = $this->db
-		->where("a.ptm_number",$tenderid)
-		->join("prc_tender_main a","a.ptm_number=b.ptm_number","left")
-		->join("prc_eauction_header c","a.ptm_number=c.ppm_id AND c.status = 1","left")
-		->get("prc_tender_prep b")
-		->row_array();
+			->where("a.ptm_number",$tenderid)
+			->join("prc_tender_main a","a.ptm_number=b.ptm_number","left")
+			->join("prc_eauction_header c","a.ptm_number=c.ppm_id AND c.status = 1","left")
+			->get("prc_tender_prep b")
+			->row_array();
 
 		$data['prep'] = $prep;
 
@@ -314,11 +317,11 @@ class Pengadaan extends MY_Controller {
 				$penurunan = $prep['minimal_penurunan'];
 
 				$last_offer = $this->db
-				->select('total_ppn')
-				->where(array("ptm_number"=>$tenderid,"ptv_vendor_code"=>$userdata['userid']))
-				->get('vw_prc_quotation_vendor_sum')
-				->row()
-				->total_ppn;
+					->select('total_ppn')
+					->where(array("ptm_number"=>$tenderid,"ptv_vendor_code"=>$userdata['userid']))
+					->get('vw_prc_quotation_vendor_sum')
+					->row()
+					->total_ppn;
 
 				$jml_last_penawaran = (!empty($last_penawaran['jumlah_bid'])) ? $last_penawaran['jumlah_bid'] : $batas_atas;
 				$penurunan = $prep['minimal_penurunan'];
@@ -444,19 +447,18 @@ class Pengadaan extends MY_Controller {
 			$data['tender'] = $prep;
 
 			$data['item'] = $this->db
-			->select("b.*, d.ppm_id, d.value_min, c.ptm_number, e.tit_code, e.tit_unit")
-			->where(array("c.ptm_number"=>"$tenderid", "c.ptv_vendor_code" => $userdata['userid']))
-			->join("prc_tender_quo_main c", "b.pqm_id = c.pqm_id", "left")
-			->join("prc_eauction_item d", "c.ptm_number = d.ppm_id", "left")
-			->join("prc_tender_item e", "e.tit_id = b.tit_id", "left")
-			->get("prc_tender_quo_item b")
-			->result_array();
+				->select("b.*, d.ppm_id, d.value_min, c.ptm_number, e.tit_code, e.tit_unit")
+				->where(array("c.ptm_number"=>"$tenderid", "c.ptv_vendor_code" => $userdata['userid']))
+				->join("prc_tender_quo_main c", "b.pqm_id = c.pqm_id", "left")
+				->join("prc_eauction_item d", "c.ptm_number = d.ppm_id", "left")
+				->join("prc_tender_item e", "e.tit_id = b.tit_id", "left")
+				->get("prc_tender_quo_item b")
+				->result_array();
 
 			$history = $this->db->where(array(
 				"ppm_id"=>$tenderid,
 				"vendor_id"=>$userdata['userid']
-			))
-			->get("prc_eauction_history_item")->result_array();
+			))->get("prc_eauction_history_item")->result_array();
 
 			$list_hist = array();
 
@@ -465,6 +467,27 @@ class Pengadaan extends MY_Controller {
 			}
 
 			$data['history_item'] = $list_hist;
+
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => $urls,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'POST',
+				CURLOPT_POSTFIELDS => array(
+					'message' => '{"online": "true"}'
+				),
+				CURLOPT_HTTPHEADER => array(
+					'Cookie: wika_internal_sess=3c1a6cqomdilt6am2qfc62receap3ndk'
+				)
+			));
+
+			$resst = curl_exec($curl);
+			curl_close($curl);
 
 			if($load_view){
 				$this->layout->view("pengadaan/eauction", $data);

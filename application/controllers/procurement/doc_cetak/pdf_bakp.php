@@ -128,7 +128,7 @@ $data=array(
 );
 
 //print_r($tender);
-$this->template($view,"BAPK",$data);
+$this->template($view,"BAKP",$data);
 
 //$this->load->view($view,$data);
 /*

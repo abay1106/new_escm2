@@ -9,7 +9,7 @@
                  </a>
                </li>
                <li>
-                 <img src="<?= base_url('assets/img/Logo_BUMN_Untuk_Indonesia_2020.png') ?>" width="200" />
+                 <img src="<?= base_url('assets/img/Logo_BUMN_Untuk_Indonesia_2020.png') ?>" width="150" />
                </li>
             </ul>
       </div>

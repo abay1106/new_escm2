@@ -22,71 +22,69 @@
       border-radius: 1.35rem;
     }
 </style>
-<div class="container-fluid">
-    <div class="row px-0 my-2 step">
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Mulai Pendaftaran</p>
-                <small class="text-muted" id="mulai_pendaftaran"></small>
-            </div>
-            <div class="segitiga2"></div>
+<div class="row px-0 my-2 step">
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Mulai Pendaftaran</p>
+            <small class="text-muted" id="mulai_pendaftaran"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Aanwijing</p>
-                <small class="text-muted" id="ptp_prebid_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Aanwijing</p>
+            <small class="text-muted" id="ptp_prebid_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Penawaran</p>
-                <small class="text-muted" id="ptp_quot_opening_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Penawaran</p>
+            <small class="text-muted" id="ptp_quot_opening_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Evaluasi</p>
-                <small class="text-muted" id="ptp_doc_open_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Evaluasi</p>
+            <small class="text-muted" id="ptp_doc_open_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Negosiasi</p>
-                <small class="text-muted" id="ptp_negosiation_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Negosiasi</p>
+            <small class="text-muted" id="ptp_negosiation_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">USKEP</p>
-                <small class="text-muted" id="ptp_uskep_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">USKEP</p>
+            <small class="text-muted" id="ptp_uskep_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Pengumuman</p>
-                <small class="text-muted" id="ptp_announcement_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Pengumuman</p>
+            <small class="text-muted" id="ptp_announcement_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Sanggahan</p>
-                <small class="text-muted" id="ptp_disclaimer_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Sanggahan</p>
+            <small class="text-muted" id="ptp_disclaimer_date_"></small>
         </div>
-        <div class="shadow-none rounded-0 d-flex flex-row mb-1">
-            <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
-                <p class="mb-1 font-weight-bold">Penunjukan</p>
-                <small class="text-muted" id="ptp_appointment_date_"></small>
-            </div>
-            <div class="segitiga2"></div>
+        <div class="segitiga2"></div>
+    </div>
+    <div class="shadow-none rounded-0 d-flex flex-row mb-1">
+        <div class="px-2 py-1" style="background-color: white;border-radius: 10px 0px 0px 10px;">
+            <p class="mb-1 font-weight-bold">Penunjukan</p>
+            <small class="text-muted" id="ptp_appointment_date_"></small>
         </div>
+        <div class="segitiga2"></div>
     </div>
 </div>
 

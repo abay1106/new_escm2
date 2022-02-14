@@ -57,6 +57,7 @@ if ($getDataUskep) {
 
 		$nama_array = explode(" - ", $value);
 
+		
 		if ($bakp_kpd_cat[$par] == "Menyetujui") {
 
 			array_push($menyetujui_name, $nama_array[0]);
@@ -101,7 +102,8 @@ $data['diusulkan_name'] = $diusulkan_name;
 $data['diusulkan_posisi'] = $diusulkan_posisi;
 
 
-$this->load->view($view, $data);
+//$this->load->view($view, $data);
+$this->template($view,"DEPKN FORM",$data);
 
 /*
 $html = $this->output->get_output();
