@@ -102,7 +102,8 @@ $data['diusulkan_name'] = $diusulkan_name;
 $data['diusulkan_posisi'] = $diusulkan_posisi;
 
 
-$this->load->view($view, $data);
+//$this->load->view($view, $data);
+$this->template($view,"DEPKN FORM",$data);
 
 /*
 $html = $this->output->get_output();
