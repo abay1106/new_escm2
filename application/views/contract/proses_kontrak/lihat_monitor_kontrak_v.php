@@ -89,13 +89,10 @@
 						<?php $ptm_number = (isset($kontrak['ptm_number'])) ? $kontrak['ptm_number'] : ""; ?>
 						<?php $contract_id = (isset($kontrak['contract_id'])) ? $kontrak['contract_id'] : ""; ?>
 						<label>Isi Komentar</label>
-						<div class="form-group position-relative has-icon-left">
+						<div class="form-group">
 							<input type="hidden" name="cad_contract_id" value="<?php echo $contract_id; ?>" >
 							<input type="hidden" name="cad_ptm_number" value="<?php echo $ptm_number; ?>" >
-							<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>
-							<div class="form-control-position">
-								<i class="ft-airplay font-medium-2 text-muted"></i>
-							</div>
+							<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>							
 						</div>
 
 					</div>
