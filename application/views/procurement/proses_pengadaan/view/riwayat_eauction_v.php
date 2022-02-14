@@ -15,7 +15,7 @@
                   <thead>
                     <tr>
                       <th class="text-center" data-field='online'>Online</th>
-                      <th class="text-center" data-field='peringkat'>Peringkat</th>
+                      <th class="text-center" data-field='peringkat' data-sort-order="asc" data-order='asc' data-sortable="true" data-sort-order="asc">Peringkat</th>
                       <th class="text-center" data-field='nama_vendor'>Nama Vendor</th>
                       <th class="text-center" data-field='penawaran_saat_ini'>Penawaran Saat Ini</th>
                       <th class="text-center" data-field='penawaran_sebelumnya'>Penawaran Sebelumnya</th>
@@ -130,12 +130,13 @@ function makeid(length) {
         order:true,
         searchable:true,
         align: 'left',
-        valign: 'middle'
+        valign: 'middle',
+        order: 'asc'
       },
       {
         field: 'vendor_name',
         title: 'Nama Vendor',
-        sortable:true,
+        //sortable:true,
         order:false,
         searchable:true,
         align: 'left',
@@ -144,8 +145,8 @@ function makeid(length) {
       {
         field: 'tgl_bid',
         title: 'Tanggal',
-        sortable:true,
-        order:false,
+       // sortable:true,
+        //order:false,
         searchable:false,
         align: 'center',
         valign: 'middle'
@@ -153,8 +154,8 @@ function makeid(length) {
       {
         field: 'jumlah_bid',
         title: 'Penawaran Saat Ini',
-        sortable:true,
-        order:false,
+        //sortable:true,
+        //order:false,
         searchable:false,
         align: 'center',
         valign: 'middle'
@@ -162,8 +163,8 @@ function makeid(length) {
       {
         field: 'bid_before',
         title: 'Penawaran Sebelumnya',
-        sortable:false,
-        order:false,
+        //sortable:false,
+        //order:false,
         searchable:false,
         align: 'center',
         valign: 'middle'
