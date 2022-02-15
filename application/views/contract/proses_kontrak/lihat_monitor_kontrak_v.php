@@ -36,7 +36,7 @@
 											<ul class="list-group">
 												<li class="list-group-item">
 													<span class="badge badge-info mr-2"><?php echo strtoupper($value['cad_user_name'][0]); ?></span> <?php echo $value['cad_user_name']; ?> 
-													<span class="text-muted ml-2"><?php echo date("D, d/m/Y - H:i:s", strtotime($value['cad_created_date'])); ?></span>												
+													<span class="ml-2">| <?php echo date("D, d/m/Y - H:i:s", strtotime($value['cad_created_date'])); ?></span>												
 
 													<?php if ($pos["job_title"] == "PIC USER") { ?>
 														<a href="<?php echo site_url('contract/submit_delete_comment/' . $value['id']); ?>" onclick="return confirm('Apakah Anda yakin akan hapus data ini?')" class="text-danger"><i class="ft-x-circle"></i></a>													
