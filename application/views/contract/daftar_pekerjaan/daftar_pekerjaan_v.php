@@ -1,22 +1,12 @@
-<div class="wrapper wrapper-content animated fadeInRight">
-
-  <div class="row">
-
-    <div class="col-lg-12">
-    <?php include("daftar_pekerjaan_kontrak_v.php"); ?>
-      <?php include("daftar_pekerjaan_wo_v.php"); ?>
-      <?php include("daftar_pekerjaan_wo_progress_v.php"); ?>
-      <?php include("daftar_pekerjaan_milestone_progress_v.php"); ?>
-      <?php include("daftar_pekerjaan_bast_wo_v.php"); ?>
-      <?php include("daftar_pekerjaan_bast_milestone_v.php"); ?>
-      <?php include("daftar_pekerjaan_invoice_wo_v.php"); ?>
-      <?php include("daftar_pekerjaan_invoice_milestone_v.php"); ?>
-      <?php include("daftar_pekerjaan_addendum_v.php"); ?>
-    </div>
-
-  </div>
-
-</div>
+<?php include("daftar_pekerjaan_kontrak_v.php"); ?>
+<?php include("daftar_pekerjaan_wo_v.php"); ?>
+<?php include("daftar_pekerjaan_wo_progress_v.php"); ?>
+<?php include("daftar_pekerjaan_milestone_progress_v.php"); ?>
+<?php include("daftar_pekerjaan_bast_wo_v.php"); ?>
+<?php include("daftar_pekerjaan_bast_milestone_v.php"); ?>
+<?php include("daftar_pekerjaan_invoice_wo_v.php"); ?>
+<?php include("daftar_pekerjaan_invoice_milestone_v.php"); ?>
+<?php include("daftar_pekerjaan_addendum_v.php"); ?>
 
 <script type="text/javascript">
 

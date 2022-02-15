@@ -1,21 +1,10 @@
-<div class="wrapper wrapper-content animated fadeInRight">
-
-  <div class="row">
-
-    <div class="col-lg-12">
-
-      <?php include("daftar_pekerjaan_wo_matgis_v.php"); ?>
-      <?php include("daftar_pekerjaan_si_matgis_v.php"); ?>
-      <?php include("daftar_pekerjaan_sppm_matgis_v.php"); ?>
-      <?php include("daftar_pekerjaan_do_matgis_v.php"); ?>
-      <?php include("daftar_pekerjaan_sj_matgis_v.php"); ?>
-      <?php include("daftar_pekerjaan_bapb_matgis_v.php"); ?>
-      <?php include("daftar_pekerjaan_invoice_matgis_v.php"); ?>
-    </div>
-
-  </div>
-
-</div>
+<?php include("daftar_pekerjaan_wo_matgis_v.php"); ?>
+<?php include("daftar_pekerjaan_si_matgis_v.php"); ?>
+<?php include("daftar_pekerjaan_sppm_matgis_v.php"); ?>
+<?php include("daftar_pekerjaan_do_matgis_v.php"); ?>
+<?php include("daftar_pekerjaan_sj_matgis_v.php"); ?>
+<?php include("daftar_pekerjaan_bapb_matgis_v.php"); ?>
+<?php include("daftar_pekerjaan_invoice_matgis_v.php"); ?>    
 
 <script type="text/javascript">
 
