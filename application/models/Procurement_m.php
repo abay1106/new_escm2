@@ -28,12 +28,12 @@ class Procurement_m extends CI_Model {
 
 		$where2 = " WHERE C.ptc_name IS NULL AND C.ptc_end_date IS NULL ";
 
-		$sql = "SELECT A.ppc_id,B.pr_number,A.ppc_name,A.ppc_position,B.pr_subject_of_work FROM prc_pr_comment A 
+		$sql = "SELECT A.ppc_id,B.pr_number,A.ppc_name,A.ppc_position,B.pr_subject_of_work FROM prc_pr_comment A
 		INNER JOIN prc_pr_main B ON B.pr_number = A.pr_number
 		$where
 		UNION ALL
 		SELECT C.ptc_id,D.ptm_number,C.ptc_name,C.ptc_position,D.ptm_subject_of_work FROM prc_tender_comment C
-		INNER JOIN prc_tender_main D ON C.ptm_number = D.ptm_number	
+		INNER JOIN prc_tender_main D ON C.ptm_number = D.ptm_number
 		$where2";
 
 		return $this->db->query($sql);
@@ -42,7 +42,7 @@ class Procurement_m extends CI_Model {
 
 	//=========K=========Berita Acara Aanwijzing
 		public function getAanwijzingChat($ptmNumber = ""){
-			
+
 		  if(!empty($ptmNumber)){
 			$this->db->like('key_ac',$ptmNumber);
 		  }
@@ -54,14 +54,14 @@ class Procurement_m extends CI_Model {
 		}
 
 		public function getVendorByName($vendorName){
-			
+
 			$this->db->like("vendor_name",$vendorName);
 
 			return $this->db->get('vnd_header');
 		}
 
 		public function getOnlineAanwijzingParticipant($ptmNumber = ""){
-			
+
 			if(!empty($ptmNumber)){
 				$this->db->like('key_ac',$ptmNumber);
 			}
@@ -74,6 +74,14 @@ class Procurement_m extends CI_Model {
 
 			return $this->db->get('adm_chat');
 
+		}
+
+		public function get_data_matgis()
+		{
+			$data = array();
+			$this->db->where('ppm_type_of_plan', 'rkp_non_pmcs');
+
+			return $this->db->get('vw_prc_matgis_header_detail')->result_array();
 		}
 	//===================
 
