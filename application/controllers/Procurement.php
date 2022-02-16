@@ -9,7 +9,7 @@ class Procurement extends Telescoope_Controller {
     parent::__construct();
 
     $this->load->model(array("Workflow_m","Procurement_m","Procpagu_m","Procrfq_m","Procpr_m","Procplan_m","Procevaltemp_m","Administration_m","Comment_m","Administration_m","Procedure_m","Commodity_m"));
-    
+
     $this->data['date_format'] = "h:i A | d M Y";
 
     $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
@@ -20,7 +20,7 @@ class Procurement extends Telescoope_Controller {
 
     $userdata = $this->Administration_m->getLogin();
 
-    //print_r($userdata);  
+    //print_r($userdata);
 
     $this->data['dir'] = 'procurement';
 
@@ -55,7 +55,7 @@ class Procurement extends Telescoope_Controller {
     $this->data['userdata'] = (!empty($userdata)) ? $userdata : array();
 
     $this->data['doc_category'] = $this->Procurement_m->getKategoriDokumen()->result_array();
-    
+
     $selection = array(
       "selection_mata_anggaran",
       "selection_perencanaan_pengadaan",
@@ -74,7 +74,7 @@ class Procurement extends Telescoope_Controller {
       $this->data[$value] = $this->session->userdata($value);
     }
 
-    
+
     $this->data['workflow_list'] = array(3=>"Ditolak",2=>"Disetujui");
 
     if(empty($userdata)){
@@ -84,7 +84,7 @@ class Procurement extends Telescoope_Controller {
  }
 
  public function privyupload($rfid, $nama_file) {
-	 
+
   $getDataUskep = $this->Procrfq_m->getUskepData($rfid)->row_array();
   //print_r($getDataUskep);
   //exit;
@@ -104,7 +104,7 @@ class Procurement extends Telescoope_Controller {
    foreach ($data_recipient_array as $val) {
      $data_signer_array = explode(" [", $val);
      if (count($data_signer_array) > 1) {
-       
+
        $signer_id = str_replace("]","",$data_signer_array[1]);
        if ($signer_id != "") {
          array_push($signer, $signer_id);
@@ -128,15 +128,15 @@ class Procurement extends Telescoope_Controller {
    $index += 1;
 
     $signer_array_1[] = array(
-        "privyId" => $vals, 
-        "type" => "Signer", 
+        "privyId" => $vals,
+        "type" => "Signer",
         "enterpriseToken" => "41bc84b42c8543daf448d893c255be1dbdcc722e"
 
     );
   }
 
   $owner_ecode = json_encode(array(
-    "privyId" =>  $privyidOwner, 
+    "privyId" =>  $privyidOwner,
     "enterpriseToken" => "41bc84b42c8543daf448d893c255be1dbdcc722e"
   ));
   $signer_ecode = json_encode($signer_array_1);
@@ -152,14 +152,14 @@ class Procurement extends Telescoope_Controller {
    );
 
   //print_r($payloadName);
-  
+
   $host = "https://api-sandbox.privy.id/v3/merchant/document/upload";
-  
+
   $username = "wika_sandbox";
   $password = "w9g7mmqcmrt3i400s4dy";
-  
+
   /*
-  
+
   $ch = curl_init($host);
  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data', "Merchant-Key: 5mynfcqtfb8oss1pye25"));
  curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -170,11 +170,11 @@ class Procurement extends Telescoope_Controller {
  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
  $return = curl_exec($ch);
  curl_close($ch);
-  
+
   echo $return;
   */
-  
-  
+
+
   $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -199,19 +199,19 @@ curl_close($curl);
 echo $response;
 
 }
- 
+
 public function callback() {
- 
+
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
     $data = file_get_contents("php://input");
     $getjson = json_decode($data);
     print_r($getjson);
-    
-  } else {			
+
+  } else {
        print_r("Cannot ".$_SERVER["REQUEST_METHOD"]." ".$_SERVER["SCRIPT_NAME"]);
   }
-  
+
 }
 
  public function panduan($params1 = ""){
@@ -220,12 +220,12 @@ public function callback() {
     case 'manual_guide_eproc':
       redirect(base_url("guide/user_guide.zip"));
       break;
-    
+
     default:
      show_404();
       break;
   }
-  
+
 }
 
 public function mata_anggaran($param1 = "" ,$param2 = ""){
@@ -257,6 +257,14 @@ public function perencanaan_pengadaan($param1 = "" ,$param2 = ""){
     $this->pembuatan_perencanaan_matgis();
     break;
 
+    case 'perencanaan_non_pmcs':
+   $this->perencanaan_non_pmcs();
+   break;
+
+   case 'drup':
+  $this->drup();
+  break;
+
     case 'daftar_perencanaan_pengadaan':
 
     switch ($param2) {
@@ -276,11 +284,11 @@ public function perencanaan_pengadaan($param1 = "" ,$param2 = ""){
     case 'pembuatan_history_pengadaan_car':
     $this->pembuatan_history_pengadaan_car();
     break;
-  
+
       case 'daftar_history_car':
-  
+
       switch ($param2) {
-  
+
         case 'lihat':
         $this->lihat_history_car();
         break;
@@ -288,11 +296,11 @@ public function perencanaan_pengadaan($param1 = "" ,$param2 = ""){
         case 'ubah':
           $this->ubah_history_car();
           break;
-  
+
         default:
         $this->daftar_history_car();
         break;
-  
+
       }
 
       break;
@@ -365,7 +373,7 @@ public function proses_pengadaan($param1 = "" ,$param2 = ""){
     $this->pembuatan_permintaan_pengadaan();
     break;
 
-       
+
 
     //haqim
      case 'data_employee_chat':
@@ -398,7 +406,7 @@ public function proses_pengadaan($param1 = "" ,$param2 = ""){
      break;
        }
    }
-   break; 
+   break;
 
    default:
    $this->daftar_permintaan_pengadaan();
@@ -451,7 +459,7 @@ public function procurement_tools($param1 = "" ,$param2 = "", $param3 = ""){
     case 'update_tanggal_pembukaan_penawaran':
     $this->update_procurement("ubah_tanggal","Update Tanggal Pembukaan Penawaran");
     break;
-    
+
     case 'ubah_template_evaluasi':
     $this->template_evaluasi('ubah');
     break;
@@ -497,7 +505,7 @@ public function procurement_tools($param1 = "" ,$param2 = "", $param3 = ""){
       break;
 
     }
-    
+
     break;
 
     case 'mata_anggaran':
@@ -647,7 +655,7 @@ public function daftar_pekerjaan($param1 = "" ,$param2 = ""){
     break;
 
   }
-  
+
 }
 
 public function data_riwayat_eauction(){
@@ -777,7 +785,7 @@ public function submit_ubah_hps(){
 public function pembatalan_permintaan_pengadaan(){
   include("procurement/proses_pengadaan/pembatalan_permintaan_pengadaan.php");
 }
-   
+
 public function submit_pembatalan_permintaan_pengadaan(){
   include("procurement/proses_pengadaan/submit_pembatalan_permintaan_pengadaan.php");
 }
@@ -789,6 +797,14 @@ public function pembatalan_pengadaan(){
 
 public function submit_pembatalan_pengadaan(){
   include("procurement/proses_pengadaan/submit_pembatalan_pengadaan.php");
+}
+
+public function submit_drup(){
+  include("procurement/proses_pengadaan/submit_drup.php");
+}
+
+public function delete_drup($id){
+  include("procurement/proses_pengadaan/delete_drup.php");
 }
 
 public function proses_pembatalan_paket(){
@@ -878,6 +894,14 @@ public function pembuatan_perencanaan_matgis(){
   include("procurement/perencanaan_pengadaan/pembuatan_perencanaan_matgis.php");
 }
 
+public function perencanaan_non_pmcs(){
+  include("procurement/perencanaan_pengadaan/perencanaan_non_pmcs.php");
+}
+
+public function drup(){
+  include("procurement/perencanaan_pengadaan/drup.php");
+}
+
 public function pembuatan_perencanaan_pengadaan(){
   include("procurement/perencanaan_pengadaan/pembuatan_perencanaan_pengadaan.php");
 }
@@ -949,6 +973,14 @@ public function data_perencanaan_pengadaan(){
   include("procurement/perencanaan_pengadaan/data_perencanaan_pengadaan.php");
 }
 
+public function data_perencanaan_non_pmcs(){
+  include("procurement/perencanaan_pengadaan/data_perencanaan_non_pmcs.php");
+}
+
+public function data_drup(){
+  include("procurement/perencanaan_pengadaan/data_drup.php");
+}
+
 public function data_history_car(){
   include("procurement/perencanaan_pengadaan/data_history_car.php");
 }
@@ -1018,7 +1050,7 @@ public function submit_ubah_permintaan_pengadaan(){
 }
 
 public function ubah_permintaan_pengadaan(){
-  include("procurement/proses_pengadaan/ubah_permintaan_pengadaan.php"); 
+  include("procurement/proses_pengadaan/ubah_permintaan_pengadaan.php");
 }
 
 public function submit_ubah_tender_pengadaan(){
@@ -1026,7 +1058,7 @@ public function submit_ubah_tender_pengadaan(){
 }
 
 public function ubah_tender_pengadaan(){
-  include("procurement/proses_pengadaan/ubah_tender_pengadaan.php"); 
+  include("procurement/proses_pengadaan/ubah_tender_pengadaan.php");
 }
 
 public function submit_pembuatan_permintaan_pengadaan(){
@@ -1138,32 +1170,32 @@ public function submit_join_pengadaan(){
 //y end
 
 /*
-public function data_mata_anggaran(){ 
+public function data_mata_anggaran(){
   include ("procurement/mata_anggaran/data_mata_anggaran.php");
 }
 */
 
-public function alias_mata_anggaran(){ 
+public function alias_mata_anggaran(){
   include ("procurement/mata_anggaran/alias_mata_anggaran.php");
 }
 
-public function add_mata_anggaran(){ 
+public function add_mata_anggaran(){
   include ("procurement/mata_anggaran/add_mata_anggaran.php");
 }
 
-public function submit_add_mata_anggaran(){ 
+public function submit_add_mata_anggaran(){
   include ("procurement/mata_anggaran/submit_add_mata_anggaran.php");
 }
 
-public function edit_mata_anggaran($id){ 
+public function edit_mata_anggaran($id){
   include ("procurement/mata_anggaran/edit_mata_anggaran.php");
 }
 
-public function submit_edit_mata_anggaran(){ 
+public function submit_edit_mata_anggaran(){
   include ("procurement/mata_anggaran/submit_edit_mata_anggaran.php");
 }
 
-public function delete_mata_anggaran($id){ 
+public function delete_mata_anggaran($id){
   include ("procurement/mata_anggaran/delete_mata_anggaran.php");
 }
 
@@ -1172,66 +1204,66 @@ public function panitia_pengadaan(){
   include("procurement/panitia_pengadaan/panitia_pengadaan.php");
 }
 
-public function add_panitia_pengadaan(){ 
+public function add_panitia_pengadaan(){
   include ("procurement/panitia_pengadaan/add_panitia_pengadaan.php");
 }
-public function edit_panitia_pengadaan($id){ 
+public function edit_panitia_pengadaan($id){
   include ("procurement/panitia_pengadaan/edit_panitia_pengadaan.php");
 }
 
-public function submit_add_panitia_pengadaan(){ 
+public function submit_add_panitia_pengadaan(){
   include ("procurement/panitia_pengadaan/submit_add_panitia_pengadaan.php");
 }
 
-public function submit_edit_panitia_pengadaan(){ 
+public function submit_edit_panitia_pengadaan(){
   include ("procurement/panitia_pengadaan/submit_edit_panitia_pengadaan.php");
 }
 
-public function delete_panitia_pengadaan($id){ 
+public function delete_panitia_pengadaan($id){
   include ("procurement/panitia_pengadaan/delete_panitia_pengadaan.php");
 }
 
-public function add_panitia_detail($id){ 
+public function add_panitia_detail($id){
   include ("procurement/panitia_pengadaan/add_panitia_detail.php");
 }
 
-public function submit_panitia_detail(){ 
+public function submit_panitia_detail(){
   include ("procurement/panitia_pengadaan/submit_panitia_detail.php");
 }
 
-public function data_panitia_detail(){ 
+public function data_panitia_detail(){
   include ("procurement/panitia_pengadaan/data_panitia_detail.php");
 }
 
-public function delete_panitia_detail($id){ 
+public function delete_panitia_detail($id){
   include ("procurement/panitia_pengadaan/delete_panitia_detail.php");
 }
 
-public function list_eauction(){ 
+public function list_eauction(){
   include ("procurement/eauction/list.php");
 }
 
-public function process_eauction($id){ 
+public function process_eauction($id){
   include ("procurement/eauction/form.php");
 }
 
-public function delete_eauction($id){ 
+public function delete_eauction($id){
   include ("procurement/eauction/delete.php");
 }
 
-public function picker_eauction(){ 
+public function picker_eauction(){
   include ("procurement/eauction/picker.php");
 }
 
-public function submit_eauction(){ 
+public function submit_eauction(){
   include ("procurement/eauction/submit.php");
 }
 
-public function data_eauction(){ 
+public function data_eauction(){
   include ("procurement/eauction/data.php");
 }
 
-public function remove_vendor(){ 
+public function remove_vendor(){
   include ("procurement/procurement_tools/remove_vendor.php");
 }
 
@@ -1313,17 +1345,17 @@ public function periode_pengadaan_picker(){
     $beritaAcara = $this->Procurement_m->getAanwijzingChat('1-'.$ptmNumber)->result_array();
 
     foreach ($beritaAcara as $key => $value) {
-      
+
       $isVendor = $this->Procurement_m->getVendorByName($value['name_ac'])->num_rows();
-      
+
       if($isVendor > 0){
-      
+
         $beritaAcara[$key]['position'] = 'Vendor';
 
       }else{
-      
+
         $beritaAcara[$key]['position'] = 'User';
-      
+
       }
 
     }
@@ -1358,8 +1390,8 @@ public function periode_pengadaan_picker(){
     foreach($itemPemenang as $k => $v){
       $data['header'][$v['vendor_id']]['vendor_name'] = $v['vendor_name'];
       $data['header'][$v['vendor_id']]['contact_person'] = $v['contact_name'];
-      $data['header'][$v['vendor_id']]['phone'] = $v['address_phone_no']; 
-      $data['header'][$v['vendor_id']]['address'] = $v['address_street']; 
+      $data['header'][$v['vendor_id']]['phone'] = $v['address_phone_no'];
+      $data['header'][$v['vendor_id']]['address'] = $v['address_street'];
       $data['header'][$v['vendor_id']]['penawaran'] = $v['ptm_number'].'/'.$v['ptp_quot_opening_date'];
     }
 
@@ -1383,7 +1415,7 @@ public function periode_pengadaan_picker(){
     // die();
 
     return $data;
-    
+
   }
   public function GenerateBeritaAcaraAanwijzing($ptmNumber){
 
@@ -1392,12 +1424,12 @@ public function periode_pengadaan_picker(){
     $dataPengadaan = $this->Procrfq_m->getRFQ($ptmNumber)->row_array();
 
     $dataPrepPengadaan = $this->Procrfq_m->getPrepRFQ($ptmNumber)->row_array();
-    
+
     $beritaAcara = $this->getBeritaAcaraAanwijzing($ptmNumber);
 
     $pesertaHadir = $this->Procurement_m->getOnlineAanwijzingParticipant('0-'.$ptmNumber)->result_array();
 
-    
+
     $data['data'] = '<p align="center"><h3><b>BERITA ACARA AANWIJZING</b></h3></p><p align="center"><h3><b>'.$dataPengadaan['ptm_subject_of_work'].'</b></h3></p>';
 
     $data['data'] .= '<hr />';
@@ -1415,9 +1447,9 @@ public function periode_pengadaan_picker(){
     foreach ($pesertaHadir as $key => $value) {
 
       $isVendor = $this->Procurement_m->getVendorByName($value['name_ac'])->num_rows();
-      
+
       if($isVendor > 0){
-        
+
         $data['data'] .= '<p>'.$n.'.   '.$value['name_ac'].'</p>';
 
         $n++;
@@ -1431,7 +1463,7 @@ public function periode_pengadaan_picker(){
     $data['data'] .= '<table border="1px"><thead><tr><th style="width: 25%;">Nama</th><th style="width: 10%;">Posisi</th><th style="width: 40%;">Pesan</th><th style="width: 25%;">Tanggal</th></tr></thead><tbody>';
 
     foreach ($beritaAcara as $key => $value) {
-      
+
       $isVendor = $this->Procurement_m->getVendorByName($value['name_ac'])->num_rows();
 
       $data['data'] .= '<tr><td style="width: 25%;">'.$value['name_ac'].'</td><td style="width: 10%;">'.$value['position'].'</td><td style="width: 40%;">'.$value['message_ac'].'</td><td style="width: 25%;">'.$value['datetime_ac'].'</td></tr>';
@@ -1454,7 +1486,7 @@ public function periode_pengadaan_picker(){
     $dataPengadaan = $this->Procrfq_m->getRFQ($ptmNumber)->row_array();
 
     $dataPrepPengadaan = $this->Procrfq_m->getPrepRFQ($ptmNumber)->row_array();
-    
+
     $evaluasi = $this->getEvaluasi($ptmNumber);
     // echo '<pre>';
     // print_r($evaluasi['internal']);
@@ -1477,13 +1509,13 @@ public function periode_pengadaan_picker(){
      $vendorPenawaran .= '<td colspan="2">'.$value['penawaran'].'</td>';
      $vendorNego .= '<td colspan="2"></td>';
     }
-    
+
 
     foreach ($evaluasi['internal'] as $key => $value) {
       # code...
     }
 
-    
+
     $data['data'] = '<p align="center"><h3><b>Evaluasi Keputusan Pemilihan Pemasok / Peyedia Jasa </b></h3></p><p align="center"></p>';
 
     $data['data'] .= '<hr />';
@@ -1609,7 +1641,7 @@ public function periode_pengadaan_picker(){
       $data['data'] .= '</tr>';
       $n++;
     }
-   
+
     $data['data'] .= '
     <tr>
     <td>B)</td>
@@ -1691,7 +1723,7 @@ public function periode_pengadaan_picker(){
       '.$vendorPenawaran.'
     </tr>';
 
-    $data['data'] .= '</table>'; 
+    $data['data'] .= '</table>';
 
     print_r($data);
     die();
@@ -1702,9 +1734,9 @@ public function periode_pengadaan_picker(){
     foreach ($pesertaHadir as $key => $value) {
 
       $isVendor = $this->Procurement_m->getVendorByName($value['name_ac'])->num_rows();
-      
+
       if($isVendor > 0){
-        
+
         $data['data'] .= '<p>'.$n.'.   '.$value['name_ac'].'</p>';
 
         $n++;
@@ -1718,7 +1750,7 @@ public function periode_pengadaan_picker(){
     $data['data'] .= '<table border="1px"><thead><tr><th style="width: 25%;">Nama</th><th style="width: 10%;">Posisi</th><th style="width: 40%;">Pesan</th><th style="width: 25%;">Tanggal</th></tr></thead><tbody>';
 
     foreach ($beritaAcara as $key => $value) {
-      
+
       $isVendor = $this->Procurement_m->getVendorByName($value['name_ac'])->num_rows();
 
       $data['data'] .= '<tr><td style="width: 25%;">'.$value['name_ac'].'</td><td style="width: 10%;">'.$value['position'].'</td><td style="width: 40%;">'.$value['message_ac'].'</td><td style="width: 25%;">'.$value['datetime_ac'].'</td></tr>';
