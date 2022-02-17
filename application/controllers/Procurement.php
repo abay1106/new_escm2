@@ -269,6 +269,10 @@ public function perencanaan_pengadaan($param1 = "" ,$param2 = ""){
   $this->drup();
   break;
 
+    case 'perencanaan_matgis':
+   $this->perencanaan_matgis();
+   break;
+
     case 'daftar_perencanaan_pengadaan':
 
     switch ($param2) {
@@ -910,6 +914,10 @@ public function drup(){
   include("procurement/perencanaan_pengadaan/drup.php");
 }
 
+public function perencanaan_matgis(){
+  include("procurement/perencanaan_pengadaan/perencanaan_matgis.php");
+}
+
 public function pembuatan_perencanaan_pengadaan(){
   include("procurement/perencanaan_pengadaan/pembuatan_perencanaan_pengadaan.php");
 }
@@ -991,6 +999,10 @@ public function data_perencanaan_non_pmcs(){
 
 public function data_drup(){
   include("procurement/perencanaan_pengadaan/data_drup.php");
+}
+
+public function data_perencanaan_matgis(){
+  include("procurement/perencanaan_pengadaan/data_perencanaan_non_pmcs.php");
 }
 
 public function data_history_car(){
