@@ -83,6 +83,19 @@ class Procurement_m extends CI_Model {
 
 			return $this->db->get('vw_prc_matgis_header_detail')->result_array();
 		}
+
+		public function get_data_pmcs()
+		{
+			$data = array();
+			$this->db->distinct();
+			return $this->db->query("
+					SELECT DISTINCT data.ppm_id,item.smbd_code,item.smbd_name,item.unit,project_name,item.smbd_quantity,price,up.ppm_id as id_update
+					FROM vw_data_item_perencanaan_pmcs data
+					LEFT JOIN vw_prc_plan_item_pmcs item ON data.ppm_id = item.ppm_id
+					LEFT JOIN (SELECT ppm_id, smbd_code, spk_code, satuan, volume, harga_satuan FROM prc_update_pmcs GROUP BY ppm_id, smbd_code, spk_code, satuan, volume, harga_satuan) up ON item.ppm_id = up.ppm_id
+					AND item.smbd_code = up.smbd_code
+			")->result_array();
+		}
 	//===================
 
 }
