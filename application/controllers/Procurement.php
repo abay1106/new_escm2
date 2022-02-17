@@ -257,6 +257,10 @@ public function perencanaan_pengadaan($param1 = "" ,$param2 = ""){
     $this->pembuatan_perencanaan_matgis();
     break;
 
+    case 'perencanaan_pmcs':
+   $this->perencanaan_pmcs();
+   break;
+
     case 'perencanaan_non_pmcs':
    $this->perencanaan_non_pmcs();
    break;
@@ -894,6 +898,10 @@ public function pembuatan_perencanaan_matgis(){
   include("procurement/perencanaan_pengadaan/pembuatan_perencanaan_matgis.php");
 }
 
+public function perencanaan_pmcs(){
+  include("procurement/perencanaan_pengadaan/perencanaan_pmcs.php");
+}
+
 public function perencanaan_non_pmcs(){
   include("procurement/perencanaan_pengadaan/perencanaan_non_pmcs.php");
 }
@@ -971,6 +979,10 @@ public function approval_perencanaan_pengadaan(){
 
 public function data_perencanaan_pengadaan(){
   include("procurement/perencanaan_pengadaan/data_perencanaan_pengadaan.php");
+}
+
+public function data_perencanaan_pmcs(){
+  include("procurement/perencanaan_pengadaan/data_perencanaan_pmcs.php");
 }
 
 public function data_perencanaan_non_pmcs(){
