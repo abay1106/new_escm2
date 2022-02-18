@@ -5,7 +5,7 @@
     <div class="card">
       
       <div class="card-header border-bottom pb-2">
-          <h4 class="card-title">E-Auction Vendor</h4>
+          <h4 class="card-title">Detail Vendor</h4>
       </div>
 
       <div class="card-content">
@@ -14,12 +14,9 @@
                 <table id="riwayat_eauction" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th class="text-center" data-field='online'>Online</th>
-                      <th class="text-center" data-field='peringkat' data-sort-order="asc" data-order='asc' data-sortable="true" data-sort-order="asc">Peringkat</th>
+                      <th class="text-center" data-field='peringkat' data-sort-order="asc" data-order='asc' data-sortable="true" data-sort-order="asc">No</th>
                       <th class="text-center" data-field='nama_vendor'>Nama Vendor</th>
-                      <th class="text-center" data-field='penawaran_saat_ini'>Penawaran Saat Ini</th>
-                      <th class="text-center" data-field='penawaran_sebelumnya'>Penawaran Sebelumnya</th>
-                      <th class="text-center" data-field='riwayat'>Riwayat</th>
+                      <th class="text-center" data-field='penawaran_saat_ini'>Penawaran</th>
                     </tr>
                   </thead>
                 </table>
@@ -55,7 +52,6 @@ function makeid(length) {
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-      console.log(data);
       table_peringkat_penawar.bootstrapTable('refresh', {
         useCurrentPage: false,
         includeHiddenRows: true,
@@ -113,8 +109,8 @@ function makeid(length) {
   var $riwayat_eauction = $('#riwayat_eauction'),
   selections = [];
 
-  function operateFormatter2(value, row, index) {
-      var link = "<?php echo site_url('Procurement/vendor_eacution_history') ?>";
+  function operateFormatter2(value, row, index) { 
+      var link = "<?php echo site_url('procurement/daftar_pekerjaan') ?>";
       return [
       '<a class="btn btn-info btn-xs action" target="_blank" href="'+link+'/eacution_detail/?id='+value+'">',
       'Lihat',
@@ -124,7 +120,7 @@ function makeid(length) {
 
 
   $(function () {
-    var urls = "<?php echo site_url('Procurement/data_vendor_eauction') ?>";
+    var urls = "<?php echo site_url('Procurement/data_vendor_eacution_history') ?>?id=<?php echo $_GET['id']?>";
     console.log(urls);
     $riwayat_eauction.bootstrapTable({
       url: urls,
@@ -133,8 +129,8 @@ function makeid(length) {
       columns: [
       {
         
-        field: 'rank',
-        title: 'Peringkat',
+        field: 'number',
+        title: 'No',
         sortable:true,
         order:true,
         searchable:true,
@@ -162,31 +158,13 @@ function makeid(length) {
       },
       {
         field: 'jumlah_bid',
-        title: 'Penawaran Saat Ini',
+        title: 'Penawaran',
         //sortable:true,
         //order:false,
         searchable:false,
         align: 'center',
         valign: 'middle'
       },
-      {
-        field: 'bid_before',
-        title: 'Penawaran Sebelumnya',
-        //sortable:false,
-        //order:false,
-        searchable:false,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'vendor_id',
-        title: 'Riwayat',
-        align: 'center',
-        width: '10%',
-        valign:'middle',
-        formatter: operateFormatter2,
-      },
-      
       ]
     });
 

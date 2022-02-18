@@ -674,6 +674,14 @@ public function data_peringkat_vendor_eauction(){
   include("procurement/eauction/data_peringkat_vendor.php");
 }
 
+public function vendor_eacution_history(){
+  include("procurement/eauction/vendor_eacution_history.php");
+}
+
+public function data_vendor_eacution_history(){
+  include("procurement/eauction/data_vendor_eacution_history.php");
+}
+
 public function data_vendor_eauction(){
   include("procurement/eauction/data_vendor_eauction.php");
 }

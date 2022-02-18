@@ -26,20 +26,8 @@ if(!empty($search)){
 }
 
 $data['total'] = $this->db->query("
- SELECT DISTINCT a.vendor_id, a.ppm_id,
-    b.vendor_name,
-    a.jumlah_bid,
-    row_number() OVER (ORDER BY a.jumlah_bid) AS rank
-   FROM (( SELECT prc_eauction_history.ppm_id,
-            prc_eauction_history.vendor_id,
-            min(prc_eauction_history.jumlah_bid) AS jumlah_bid
-           FROM prc_eauction_history
-           WHERE ppm_id = '".$ptm_number."'
-           AND selected = 1
-          GROUP BY prc_eauction_history.vendor_id, prc_eauction_history.ppm_id) a
-     JOIN vnd_header b ON ((b.vendor_id = a.vendor_id)))")->num_rows();
-// $this->db->select("vendor_name,jumlah_bid,rank")->where("ppm_id",$ptm_number)
-// ->get("$table a")->num_rows();
+SELECT * FROM prc_eauction_history pe
+where pe.ppm_id  = '".$ptm_number."' and pe.vendor_id = '".$id."' ")->num_rows();
 
 if(!empty($search)){
   $this->db->group_start();
@@ -62,30 +50,13 @@ if(!empty($limit)){
 }
 
 $rows = $this->db->query("
- SELECT DISTINCT a.vendor_id, a.ppm_id,
-    b.vendor_name,
-    a.jumlah_bid,
-    row_number() OVER (ORDER BY a.jumlah_bid) AS rank
-   FROM (( SELECT prc_eauction_history.ppm_id,
-            prc_eauction_history.vendor_id,
-            min(prc_eauction_history.jumlah_bid) AS jumlah_bid
-           FROM prc_eauction_history
-           WHERE ppm_id = '".$ptm_number."'
-           AND selected = 1
-          GROUP BY prc_eauction_history.vendor_id, prc_eauction_history.ppm_id) a
-     JOIN vnd_header b ON ((b.vendor_id = a.vendor_id))) order by rank asc")->result_array();
-
+SELECT pe.ppm_id, pe.jumlah_bid , pe.tgl_bid , pe.vendor_id , vnd.vendor_name FROM prc_eauction_history pe
+INNER JOIN vnd_header vnd ON pe.vendor_id=vnd.vendor_id
+where pe.ppm_id  = '".$ptm_number."' and pe.vendor_id = '".$id."' ")->result_array();
 
 foreach ($rows as $key => $value) {
-  $bid_before = $this->db->query("SELECT jumlah_bid as bid_before, tgl_bid FROM prc_eauction_history pc where
-    pc.ppm_id = '".$ptm_number."' and pc.vendor_id = '".$rows[$key]['vendor_id']."'
-    and pc.selected = 0
-    order by id asc limit 1")->result();
-
-  $rows[$key]['tgl_bid'] = !empty($bid_before[0]->tgl_bid) ? $bid_before[0]->tgl_bid : "-";
-  $rows[$key]['jumlah_bid'] = inttomoney($rows[$key]['jumlah_bid']);
-  $rows[$key]['bid_now'] = ($rows[$key]['jumlah_bid']);
-  $rows[$key]['bid_before'] = !empty($bid_before[0]->bid_before) ? inttomoney($bid_before[0]->bid_before) : "-";
+    $rows[$key]['number'] = $key+1;
+    $rows[$key]['jumlah_bid'] = inttomoney($value['jumlah_bid']);
 }
 
 $data['rows'] = $rows;
