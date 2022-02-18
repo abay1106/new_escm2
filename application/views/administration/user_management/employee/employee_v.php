@@ -1,27 +1,21 @@
 <section>
   <div class="row">
+    <div class="col-12">
+      <div class="card">
 
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <!-- <h5>Employee</h5> -->
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+        <div class="card-header border-bottom pb-2">
+          <h4 class="card-title float-left">Employee</h4>
+          <a class="btn btn-info float-right" href="<?php echo site_url('administration/user_management/employee/add_employee') ?>" role="button">Tambah</a>
+        </div>
 
+        <div class="card-content">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="employee" class="table table-bordered table-striped"></table>
+            </div>
           </div>
         </div>
 
-        <div class="ibox-content">
-          <div class="table-responsive">
-            <table id="employee" class="table table-bordered table-striped">
-              <a class="btn btn-info" href="<?php echo site_url('administration/user_management/employee/add_employee') ?>" role="button">
-                <i class="ft-plus mr-1"></i>Tambah
-              </a>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -49,11 +43,10 @@
     var mydata = $.getCustomJSON("<?php echo site_url('administration') ?>/" + url);
 
     var html = [];
-    
-    $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){
-       return e.field == key;
-     });
+    $.each(row, function(key, value) {
+      var data = $.grep(mydata, function(e) {
+        return e.field == key;
+      });
 
       if (typeof data[0] !== 'undefined') {
 
@@ -68,14 +61,12 @@
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('administration/user_management/employee') ?>";
     return [
-    '<div class="btn-group">',
-    '<a class="btn btn-info btn-xs action" href="'+link+'/ubah/'+value+'">',
-    '<i class="ft-edit mr-1"></i>Ubah',
-    '</a>  ',
-    '<a class="btn btn-danger btn-xs action" onclick="return confirm(\'Anda yakin ingin menghapus data?\')" href="'+link+'/hapus/'+value+'">',
-    '<i class="ft-trash mr-1"></i>Hapus',
-    '</a>  ',
-    '</div>',
+      '<div class="btn-group"><a class="btn btn-sm btn-info ft ft-edit btn-xs action" href="' + link + '/ubah/' + value + '">',
+      'Ubah',
+      '</a>  ',
+      '<a class="btn btn-sm btn-danger ft ft-trash btn-xs action" onclick="return confirm(\'Anda yakin ingin menghapus data?\')" href="' + link + '/hapus/' + value + '">',
+      'Hapus',
+      '</a></div>',
     ].join('');
   }
 
@@ -190,4 +181,5 @@
       $detail.html(detailFormatter(index, row, "alias_employee"));
     });
 
+  });
 </script>

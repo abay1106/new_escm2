@@ -1,4 +1,3 @@
-
 <div class="wrapper wrapper-content animated fadeInRight">
 	<form class="form-horizontal">
 

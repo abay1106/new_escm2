@@ -1059,4 +1059,45 @@ class Comment_m extends CI_Model {
 		}
 	}
 
+	public function getEndDate($code = "",$activity = "", $ctr = ""){
+
+		$this->db->select("ccc_id as comment_id,
+		ptm_number as tender_id,
+		contract_id,
+		ccc_start_date as comment_date,
+		ccc_end_date as comment_end_date,
+		ccc_name as comment_name,
+		ccc_response as response,
+		ccc_comment as comments,
+		ccc_activity as activity,
+		ccc_position as position,
+		ccc_end_date as end_date,
+		ccc_attachment as attachment,
+		(SELECT awa_name FROM adm_wkf_activity WHERE awa_id=ccc_activity) as activity_name,
+		ccc_user as user_id");
+
+		if(!empty($code)){
+
+			$this->db->where("ptm_number = '".$code."'");
+
+		}
+
+		if(!empty($ctr)){
+
+			$this->db->where("contract_id",$ctr);
+
+		}
+		
+		if(!empty($activity)){
+
+			$this->db->where_in('ccc_activity', $activity);
+
+		}
+
+		$this->db->order_by("ccc_id","desc");
+
+		return $this->db->get("ctr_contract_comment");
+
+	}
+
 }

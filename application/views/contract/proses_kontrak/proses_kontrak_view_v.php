@@ -15,7 +15,13 @@
 
   <?php include("view/komentar_v.php") ?>
 
-  <?php echo buttonsubmit('',lang('back'),lang('save')) ?>
+  <div class="card">				
+    <div class="card-content">
+      <div class="card-body">			                    
+        <?php echo buttonsubmit('',lang('back'),lang('save')) ?>
+      </div>
+    </div>
+  </div>
 
   </form>
 
