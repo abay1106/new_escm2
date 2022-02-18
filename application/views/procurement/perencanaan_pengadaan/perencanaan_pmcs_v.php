@@ -3,7 +3,6 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Data Rencana Pengadaan</h5>
           <div class="ibox-tools">
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
@@ -14,9 +13,11 @@
         <div class="ibox-content">
 
           <div class="table-responsive">
-
-            <table id="table_perencanaan_pengadaan" class="table table-bordered table-striped"></table>
-
+            <div class="card" style="border-radius: 30px;">
+              <div class="card-body">
+                <table id="table_perencanaan_pmcs" class="table table-bordered table-striped"></table>
+              </div>
+            </div>
           </div>
 
 
@@ -81,15 +82,7 @@
 window.operateEvents = {
   'click .approval': function (e, value, row, index) {
     //alert('You click approval action, row: ' + JSON.stringify(row));
-  },
-  /*
-  'click .remove': function (e, value, row, index) {
-    $table_perencanaan_pengadaan.bootstrapTable('remove', {
-      field: 'id',
-      values: [row.ppm_id]
-    });
   }
-  */
 };
 function totalTextFormatter(data) {
   return 'Total';
@@ -108,18 +101,13 @@ function totalPriceFormatter(data) {
 </script>
 
 <script type="text/javascript">
-
-  var $table_perencanaan_pengadaan = $('#table_perencanaan_pengadaan'),
+  var $table_perencanaan_pmcs = $('#table_perencanaan_pmcs'),
   selections = [];
-
 </script>
 
 <script type="text/javascript">
 
   $(function () {
-
-
-
         var bar = $('.bar-csv');
         var percent = $('.percent-csv');
 
@@ -179,36 +167,16 @@ function totalPriceFormatter(data) {
 
     });
 
+    $table_perencanaan_pmcs.bootstrapTable({
 
-    $table_perencanaan_pengadaan.bootstrapTable({
-
-      url: "<?php echo site_url('procurement/data_perencanaan_pengadaan') ?>/<?php echo ($edit) ? 'update' : '' ?>",
-      cookieIdTable:"perencanaan_pengadaan",
+      url: "<?php echo site_url('procurement/data_perencanaan_pmcs') ?>/<?php echo ($edit) ? 'update' : '' ?>",
+      cookieIdTable:"perencanaan_pmcs",
       idField:"ppm_id",
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
       columns: [
       {
-        field: 'ppm_id',
-        title: '<?php echo DEFAULT_BOOTSTRAP_TABLE_FIRST_COLUMN_NAME ?>',
-        align: 'center',
-        valign:'middle',
-        width:'10%',
-        events: operateEvents,
-        formatter: operateFormatter,
-      },
-      {
-        field: 'ppm_created_date_vw',
-        title: 'Tanggal Buat',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle',
-        width:'15%',
-      },
-      {
-        field: 'ppm_planner',
-        title: 'User',
+        field: 'smbd_code',
+        title: 'Kode Sumber Daya',
         sortable:true,
         order:true,
         searchable:true,
@@ -216,8 +184,8 @@ function totalPriceFormatter(data) {
         valign: 'middle',
         width:'20%',
       }, {
-        field: 'ppm_subject_of_work',
-        title: 'Nama Program',
+        field: 'smbd_name',
+        title: 'Nama Sumber Daya',
         sortable:true,
         order:true,
         searchable:true,
@@ -226,8 +194,8 @@ function totalPriceFormatter(data) {
         width:'20%',
       },
       {
-        field: 'ppm_dept_name',
-        title: 'Divisi/Departemen',
+        field: 'unit',
+        title: 'Satuan',
         sortable:true,
         order:true,
         searchable:true,
@@ -235,58 +203,22 @@ function totalPriceFormatter(data) {
         valign: 'middle',
         width:'20%',
       },
-      <?php /*
       {
-        field: 'coa',
-        title: 'Sub Mata Anggaran',
+        field: 'smbd_quantity',
+        title: 'Volume',
         sortable:true,
         order:true,
         searchable:true,
         align: 'center',
         valign: 'middle',
         width:'25%',
-      },
-      {
-        field: 'ppm_renc_kebutuhan_vw',
-        title: 'Rencana Kebutuhan',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle',
-        width:'10%',
-      },
-      {
-        field: 'ppm_renc_pelaksanaan_vw',
-        title: 'Rencana Perencanaan Pengadaan',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle',
-        width:'5%',
-      },
-      */ ?>
-      {
-        field: 'ppm_status_name',
-        title: 'Status',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'center',
-        valign: 'middle',
-        width:'15%',
-      },
+      }
       ]
 
     });
 setTimeout(function () {
-  $table_perencanaan_pengadaan.bootstrapTable('resetView');
+  $table_perencanaan_pmcs.bootstrapTable('resetView');
 }, 200);
-
-$table_perencanaan_pengadaan.on('expand-row.bs.table', function (e, index, row, $detail) {
-  $detail.html(detailFormatter(index,row,"alias_perencanaan_pengadaan"));
-});
 
 });
 

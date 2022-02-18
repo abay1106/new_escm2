@@ -8,8 +8,6 @@
 
 	$input = array();
 
-	var_dump($input);die();
-
 	$this->db->trans_begin();
 
 	$input['cad_contract_id'] = $post['cad_contract_id'];

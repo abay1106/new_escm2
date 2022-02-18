@@ -1,4 +1,3 @@
-
 <div class="wrapper wrapper-content animated fadeInRight">
 	<form class="form-horizontal">
 
@@ -36,7 +35,7 @@
 											<ul class="list-group">
 												<li class="list-group-item">
 													<span class="badge badge-info mr-2"><?php echo strtoupper($value['cad_user_name'][0]); ?></span> <?php echo $value['cad_user_name']; ?> 
-													<span class="text-muted ml-2"><?php echo date("D, d/m/Y - H:i:s", strtotime($value['cad_created_date'])); ?></span>												
+													<span class="ml-2">| <?php echo date("D, d/m/Y - H:i:s", strtotime($value['cad_created_date'])); ?></span>												
 
 													<?php if ($pos["job_title"] == "PIC USER") { ?>
 														<a href="<?php echo site_url('contract/submit_delete_comment/' . $value['id']); ?>" onclick="return confirm('Apakah Anda yakin akan hapus data ini?')" class="text-danger"><i class="ft-x-circle"></i></a>													
@@ -89,13 +88,10 @@
 						<?php $ptm_number = (isset($kontrak['ptm_number'])) ? $kontrak['ptm_number'] : ""; ?>
 						<?php $contract_id = (isset($kontrak['contract_id'])) ? $kontrak['contract_id'] : ""; ?>
 						<label>Isi Komentar</label>
-						<div class="form-group position-relative has-icon-left">
+						<div class="form-group">
 							<input type="hidden" name="cad_contract_id" value="<?php echo $contract_id; ?>" >
 							<input type="hidden" name="cad_ptm_number" value="<?php echo $ptm_number; ?>" >
-							<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>
-							<div class="form-control-position">
-								<i class="ft-airplay font-medium-2 text-muted"></i>
-							</div>
+							<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>							
 						</div>
 
 					</div>

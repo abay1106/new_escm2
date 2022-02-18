@@ -22,10 +22,8 @@ function errormessage($str){
 function buttonsubmit($url,$back = "Kembali", $save = "Simpan"){
   $html = "<div class='row'>
   <div class='col-md-12'>
-    <div style='padding-bottom:20px;'>
-      <a href='".site_url($url)."' class='btn btn-light btn-lg'>".$back."</a>
-      <button type='submit' class='btn btn-primary btn-lg pull-right'>".$save."</button>
-    </div>
+    <a href='".site_url($url)."' class='btn btn-secondary btn-lg'>".$back."</a>
+    <button type='submit' class='btn btn-info btn-lg pull-right'>".$save."</button>    
   </div>
 </div>";
 return $html;
@@ -34,9 +32,7 @@ return $html;
 function buttonback($url,$back = "Kembali"){
   $html = "<div class='row'>
   <div class='col-md-12'>
-    <div style='padding-bottom:20px;'>
-      <a href='".site_url($url)."' class='btn btn-light btn-lg'>".$back."</a>
-    </div>
+    <a href='".site_url($url)."' class='btn btn-secondary btn-lg'>".$back."</a>    
   </div>
 </div>";
 return $html;

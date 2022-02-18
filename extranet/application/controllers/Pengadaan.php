@@ -416,7 +416,7 @@ class Pengadaan extends MY_Controller {
 					}
 
 
-				}
+				}				
 
 				if(!empty($data['message'])){
 
@@ -494,7 +494,6 @@ class Pengadaan extends MY_Controller {
 			}
 
 		} else {
-
 			
 			$current_stat = $post["current_status"];
 
@@ -570,7 +569,6 @@ class Pengadaan extends MY_Controller {
 				$this->layout->view("pengadaan/aanwijzing_online", $data);
 
 			}
-
 
 			$statss = array(-5,-8,-7,-4,4,5,7,8,22,23,24,25,26);
 

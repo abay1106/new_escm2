@@ -24,11 +24,6 @@
           <div class="card-title"> 
             <h5>HEADER</h5>
           </div>
-          <!-- <div class="card-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-          </div> -->
         </div>
 
         <div class="card-content">
@@ -37,8 +32,8 @@
               <div class="col-lg-12">
 
                 <?php $curval = (isset($tender['ptm_number'])) ?  $tender["ptm_number"] : ""; ?>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Nomor Tender</label>
+                <div class="row form-group">
+                  <label class="col-sm-2 control-label text-right">Nomor Tender</label>
                   <div class="col-sm-10">
                     <p class="form-control-static"><?php echo $curval ?></p>
 
@@ -46,31 +41,31 @@
                 </div>
 
                 <?php $curval = (isset($tender['ptm_subject_of_work'])) ?  $tender["ptm_subject_of_work"] : ""; ?>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Deskripsi Tender</label>
+                <div class="row form-group">
+                  <label class="col-sm-2 control-label text-right">Deskripsi Tender</label>
                   <div class="col-sm-10">
                     <p class="form-control-static"><?php echo $curval ?></p>
                   </div>
                 </div>
 
                 <?php $curval = (isset($tender['judul'])) ?  $tender["judul"] : ""; ?>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Judul E-Auction</label>
+                <div class="row form-group">
+                  <label class="col-sm-2 control-label text-right">Judul E-Auction</label>
                   <div class="col-sm-10">
                     <p class="form-control-static"><?php echo $curval ?></p>
                   </div>
                 </div>
 
                 <?php $curval = (isset($tender['deskripsi'])) ?  $tender["deskripsi"] : ""; ?>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Deskripsi</label>
+                <div class="row form-group">
+                  <label class="col-sm-2 control-label text-right">Deskripsi</label>
                   <div class="col-sm-10">
                     <p class="form-control-static"><?php echo $curval ?></p>
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Waktu</label>
+                <div class="row form-group">
+                  <label class="col-sm-2 control-label text-right">Waktu</label>
                   <div class="col-sm-10">
                     <p class="form-control-static">
                       <?php echo date("d/m/Y H:i:s",$dari); ?>
@@ -81,8 +76,8 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Durasi</label>
+                <div class="row form-group">
+                  <label class="col-sm-2 control-label text-right">Durasi</label>
                   <div class="col-sm-10">
                     <p class="form-control-static"><?php
                     $time = gmdate("H:i:s", $sampai-$dari);
@@ -118,11 +113,6 @@
         <div class="card-header">
           <div class="card-title">
             <h5>PENAWARAN TOTAL</h5>
-            <!-- <div class="ibox-tools">
-              <a class="collapse-link">
-                <i class="fa fa-chevron-up"></i>
-              </a>
-            </div> -->
           </div>
         </div>
 
@@ -151,88 +141,82 @@
         </div>
 
         <div class="card-content">
-        <div class="card-body">
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode</th>
+                  <th>Deskripsi</th>
+                  <th>Jumlah</th>
+                  <th>Harga Satuan</th>
+                  <th>Harga Total Penawaran</th>
+                </tr>
+              </thead>
 
-         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Kode</th>
-              <th>Deskripsi</th>
-              <th>Jumlah</th>
-              <th>Harga Satuan</th>
-              <!-- <th>Pajak(%)</th> -->
-              <!-- <th>Harga Total Penawaran</th> -->
-              <th>Harga Total Penawaran</th>
-            </tr>
-          </thead>
+              <tbody>
+              <?php 
+                $total = 0;
+                $i = 1;
+                foreach ($item as $key => $value) { 
+                  $harga = (isset($history_item[$value['tit_id']])) ? $history_item[$value['tit_id']] : $value['pqi_price'];
+                  $subtotal = $harga*$value['pqi_quantity']; 
+                  $total += $subtotal;
+                  $no = $key+1;
+              ?>
+                <tr data-key="<?php echo $no ?>">
+                  <td><?php echo $no ?></td>
+                  <td><p class="form-control-static"><?php echo $value['tit_code'] ?></p></td>
+                  <td><p class="form-control-static"><?php echo $value['pqi_description'] ?></p></td>
+                  <td>
+                  <p class="form-control-static" id="qty<?php echo $value['tit_id'] ?>">
+                    <?php echo inttomoney($value['pqi_quantity']) ?> <?php echo $value['tit_unit'] ?>
+                  </p>
+                  <input type="hidden" class="jumlah_inp" name="jumlah_inp[<?php echo $value['tit_id'] ?>]" value="<?php echo $value['pqi_quantity'] ?>" id="jumlah_<?php echo $i ?>">
+                  </td>
+                  <td>
+                  <?php if($sampai-time() <= 0){ ?>
+                  <p class="text-right form-control-static" style="font-weight: bold;">
+                    <?php echo inttomoney($harga) ?>            
+                  </p>
+                  <?php } else { ?>
+                  <input class="form-control text-right money harga_inp" type="text" data-key="<?php echo $no ?>" name="harga_inp[<?php echo $value['tit_id'] ?>]" value="<?php echo $harga ?>" id="harga_<?php echo $i ?>">
+                  <?php } ?>
+                  </td>
+                  <td>
+                    <p class="subtotal text-right form-control-static" id="shargaitem_<?php echo $i ?>">
+                        <?php echo inttomoney($subtotal) ?>
+                        <input type="hidden" id="hargaitem_<?php echo $value['tit_id'] ?>" name="hargaitem" value="<?php echo $subtotal ?>">
+                      </div>
+                    </p>
+                  </td>
+                </tr>
+                <?php $i++; } ?>
+                <input type="hidden" id="num_item" name="num_item" value="<?php echo $i ?>">
+              </tbody>
+            </table>
 
-          <tbody>
-           <?php 
-           $total = 0;
-           $i = 1;
-           foreach ($item as $key => $value) { 
-            $harga = (isset($history_item[$value['tit_id']])) ? $history_item[$value['tit_id']] : $value['pqi_price'];
-            $subtotal = $harga*$value['pqi_quantity']; 
-            // $total += $subtotal*1.1;
-            $total += $subtotal;
-            $no = $key+1;
-            ?>
-            <tr data-key="<?php echo $no ?>">
-              <td><?php echo $no ?></td>
-              <td><p class="form-control-static"><?php echo $value['tit_code'] ?></p></td>
-              <td><p class="form-control-static"><?php echo $value['pqi_description'] ?></p></td>
-              <td>
-               <p class="form-control-static" id="qty<?php echo $value['tit_id'] ?>">
-                 <?php echo inttomoney($value['pqi_quantity']) ?> <?php echo $value['tit_unit'] ?>
-               </p>
-               <input type="hidden" class="jumlah_inp" name="jumlah_inp[<?php echo $value['tit_id'] ?>]" value="<?php echo $value['pqi_quantity'] ?>" id="jumlah_<?php echo $i ?>">
-             </td>
-             <td>
-              <?php if($sampai-time() <= 0){ ?>
-          <p class="text-right form-control-static" style="font-weight: bold;">
-          <?php echo inttomoney($harga) ?>
-            
-          </p>
-          <?php } else { ?>
-              <input class="form-control text-right money harga_inp" type="text" data-key="<?php echo $no ?>" name="harga_inp[<?php echo $value['tit_id'] ?>]" value="<?php echo $harga ?>" id="harga_<?php echo $i ?>"">
-              <?php } ?>
-            </td>
-            <!-- <td><p class="form-control-static text-center">10</p></td> -->
-            <td>
-              <p class="subtotal text-right form-control-static" id="shargaitem_<?php echo $i ?>">
-                  <?php echo inttomoney($subtotal) ?>
-                  <input type="hidden" id="hargaitem_<?php echo $value['tit_id'] ?>" name="hargaitem" value="<?php echo $subtotal ?>">
-                </div>
-              </p>
-            </td>
-          <!--   <td>
-              <p class="subtotal_ppn text-right form-control-static">
-                <?php echo inttomoney($subtotal*1.1) ?>
-              </p>
-            </td> -->
-          </tr>
-          <?php $i++; } ?>
-          <input type="hidden" id="num_item" name="num_item" value="<?php echo $i ?>">
-          </tbody>
-        </table>
-
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 <?php } ?>
 
-<?php 
-$link = 'pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("eauction"), 'enkrip');
-if($sampai-time() > 0){ 
-  echo buttonsubmit($link,'Back','Save');
-} else {
-  echo buttonback($link,'Back');
-}
-?>
-
+<div class="card">
+  <div class="card-content">
+    <div class="card-body">      
+      <?php 
+          $link = 'pengadaan/lists/'.$this->umum->forbidden($this->encryption->encrypt("eauction"), 'enkrip');
+          if($sampai-time() > 0){ 
+            echo buttonsubmit($link,'Back','Save');
+          } else {
+            echo buttonback($link,'Back');
+          }
+      ?>
+    </div>
+  </div>
+</div>
 
 </form>
 
@@ -415,7 +399,7 @@ function initializeClock(id, endtime){
     '<strong>' + t.seconds+ '</strong> Detik ';
     if(t.total<=0){
       clearInterval(timeinterval);
-        //window.location.reload();
+        window.location.reload();
       }
     },1000);
 }
