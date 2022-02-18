@@ -1,10 +1,10 @@
 <!-- Modal -->
 <div class="modal" id="upload" tabindex="-3" role="dialog" aria-labelledby="uploadLabel">
-  <div class="modal-dialog modal-lg" style="width:30%" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="uploadLabel">File Uploader</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         <form method="POST" id="uploadForm" enctype="multipart/form-data" action="<?php echo site_url('log/doupload') ?>">
@@ -15,7 +15,7 @@
           <input type="hidden" name="uploader" id="uploader">
           <br>
           <center>
-            <input type="submit" name="submit" value="Kirim" class="btn btn-primary" id="submit_file" disabled>
+            <input type="submit" name="submit" value="Kirim" class="btn btn-info" id="submit_file" disabled>
           </center>
         </form>
       </div>
