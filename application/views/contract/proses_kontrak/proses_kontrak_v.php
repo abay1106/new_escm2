@@ -22,7 +22,6 @@
 		$status_4 = 'Menunggu proses';
 		$status_5 = 'Menunggu proses';
 		
-
 		if ($activity_id > 2020 && $activity_id < 2904) {
 			$bg_color_1 = 'card-inverse bg-info';
 			$color_1 = 'card-text';

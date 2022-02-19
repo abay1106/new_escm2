@@ -141,6 +141,12 @@ $data['workflow_list'] = $this->Procedure2_m->getResponseList($activity['awa_id'
 
 $data["comment_list"][0] = $this->Comment_m->getContractActive($ptm_number, "", $kontrak['contract_id'])->result_array();
 
+$data["end_date_1"] = $this->Comment_m->getEndDate($ptm_number, ['2010'], $kontrak['contract_id'])->row_array();	
+$data["end_date_2"] = $this->Comment_m->getEndDate($ptm_number, ['2027'], $kontrak['contract_id'])->row_array();	
+$data["end_date_3"] = $this->Comment_m->getEndDate($ptm_number, ['2030'], $kontrak['contract_id'])->row_array();	
+$data["end_date_4"] = $this->Comment_m->getEndDate($ptm_number, ['2901'], $kontrak['contract_id'])->row_array();	
+$data["end_date_5"] = $this->Comment_m->getEndDate($ptm_number, ['2903'], $kontrak['contract_id'])->row_array();
+
 //hlmifzi
 $data['penilaian']= $this->db->get('adm_question_kpi_vendor')->result_array();
 
