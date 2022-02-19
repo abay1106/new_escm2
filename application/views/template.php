@@ -47,6 +47,7 @@
     <link href="assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="assets/app-assets/vendors/js/vendors.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/switchery.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/fonts/feather/style.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/perfect-scrollbar.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/bootstrap.min.css">
@@ -54,7 +55,7 @@
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/toastr/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">
+    <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">    
     <!-- <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/chartist.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/assets/css/style.css">
 
@@ -267,6 +268,8 @@
   <script type="text/javascript" src="assets/app-assets/js/components-modal.min.js"></script>
   <script type="text/javascript" src="assets/app-assets/vendors/js/sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="assets/assets/js/scripts.js"></script>
+  <script type="text/javascript" src="assets/app-assets/js/customizer.js"></script>
+  <script type="text/javascript" src="assets/app-assets/vendors/js/switchery.min.js"></script>
 
   <script type="text/javascript" src="assets/js/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="assets/plugins/bootstrap-table/dist/extensions/editable/x-editable.js"></script>

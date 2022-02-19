@@ -3,7 +3,7 @@
     <div class="card">
 
       <div class="card-header border-bottom pb-2">
-        <h4 class="card-title">Jaminan Pelaksanaan</h4>
+        <h4 class="card-title">Jaminan</h4>
       </div>
 
       <div class="card-content">
