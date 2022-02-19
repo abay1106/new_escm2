@@ -50,6 +50,7 @@ $vendor_verifikasi = $this->Procrfq_m->getVendorBidderRFQ($rfq_id)->result_array
 $getDataUskep = $this->Procrfq_m->getUskepData($rfq_id)->row_array();
 
 if (isset($_POST['kota'])) {
+	
 	if ($getDataUskep) {
 		$data_update = array(
 			'bakp_city' => $_POST['kota'],
@@ -62,6 +63,7 @@ if (isset($_POST['kota'])) {
 		$this->Procrfq_m->updateDataUskep($rfq_id, $data_update);
 		$getDataUskep = $this->Procrfq_m->getUskepData($rfq_id)->row_array();
 	} else {
+		
 		$this->Procrfq_m->insertDataUskep(array(
 			'rfq_number' => $rfq_id,
 			'bakp_city' => $_POST['kota'],
