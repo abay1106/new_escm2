@@ -12,7 +12,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-2">Session </div> :
-            <div class="col-sm-4 status_session">Aktif</div>
+            <div class="col-sm-4 status_session"></div>
           </div>
           <div class="row">
             <div class="col-sm-2">Sisa Waktu </div> :
@@ -145,6 +145,11 @@
         '' + t.seconds+ 'Detik ';
 
       $(".sisa_waktu").text(time_exp);
+      if(parseInt(t.total) <= 0){
+        $(".status_session").text("Tidak Aktif");
+      } else {
+        $(".status_session").text("Aktif");
+      }
     },1000);
   });
 
@@ -167,7 +172,7 @@
     }
 
     $.ajax(settings).done(function (response) {
-      //console.log(response);
+      window.location.reload();
     });
   });
 

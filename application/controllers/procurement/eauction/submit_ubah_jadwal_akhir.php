@@ -7,6 +7,6 @@ $new_date = (isset($post['new_date']) && !empty($post['new_date'])) ? $post['new
 
 if(!empty($new_date) || $new_date != ""){
     $new_date = str_replace("T"," ", $new_date);
-    $rows = $this->db->query("UPDATE prc_eauction_header SET tanggal_berakhir = '".$new_date."' WHERE ppm_id ='".$ppm_id."' ")->result();
+    $rows = $this->db->query("UPDATE prc_eauction_header SET tanggal_berakhir = '".$new_date."' WHERE ppm_id ='".$ppm_id."' ");
 }
-//$this->output->set_content_type('application/json')->set_output(json_encode($post));
+$this->output->set_content_type('application/json')->set_output(json_encode($post));
