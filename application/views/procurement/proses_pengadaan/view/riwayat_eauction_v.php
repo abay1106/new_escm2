@@ -10,6 +10,21 @@
 
       <div class="card-content">
         <div class="card-body">
+          <div class="row">
+            <div class="col-sm-2">Session </div> :
+            <div class="col-sm-4 status_session"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Sisa Waktu </div> :
+            <div class="col-sm-4 sisa_waktu">Aktif</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Tanggal berakhir</div> :
+            <div class="col-sm-4">
+                <input type="datetime-local" name="tanggal_berakhir" id="tanggal_berakhir" required class="form-control  tanggal_berakhir" value="">
+            </div>
+          </div>
+
             <div class="table-responsive">
                 <table id="riwayat_eauction" class="table table-bordered table-striped">
                   <thead>
@@ -34,7 +49,7 @@
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
 <script type="text/javascript">
-function makeid(length) {
+  function makeid(length) {
       var result           = '';
       var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       var charactersLength = characters.length;
@@ -43,7 +58,6 @@ function makeid(length) {
     }
     return result;
   }
-
 
   $(function () {
     var table_peringkat_penawar = $('#riwayat_eauction')
@@ -55,7 +69,6 @@ function makeid(length) {
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-      console.log(data);
       table_peringkat_penawar.bootstrapTable('refresh', {
         useCurrentPage: false,
         includeHiddenRows: true,
@@ -109,6 +122,75 @@ function makeid(length) {
 </script>
 
 <script type="text/javascript">
+  var ppm_id = "";
+
+  $( document ).ready(function() {
+    <?php
+    $eauction_header = json_encode($hist_eauction_header);
+    $date_end = json_encode($hist_eauction_header[0]['tanggal_berakhir']);
+    $date_end = str_replace('"', '', $date_end);
+    ?>
+    var tanggal_berakhir =  '<?php echo $date_end; ?>';
+    var date_penutup = moment(tanggal_berakhir).format('YYYY-MM-DDThh:mm:ss');
+
+    ppm_id = "<?php echo str_replace('"', '', json_encode($hist_eauction_header[0]['ppm_id']) ) ?>";
+
+    $("#tanggal_berakhir").val(date_penutup);
+
+    setInterval( function() {
+      var t = getTimeRemaining(tanggal_berakhir);
+      var time_exp = '' + t.days + 'Hari ' +
+        ''+ t.hours + 'Jam ' +
+        '' + t.minutes + 'Menit ' +
+        '' + t.seconds+ 'Detik ';
+
+      $(".sisa_waktu").text(time_exp);
+      if(parseInt(t.total) <= 0){
+        $(".status_session").text("Tidak Aktif");
+      } else {
+        $(".status_session").text("Aktif");
+      }
+    },1000);
+  });
+
+  $('.tanggal_berakhir').on('change', function(e){
+    var get_date_aja = e.target.value;
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "<?php echo site_url('Procurement') ?>/submit_ubah_jadwal_akhir",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "accept": "application/json",
+        "cache-control": "no-cache",
+      },
+      "data": {
+        "ppm_id": ppm_id,
+        "new_date": get_date_aja
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      window.location.reload();
+    });
+  });
+
+  function getTimeRemaining(endtime){
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor( (t/1000) % 60 );
+    var minutes = Math.floor( (t/1000/60) % 60 );
+    var hours = Math.floor( (t/(1000*60*60)) % 24 );
+    var days = Math.floor( t/(1000*60*60*24) );
+    return {
+      'total': t,
+      'days': days,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
+    };
+  }
+
 
   var $riwayat_eauction = $('#riwayat_eauction'),
   selections = [];
@@ -122,71 +204,68 @@ function makeid(length) {
     ].join('');
   }
 
-
   $(function () {
     var urls = "<?php echo site_url('Procurement/data_vendor_eauction') ?>";
-    console.log(urls);
     $riwayat_eauction.bootstrapTable({
       url: urls,
       idField:"vendor_id",
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
       columns: [
-      {
-        
-        field: 'rank',
-        title: 'Peringkat',
-        sortable:true,
-        order:true,
-        searchable:true,
-        align: 'left',
-        valign: 'middle',
-        order: 'asc'
-      },
-      {
-        field: 'vendor_name',
-        title: 'Nama Vendor',
-        //sortable:true,
-        order:false,
-        searchable:true,
-        align: 'left',
-        valign: 'middle'
-      },
-      {
-        field: 'tgl_bid',
-        title: 'Tanggal',
-       // sortable:true,
-        //order:false,
-        searchable:false,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'jumlah_bid',
-        title: 'Penawaran Saat Ini',
-        //sortable:true,
-        //order:false,
-        searchable:false,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'bid_before',
-        title: 'Penawaran Sebelumnya',
-        //sortable:false,
-        //order:false,
-        searchable:false,
-        align: 'center',
-        valign: 'middle'
-      },
-      {
-        field: 'vendor_id',
-        title: 'Riwayat',
-        align: 'center',
-        width: '10%',
-        valign:'middle',
-        formatter: operateFormatter2,
-      },
-      
+        {
+          
+          field: 'rank',
+          title: 'Peringkat',
+          sortable:true,
+          order:true,
+          searchable:true,
+          align: 'left',
+          valign: 'middle',
+          order: 'asc'
+        },
+        {
+          field: 'vendor_name',
+          title: 'Nama Vendor',
+          //sortable:true,
+          order:false,
+          searchable:true,
+          align: 'left',
+          valign: 'middle'
+        },
+        {
+          field: 'tgl_bid',
+          title: 'Tanggal',
+        // sortable:true,
+          //order:false,
+          searchable:false,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'jumlah_bid',
+          title: 'Penawaran Saat Ini',
+          //sortable:true,
+          //order:false,
+          searchable:false,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'bid_before',
+          title: 'Penawaran Sebelumnya',
+          //sortable:false,
+          //order:false,
+          searchable:false,
+          align: 'center',
+          valign: 'middle'
+        },
+        {
+          field: 'vendor_id',
+          title: 'Riwayat',
+          align: 'center',
+          width: '10%',
+          valign:'middle',
+          formatter: operateFormatter2,
+        },
       ]
     });
 

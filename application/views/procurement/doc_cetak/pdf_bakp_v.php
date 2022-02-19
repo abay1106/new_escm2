@@ -72,7 +72,7 @@
 </center>
 
 <b><p>Pada hari ini <?= strtolower($this->terbilang->hari_indo(date('D'))); ?> tanggal <font style="font-weight:bold;"><?php echo strtolower($this->terbilang->eja(date('d')))." bulan ".date('F')." tahun ". strtolower($this->terbilang->eja(date('Y'))); ?><?php echo date('(d-m-Y)', strtotime($tgl_penetapan_pemenang)); ?></font> di <b><?php echo $data_uskep['bakp_city'];?></b> telah dilaksanakan <br>rapat penentuan/pengusulan pemutusan pemenang subkon / pemasok , untuk :</p></b>
-
+<input type="hidden" name="kota" value="Jakarta">
 <table style="width:100%;">
 	<tr>
 		<td width="1%;">1.</td>

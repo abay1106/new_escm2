@@ -44,14 +44,14 @@ class Privy extends CI_Controller {
 
         $recipients = [
             [
-                'identifier' => 'DEVOK3079',
+                'identifier' => 'DEVWI0989',
                 'type' => 'signer',
                 'pos_x' => 60,
                 'pos_y' => 440,
                 'page' => 1
             ],
             [
-                'identifier' => 'DEVPA2079',
+                'identifier' => 'DEVWI6048',
                 'type' => 'signer',
                 'pos_x' => 455,
                 'pos_y' => 440,
