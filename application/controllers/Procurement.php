@@ -1199,6 +1199,11 @@ public function reject_join($id){
 public function submit_join_pengadaan(){
   include("procurement/proses_pengadaan/submit_join_pengadaan.php");
 }
+
+public function submit_ubah_jadwal_akhir(){
+  include("procurement/eauction/submit_ubah_jadwal_akhir.php");
+}
+
 //y end
 
 /*
