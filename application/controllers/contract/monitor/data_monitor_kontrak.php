@@ -33,7 +33,6 @@ else if ($filtering === "monitor_kompilasi_vpi") {
   $this->db->join('vnd_vpi_kompilasi c', 'b.vvh_id = c.vvh_id');
 }
 
-
 if (!empty($vnd_id)) {
   $this->db->where('vendor_id', $vnd_id);
 }
@@ -56,7 +55,6 @@ if(!empty($search)){
 }
 
 $data['total'] = $this->Contract_m->getMonitor($id)->num_rows();
-
 
 if($filtering === "active"){
   $this->db->where("status",2901);

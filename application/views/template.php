@@ -193,7 +193,7 @@
         serverdate.setSeconds(serverdate.getSeconds()+1)
         var datestring=padlength(serverdate.getDate())+" "+montharray[serverdate.getMonth()]+" "+serverdate.getFullYear()+" - "
         var timestring=padlength(serverdate.getHours())+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds())
-        document.getElementById("servertime").innerHTML=datestring+" "+timestring+" WIB";
+        //document.getElementById("servertime").innerHTML=datestring+" "+timestring+" WIB";
       }
 
       window.onload=function(){
