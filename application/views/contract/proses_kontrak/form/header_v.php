@@ -3,7 +3,7 @@
     <div class="card">
 
       <div class="card-header border-bottom pb-2">
-        <h4 class="card-title float-left"><?php echo $tender['evt_description']?></h4> 
+        <h4 class="card-title float-left"><?php echo $kontrak['subject_work']?></h4> 
         <span class="text-info float-right text-bold-700"><i class="ft-cpu"></i> Lelang Electronik</span>
       </div>
 
@@ -142,7 +142,7 @@
 
             </div>
 
-            <!-- center-side -->
+            <!-- right-side -->
             <div class="col">
 
               <?php $curval = (isset($kontrak['vendor_name'])) ? $kontrak['vendor_name'] : ""; ?>

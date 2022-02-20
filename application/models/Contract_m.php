@@ -1004,6 +1004,12 @@ class Contract_m extends CI_Model {
 
 		}
 
+		$this->db->join("vnd_header vnd","vnd.vendor_id = vw_ctr_monitor.vendor_id", "LEFT");
+		
+		$this->db->join("prc_tender_main tender","tender.ptm_number = vw_ctr_monitor.ptm_number", "LEFT");
+
+		$this->db->order_by("contract_id", "DESC");
+
 		return $this->db->get("vw_ctr_monitor");
 
 	}
