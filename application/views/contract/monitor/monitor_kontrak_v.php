@@ -84,8 +84,6 @@
 
 <script type="text/javascript">
 
-  console.log($('#siup_type').val() );
-
   jQuery.extend({
     getCustomJSON: function(url) {
       var result = null;
