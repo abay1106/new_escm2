@@ -16,7 +16,7 @@
       <div class="logo clearfix"><a class="logo-text float-left" href="index.html">
 
           <div class="logo-img">
-            <img src="<?= base_url('assets') ?>/app-assets/img/logo_wika_white.png" alt="WIKA Logo" / style="width:70px;">
+            <img src="<?= base_url('assets') ?>/app-assets/img/logo_wika_white.png" class="menu-title" alt="WIKA Logo" / style="width:70px;">
           </div>
           <!-- <span class="text">
             <b>E-SCM</b>

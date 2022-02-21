@@ -10,6 +10,7 @@ class Pengadaan extends MY_Controller {
 
 	public function index(){
 		$data["list"] = $this->db->query("select b.ptp_quot_closing_date,c.pvs_status, a.ptm_number, a.ptm_subject_of_work, b.ptp_reg_opening_date, b.ptp_prebid_date, b.ptp_reg_closing_date, b.ptp_quot_opening_date, d.lkp_description as status from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number join prc_tender_vendor_status c on b.ptm_number = c.ptm_number join z_bidder_status d on c.pvs_status = d.lkp_id join prc_tender_prep e on e.ptm_number = a.ptm_number where c.pvs_vendor_code = '".$this->session->userdata("userid")."' and ((c.pvs_status = 1 and e.ptp_reg_closing_date > now()) or (c.pvs_status in (2, 20) and e.ptp_quot_opening_date > now()) or (c.pvs_status = 10))")->result_array();
+		$data['title'] = 'Daftar Pekerjaan';
 		$this->layout->view("pengadaan/listpekerjaan", $data);
 	}
 
@@ -23,7 +24,7 @@ class Pengadaan extends MY_Controller {
 			$pesan = htmlspecialchars($parse[3]);
 			$waktu = date("Y-m-d H:i:s");
 			$waktus = date("d/m/Y H:i");
-			$i = $this->db->insert("adm_chat",array("datetime_ac"=>$waktu, "key_ac"=>$kode, "name_ac"=>$nama, 
+			$i = $this->db->insert("adm_chat",array("datetime_ac"=>$waktu, "key_ac"=>$kode, "name_ac"=>$nama,
 				"message_ac"=>$pesan));
 			if($tipe == 0){
 				echo $tipe.'#'.$parse[1]."#".$nama."#".$pesan;
@@ -70,7 +71,7 @@ class Pengadaan extends MY_Controller {
 				//start code hlmifzi
 				// $where = " and c.pvs_status in (2, 20, 12) and b.ptp_quot_closing_date > now()";
 				$where = " and c.pvs_status in (2, 20, 12) and ( (b.ptp_quot_opening_date <= now() and b.ptp_quot_closing_date >= now()) OR (b.ptp_quot_opening_date >= now() AND b.ptp_reg_opening_date < now()) OR (b.ptp_bid_opening2 <= now() AND b.ptp_bid_closing2 >= now() AND c.pvs_technical_status = 1) )";
-				//end   
+				//end
 				$data["title"] = "Pengadaan yang menunggu Penawaran";
 				break;
 				case "penawarandievaluasi":
@@ -91,13 +92,13 @@ class Pengadaan extends MY_Controller {
 				break;
 			}
 
-			$query = "select c.pvs_status, a.ptm_number, a.ptm_subject_of_work, b.ptp_reg_opening_date, b.ptp_reg_closing_date, b.ptp_prebid_date, b.ptp_quot_opening_date, b.ptp_quot_closing_date, d.lkp_description as status 
-			from prc_tender_main a 
-			join prc_tender_prep b on a.ptm_number = b.ptm_number 
-			join prc_tender_vendor_status c on b.ptm_number = c.ptm_number 
-			join z_bidder_status d on c.pvs_status = d.lkp_id 
+			$query = "select c.pvs_status, a.ptm_number, a.ptm_subject_of_work, b.ptp_reg_opening_date, b.ptp_reg_closing_date, b.ptp_prebid_date, b.ptp_quot_opening_date, b.ptp_quot_closing_date, d.lkp_description as status
+			from prc_tender_main a
+			join prc_tender_prep b on a.ptm_number = b.ptm_number
+			join prc_tender_vendor_status c on b.ptm_number = c.ptm_number
+			join z_bidder_status d on c.pvs_status = d.lkp_id
 			left join prc_eauction_header e on e.ppm_id=a.ptm_number AND e.status = 1
-			where c.pvs_vendor_code = '".$this->session->userdata("userid")."' 
+			where c.pvs_vendor_code = '".$this->session->userdata("userid")."'
 			AND ptm_status >=1080
 			".$where;
 
@@ -115,12 +116,13 @@ class Pengadaan extends MY_Controller {
 	public function buatsanggah(){
 		$data["list"] = $this->db->query("
 			select a.ptm_number, c.ptm_subject_of_work, b.ptp_denial_period
-			from prc_tender_vendor_status a 
-			JOIN prc_tender_prep b on a.ptm_number = b.ptm_number 
-			join prc_tender_main c on c.ptm_number = b.ptm_number 
-			where pvs_vendor_code = '".$this->session->userdata("userid")."' and a.ptm_number 
+			from prc_tender_vendor_status a
+			JOIN prc_tender_prep b on a.ptm_number = b.ptm_number
+			join prc_tender_main c on c.ptm_number = b.ptm_number
+			where pvs_vendor_code = '".$this->session->userdata("userid")."' and a.ptm_number
 			not in (SELECT ptm_number FROM prc_tender_claim WHERE pcl_jwb_isi IS NULL) and b.ptp_denial_period != 0 and c.ptm_status = 1170
 			")->result_array();
+			$data["title"] = "Buat Sanggahan";
 		$this->layout->view("pengadaan/sanggah", $data);
 	}
 	//endcode
@@ -135,7 +137,7 @@ class Pengadaan extends MY_Controller {
 
 		$data["submits"] = false;
 
-		if ($data["header"]["ptp_submission_method"] == '2') { 
+		if ($data["header"]["ptp_submission_method"] == '2') {
 			$data["tahap2"] = true;
 		}
 		else{
@@ -145,7 +147,7 @@ class Pengadaan extends MY_Controller {
 	}
 
 	public function inputsanggah(){
-		
+
 		$post = $this->input->post();
 
 		$nilaijaminan = str_replace(".", "", $post["nilaijaminan"]);
@@ -202,12 +204,14 @@ class Pengadaan extends MY_Controller {
 
 	public function monitorsanggah(){
 		$data["list"] = $this->db->query("select pcl_id, a.ptm_number, pcl_title, pcl_jwb_isi, b.ptm_subject_of_work from prc_tender_claim a join prc_tender_main b on a.ptm_number = b.ptm_number where pcl_vendor_id = '".$this->session->userdata("userid")."'")->result_array();
+		$data['title'] = 'Monitor Sanggahan';
 		$this->layout->view("pengadaan/monitorsanggah", $data);
 	}
 
 	public function view_sanggah(){
 		$pcl_id = $this->input->post("ids");
 		$data["content"] = $this->db->query("select a.ptm_number, pcl_vendor_id, pcl_title, pcl_reason, pcl_supporting_text, pcl_supporting_att, pcl_jam_amount,pcl_jam_att, pcl_jam_bank, pcl_jam_number, pcl_jam_start_date, pcl_jam_end_date, pcl_jwb_judul, pcl_jwb_no, pcl_jwb_isi, pcl_jwb_attachment, pcl_created_date, pcl_completed_date, b.ptm_subject_of_work from prc_tender_claim a join prc_tender_main b on a.ptm_number = b.ptm_number where pcl_id = '".$pcl_id."'")->row_array();
+		$data['title'] = 'Lihat Sanggahan';
 
 		$this->layout->view("pengadaan/sanggah", $data);
 
@@ -268,7 +272,7 @@ class Pengadaan extends MY_Controller {
 		if(empty($post)){
 			redirect(site_url("home"));
 		}
-		
+
 		$tenderid = $post["ids"];
 		$query	 = $this->db->select("*")->where("ptm_number",$tenderid)->get("prc_tender_prep")->row_array();
 		$this->session->set_userdata("tenderid", $tenderid);
@@ -276,7 +280,7 @@ class Pengadaan extends MY_Controller {
 		$data['userdata'] = $userdata;
 		//hlmifzi
 		$data['dateex'] = strtotime(date($query["ptp_quot_closing_date"]))*1000;
-		
+
 		$last_state = (isset($userdata['last_state'])) ? $userdata['last_state'] : $post['state'] ;
 
 		$prep = $this->db
@@ -329,7 +333,7 @@ class Pengadaan extends MY_Controller {
 				if(empty($penawaran)){
 					$data['message'] = "Penawaran tidak boleh 0";
 				}
-			
+
 				else if($penawaran < $batas_bawah){
 
 					$data['message'] = "Penawaran harus diatas harga batas bawah";
@@ -495,7 +499,7 @@ class Pengadaan extends MY_Controller {
 
 		} else {
 
-			
+
 			$current_stat = $post["current_status"];
 
 			$aanwijzing = $post["aanwijzing"];
@@ -584,7 +588,7 @@ class Pengadaan extends MY_Controller {
 				else{
 					$data["submits"] = false;
 				}
-				if ($data["header"]["ptp_submission_method"] == '2') { 
+				if ($data["header"]["ptp_submission_method"] == '2') {
 					$data["tahap2"] = true;
 				}
 				else{
@@ -602,7 +606,7 @@ class Pengadaan extends MY_Controller {
 
 					//draft
 					if ($cek_item_penawaran > 1) {
-						
+
 						$now = $this->db->query("select now() as waktu")->row_array();
 						$cek_item_penawaran = $this->db->query("select pqi_id from prc_tender_quo_item where pqm_id in (select pqm_id from prc_tender_quo_main where ptm_number = '".$tenderid."' and ptv_vendor_code = '".$this->session->userdata("userid")."')")->num_rows();
 
@@ -638,7 +642,7 @@ class Pengadaan extends MY_Controller {
 								$data["template"] = $this->db->query("select c.etd_item, c.etd_mode, c.etd_weight from prc_tender_prep a join prc_evaluation_template b on a.evt_id = b.evt_id RIGHT JOIN prc_evaluation_template_detail c on b.evt_id = c.evt_id where a.ptm_number = '".$tenderid."'")->result_array();
 								$data["item"] = $this->db->query("select tit_id, tit_description, tit_quantity, tit_ppn, tit_pph from prc_tender_item where ptm_number = '".$tenderid."'")->result_array();
 							}
-							
+
 
 						}
 						//insert
@@ -653,11 +657,11 @@ class Pengadaan extends MY_Controller {
 								$data["currency"] = $this->db->query("select curr_code, curr_name from adm_curr where curr_code = (select ptm_currency from prc_tender_main where ptm_number = '".$tenderid."' ) order by curr_code asc")->result_array();
 
 							}
-					
+
 					$this->layout->view("pengadaan/penawaran", $data);
 
 				} else if($prep["ptp_submission_method"] == '2'){
-					
+
 					$time = time();
 					$opening = strtotime($proc_date["ptp_quot_opening_date"]);
 					$closing = strtotime($proc_date["ptp_quot_closing_date"]);
@@ -721,7 +725,7 @@ class Pengadaan extends MY_Controller {
 						$data['readonly'] = "1";
 						echo "<script>alert(\"M0 : Maaf, Saat ini bukan waktu memasukan penawaran 3\"); window.history.go(-1);</script>";
 					}
-					
+
 
 
 					$data["tenderid"] = $tenderid;
@@ -742,7 +746,7 @@ class Pengadaan extends MY_Controller {
 					}
 
 					$this->layout->view("pengadaan/penawaran", $data);
-					
+
 
 				}
 				else{
@@ -829,7 +833,7 @@ class Pengadaan extends MY_Controller {
 				$data["currency"] = $this->db->query("select curr_code, curr_name from adm_curr where curr_code like 'IDR' order by curr_code asc")->result_array();
 				$data["readonly"] = "1";
 				$this->layout->view("pengadaan/penawaran", $data);
-				
+
 			}
 
 			else if($current_stat == "11"){
@@ -843,7 +847,7 @@ class Pengadaan extends MY_Controller {
 				$data["readonly"] = "1";
 				$data["winner"] = "1";
 				$this->layout->view("pengadaan/penawaran", $data);
-				
+
 			}
 
 			else if($current_stat == "10"){
@@ -1116,7 +1120,7 @@ class Pengadaan extends MY_Controller {
 				else{
 					$data["submits"] = false;
 				}
-				if ($data["header"]["ptp_submission_method"] == '2') { 
+				if ($data["header"]["ptp_submission_method"] == '2') {
 					$data["tahap2"] = true;
 				}
 				else{
@@ -1128,14 +1132,14 @@ class Pengadaan extends MY_Controller {
 			else if(in_array($current_stat, array("20","2"))){
 
 				$now = $this->db->query("select now() as waktu")->row_array();
-				if((strtotime($proc_date['ptp_quot_opening_date']) <= strtotime($now["waktu"])) && (strtotime($proc_date['ptp_quot_closing_date']) >= strtotime($now["waktu"])) && ($prep["ptp_submission_method"] != '2')){								
+				if((strtotime($proc_date['ptp_quot_opening_date']) <= strtotime($now["waktu"])) && (strtotime($proc_date['ptp_quot_closing_date']) >= strtotime($now["waktu"])) && ($prep["ptp_submission_method"] != '2')){
 					//start code hlmifzi
 					$data["header"] = $this->db->query("SELECT b.ptp_eauction, ptp_quot_closing_date,ptp_doc_open_date,a.ptm_number, b.ptp_submission_method, a.ptm_subject_of_work, a.ptm_scope_of_work, a.ptm_contract_type, b.ptp_klasifikasi_peserta, a.ptm_currency, b.ptp_reg_opening_date, b.ptp_reg_closing_date, b.ptp_prebid_date, b.ptp_quot_opening_date, b.ptp_prebid_location, b.ptp_bid_opening2, b.ptp_tgl_aanwijzing2, b.ptp_lokasi_aanwijzing2, CASE b.ptp_tender_method WHEN '0' THEN 'PENUNJUKAN LANGSUNG' WHEN '1' THEN 'PEMILIHAN LANGSUNG' WHEN '2' THEN 'LELANG' END AS metode, now() AS waktu, b.ptp_aanwijzing_online, COALESCE (( SELECT sum(tit_quantity * tit_price * 1.1) FROM prc_tender_item WHERE ptm_number = '".$tenderid."' GROUP BY ptm_number ), 0 ) AS nilai from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number where b.ptm_number = '".$tenderid."'")->row_array();
 					$data["item"] = $this->db->query("select tit_code, tit_description, tit_quantity, tit_unit from prc_tender_item where ptm_number = '".$tenderid."'")->result_array();
 					$data["dokumen"] = $this->db->query("select ptd_id, ptd_category, ptd_description, ptd_file_name from prc_tender_doc where ptd_type = '1' and ptm_number = '".$tenderid."'")->result_array();
-					
 
-					if ($data["header"]["ptp_submission_method"] == '2') { 
+
+					if ($data["header"]["ptp_submission_method"] == '2') {
 						$data["tahap2"] = true;
 					}
 					else{
@@ -1191,7 +1195,7 @@ class Pengadaan extends MY_Controller {
 					$data["dokumen"] = $this->db->query("select ptd_id, ptd_category, ptd_description, ptd_file_name from prc_tender_doc where ptd_type = '1' and ptm_number = '".$tenderid."'")->result_array();
 
 
-					if ($data["header"]["ptp_submission_method"] == '2') { 
+					if ($data["header"]["ptp_submission_method"] == '2') {
 						$data["tahap2"] = true;
 					}
 					else{
@@ -1223,9 +1227,9 @@ class Pengadaan extends MY_Controller {
 						$data["header"] = $this->db->query("SELECT b.ptp_eauction, ptp_quot_closing_date,ptp_doc_open_date,a.ptm_number, b.ptp_submission_method, a.ptm_subject_of_work, a.ptm_scope_of_work, a.ptm_contract_type, b.ptp_klasifikasi_peserta, a.ptm_currency, b.ptp_reg_opening_date, b.ptp_reg_closing_date, b.ptp_prebid_date, b.ptp_quot_opening_date, b.ptp_prebid_location, b.ptp_bid_opening2, b.ptp_tgl_aanwijzing2, b.ptp_lokasi_aanwijzing2, CASE b.ptp_tender_method WHEN '0' THEN 'PENUNJUKAN LANGSUNG' WHEN '1' THEN 'PEMILIHAN LANGSUNG' WHEN '2' THEN 'LELANG' END AS metode, now() AS waktu, b.ptp_aanwijzing_online, COALESCE (( SELECT sum(tit_quantity * tit_price * 1.1) FROM prc_tender_item WHERE ptm_number = '".$tenderid."' GROUP BY ptm_number ), 0 ) AS nilai from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number where b.ptm_number = '".$tenderid."'")->row_array();
 						$data["item"] = $this->db->query("select tit_code, tit_description, tit_quantity, tit_unit from prc_tender_item where ptm_number = '".$tenderid."'")->result_array();
 						$data["dokumen"] = $this->db->query("select ptd_id, ptd_category, ptd_description, ptd_file_name from prc_tender_doc where ptd_type = '1' and ptm_number = '".$tenderid."'")->result_array();
-						
 
-						if ($data["header"]["ptp_submission_method"] == '2') { 
+
+						if ($data["header"]["ptp_submission_method"] == '2') {
 							$data["tahap2"] = true;
 						}
 						else{
@@ -1254,7 +1258,7 @@ class Pengadaan extends MY_Controller {
 					}
 
 					$this->layout->view("pengadaan/penawaran", $data);
-					
+
 
 				}
 				else{
@@ -1328,7 +1332,7 @@ class Pengadaan extends MY_Controller {
 				$data["pajak"] = $this->db->query("select case npwp_pkp WHEN 'YA' THEN '1' ELSE '0' END as pajak from vnd_header where vendor_id = '".$this->session->userdata("userid")."'")->row_array();
 				$data["pajak"] = $data["pajak"]["pajak"];
 				$data["header"] = $this->db->query("select * from prc_tender_quo_main where ptm_number = '".$tenderid."' and ptv_vendor_code = '".$this->session->userdata("userid")."'")->row_array();
-				
+
 				//============================================
 				if($data["header"] == NULL ){
 					$data["header"] = $this->db->query("SELECT ptp_eauction,a.ptm_number, b.ptp_submission_method, a.ptm_subject_of_work, a.ptm_scope_of_work, a.ptm_contract_type, b.ptp_klasifikasi_peserta, a.ptm_currency, b.ptp_reg_opening_date, b.ptp_reg_closing_date, b.ptp_prebid_date, b.ptp_quot_opening_date, b.ptp_prebid_location, b.ptp_bid_opening2, b.ptp_tgl_aanwijzing2, b.ptp_lokasi_aanwijzing2, ptp_quot_closing_date, ptp_doc_open_date, CASE b.ptp_tender_method WHEN '0' THEN 'PENUNJUKAN LANGSUNG' WHEN '1' THEN 'PEMILIHAN LANGSUNG' WHEN '2' THEN 'LELANG' END AS metode, now() AS waktu, b.ptp_aanwijzing_online, COALESCE (( SELECT sum(tit_quantity * tit_price * 1.1) FROM prc_tender_item WHERE ptm_number = '".$tenderid."' GROUP BY ptm_number ), 0 ) AS nilai from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number where b.ptm_number = '".$tenderid."'")->row_array();
@@ -1340,14 +1344,14 @@ class Pengadaan extends MY_Controller {
 					else{
 						$data["submits"] = false;
 					}
-					if ($data["header"]["ptp_submission_method"] == '2') { 
+					if ($data["header"]["ptp_submission_method"] == '2') {
 						$data["tahap2"] = true;
 					}
 					else{
 						$data["tahap2"] = false;
 					}
 					$this->layout->view("pengadaan/overview", $data);
-				}else{							
+				}else{
 				//============================================
 
 					$data["template"] = $this->db->query("select pqt_id, pqt_item, pqt_weight, pqt_check_vendor, pqt_vendor_desc, pqt_attachment from prc_tender_quo_tech where pqm_id = '".$data["header"]["pqm_id"]."'")->result_array();
@@ -1357,7 +1361,7 @@ class Pengadaan extends MY_Controller {
 					$this->layout->view("pengadaan/penawaran", $data);
 
 				}
-				
+
 			}
 
 			else if($current_stat == "11"){
@@ -1371,7 +1375,7 @@ class Pengadaan extends MY_Controller {
 				$data["readonly"] = "1";
 				$data["winner"] = "1";
 				$this->layout->view("pengadaan/penawaran", $data);
-				
+
 			}
 
 			else if($current_stat == "10"){
@@ -1390,9 +1394,9 @@ class Pengadaan extends MY_Controller {
 				$data["header"] = $this->db->query("SELECT b.ptp_eauction, ptp_quot_closing_date,ptp_doc_open_date,a.ptm_number, b.ptp_submission_method, a.ptm_subject_of_work, a.ptm_scope_of_work, a.ptm_contract_type, b.ptp_klasifikasi_peserta, a.ptm_currency, b.ptp_reg_opening_date, b.ptp_reg_closing_date, b.ptp_prebid_date, b.ptp_quot_opening_date, b.ptp_prebid_location, b.ptp_bid_opening2, b.ptp_tgl_aanwijzing2, b.ptp_lokasi_aanwijzing2, CASE b.ptp_tender_method WHEN '0' THEN 'PENUNJUKAN LANGSUNG' WHEN '1' THEN 'PEMILIHAN LANGSUNG' WHEN '2' THEN 'LELANG' END AS metode, now() AS waktu, b.ptp_aanwijzing_online, COALESCE (( SELECT sum(tit_quantity * tit_price * 1.1) FROM prc_tender_item WHERE ptm_number = '".$tenderid."' GROUP BY ptm_number ), 0 ) AS nilai from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number where b.ptm_number = '".$tenderid."'")->row_array();
 				$data["item"] = $this->db->query("select tit_code, tit_description, tit_quantity, tit_unit from prc_tender_item where ptm_number = '".$tenderid."'")->result_array();
 				$data["dokumen"] = $this->db->query("select ptd_id, ptd_category, ptd_description, ptd_file_name from prc_tender_doc where ptd_type = '1' and ptm_number = '".$tenderid."'")->result_array();
-				
 
-				if ($data["header"]["ptp_submission_method"] == '2') { 
+
+				if ($data["header"]["ptp_submission_method"] == '2') {
 					$data["tahap2"] = true;
 				}
 				else{
@@ -1404,7 +1408,7 @@ class Pengadaan extends MY_Controller {
 
 		}
 
-	} //end	
+	} //end
 
 	public function edit_harga_nego(){
 		$tenderid = $this->session->userdata("tenderid");
@@ -1603,7 +1607,7 @@ class Pengadaan extends MY_Controller {
 					"pqm_guarantee_unit"=>$post["garansi_u"],
 					"pqm_valid_thru"=>$post["berlakuhingga"],
 					"pqm_notes"=>$post["catatan"],
-					"pqm_currency"=>"IDR",				
+					"pqm_currency"=>"IDR",
 					"pqm_created_date"=>date("Y-m-d H:i:s"),
 				);
 
@@ -1634,7 +1638,7 @@ class Pengadaan extends MY_Controller {
 					"pqm_guarantee_unit"=>$post["garansi_u"],
 					"pqm_valid_thru"=>$post["berlakuhingga"],
 					"pqm_notes"=>$post["catatan"],
-					"pqm_currency"=>"IDR",			
+					"pqm_currency"=>"IDR",
 					"pqm_created_date"=>date("Y-m-d H:i:s"),
 				);
 
@@ -1649,7 +1653,7 @@ class Pengadaan extends MY_Controller {
 
 				$result = $this->db->where("pqm_id",$post["pqmid"])->update("prc_tender_quo_main",$input);
 
-			}						 	
+			}
 
 
 			if($this->db->affected_rows($result) > 0 ){
@@ -1840,7 +1844,7 @@ class Pengadaan extends MY_Controller {
 					}
 				}
 				if($affected == ($num_item-1)){
-					
+
 					if ($post["submitStatus"] == "draft") {
 							$pvs_status = 2;
 						}else{
@@ -1889,7 +1893,7 @@ class Pengadaan extends MY_Controller {
 				}
 
 				if ($statuss == TRUE){
-					$this->db->trans_commit();						
+					$this->db->trans_commit();
 					$query = "SELECT a.ptv_vendor_code, sum(b.pqi_price * b.pqi_quantity) AS jumlah
 					FROM prc_tender_quo_main a JOIN prc_tender_quo_item b ON a.pqm_id = b.pqm_id
 					WHERE ptm_number = '".$post["tenderids"]."'
@@ -1910,7 +1914,7 @@ class Pengadaan extends MY_Controller {
 					echo $rank;
 				}
 				//end of komersial
-			} 
+			}
 		}
 
 		exit();
@@ -1953,7 +1957,7 @@ class Pengadaan extends MY_Controller {
 			}
 			$this->session->set_userdata("files", $files);
 		}
-		
+
 		else if($section == "adm"){
 			$temp = [];
 			for ($i = 1; $i < $post['num_adm']; $i++) {
@@ -1974,7 +1978,7 @@ class Pengadaan extends MY_Controller {
 			$this->session->set_userdata("adm", $post);
 			echo "1";
 		}
-		
+
 		else if($section == "teknis"){
 
 			$temp = [];
@@ -2010,7 +2014,7 @@ class Pengadaan extends MY_Controller {
 					"pqm_number"=>$post["nopenawaran"],
 					"pqm_type"=>$post["tipepenawaran"],
 					"pqm_bid_bond_value"=>$post["bid_bond_input"],
-					"pqm_local_content"=>!empty($post["kandunganlokal"]) ? $post["kandunganlokal"] : null,						
+					"pqm_local_content"=>!empty($post["kandunganlokal"]) ? $post["kandunganlokal"] : null,
 					"pqm_valid_thru"=>$post["berlakuhingga"],
 					"pqm_notes"=>$post["catatan"],
 					"pqm_currency"=>"IDR",
@@ -2369,7 +2373,7 @@ class Pengadaan extends MY_Controller {
 			if($this->db->affected_rows($result) > 0){
 				$posts = $result->row_array();
 
-					//y insert penawaran terakhir ke history									
+					//y insert penawaran terakhir ke history
 				$lastquo = $this->db->where(array('pqm_id'=>$post['pqmid']))->get('prc_tender_quo_main')->row_array();
 				$inn = array(
 					"pqm_id"=>$lastquo["pqm_id"],
@@ -2390,9 +2394,9 @@ class Pengadaan extends MY_Controller {
 					"pqm_att"=>$lastquo["pqm_att"],
 					"pqm_att_quo"=>$lastquo["pqm_att_quo"],
 				);
-				
+
 				$rslt = $this->db->insert("prc_tender_quo_main_hist",$inn);
-				
+
 					//y end
 
 					// $input = array(
@@ -2485,7 +2489,7 @@ class Pengadaan extends MY_Controller {
 				if(!empty($fq)){
 					$input['pqm_att_quo'] = $fq;
 				}else{
-					$lastattquo = $this->db->where(array("pqm_id"=>$post["pqmid"]))->get("prc_tender_quo_main")->row_array();									
+					$lastattquo = $this->db->where(array("pqm_id"=>$post["pqmid"]))->get("prc_tender_quo_main")->row_array();
 					$input['pqm_att_quo'] = $lastattquo["pqm_att_quo"];
 				}
 
@@ -2521,7 +2525,7 @@ class Pengadaan extends MY_Controller {
 					$row['pqm_hist_id'] = $no_penawaran["pqi_hist_id"];
 					unset($row['pqm_id']);
 					unset($row['pqi_id']);
-					$result = $this->db->insert('prc_tender_quo_item_hist',$row);				
+					$result = $this->db->insert('prc_tender_quo_item_hist',$row);
 					$affected = $affected + $this->db->affected_rows($result);
 				}
 
@@ -2540,8 +2544,8 @@ class Pengadaan extends MY_Controller {
 								"pqi_guarantee_type"=>$post["guarantee_type_".$i],
 								"pqi_deliverable_type"=>$post["deliverable_type_".$i],
 							);
-						
-							$result = $this->db->where("pqi_id",$post["pqiid_".$i])->update("prc_tender_quo_item",$input);						
+
+							$result = $this->db->where("pqi_id",$post["pqiid_".$i])->update("prc_tender_quo_item",$input);
 							$affected = $affected + $this->db->affected_rows($result);
 						}
 					}

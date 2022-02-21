@@ -674,6 +674,14 @@ public function data_peringkat_vendor_eauction(){
   include("procurement/eauction/data_peringkat_vendor.php");
 }
 
+public function vendor_eacution_history(){
+  include("procurement/eauction/vendor_eacution_history.php");
+}
+
+public function data_vendor_eacution_history(){
+  include("procurement/eauction/data_vendor_eacution_history.php");
+}
+
 public function data_vendor_eauction(){
   include("procurement/eauction/data_vendor_eauction.php");
 }
@@ -1191,6 +1199,11 @@ public function reject_join($id){
 public function submit_join_pengadaan(){
   include("procurement/proses_pengadaan/submit_join_pengadaan.php");
 }
+
+public function submit_ubah_jadwal_akhir(){
+  include("procurement/eauction/submit_ubah_jadwal_akhir.php");
+}
+
 //y end
 
 /*
