@@ -7,24 +7,21 @@
             <a class="collapse-link">
               <i class="fa fa-chevron-up"></i>
             </a>
-
           </div>
         </div>
         <div class="ibox-content">
-
           <div class="table-responsive">
             <div class="card" style="border-radius: 30px;">
               <div class="card-body">
+                <a href="<?= base_url('procurement/perencanaan_pengadaan/perencanaan_pmcs/')?>" class="btn btn-info" onclick="return confirm('Apakah Anda yakin Syncron data?')" style="margin-bottom: -65px;">
+                  <i class="ft-refresh-cw mr-1"></i> Syncron
+                </a>
                 <table id="table_perencanaan_pmcs" class="table table-bordered table-striped"></table>
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
-
-
     </div>
   </div>
 </div>

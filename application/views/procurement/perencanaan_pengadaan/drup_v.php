@@ -40,26 +40,26 @@
                             <a href="#" class="btn btn-info mb-3 btn-lg" data-toggle="modal" data-target="#drupForm">
                               <i class="ft-file-plus"></i>Tambah
                             </a>
-                            <a href="<?= base_url('procurement/perencanaan_pengadaan/export/export_pdf');?>" target="_blank" onclick="return confirm('Apakah Anda yakin cetak data ini?')" class="btn btn-info mb-3 btn-lg">
+                            <a href="<?= base_url('procurement/doc_cetak/pdf_drup');?>" target="_blank" onclick="return confirm('Apakah Anda yakin cetak data ini?')" class="btn btn-info mb-3 btn-lg">
                               <i class="ft-printer"></i> Print
                             </a>
-							<div class="table-responsive">
-								<table class="table table-sm table-bordered data-tbl">
-									<thead class="thead-light">
-										<tr>
-											<th rowspan="2" style="vertical-align: middle;">No</th>
-											<th rowspan="2" style="vertical-align: middle;">Kode COA</th>
-											<th rowspan="2" style="vertical-align: middle;">Kode Sumber Daya</th>
-											<th rowspan="2" style="vertical-align: middle;">Paket Pengadaan dan Program</th>
-											<th colspan="2" class="text-center">Unit Kerja</th>
-											<th colspan="2" class="text-center">Jenis Pengadaan</th>
-											<th colspan="2" class="text-center">Pelaksanaan Pengadaan</th>
-											<th colspan="2" class="text-center">Pelaksanaan Pekerjaan</th>
-											<th colspan="2" class="text-center">Volume</th>
-											<th colspan="2" class="text-center">Anggaran</th>
-											<th rowspan="2" style="vertical-align: middle;">Catatan</th>
-											<th rowspan="2" style="vertical-align: middle;">Action</th>
-										</tr>
+                  							<div class="table-responsive">
+                  								<table class="table table-sm table-bordered data-tbl">
+                  									<thead class="thead-light">
+                  										<tr>
+                  											<th rowspan="2" style="vertical-align: middle;">No</th>
+                  											<th rowspan="2" style="vertical-align: middle;">Kode COA</th>
+                  											<th rowspan="2" style="vertical-align: middle;">Kode Sumber Daya</th>
+                  											<th rowspan="2" style="vertical-align: middle;">Paket Pengadaan dan Program</th>
+                  											<th colspan="2" class="text-center">Unit Kerja</th>
+                  											<th colspan="2" class="text-center">Jenis Pengadaan</th>
+                  											<th colspan="2" class="text-center">Pelaksanaan Pengadaan</th>
+                  											<th colspan="2" class="text-center">Pelaksanaan Pekerjaan</th>
+                  											<th colspan="2" class="text-center">Volume</th>
+                  											<th colspan="2" class="text-center">Anggaran</th>
+                  											<th rowspan="2" style="vertical-align: middle;">Catatan</th>
+                  											<th rowspan="2" style="vertical-align: middle;">Action</th>
+                  										</tr>
                                         <tr>
                                             <th>Pemilik Program</th>
                                             <th>Pengelola Anggaran</th>
@@ -74,8 +74,8 @@
                                             <th>Harga Satuan</th>
                                             <th>Total</th>
                                         </tr>
-									</thead>
-									<tbody>
+                    									</thead>
+                    									<tbody>
                                         <?php $noabjd = 'A'; foreach ($drup_data as $value) { ?>
                                             <tr style="background-color: #dcf6ff">
                                                 <td class="text-center text-bold-700 font-small-2"><?php echo $noabjd++; ?></td>
@@ -117,7 +117,7 @@
                                                 </tr>
                                             <?php } ?>
                                         <?php } ?>
-									</tbody>
+									                    </tbody>
                                     <tfoot>
                                         <tr style="background-color: #e9ecef">
                                             <td colspan="14">&nbsp;</td>
@@ -127,8 +127,8 @@
                                             <td>&nbsp;</td>
                                         </tr>
                                     </tfoot>
-								</table>
-							</div>
+            								    </table>
+            							</div>
                         </div>
                     </div>
                 </div>

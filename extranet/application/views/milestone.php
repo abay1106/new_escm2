@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-7">
-		<div class="content-header"><strong><?php echo ($viewer) ? "Lihat" : "Form"; ?> Progress Milestone</strong></div>			
+		<div class="content-header"><strong><?php echo ($viewer) ? "Lihat" : "Form"; ?> Progress Milestone</strong></div>
 	</div>
 	<div class="col-5">
 		<div class="content-header float-right">
@@ -62,7 +62,7 @@
 									<?php echo date("d/m/Y",strtotime($header["target_date"])) ?>
 								</p>
 							</div>
-						</div>  
+						</div>
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">
@@ -70,7 +70,7 @@
 							</label>
 							<div class="col-lg-6 m-l-n">
 								<p class="form-control-static">
-									<?php echo $header["percentage"] ?> % 
+									<?php echo $header["percentage"] ?> %
 
 								</p>
 							</div>
@@ -96,7 +96,7 @@
 								Presentase Progress *
 							</label>
 							<div class="col-lg-2 m-l-n">
-								
+
 								<?php if(!$viewer){ ?>
 								<div class="input-group">
 									<input type="text" required class="form-control money" name="presentase_inp" value="">
@@ -107,7 +107,7 @@
 									<?php echo $current["percentage"] ?> %
 								</p>
 								<?php } ?>
-								
+
 							</div>
 						</div>
 
@@ -116,7 +116,7 @@
 								Deskripsi Progress *
 							</label>
 							<div class="col-lg-6 m-l-n">
-								
+
 								<?php if(!$viewer){ ?>
 								<textarea name="progress_inp" required class="form-control"></textarea>
 								<?php } else { ?>
@@ -148,7 +148,7 @@
                       <div class="col-sm-6">
                         <div class="input-group">
                           <span class="input-group-btn">
-                               <button type="button" data-id="kode_item" data-url="<?php echo site_url('kontrak/picker_contract_item/'.$header["contract_id"]) ?>" class="btn btn-primary picker barang_btn not_integrated">Pilih Item</button> 
+                               <button type="button" data-id="kode_item" data-url="<?php echo site_url('kontrak/picker_contract_item/'.$header["contract_id"]) ?>" class="btn btn-primary picker barang_btn not_integrated">Pilih Item</button>
                          </span>
                          <?php $curval = set_value("kode_item"); ?>
                          <input readonly type="text" class="form-control" id="kode_item" name="kode_item" value="<?php echo $curval ?>">
@@ -205,7 +205,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php 
+                <?php
                 if(isset($item_progress) && !empty($item_progress)){
                   foreach ($item_progress as $key => $value) {
                     $idnya = $key+1;
@@ -249,8 +249,8 @@
                 </div>
             </div>
         </div>
-		
-		
+
+
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="ibox float-e-margins">
@@ -275,7 +275,7 @@
 
 							<tbody>
 
-								<?php 
+								<?php
 								foreach ($item as $key => $value) { ?>
 
 								<tr>
@@ -284,7 +284,7 @@
 									<td><?php echo $value['description'] ?></td>
 									<td><?php echo $value['percentage'] ?> %</td>
 								</tr>
-								
+
 								<?php } ?>
 
 							</tbody>
@@ -322,7 +322,7 @@
 							</thead>
 							<tbody>
 
-								<?php if(isset($comment_list) && !empty($comment_list)){ 
+								<?php if(isset($comment_list) && !empty($comment_list)){
 
 									foreach ($comment_list as $kc => $vc) {
 										$start_date = date("d/m/Y H:i:s",strtotime($vc['comment_date']));
@@ -376,7 +376,7 @@
 
 				<?php } else { ?>
 				<a href="javascript:window.history.go(-1);" class="btn btn-light">Kembali</a>
-				<?php } ?> 
+				<?php } ?>
 
 			</form>
 
@@ -409,7 +409,7 @@
 
             $(".jml_item").autoNumeric('update',{
             	aSep: '.',
-			    aDec: ',', 
+			    aDec: ',',
 			    aSign: '',
 			    vMin: '0',
 			    vMax: mydata.volume_remain
@@ -431,7 +431,7 @@
 
     		if ( getMaxDataNo(".edit_item") != "" && getMaxDataNo(".edit_item") != 0 ) {
 	    		for (var i = 1; i < getMaxDataNo(".edit_item")+1 ; i++) {
-	    			
+
 
 	    			if (id == $("[name='item_kode["+i+"]']").val()) {
 	    				 is_exists = 'true';
@@ -468,7 +468,7 @@
       return max;
     }
 
-     $(".action_item").click(function(){ 
+     $(".action_item").click(function(){
 
       var current_item = $("#current_item").val();
       var no = current_item;
@@ -535,10 +535,10 @@
       if ($('[name="item_id['+no+']"]').val() != "") {
       	alert($('[name="item_id['+no+']"]').val());
       }
-      
+
       $(".jml_item").autoNumeric('update',{
             	aSep: '.',
-			    aDec: ',', 
+			    aDec: ',',
 			    aSign: '',
 			    vMin: '0',
 			    vMax: max_val
@@ -558,17 +558,17 @@
 
     });
 
-	
+
 	$("input.money").autoNumeric('init',{
 	    aSep: '.',
-	    aDec: ',', 
+	    aDec: ',',
 	    aSign: '',
 	    vMin: '0'
 	  });
 
 	$("input.jml_item").autoNumeric('init',{
 	    aSep: '.',
-	    aDec: ',', 
+	    aDec: ',',
 	    aSign: '',
 	    vMin: '0'
 	  });

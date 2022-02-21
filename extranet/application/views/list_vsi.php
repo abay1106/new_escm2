@@ -7,11 +7,8 @@
       <div class="alert alert-success" role="alert"><?php echo $message ?></div>
 
       <?php $this->session->unset_userdata("message"); } ?>
-                            
+
       <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>List Survey Kepuasan Vendor</h5>
-        </div>
         <div class="ibox-content">
           <div class="table-responsive">
             <table class="table table-striped table-bordered datatabless">
@@ -29,17 +26,17 @@
                   <tr>
                     <td><?php echo ++$key; ?></td>
                     <td>
-                      <?php $curval = isset($row["contract_number"]) ? $row["contract_number"] : NULL; 
+                      <?php $curval = isset($row["contract_number"]) ? $row["contract_number"] : NULL;
                       echo $curval; ?>
                     </td>
                     <td>
-                      <?php $curval = isset($row["subject_work"]) ? $row["subject_work"] : NULL; 
-                      echo $curval;?>  
+                      <?php $curval = isset($row["subject_work"]) ? $row["subject_work"] : NULL;
+                      echo $curval;?>
                     </td>
                     <td>
                       <?php $curval = isset($periode['periode']) ? $periode['periode'] : NULL;
                       $is = isset($month) ? $month : NULL;
-                      echo "Periode ".$curval." - ".$is; ?>  
+                      echo "Periode ".$curval." - ".$is; ?>
                     </td>
                     <td style="text-align: center;">
                       <?php $curval = isset($template['atk_id']) ? $template['atk_id'] : NULL ?>

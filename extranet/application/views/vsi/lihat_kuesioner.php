@@ -1,14 +1,3 @@
-<div class="row">
-	<div class="col-7">
-		<div class="content-header"><strong>Kuesioner Kepuasan Vendor</strong></div>			
-	</div>
-	<div class="col-5">
-		<div class="content-header float-right">
-			<a class="text-muted text-xs block h5" id="servertime"></a>
-		</div>
-	</div>
-</div>
-
 <form role="form" id="komersial" method="POST" action="<?php echo site_url('/Vsi/submit_kuesioner') ?>" class="form-horizontal">
 	<div class="wrapper wrapper-content animated fadeIn">
 		<div class="row">
@@ -18,7 +7,7 @@
 						<h5>Kuesioner Kepuasan Vendor</h5>
 					</div>
 					<div class="ibox-content">
-						<form role="form" id="komersial" method="POST" action="<?php echo site_url('/Vsi/submit_kuesioner') ?>" class="form-horizontal">	
+						<form role="form" id="komersial" method="POST" action="<?php echo site_url('/Vsi/submit_kuesioner') ?>" class="form-horizontal">
 							<input type="text" style="display: none" name="quest_id" value="<?php echo $quest_id ?>">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">
@@ -32,11 +21,11 @@
 								</label>
 							</div>
 
-							<?php 
+							<?php
 							$p = "";
 							$h = 1;
 							$tab = "&nbsp;&nbsp;&nbsp;";
-							foreach ($quest as $key => $val) { 
+							foreach ($quest as $key => $val) {
 								$p .= "I";
 								$q = 1;
 								?>
@@ -46,15 +35,15 @@
 										<?php echo "<b>".$p.". ".$val[0]['vvk_quest_header']."</b>"; ?>
 									</div>
 								</div>
-								
+
 								<?php foreach ($val as $k => $v) { ?>
 									<div class="form-group">
 										<div class="col-sm-6 col-form-label">
 											<?php echo $tab.$h.".".$q.$tab.$v['vvk_quest_name']; ?>
 										</div>
 										<div class="radio radio-info col-sm-3">
-										<?php echo $tab.$tab; 
-										for ($i=1; $i <= 4 ; $i++) { 
+										<?php echo $tab.$tab;
+										for ($i=1; $i <= 4 ; $i++) {
 			                                echo $tab ;
 			                                $check = ($i == $v['vvk_satis_score']) ? "checked" : null; ?>
 			                                <input type="radio" id="satis_<?php echo $v['vvk_id'] ?>" name="satis_<?php echo $v['vvk_id']?>" <?php echo $check; ?> disabled>
@@ -64,13 +53,13 @@
 
 										<div class="radio radio-info col-sm-3">
 										<?php echo $tab;
-										for ($i=1; $i <= 4 ; $i++) { 
+										for ($i=1; $i <= 4 ; $i++) {
 			                                echo $tab ;
 			                                $check = ($i == $v['vvk_imp_score']) ? "checked" : null; ?>
 			                                <input type="radio" id="imp_<?php echo $v['vvk_id'] ?>" name="imp_<?php echo $v['vvk_id']?>" <?php echo $check ?> disabled >
 			                                <label for="imp<?php echo $v['vvk_id'] ?>"> <?php echo $i.$tab ?> </label>
 										<?php } ?>
-			                            </div>	
+			                            </div>
 									</div>
 
 								<?php $q++;
@@ -99,7 +88,7 @@
 								    </tr>
 							  	</thead>
 							  	<tbody>
-							    <?php 
+							    <?php
 							    $urut = 1;
 							    foreach ($contractor as $key => $value) { ?>
 							    	<tr>
@@ -112,13 +101,13 @@
 							    		<td>
 							    			<?php echo $value['vvc_type']; ?>
 							    		</td>
-										<?php for ($i=1; $i <= 4 ; $i++) { 
+										<?php for ($i=1; $i <= 4 ; $i++) {
 			                                $check = ($i == $value['vct_score']) ? "checked" : null; ?>
 						    				<td>
 						    					<div class="radio radio-info">
 													<input type="radio" id="con<?php echo $key ?>" name="con<?php echo $key ?>" <?php echo $check ?> disabled >
 					                                <label for="con<?php echo $key ?>"></label>
-					                            </div>	
+					                            </div>
 						    				</td>
 										<?php } ?>
 						    		</tr>
@@ -144,7 +133,7 @@
 							 				<label for="already">Tidak</label>
 							 			</div>
 						 			</div>
-								    
+
 								</div>
 							</div>
 							<div class="form-group">
@@ -180,7 +169,7 @@
 						<div class="ibox-title">
 							<h5><?php echo $this->lang->line('Komentar'); ?></h5>
 						</div>
-						
+
 						<div class="ibox-content">
 
 							<div class="form-group">
@@ -206,13 +195,13 @@
 </div>
 
 <script >
-$(document).ready(function(){	 
-	
+$(document).ready(function(){
+
 	var sel = ""
 
 	$("#type_contr").change(function(){
         sel = $(this).children("option:selected").text();
-    });	
+    });
 
     $(".action_add").click(function(){
 
