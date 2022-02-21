@@ -329,6 +329,9 @@ class Kontrak extends MY_Controller {
 		$data["list_sj"]=$this->Contract_m->get_sj_matgis($vendor);
 		$data["list_bapb"]=$this->Contract_m->get_bapb_matgis($vendor);
 		$data["list_bapb_invoice"]=$this->Contract_m->get_bapb_invoice_matgis($vendor);
+
+		$data['title'] = "Daftar Pekerjaan";
+
 		$this->layout->view('listpekerjaankontrak', $data);
 	}
 
@@ -360,6 +363,7 @@ class Kontrak extends MY_Controller {
 			WHERE a.vendor_id='".$this->session->userdata("userid")."' AND progress_percentage='100'")
 		->result_array();
 
+		$data['title'] = "Monitor Bast";
 		$this->layout->view('listbast', $data);
 	}
 
@@ -1146,7 +1150,7 @@ class Kontrak extends MY_Controller {
 		// ->get("ctr_po_comment b")
 		// ->result_array();
 		//echo $this->db->last_query();
-		$data['judul'] = "List Progress PO";
+		$data['title'] = "List Progress PO";
 		$this->layout->view('listwo', $data);
 	}
 
@@ -1205,7 +1209,7 @@ class Kontrak extends MY_Controller {
 		// ->join("ctr_po_progress_header e","e.po_id=a.po_id","left")
 		// ->get("ctr_po_comment b")
 		// ->result_array();
-		$data['judul'] = "List Monitor PO";
+		$data['title'] = "List Monitor PO";
 		$this->layout->view('listwo', $data);
 	}
 
@@ -1225,7 +1229,7 @@ class Kontrak extends MY_Controller {
 		->join("ctr_contract_header c","c.contract_id=a.contract_id","left")
 		->get("ctr_contract_milestone a")
 		->result_array();
-		$data['judul'] = "List Monitor Milestone";
+		$data['title'] = "List Monitor Milestone";
 		$this->layout->view('listmilestone', $data);
 	}
 
@@ -1280,7 +1284,7 @@ class Kontrak extends MY_Controller {
 		// ->join("ctr_contract_header c","c.contract_id=a.contract_id","left")
 		// ->get("ctr_contract_milestone a")
 		// ->result_array();
-		$data['judul'] = "List Progress Milestone";
+		$data['title'] = "List Progress Milestone";
 		$this->layout->view('listmilestone', $data);
 	}
 
@@ -1709,18 +1713,18 @@ class Kontrak extends MY_Controller {
 
 			")->result_array();
 
-
+			$data['title'] = 'Tagihan';
 		$this->layout->view('listinvoice', $data);
 	}
 
 	public function submit_terminasi(){
-		
+
 		$post = $this->input->post();
-		
+
 		$error = false;
 
 		$this->db->trans_begin();
-		
+
 		$sess = $this->session->all_userdata();
 
 //		var_dump($sess);die();
@@ -1758,7 +1762,7 @@ class Kontrak extends MY_Controller {
 			$input_ctr['ccc_comment'] = $post['reason'];
 			$input_ctr['ccc_start_date'] = date("Y-m-d H:i:s");
 			$input_ctr['ccc_response'] = "Pembatalan kontrak melalui vendor";
-			
+
 			if ($com['ccc_user'] == NULL) {
 				$this->db->where("ccc_id", $com['ccc_id'])->update("ctr_contract_comment", array("ccc_name"=>" ", "ccc_user"=>$sess["userid"]));
 			}

@@ -1,21 +1,6 @@
 <div class="row">
-	<div class="col-7">
-		<div class="content-header"><strong><?php if(!isset($title) || empty($title)) { echo "Daftar Pekerjaan"; } else { echo $title; } ?></strong></div>			
-	</div>
-	<div class="col-5">
-		<div class="content-header float-right">
-			<a class="text-muted text-xs block h5" id="servertime"></a>
-		</div>
-	</div>
-</div>
-
-<div class="row">
 	<div class="col-12">
 		<div class="card">
-
-			<div class="card-header border-bottom pb-2">
-				<h4 class="card-title">List Daftar Pekerjaan</h4>		
-			</div>
 
 			<div class="card-content">
 				<div class="card-body">

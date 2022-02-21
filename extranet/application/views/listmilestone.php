@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-lg-12">
 
-	<?php if($this->session->userdata('message')){ 
+	<?php if($this->session->userdata('message')){
 		if ($this->session->userdata('message_status') AND $this->session->userdata('message_status') == 'success' ) {
 			$alert_class = "alert-success";
 		}else{
@@ -11,13 +11,10 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <?php echo $this->session->userdata('message') ?>
       </div>
-      <?php $this->session->unset_userdata("message");$this->session->unset_userdata("message_status");  
+      <?php $this->session->unset_userdata("message");$this->session->unset_userdata("message_status");
   	  } ?>
 
 		<div class="ibox float-e-margins">
-			<div class="ibox-title">
-				<h5><?php echo $judul ?></h5>
-			</div>
 			<div class="ibox-content">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered datatabless">

@@ -96,6 +96,65 @@ class Procurement_m extends CI_Model {
 					AND item.smbd_code = up.smbd_code
 			")->result_array();
 		}
-	//===================
+
+		public function syncron()
+		{
+			$this->db->limit(1);
+			$this->db->where('ppm_type_of_plan', 'rkp_non_pmcs');
+			$this->db->where('ppm_is_integrated', 0);
+			$res = $this->db->get('vw_prc_matgis_header_detail');
+
+			// get max id
+			$this->db->select_max('id');
+	    	$max_pp = $this->db->get('prc_plan_integrasi')->row_array();
+
+			if($res->num_rows() > 0) {
+				$res = $res->row_array();
+				$data_pp = array (
+					'id' => $max_pp['id']+1,
+					'spk_code' => $res['ppm_project_id'],
+					'project_name' => 'Syncron From Non PMCS',
+					'dept_code' => $res['ppm_dept_id'],
+					'dept_name' => $res['ppm_dept_name'],
+					'group_smbd_code' => 'A27',
+					'group_smbd_name' => 'Batu Kali',
+					'smbd_type' => 'Material',
+					'smbd_code' => 'A27101',
+					'smbd_name' => 'Batu Anstamping',
+					'unit' => strtoupper($res['ppi_satuan']),
+					'smbd_quantity' => $res['ppi_jumlah'],
+					'periode_pengadaan' => '01/03/2021',
+					'price' => $res['ppi_harga'],
+					'total' => $res['ppi_total'],
+					'coa_code' => '6101111',
+					'coa_name' => 'BEBAN MATERIAL',
+					'currency' => 'IDR',
+					'user_id' => 'ET204472',
+					'user_name' => 'Muhammad Barru Herman',
+					'periode_locking' => '04/09/2021',
+					'created_date' => date('Y-m-d h:i:s'),
+					'updated_date' => date('Y-m-d h:i:s'),
+					'is_matgis' => 'f'
+				);
+
+				$result = $this->db->insert('prc_plan_integrasi', $data_pp);
+
+				$this->db->query("UPDATE prc_plan_main SET ppm_is_integrated = 1 WHERE ppm_project_id = '". $res['ppm_project_id'] ."'");
+
+				$this->session->set_flashdata('tab', 'sync');
+				if ($result) {
+					$this->session->set_flashdata('status', '1');
+					return redirect('procurement/perencanaan_pengadaan/perencanaan_pmcs');
+				} else {
+					$this->session->set_flashdata('status', '2');
+					return redirect('procurement/perencanaan_pengadaan/perencanaan_pmcs');
+				}
+
+			} else {
+				$this->session->set_flashdata('tab', 'sync');
+				$this->session->set_flashdata('status', '3');
+				return redirect('procurement/perencanaan_pengadaan/perencanaan_pmcs');
+			}
+		}
 
 }
