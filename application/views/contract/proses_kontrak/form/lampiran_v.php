@@ -1,63 +1,54 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>LAMPIRAN DOKUMEN</h5>
-        <div class="ibox-tools">
+  <div class="col-12">
+    <div class="card">
 
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-        </div>
+      <div class="card-header border-bottom pb-2">
+        <h4 class="card-title">Lampiran Dokumen</h4>
       </div>
-      <div class="ibox-content">
 
-        <div class="row">
-          <div class="col-lg-12">
-            <center>
-              <a class="btn btn-primary tambah_dok">Tambah Lampiran</a>
-              <br/>
-              <br/>
-            </center>
+      <div class="card-content">
+        <div class="card-body">
+          
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-center mb-2">
+                <a class="btn btn-info tambah_dok">Tambah Lampiran</a>                
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div id="lampiran_container">
+          <div id="lampiran_container">
 
-          <?php 
-          $sisa = 5;
-          if(isset($document) && !empty($document)){
-            foreach ($document as $k => $v) {
-              $show = ($k == 0 || !empty($v['filename'])) ? "" : "display:none;";
-              ?>
+            <?php 
+              $sisa = 5;
+              if(isset($document) && !empty($document)){
+                foreach ($document as $k => $v) {
+                  $show = ($k == 0 || !empty($v['filename'])) ? "" : "display:none;";
+            ?>
 
-              <div class="row lampiran" style="<?php echo $show ?>" data-no="<?php echo $k ?>">
-                <div class="col-lg-12">
-                  <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                      <h5>DOKUMEN #<?php echo $k ?></h5>
-                      <div class="ibox-tools">
+            <div class="row lampiran" style="<?php echo $show ?>" data-no="<?php echo $k ?>">              
+              <div class="col-12">
+                <div class="card">
 
-                        <a class="tutup" data-no="<?php echo $k ?>">
-                          <i class="fa fa-times"></i>
-                        </a>
+                  <div class="card-header border-bottom pb-2">
+                    <h4 class="card-title">DOKUMEN #<?php echo $k ?></h4>
+                    <a class="tutup" data-no="<?php echo $k ?>">
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
 
-                        <a class="collapse-link">
-                          <i class="fa fa-chevron-up"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="ibox-content">
-
+                  <div class="card-content">
+                    <div class="card-body">
                       <?php $curval = (isset($v['category'])) ? $v['category'] :  set_value("doc_category_inp[$k]"); ?>
 
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label"><?php echo lang('category') ?></label>
+                      <div class="row form-group">
+                        <label class="col-sm-2 control-label text-right"><?php echo lang('category') ?></label>
                         <div class="col-sm-4">
-                         <select class="form-control" name="doc_category_inp[<?php echo $k ?>]" >
-                           <option value=""><?php echo lang('choose') ?></option>
-                           <?php foreach($doc_category as $key => $val){
-                            $selected = ($val['cdt_name'] == $curval) ? "selected" : ""; 
+                        <select class="form-control" name="doc_category_inp[<?php echo $k ?>]" >
+                            <option value=""><?php echo lang('choose') ?></option>
+                            <?php foreach($doc_category as $key => $val){
+                              $selected = ($val['cdt_name'] == $curval) ? "selected" : ""; 
                             ?>
                             <option <?php echo $selected ?> value="<?php echo $val['cdt_name'] ?>"><?php echo $val['cdt_name'] ?></option>
                             <?php } ?>
@@ -65,34 +56,34 @@
                         </div>
 
                         <?php $curval = (isset($v['publish'])) ? $v['publish'] :  set_value("doc_vendor_inp[$k]"); ?>
-                        <label class="col-sm-2 control-label">Kirim ke Vendor</label>
-                        <div class="col-sm-2">
-                         <select class="form-control" name="doc_vendor_inp[<?php echo $k ?>]" >
-                           <?php $selected = (0 == $curval) ? "selected" : "";  ?>
-                           <option <?php echo $selected ?> value="0">Tidak</option>
-                           <?php $selected = (1 == $curval) ? "selected" : "";  ?>
-                           <option <?php echo $selected ?> value="1">Ya</option>
-                         </select>
-                       </div>
-                     </div>
+                        <label class="col-sm-2 control-label text-right">Kirim ke Vendor</label>
+                        <div class="col-sm-4">
+                        <select class="form-control" name="doc_vendor_inp[<?php echo $k ?>]" >
+                          <?php $selected = (0 == $curval) ? "selected" : "";  ?>
+                          <option <?php echo $selected ?> value="0">Tidak</option>
+                          <?php $selected = (1 == $curval) ? "selected" : "";  ?>
+                          <option <?php echo $selected ?> value="1">Ya</option>
+                        </select>
+                      </div>
+                      </div>
 
-                     <?php $curval = (isset($v['description'])) ? $v['description'] :  set_value("doc_desc_inp[$k]"); ?>
+                      <?php $curval = (isset($v['description'])) ? $v['description'] :  set_value("doc_desc_inp[$k]"); ?>
 
-                     <div class="form-group">
-                      <label class="col-sm-2 control-label"><?php echo lang('description') ?></label>
+                      <div class="row form-group">
+                      <label class="col-sm-2 control-label text-right"><?php echo lang('description') ?></label>
                       <div class="col-sm-10">
-                       <textarea class="form-control" maxlength="1000" name="doc_desc_inp[<?php echo $k ?>]"><?php echo $curval ?></textarea>
-                     </div>
-                   </div>
+                      <textarea class="form-control" maxlength="1000" name="doc_desc_inp[<?php echo $k ?>]"><?php echo $curval ?></textarea>
+                      </div>
+                      </div>
 
-                   <?php $curval = (isset($v['filename'])) ? $v['filename'] :  set_value("doc_attachment_inp[$k]"); ?>
+                      <?php $curval = (isset($v['filename'])) ? $v['filename'] :  set_value("doc_attachment_inp[$k]"); ?>
 
-                   <div class="form-group">
-                    <label class="col-sm-2 control-label"><?php echo lang('attachment') ?></label>
-                    <div class="col-sm-10">
+                      <div class="row form-group">
+                      <label class="col-sm-2 control-label text-right"><?php echo lang('attachment') ?></label>
+                      <div class="col-sm-10">
                       <div class="input-group">
                         <span class="input-group-btn">
-                          <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-primary upload">
+                          <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-info upload">
                             <i class="fa fa-cloud-upload"></i>
                           </button> 
                           <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-danger removefile">
@@ -101,136 +92,132 @@
                         </span> 
                         <input readonly type="text" class="form-control" id="doc_attachment_inp_<?php echo $k ?>" name="doc_attachment_inp[<?php echo $k ?>]" value="<?php echo $curval ?>">
                         <span class="input-group-btn">
-                          <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/".$curval) ?>" class="btn btn-primary preview_upload" id="preview_file_<?php echo $k ?>">
+                          <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file_<?php echo $k ?>">
                             <i class="fa fa-share"></i>
                           </button> 
                         </span> 
                       </div>
-                       <div class="col-sm-0" style="font-size: 11px">
+                      <div class="col-sm-0" style="font-size: 11px">
                         <i>Max file 5 MB 
                         <br>
                           Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
                         </i>
                       </div>
+                      </div>
+                      </div>
+
+                      <?php $curval = (isset($v['doc_id'])) ? $v['doc_id'] :  ""; ?>
+                      <input type="hidden" name="doc_id_inp[<?php echo $k ?>]" value="<?php echo $curval ?>"/>
                     </div>
                   </div>
-
-                  <?php $curval = (isset($v['doc_id'])) ? $v['doc_id'] :  ""; ?>
-                  <input type="hidden" name="doc_id_inp[<?php echo $k ?>]" value="<?php echo $curval ?>"/>
 
                 </div>
               </div>
             </div>
-          </div>
 
-          <?php $sisa--;} } ?>
+            <?php $sisa--;} } ?>
 
-          <?php for ($k = 5-$sisa; $k <= 5; $k++) { 
-            $show = ($k == 0) ? "" : "display:none;";
+            <?php for ($k = 5-$sisa; $k <= 5; $k++) { 
+              $show = ($k == 0) ? "" : "display:none;";
             ?>
 
-            <div class="row lampiran" style="<?php echo $show ?>" data-no="<?php echo $k ?>">
-              <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                  <div class="ibox-title">
-                    <h5>DOKUMEN #<?php echo $k ?></h5>
-                    <div class="ibox-tools">
+            <div class="row lampiran" style="<?php echo $show ?>" data-no="<?php echo $k ?>">            
+              <div class="col-12">
+                <div class="card">
 
-                     <?php if($k > 0){ ?>
-                     <a class="tutup" data-no="<?php echo $k ?>">
-                      <i class="fa fa-times"></i>
-                    </a>
+                  <div class="card-header border-bottom pb-2">
+                    <h4 class="card-title">DOKUMEN #<?php echo $k ?></h4>
+                    <?php if($k > 0){ ?>
+                      <a class="tutup" data-no="<?php echo $k ?>">
+                        <i class="fa fa-times"></i>
+                      </a>
                     <?php } ?>
-
-                    <a class="collapse-link">
-                      <i class="fa fa-chevron-up"></i>
-                    </a>
-
                   </div>
-                </div>
-                <div class="ibox-content">
 
-                  <?php $curval = set_value("doc_category_inp[$k]"); ?>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"><?php echo lang('category') ?></label>
-                    <div class="col-sm-4">
-                     <select class="form-control" name="doc_category_inp[<?php echo $k ?>]">
-                       <option value=""><?php echo lang('choose') ?></option>
-                       <?php foreach($doc_category as $key => $val){
-                        $selected = ($val['cdt_name'] == $curval) ? "selected" : ""; 
-                        ?>
-                        <option <?php echo $selected ?> value="<?php echo $val['cdt_name'] ?>"><?php echo $val['cdt_name'] ?></option>
-                        <?php } ?>
-                      </select>
+                  <div class="card-content">
+                    <div class="card-body">
+                        <?php $curval = set_value("doc_category_inp[$k]"); ?>
+                        <div class="row form-group">
+                          <label class="col-sm-2 control-label text-right"><?php echo lang('category') ?></label>
+                          <div class="col-sm-4">
+                          <select class="form-control" name="doc_category_inp[<?php echo $k ?>]">
+                            <option value=""><?php echo lang('choose') ?></option>
+                              <?php foreach($doc_category as $key => $val){
+                                $selected = ($val['cdt_name'] == $curval) ? "selected" : ""; 
+                              ?>
+                              <option <?php echo $selected ?> value="<?php echo $val['cdt_name'] ?>"><?php echo $val['cdt_name'] ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                          <?php $curval = set_value("doc_vendor_inp[$k]"); ?>
+                          <label class="col-sm-2 control-label text-right">Kirim ke Vendor</label>
+                          <div class="col-sm-4">
+                            <select class="form-control" name="doc_vendor_inp[<?php echo $k ?>]" >
+                              <?php $selected = (0 == $curval) ? "selected" : "";  ?>
+                              <option <?php echo $selected ?> value="0">Tidak</option>
+                              <?php $selected = (1 == $curval) ? "selected" : "";  ?>
+                              <option <?php echo $selected ?> value="1">Ya</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <?php $curval = set_value("doc_desc_inp[$k]"); ?>
+                        <div class="row form-group">
+                          <label class="col-sm-2 control-label text-right"><?php echo lang('description') ?></label>
+                          <div class="col-sm-10">
+                          <textarea class="form-control" maxlength="1000" name="doc_desc_inp[<?php echo $k ?>]"><?php echo $curval ?></textarea>
+                        </div>
+                      </div>
+
+
+                      <?php $curval = set_value("doc_attachment_inp[$k]"); ?>
+                      <div class="row form-group">
+                        <label class="col-sm-2 control-label text-right"><?php echo lang('attachment') ?></label>
+                        <div class="col-sm-10">
+                          <div class="input-group">
+                            <span class="input-group-btn">
+                              <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-info upload">
+                                <i class="fa fa-cloud-upload"></i> Upload
+                              </button> 
+                              <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file_<?php echo $k ?>">
+                                <i class="fa fa-share"></i> Preview
+                              </button>
+                              </span> 
+                            <input readonly type="text" class="form-control" id="doc_attachment_inp_<?php echo $k ?>" name="doc_attachment_inp[<?php echo $k ?>]" value="<?php echo $curval ?>">
+                            <span class="input-group-btn">
+                              <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-danger removefile">
+                                    <i class="fa fa-trash"></i> Delete
+                                  </button> 
+                            </span> 
+                          </div>
+                          <div class="col-sm-0" style="font-size: 11px">
+                            <i>Max file 5 MB 
+                            <br>
+                              Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
+                            </i>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
-                    <?php $curval = set_value("doc_vendor_inp[$k]"); ?>
-                    <label class="col-sm-2 control-label">Kirim ke Vendor</label>
-                    <div class="col-sm-2">
-                     <select class="form-control" name="doc_vendor_inp[<?php echo $k ?>]" >
-                       <?php $selected = (0 == $curval) ? "selected" : "";  ?>
-                       <option <?php echo $selected ?> value="0">Tidak</option>
-                       <?php $selected = (1 == $curval) ? "selected" : "";  ?>
-                       <option <?php echo $selected ?> value="1">Ya</option>
-                     </select>
-                   </div>
-                 </div>
-
-                 <?php $curval = set_value("doc_desc_inp[$k]"); ?>
-                 <div class="form-group">
-                  <label class="col-sm-2 control-label"><?php echo lang('description') ?></label>
-                  <div class="col-sm-10">
-                   <textarea class="form-control" maxlength="1000" name="doc_desc_inp[<?php echo $k ?>]"><?php echo $curval ?></textarea>
-                 </div>
-               </div>
-
-
-               <?php $curval = set_value("doc_attachment_inp[$k]"); ?>
-               <div class="form-group">
-                <label class="col-sm-2 control-label"><?php echo lang('attachment') ?></label>
-                <div class="col-sm-10">
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-primary upload">
-                        <i class="fa fa-cloud-upload"></i> Upload
-                      </button> 
-                      <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/".$curval) ?>" class="btn btn-primary preview_upload" id="preview_file_<?php echo $k ?>">
-                        <i class="fa fa-share"></i> Preview
-                      </button>
-                      </span> 
-                    <input readonly type="text" class="form-control" id="doc_attachment_inp_<?php echo $k ?>" name="doc_attachment_inp[<?php echo $k ?>]" value="<?php echo $curval ?>">
-                    <span class="input-group-btn">
-                      <button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo "contract/document" ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-danger removefile">
-                            <i class="fa fa-trash"></i> Delete
-                          </button> 
-                    </span> 
                   </div>
-                   <div class="col-sm-0" style="font-size: 11px">
-                    <i>Max file 5 MB 
-                    <br>
-                      Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
-                    </i>
-                  </div>
+
                 </div>
               </div>
-
             </div>
+
+            <?php } ?>
+        
           </div>
+
         </div>
       </div>
-
-      <?php } ?>
-
+      
     </div>
-
   </div>
 </div>
-</div>
-</div>
-
-
 
 <script type="text/javascript">
-
 
   $(document).ready(function(){
 

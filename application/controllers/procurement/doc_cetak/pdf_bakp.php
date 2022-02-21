@@ -99,7 +99,7 @@ if(count($ttdList) > 0 ){
 		$list = array();
 		$this->db->where('pos_id', $value['job_position_id']);
 		$list = $this->db->get('vw_user_employee')->result_array();
-
+		
 		$listTtd[$key]['lists_name'] = $list;
 
 	}
