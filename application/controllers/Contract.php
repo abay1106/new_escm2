@@ -117,7 +117,6 @@ public function picker_progress_wo_matgis(){
   include("contract/proses_progress/picker_progress_wo_matgis.php");
 }
 
-
 public function picker_item_milestone(){
   include("contract/proses_progress/picker_item_milestone.php");
 }
@@ -136,10 +135,10 @@ public function lihat_bast(){
 public function monitor_wo(){
   include("contract/monitor/monitor_wo.php");
 }
+
 public function monitoring_matgis($param1=""){
 
-//redirect function for matgis monitoring
-
+  //redirect function for matgis monitoring
 	switch ($param1) {
 
     case 'monitor_wo_matgis':
@@ -173,18 +172,13 @@ public function monitoring_matgis($param1=""){
 		case 'monitor_invoice':
 		redirect(site_url('contract_matgis/monitor_matgis/invoice'));
 		break;
-
-
-
   }
 }
 
 public function DeleteFile($file)
 {
-
 	$this->load->helper("file");
 	$path="uploads/contract/".$file;
-	//echo $path;die;
 	unlink($path);
 	return "success";
 }
@@ -226,85 +220,85 @@ public function monitor($param1 = "" ,$param2 = "",$param3 = ""){
 
   switch ($param1) {
 
-   case 'monitor_wo':
+    case 'monitor_wo':
 
-   switch ($param2) {
-    case 'lihat':
-    $this->lihat_wo($param2);
+    switch ($param2) {
+      case 'lihat':
+      $this->lihat_wo($param2);
+      break;
+
+      default:
+      $this->monitor_wo();
+      break;
+    }
+
+    break;
+
+    case 'monitor_bast':
+
+    switch ($param2) {
+      case 'lihat':
+      $this->lihat_bast();
+      break;
+
+      default:
+      $this->monitor_bast();
+      break;
+    }
+
+    break;
+
+    case 'monitor_progress':
+
+    switch ($param2) {
+      case 'lihat':
+      $this->lihat_progress();
+      break;
+
+      default:
+      $this->monitor_progress($param2,$param3);
+      break;
+    }
+
+    break;
+
+    case 'monitor_kontrak':
+
+    switch ($param2) {
+      case 'lihat':
+      $this->lihat_kontrak();
+      break;
+
+      default:
+      $this->monitor_kontrak($param2);
+      break;
+    }
+
+    break;
+
+    case 'monitor_adendum_kontrak':
+
+    switch ($param2) {
+      case 'lihat':
+      $this->lihat_addendum();
+      break;
+
+      default:
+      $this->monitor_addendum();
+      break;
+    }
+
+    break;
+
+    case 'monitor_tagihan':
+    $this->monitor_tagihan();
     break;
 
     default:
-    $this->monitor_wo();
+
     break;
+
   }
-
-  break;
-
-  case 'monitor_bast':
-
-  switch ($param2) {
-    case 'lihat':
-    $this->lihat_bast();
-    break;
-
-    default:
-    $this->monitor_bast();
-    break;
-  }
-
-  break;
-
-  case 'monitor_progress':
-
-  switch ($param2) {
-    case 'lihat':
-    $this->lihat_progress();
-    break;
-
-    default:
-    $this->monitor_progress($param2,$param3);
-    break;
-  }
-
-  break;
-
-  case 'monitor_kontrak':
-
-  switch ($param2) {
-    case 'lihat':
-    $this->lihat_kontrak();
-    break;
-
-    default:
-    $this->monitor_kontrak($param2);
-    break;
-  }
-
-  break;
-
-  case 'monitor_adendum_kontrak':
-
-  switch ($param2) {
-    case 'lihat':
-    $this->lihat_addendum();
-    break;
-
-    default:
-    $this->monitor_addendum();
-    break;
-  }
-
-  break;
-
-  case 'monitor_tagihan':
-  $this->monitor_tagihan();
-  break;
-
-  default:
-
-  break;
-
-}
 
 }
 
@@ -361,8 +355,6 @@ public function work_order_matgis($param1 = ""){
 		case 'monitoring_matgis':
 		redirect(site_url('contract_matgis/monitor_matgis/reports'));
 		break;
-
-
   }
 
 }
@@ -404,11 +396,9 @@ public function data_progress($type,$id = ""){
   include("contract/proses_progress/data_progress.php");
 }
 
-
 public function lihat_progress_milestone($id = ""){
   include("contract/proses_progress/lihat_progress_milestone.php");
 }
-
 
 public function data_monitor_progress_wo(){
   include("contract/proses_progress/data_monitor_progress_wo.php");
@@ -470,6 +460,10 @@ public function data_monitor_kontrak($act = ""){
   include("contract/monitor/data_monitor_kontrak.php");
 }
 
+public function data_umkm_padi($act = ""){
+  include("contract/monitor/data_umkm_padi.php");
+}
+
 public function monitor_addendum(){
   include("addendum/monitor/monitor_addendum.php");
 }
@@ -487,6 +481,10 @@ public function task_lists_matgis(){
 
 }
 
+public function umkm_padi(){
+  include("contract/monitor/lihat_umkm_padi.php");
+}
+
 public function create_work_order(){
   include("contract/work_order/work_order.php");
 }
@@ -495,8 +493,6 @@ public function create_work_order_matgis(){
   include("contract/work_order/work_order_matgis.php");
 }
 
-
-
 public function data_work_order(){
   include("contract/work_order/data_work_order.php");
 }
@@ -504,7 +500,6 @@ public function data_work_order(){
 public function data_work_order_matgis(){
   include("contract/work_order/data_work_order_matgis.php");
 }
-
 
 public function proses_work_order($contract_id = ""){
 	include("contract/proses_work_order/proses_work_order.php");
@@ -554,7 +549,6 @@ public function proses_si_matgis($id = ""){
 public function proses_sppm_matgis($id = ""){
   include("contract/proses_work_order/proses_sppm_matgis.php");
 }
-
 
 public function data_pekerjaan_progress_wo($id = ""){
   include("contract/daftar_pekerjaan/data_pekerjaan_progress_wo.php");
@@ -633,7 +627,6 @@ public function proses_invoice_wo_matgis($id = ""){
 public function proses_invoice_milestone($id = ""){
   include("contract/proses_progress/proses_invoice_milestone.php");
 }
-
 
 public function submit_proses_invoice_wo($id = ""){
   include("contract/proses_progress/submit_proses_invoice_wo.php");
