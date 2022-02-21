@@ -19,6 +19,8 @@ $ptm_dept_name = $this->db->select('ptm_dept_name')
 
 $data['ptm_dept_name'] = $ptm_dept_name;
 
+$data['contract'] = $this->Contract_m->getMonitor()->result_array();
+
 if(!empty($act)){
 	$this->load->view($view,$data);
 } else {

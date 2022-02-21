@@ -1,6 +1,6 @@
 <?php
 
-  $get = $this->input->get();
+  	$get = $this->input->get();
 
 	$order = (isset($get['order']) && !empty($get['order'])) ? $get['order'] : "";
 	$limit = (isset($get['limit']) && !empty($get['limit'])) ? $get['limit'] : 10;
@@ -9,7 +9,7 @@
 
 	$ch = curl_init( UMKM_PADI );
 	
-	$payload = json_encode( array( "get_umkm" => array("size" => (int)$limit, "page" => 10) ) );
+	$payload = json_encode( array( "get_umkm" => array("size" => (int)$limit, "page" => 11) ) );
 
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -39,6 +39,6 @@
 		$rows[$key]['uid'] = $rows[$key]['uid'];
 	}
 
-  echo json_encode($data);
+  	echo json_encode($data);
 
 ?>

@@ -57,9 +57,9 @@
 	}
 
 	function operateFormatter(value, row, index) {
-		var link = "<?php echo site_url('contract/monitor/monitor_kontrak') ?>";
+		var link = "#";
 		return [
-		'<a class="btn btn-danger btn-sm" href="'+link+'/hapus/'+value+'">',
+		'<a class="btn btn-danger btn-sm">',
 		'<i class="ft-trash"></i> Hapus',
 		'</a>  ',
 		].join('');
