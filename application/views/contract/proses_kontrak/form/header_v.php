@@ -220,7 +220,7 @@
                 <label class="col-sm-4 control-label text-right text-bold-700 mb-2">e-Signature</label>
                 <div class="col-sm-8">
                   <div class="custom-switch custom-switch-info mb-2">
-                      <input type="checkbox" class="custom-control-input" id="color-switch-1" checked>
+                      <input type="checkbox" class="custom-control-input" id="color-switch-1">
                       <label class="custom-control-label" for="color-switch-1"></label>
                   </div>  
                 </div>
@@ -230,7 +230,7 @@
                 <label class="col-sm-4 control-label text-right text-bold-700">Kirim Ke PaDi UMKM</label>
                 <div class="col-sm-8">
                   <div class="custom-switch custom-switch-info">
-                      <input type="checkbox" class="custom-control-input" id="color-switch-2" checked>
+                      <input type="checkbox" name="padi_umkm_inp" class="custom-control-input" id="color-switch-2">
                       <label class="custom-control-label" for="color-switch-2"></label>
                   </div>  
                 </div>

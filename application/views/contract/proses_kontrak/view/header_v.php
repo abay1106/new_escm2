@@ -9,6 +9,7 @@
 
       <div class="card-content">
         <div class="card-body">
+          
           <div class="row ml-5 mb-3">
               <div class="col-12">
               <?php $curval = (isset($kontrak['contract_amount'])) ? inttomoney($kontrak['contract_amount']) : 0; ?>
@@ -204,17 +205,18 @@
                   <label class="col-sm-4 control-label text-right text-bold-700 mb-2">e-Signature</label>
                   <div class="col-sm-8">
                     <div class="custom-switch custom-switch-info mb-2">
-                        <input type="checkbox" disabled class="custom-control-input" id="color-switch-1" checked>
+                        <input type="checkbox" disabled class="custom-control-input" id="color-switch-1">
                         <label class="custom-control-label" for="color-switch-1"></label>
                     </div>  
                   </div>
                 </div>
 
+                <?php $curval = $kontrak['padi_umkm'] == "on" ? "checked" : ""; ?>
                 <div class="form-group">                
                   <label class="col-sm-4 control-label text-right text-bold-700">Kirim Ke PaDi UMKM</label>
                   <div class="col-sm-8">
                     <div class="custom-switch custom-switch-info">
-                        <input type="checkbox" disabled class="custom-control-input" id="color-switch-2" checked>
+                        <input type="checkbox" disabled class="custom-control-input" id="color-switch-2" <?php echo $curval; ?>>
                         <label class="custom-control-label" for="color-switch-2"></label>
                     </div>  
                   </div>

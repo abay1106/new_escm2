@@ -120,6 +120,24 @@
 
   }
 
+  function logoUmkmPadi(value, row, index) {
+    var link_img = "<?php echo base_url('assets/img/padi-umkm-logo.png') ?>";
+    
+    <?php if(empty($contract['siup_type'])){ ?>
+    
+      return [
+      '<img src="'+link_img+'" alt="UMKM" width="60" height="30">',
+      ].join('');
+    
+    <?php } else { ?>
+        
+        return [
+        '-',
+        ].join('');
+
+    <?php }  ?>
+  }
+
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('contract/monitor/monitor_kontrak') ?>";
     return [
@@ -186,7 +204,7 @@ function totalPriceFormatter(data) {
           valign: 'middle',
           formatter: operateFormatter,
         },
-        <?php } ?>
+        <?php } ?>        
         {
           field: 'vw_ctr_monitor.ptm_number',
           title: 'Nomor Pengadaan',
@@ -245,6 +263,14 @@ function totalPriceFormatter(data) {
           align: 'left',
           valign: 'middle',
           width:'20%',
+        },
+        {
+          field: "contract_id",
+          title: 'UMKM?',
+          align: 'center',
+          width:'8%',
+          valign: 'middle',
+          formatter: logoUmkmPadi,
         },
         ]
 

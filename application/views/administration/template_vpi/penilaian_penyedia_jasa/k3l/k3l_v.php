@@ -300,8 +300,8 @@ function responseHandler(res) {
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="modal_add_pertanyaanLabel">Tambah Pertanyaan</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </button>
       </div>
       <form method="post" action="<?php echo site_url('administration/template_vpi/penilaian_penyedia_jasa/k3l/submit_add') ?>" id="ak_form" >
