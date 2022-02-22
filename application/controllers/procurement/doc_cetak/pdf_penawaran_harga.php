@@ -53,53 +53,54 @@ if ($getDataUskep) {
 	$bakp_kpd_cat = explode(";", $getDataUskep['bakp_kpd_cat']);
 	$bakp_kpd_as = explode(";", $getDataUskep['bakp_kpd_as']);
 	$par = 0;
-	foreach ($bakp_kpd_name as $value) {
+	// foreach ($bakp_kpd_name as $value) {
 
-		$nama_array = explode(" - ", $value);
+	// 	$nama_array = explode(" - ", $value);
 
 		
-		if ($bakp_kpd_cat[$par] == "Menyetujui") {
+	// 	if ($bakp_kpd_cat[$par] == "Menyetujui") {
 
-			array_push($menyetujui_name, $nama_array[0]);
-			if (count($nama_array) > 1) {
-				array_push($menyetujui_posisi, $nama_array[1]);
-			} else {
-				array_push($menyetujui_posisi, "");
-			}
+	// 		array_push($menyetujui_name, $nama_array[0]);
+	// 		if (count($nama_array) > 1) {
+	// 			array_push($menyetujui_posisi, $nama_array[1]);
+	// 		} else {
+	// 			array_push($menyetujui_posisi, "");
+	// 		}
 
-		} else if ($bakp_kpd_cat[$par] == "Mengetahui") {
+	// 	} else if ($bakp_kpd_cat[$par] == "Mengetahui") {
 
-			array_push($mengetahui_name, $nama_array[0]);
-			if (count($nama_array) > 1) {
-				array_push($mengetahui_posisi, $nama_array[1]);
-			} else {
-				array_push($mengetahui_posisi, "");
-			}
+	// 		array_push($mengetahui_name, $nama_array[0]);
+	// 		if (count($nama_array) > 1) {
+	// 			array_push($mengetahui_posisi, $nama_array[1]);
+	// 		} else {
+	// 			array_push($mengetahui_posisi, "");
+	// 		}
 
-		} else if ($bakp_kpd_cat[$par] == "Diusulkan") {
+	// 	} else if ($bakp_kpd_cat[$par] == "Diusulkan") {
 
-			array_push($diusulkan_name, $nama_array[0]);
-			if (count($nama_array) > 1) {
-				array_push($diusulkan_posisi, $nama_array[1]);
-			} else {
-				array_push($diusulkan_posisi, "");
-			}
+	// 		array_push($diusulkan_name, $nama_array[0]);
+	// 		if (count($nama_array) > 1) {
+	// 			array_push($diusulkan_posisi, $nama_array[1]);
+	// 		} else {
+	// 			array_push($diusulkan_posisi, "");
+	// 		}
 			
-		}
+	// 	}
 
 		
 
 
-		$par += 1;
-	}
+	// 	$par += 1;
+	// }
 }
 
-$data['menyetujui_name'] = $menyetujui_name;
-$data['menyetujui_posisi'] = $menyetujui_posisi;
-$data['mengetahui_name'] = $mengetahui_name;
-$data['mengetahui_posisi'] = $mengetahui_posisi;
-$data['diusulkan_name'] = $diusulkan_name;
-$data['diusulkan_posisi'] = $diusulkan_posisi;
+
+// $data['menyetujui_name'] = $menyetujui_name;
+// $data['menyetujui_posisi'] = $menyetujui_posisi;
+// $data['mengetahui_name'] = $mengetahui_name;
+// $data['mengetahui_posisi'] = $mengetahui_posisi;
+// $data['diusulkan_name'] = $diusulkan_name;
+// $data['diusulkan_posisi'] = $diusulkan_posisi;
 
 
 //$this->load->view($view, $data);
