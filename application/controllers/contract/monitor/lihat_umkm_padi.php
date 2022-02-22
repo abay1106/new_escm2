@@ -4,6 +4,6 @@
 	
 	$data = array();
 
-	$this->template($view, "Monitor UMKM PADI", $data);	
+	$this->template($view, "Monitor PaDi UMKM", $data);	
 
 ?>
