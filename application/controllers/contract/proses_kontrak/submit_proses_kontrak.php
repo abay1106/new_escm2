@@ -11,25 +11,28 @@
     $last_activity = (!empty($last_comment)) ? $last_comment['activity'] : 2000;
 
     $ptm_number = $last_comment['tender_id'];    
-
     
     $this->db->select('pr_number');
     $this->db->where('ptm_number', $ptm_number);
     $getNoPR = $this->db->get('vw_prc_monitor')->row_array();
     
+    $contract_id = $last_comment['contract_id'];
+    
     $permintaan = $this->Procpr_m->getPR($getNoPR['pr_number'])->row_array();
     
     $contract = $this->Contract_m->getContractNew($ptm_number)->row_array();
+
+    $contract_header = $this->Contract_m->getData($contract_id)->row_array();
     
     // post api umkm padi
-    if ($post['padi_umkm_inp'] == "on") {
+    if ($contract_header['padi_umkm'] == "on") {
           
         $vendor = $this->Vendor_m->getVendorActive($contract['vendor_id'])->row_array();
           
         $ch = curl_init( UMKM_PADI );
     
         $payload = json_encode( array( "umkm" => array(
-            "uid" => $vendor['vendor_id'],
+            "uid" => 'WIKA-' . $vendor['vendor_id'],
             "nama_umkm" => $vendor['vendor_name'],
             "alamat" => $vendor['address_street'],
             "blok_no_kav" => "-",
@@ -70,8 +73,6 @@
     }
 
     $perencanaan_id = $permintaan['ppm_id'];
-
-    $contract_id = $last_comment['contract_id'];
 
     $tender = $this->Procrfq_m->getRFQ($last_comment['tender_id'])->row_array();
 
