@@ -501,7 +501,7 @@
 				Menyetujui
 				
 				
-				<table style="font-size: 100%;" border="0">
+				<!-- <table style="font-size: 100%;" border="0">
 					<tr>
 						<td>
 							<br>
@@ -513,14 +513,14 @@
 							<div class="signature_div">
 							  <div class="Column">
 							    <label class="signature-wrapper">
-							      <label  class="signature"><?php echo $menyetujui_name[0]; ?> </label><br />
-							      <?php echo $menyetujui_posisi[0]; ?>
+							      <label  class="signature"><?php //echo $menyetujui_name[0]; ?> </label><br />
+							      <?php //echo $menyetujui_posisi[0]; ?>
 							    </label>
 							  </div>
 							</div>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 				
 
 			</td>
@@ -533,7 +533,7 @@
 
 				<table style="font-size: 100%;" border="0">
 					<tr>
-						  <?php $par = 0; foreach ($mengetahui_name as $value) { ?>
+						  <!-- <?php $par = 0; foreach ($mengetahui_name as $value) { ?>
 						  <td>
 						  	<br>
 							<br>
@@ -551,7 +551,7 @@
 						  </div>
 						  </td>
 
-						  <?php $par += 1; } ?>
+						  <?php $par += 1; } ?> -->
 
 
 					</tr>
@@ -572,7 +572,7 @@
 
 				
 
-				  <?php $par = 0; foreach ($diusulkan_name as $value) { ?>
+				  <!-- <?php $par = 0; foreach ($diusulkan_name as $value) { ?>
 				  	<td>
 						  	<br>
 							<br>
@@ -589,7 +589,7 @@
 					</div>
 					</td>
 
-				  <?php $par += 1; } ?>
+				  <?php $par += 1; } ?> -->
 
 				  </tr>
 				</table>
