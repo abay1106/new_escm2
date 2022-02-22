@@ -116,10 +116,10 @@
                 <label class="col-sm-4 control-label text-right mt-2 text-bold-700">Download Template</label>
                 <div class="col-sm-8">
                   <p class="form-control-static mt-2">
-                    <a href="<?php echo base_url('user_guide/KONTRAK.docs');?>" target="_blank" class="btn btn-info btn-sm">SPK</a>
-                    <a href="<?php echo base_url('user_guide/KONTRAK.docs');?>" target="_blank" class="btn btn-info btn-sm">SPB</a>
-                    <a href="<?php echo base_url('user_guide/KONTRAK.docs');?>" target="_blank" class="btn btn-info btn-sm">PPJ</a>
-                    <a href="<?php echo base_url('user_guide/KONTRAK.docs');?>" target="_blank" class="btn btn-info btn-sm">PPB</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">SPK</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">SPB</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">PPJ</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">PPB</a>
                   </p>
                 </div>
               </div>     
