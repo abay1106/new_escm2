@@ -1,20 +1,9 @@
 <div class="row">
-	<div class="col-7">
-		<div class="content-header"><strong><?php echo $this->lang->line('Ringkasan Pekerjaan'); ?></strong></div>			
-	</div>
-	<div class="col-5">
-		<div class="content-header float-right">
-			<a class="text-muted text-xs block h5" id="servertime"></a>
-		</div>
-	</div>
-</div>
-
-<div class="row">
     <div class="col-12">
         <div class="card">
-        
+
             <div class="card-header border-bottom pb-2">
-                <h4 class="card-title"><?php echo $this->lang->line('Ringkasan Pekerjaan'); ?></h4>
+                <!-- <h4 class="card-title"><?= $title; ?></h4> -->
             </div>
 
             <div class="card-content">
@@ -29,7 +18,7 @@
                                     <th style="width: 12.5%; text-align: center;"><?php echo $this->lang->line('Jumlah'); ?></th>
                                 </tr>
                             </thead>
-                            <tbody>                        
+                            <tbody>
                                 <tr>
                                     <td><?php echo $this->lang->line('Undangan Pengadaan/Pengadaan'); ?></td>
                                     <?php if($undangan["jumlah"] > 0){ ?>
@@ -112,7 +101,7 @@
                                     <td style="text-align: center;"><?php echo $terminasi_lelang["jumlah"]; ?></td>
                                     <?php } ?>
                                     <td>&nbsp;</td>
-                                    <td>&nbsp;</td>                                                                       
+                                    <td>&nbsp;</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -127,7 +116,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-        
+
             <div class="card-header border-bottom pb-2">
                 <h4 class="card-title">Catatan</h4>
             </div>

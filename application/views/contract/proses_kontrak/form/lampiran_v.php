@@ -46,7 +46,7 @@
                         <label class="col-sm-2 control-label text-right"><?php echo lang('category') ?></label>
                         <div class="col-sm-4">
                         <select class="form-control" name="doc_category_inp[<?php echo $k ?>]" >
-                          <option value=""><?php echo lang('choose') ?></option>
+                            <option value=""><?php echo lang('choose') ?></option>
                             <?php foreach($doc_category as $key => $val){
                               $selected = ($val['cdt_name'] == $curval) ? "selected" : ""; 
                             ?>

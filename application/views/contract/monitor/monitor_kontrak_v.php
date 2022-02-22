@@ -3,6 +3,70 @@
     <div class="card">
       
       <div class="card-header border-bottom pb-2">
+        <h4 class="card-title">Multiple Filtering</h4>
+      </div>
+
+      <div class="card-content">
+        <div class="card-body">
+            <div class="col-md-3 col-12">
+                <fieldset class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Type</label>
+                        </div>
+                        <select class="form-control" id="siup_type">
+                            <option value="#">Choose...</option>
+                            <?php foreach ($siup_type as $v) { ?>
+                              <option value="<?php echo $v['siup_type'];?>"><?php echo $v['siup_type'];?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-3 col-12">
+                <fieldset class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Date</label>
+                        </div>
+                        <input type="date" id="date_start" class="form-control">
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-3 col-12">
+                <fieldset class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Divisi</label>
+                        </div>
+                        <select class="form-control" id="divisi">
+                            <option selected>Choose...</option>
+                            <?php foreach ($ptm_dept_name as $v) { ?>
+                              <option value="<?php echo $v['ptm_dept_name'];?>"><?php echo $v['ptm_dept_name'];?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-2 col-12">
+                <button type="button" id="dt_cari_act" name="button" class="btn btn-info btn-block"><i class="ft-search"></i> Search</button>
+            </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header border-bottom pb-2">
           <h4 class="card-title">Daftar Kontrak</h4>
       </div>
 
@@ -54,6 +118,24 @@
 
     return html.join('');
 
+  }
+
+  function logoUmkmPadi(value, row, index) {
+    var link_img = "<?php echo base_url('assets/img/padi-umkm-logo.png') ?>";
+    
+    <?php if(empty($contract['siup_type'])){ ?>
+    
+      return [
+      '<img src="'+link_img+'" alt="UMKM" width="60" height="30">',
+      ].join('');
+    
+    <?php } else { ?>
+        
+        return [
+        '-',
+        ].join('');
+
+    <?php }  ?>
   }
 
   function operateFormatter(value, row, index) {
@@ -122,7 +204,7 @@ function totalPriceFormatter(data) {
           valign: 'middle',
           formatter: operateFormatter,
         },
-        <?php } ?>
+        <?php } ?>        
         {
           field: 'vw_ctr_monitor.ptm_number',
           title: 'Nomor Pengadaan',
@@ -171,7 +253,6 @@ function totalPriceFormatter(data) {
           searchable:true,
           align: 'left',
           valign: 'middle',
-
         },
         {
           field: 'status_name',
@@ -182,6 +263,14 @@ function totalPriceFormatter(data) {
           align: 'left',
           valign: 'middle',
           width:'20%',
+        },
+        {
+          field: "contract_id",
+          title: 'UMKM?',
+          align: 'center',
+          width:'8%',
+          valign: 'middle',
+          formatter: logoUmkmPadi,
         },
         ]
 
@@ -209,6 +298,7 @@ function totalPriceFormatter(data) {
       });
 
     });
+
     $table_monitor_kontrak.on('uncheck.bs.table uncheck-all.bs.table', function () {
 
       selections = getIdSelections();
@@ -229,7 +319,7 @@ function totalPriceFormatter(data) {
     });
     $table_monitor_kontrak.on('all.bs.table', function (e, name, args) {
   
-});
+  });
 
     function getIdSelections() {
       return $.map($table_monitor_kontrak.bootstrapTable('getSelections'), function (row) {
@@ -244,6 +334,5 @@ function totalPriceFormatter(data) {
     }
 
   });
-
 
 </script>

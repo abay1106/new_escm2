@@ -163,3 +163,5 @@ define("COMPANY_WEBSITE","localhost:9090/web_scm_wika/");
 define("SESSION_PREFIX","wika_int");
 //define("WEBSOCKET_URL","ws://192.168.2.206:8899/");
 define("HEADQUATERS_CODE", "110");
+define("UMKM_PADI", "https://api.thebigbox.id/padi-umkm/1.0.0/padis");
+define("API_KEY_PADI", "4HEOK3ARJVQhlusr2N1NvhiMUA3w33La");

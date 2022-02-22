@@ -847,30 +847,31 @@ class Procedure2_m extends CI_Model {
 
 					if(array_sum($ctrprice) > $hapamount[0]['hap_amount']){
 
-					$spedept = $this->db->select('ctr_spe_employee')->where(array('ptm_number'=>$ptm_number))->get('ctr_contract_header')->row_array();
-					$userdept = $this->db->select('dept_id')
-								->where(array('employee_id'=>$spedept['ctr_spe_employee']))
-								->get('adm_employee_pos')->row_array();
-					$ctrdept = $this->db->select('pos_id')
-								->where(array('job_title' => 'MANAJER PENGADAAN', 'dept_id' => $userdept['dept_id']))
-								->get('adm_pos')->row_array();
+						$spedept = $this->db->select('ctr_spe_employee')->where(array('ptm_number'=>$ptm_number))->get('ctr_contract_header')->row_array();
+						$userdept = $this->db->select('dept_id')
+									->or_where(array('employee_id'=>$spedept['ctr_spe_employee']))
+									->like('pos_name', 'Manager', 'after')
+									->get('adm_employee_pos')->row_array();
+						$ctrdept = $this->db->select('pos_id')
+									->where(array('job_title' => 'MANAJER PENGADAAN', 'dept_id' => $userdept['dept_id']))							
+									->get('adm_pos')->row_array();
 
-					$ctrdata = $this->getNextState(
-						"hap_pos_code",
-						"hap_pos_name",
-						"vw_prc_hierarchy_approval_10",
-						"hap_pos_code = (select distinct hap_pos_parent
-							from vw_prc_hierarchy_approval_10 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL AND hap_pos_parent = ".$ctrdept['pos_id'].")");
-					if ($ctrdata == NULL) {
-						$getdata = $this->getNextState(
+						$ctrdata = $this->getNextState(
 							"hap_pos_code",
 							"hap_pos_name",
 							"vw_prc_hierarchy_approval_10",
 							"hap_pos_code = (select distinct hap_pos_parent
-								from vw_prc_hierarchy_approval_10 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
-					}else{
-						$getdata = $ctrdata;
-					}
+								from vw_prc_hierarchy_approval_10 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL AND hap_pos_parent = ".$ctrdept['pos_id'].")");
+						if ($ctrdata == NULL) {
+							$getdata = $this->getNextState(
+								"hap_pos_code",
+								"hap_pos_name",
+								"vw_prc_hierarchy_approval_10",
+								"hap_pos_code = (select distinct hap_pos_parent
+									from vw_prc_hierarchy_approval_10 where hap_pos_code = ".$lastPosCode." AND hap_pos_parent IS NOT NULL)");
+						}else{
+							$getdata = $ctrdata;
+						}
 						
 						$nextPosCode = $getdata['nextPosCode'];
 						$nextPosName = $getdata['nextPosName'];

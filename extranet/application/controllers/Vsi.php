@@ -1,15 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vsi extends MY_Controller 
+class Vsi extends MY_Controller
 {
-	
-	public function __construct() 
+
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model(array("Vsi_m"));
 	}
-	
+
 	public function kuesioner()
 	{
 		$periode = $this->Vsi_m->getPeriode()->row_array();
@@ -17,14 +17,14 @@ class Vsi extends MY_Controller
 		$template = $this->Vsi_m->getTemplateKuesioner()->row_array();
 		$periode = $periode;
 		$month = date('F', mktime(0, 0, 0, $periode['month'], 10));
-		
-		$data['list'] = ($periode != NULL) ? $list : array(); 
-		$data['template'] = ($periode != NULL) ? $template : NULL; 
-		$data['periode'] = ($periode != NULL) ? $periode : NULL; 
-		$data['month'] = ($periode != NULL) ? $month : NULL; 
+
+		$data['list'] = ($periode != NULL) ? $list : array();
+		$data['template'] = ($periode != NULL) ? $template : NULL;
+		$data['periode'] = ($periode != NULL) ? $periode : NULL;
+		$data['month'] = ($periode != NULL) ? $month : NULL;
 		$data['message'] = $this->session->userdata("message");
 
-
+		$data['title'] = 'List Survey Kepuasan Vendor';
 		$this->layout->view('list_vsi', $data);
 
 	}
@@ -38,7 +38,7 @@ class Vsi extends MY_Controller
 		$kue = $this->Vsi_m->getKuesioner("", $template['atk_id'], "")->result_array();
 
 		$contr = $this->Vsi_m->getContractor()->result_array();
-		
+
 		foreach ($kue as $key => $value) {
 			$name[] = $value['avk_header'];
 		}
@@ -67,7 +67,7 @@ class Vsi extends MY_Controller
 		$kue = $this->Vsi_m->getVndKuesioner($questmaster['vvq_id'])->result_array();
 
 		$contr = $this->Vsi_m->getTemplateContractor($questmaster['vvq_id'])->result_array();
-		
+
 		foreach ($kue as $key => $value) {
 			$name[] = $value['vvk_quest_header'];
 		}
@@ -84,18 +84,20 @@ class Vsi extends MY_Controller
 					'master' => $questmaster,
 					'contractor' => $contr,
 				];
-				
+
+		$data['title'] = 'Lihat Kuisioner';
+
 		$this->layout->view("vsi/lihat_kuesioner", $data);
 	}
-	
+
 
 	public function survey()
 	{
 		$data = [];
 		$this->layout->view("vsi/survey", $data);
 	}
-	
-	
+
+
 	public function presentase()
 	{
 		$data = [];
@@ -105,7 +107,7 @@ class Vsi extends MY_Controller
 	public function submit_kuesioner()
 	{
 		$post = $this->input->post();
-		
+
 		$this->db->trans_begin();
 		$vend = $this->Vsi_m->getVendorData($this->session->userdata("userid"))->row_array();
 		$qm = [
@@ -152,7 +154,7 @@ class Vsi extends MY_Controller
 				];
 			$inq = $this->Vsi_m->insertVndKuesioner($que);
 		}
-		
+
 		foreach ($cid as $k => $v) {
 			$c_temp = [
 						'cont_id' => $v,
@@ -161,7 +163,7 @@ class Vsi extends MY_Controller
 					];
 			$ctid = $this->Vsi_m->insertContractorTemplate($c_temp);
 		}
-		
+
 		if ($this->db->trans_status() === FALSE)
 		{
 	        $this->db->trans_rollback();
@@ -176,5 +178,5 @@ class Vsi extends MY_Controller
 			redirect(site_url("vsi/kuesioner"));
 		}
 	}
-		
+
 }

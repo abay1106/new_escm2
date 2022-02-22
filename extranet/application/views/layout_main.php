@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/app-assets/vendors/css/perfect-scrollbar.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/app-assets/vendors/css/prism.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/app-assets/vendors/css/switchery.min.css">
-    
+
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/app-assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/app-assets/css/colors.css">
@@ -143,7 +143,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 
-			//y validasi input type number minimal 0   
+			//y validasi input type number minimal 0
 			$('input[type="number"]').attr({
 				min:"0",
 				oninput:"this.value = Math.abs(this.value)"
@@ -159,7 +159,7 @@
 				})
 			window.onbeforeunload=function(){
 				if(!is_link){
-					return  "Apakah Anda yakin ingin meninggalkan laman ini?";					
+					return  "Apakah Anda yakin ingin meninggalkan laman ini?";
 				}
 			}
 
@@ -180,13 +180,37 @@
         }
 		.goog-te-banner-frame.skiptranslate {
         	display: none !important;
-		} 
+		}
 		body {
-			top: 0px !important; 
+			top: 0px !important;
 		}
 
 		.goog-te-gadget span {
 			display: none !important;
+		}
+
+		.app-sidebar .sidebar-content {
+			background-image: linear-gradient(to bottom, rgb(41 167 222), rgb(0 67 121 / 74%)),url('http://localhost:8080/escm/assets/app-assets/img/sidebar-bg/07.jpg');
+		}
+
+		.app-sidebar .logo {
+			background-color: #29a7de;
+		}
+
+		.bg-breadcrumb {
+	    background-image: linear-gradient(to right, #00306a, #2AACE3);
+	    color: #fff;
+	    margin-bottom: 20px;
+	    margin-top: 30px;
+	    border-radius: 10px;
+	  }
+
+		b, strong {
+			color: #ffffff;
+		}
+
+		@media screen and (min-width: 0px) and (max-width: 100px) {
+		  #logo_white { display: none; }  /* show it on small screens */
 		}
     </style>
 
@@ -199,12 +223,19 @@
             <div class="navbar-header d-flex">
                 <div class="navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center" data-toggle="collapse"><i class="ft-menu font-medium-3"></i></div>
                 <ul class="navbar-nav">
-                    <li class="nav-item mr-2 d-none d-lg-block"><a class="nav-link apptogglefullscreen" id="navbar-fullscreen" href="javascript:;"><i class="ft-maximize font-medium-3"></i></a></li>                                        
+                    <li class="nav-item mr-2 d-none d-lg-block">
+											<a class="nav-link apptogglefullscreen" id="navbar-fullscreen" href="javascript:;">
+												<i class="ft-maximize font-medium-3"></i>
+											</a>
+										</li>
+										<li>
+		                  <img src="<?= base_url('assets/img/Logo_BUMN_Untuk_Indonesia_2020.png') ?>" width="150" />
+		                </li>
                 </ul>
             </div>
             <div class="navbar-container">
                 <div class="collapse navbar-collapse d-block" id="navbarSupportedContent">
-                    <ul class="navbar-nav">                        
+                    <ul class="navbar-nav">
                         <li class="nav-item mr-1">
 							<a class="nav-link d-flex align-items-end" href="javascript:;">
                                <!--  <div class="d-md-flex d-none mr-1"><span class="text-right"><?php echo $this->lang->line('Selamat Datang di Aplikasi eSCM '.COMPANY_NAME); ?></span></div> -->
@@ -212,12 +243,12 @@
 							   <div id="google_translate_element"></div>
 
 								</div>
-                            </a>							
+                            </a>
                         </li>
 						<li class="nav-item mr-1">
 							<a class="nav-link d-flex align-items-end" href="<?php echo site_url('welcome/out') ?>">
                                 <div class="d-md-flex d-none mr-2"><i class="ft-power mr-1" style="margin-top: 3px"></i><span class="text-right"><?php echo $this->lang->line('Keluar'); ?></span></div>
-                            </a>							
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -227,11 +258,13 @@
 
 	<div class="wrapper" id="wrapper">
 
-		<div class="app-sidebar menu-fixed" data-background-color="purple-bliss" data-image="<?php echo base_url(); ?>assets/app-assets/img/sidebar-bg/01.jpg" data-scroll-to-active="true">
+		<div class="app-sidebar menu-fixed" data-background-color="purple-bliss" data-image="<?= base_url(); ?>assets/app-assets/sidebar/img/07.png" data-scroll-to-active="true">
 
 			<div class="sidebar-header">
                 <div class="logo clearfix"><a class="logo-text float-left" href="#">
-                        <div class="logo-img"></div><span class="text-bold-700">ESCM</span>
+                        <div class="logo-img">
+													<img src="<?= base_url(); ?>assets/app-assets/img/logo_wika_white.png" class="menu-title" alt="WIKA Logo" style="width:70px;">
+												</div>
                     </a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
             </div>
 
@@ -243,14 +276,14 @@
 
 			<div class="sidebar-content main-menu-content">
 				<div class="nav-container">
-					<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">							
+					<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
 						<?php if ($this->session->userdata('status_aktivasi') == 'Active') { ?>
 
 						<li class="<?php echo $url == 'home' ? 'active' : ''; ?> nav-item"><a href="<?php echo site_url('home'); ?>"><i class="ft-home"></i><span class="menu-title">Beranda</span></a></li>
 
 						<li class="has-sub nav-item"><a href="javascript:;"><i class="ft-edit"></i><span class="menu-title"><?php echo $this->lang->line('Pengadaan'); ?></span></a>
-							<ul class="menu-content">							
+							<ul class="menu-content">
 								<li class="<?php echo $url == 'pengadaan' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Daftar Pekerjaan'); ?></span></a></li>
 								<li class="<?php echo $url == 'monitorpengadaan' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/monitorpengadaan"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Monitor Pengadaan'); ?></span></a></li>
 								<li class="<?php echo $url == 'buatsanggah' ? 'active' : ''; ?>"><a href="<?php echo site_url("pengadaan/buatsanggah"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Membuat Sanggahan'); ?></span></a></li>
@@ -260,7 +293,7 @@
 						</li>
 
 						<li class="has-sub nav-item"><a href="javascript:;"><i class="ft-box"></i><span class="menu-title"><?php echo $this->lang->line('Kontrak'); ?></span></a>
-							<ul class="menu-content">							
+							<ul class="menu-content">
 								<li class="<?php echo $url == 'kontrak' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"><?php echo $this->lang->line('Daftar Pekerjaan'); ?></span></a></li>
 								<li class="<?php echo $url == 'addendum' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/addendum"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Addendum</span></a></li>
 								<li class="<?php echo $url == 'wo' ? 'active' : ''; ?>"><a href="<?php echo site_url("kontrak/wo"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Update Progress PO</span></a></li>
@@ -274,12 +307,12 @@
 						</li>
 
 						<li class="has-sub nav-item"><a href="javascript:;"><i class="ft-file-text"></i><span class="menu-title"><?php echo $this->lang->line('VSI'); ?></span></a>
-							<ul class="menu-content">							
+							<ul class="menu-content">
 								<li class="<?php echo $url == 'kuesioner' ? 'active' : ''; ?>"><a href="<?php echo site_url("vsi/kuesioner"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">Kuesioner</span></a></li>
 								<li class="<?php echo $url == 'lihat_kuesioner' ? 'active' : ''; ?>"><a href="<?php echo site_url("vsi/lihat_kuesioner"); ?>"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item">History Kuesioner</span></a></li>
 							</ul>
 						</li>
-						
+
 						<?php } ?>
 
 						<li class="<?php echo $url == 'profile' ? 'active' : ''; ?> nav-item"><a href="<?php echo site_url('home/profile'); ?>"><i class="ft-user"></i><span class="menu-title"><?php echo $this->lang->line('Profil'); ?></span></a></li>
@@ -298,7 +331,19 @@
 			<!-- BEGIN : Main Content-->
 			<div class="main-content">
 				<div class="content-overlay"></div>
-				<div class="content-wrapper">					
+				<div class="content-wrapper">
+					<div class="row bg-breadcrumb">
+						<div class="col-7">
+							<div class="content-header" style="margin-top: 40px;">
+								<strong><?= $title; ?></strong>
+							</div>
+						</div>
+						<div class="col-5">
+							<div class="content-header float-right" style="margin-top:5px;">
+								<img src="<?= base_url('assets') ?>/app-assets/img/wika_employee.png" alt="WIKA Logo" / style="width:180px;">
+							</div>
+						</div>
+					</div>
 					<?php echo $content_for_layout; ?>
 					<?php include("picker_v.php"); ?>
 				</div>
@@ -309,7 +354,7 @@
 			<footer class="footer undefined undefined">
 				<p class="clearfix text-muted m-0"><span><?php echo COMPANY_NAME ?> &copy; 2016 </span></p>
 			</footer>
-			
+
 			<button class="btn btn-info scroll-top" type="button"><i class="ft-arrow-up"></i></button>
 
 		</div>
@@ -331,7 +376,7 @@
 
 			</div>
 		</div>
-	</div>	
+	</div>
 
 	<div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
@@ -342,7 +387,7 @@
 	<script src="<?php echo base_url(); ?>assets/app-assets/js/core/app-menu.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/core/app.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/customizer.js"></script>
-    <script src="<?php echo base_url(); ?>assets/app-assets/js/scroll-top.js"></script>	
+    <script src="<?php echo base_url(); ?>assets/app-assets/js/scroll-top.js"></script>
     <script src="<?php echo base_url(); ?>assets/app-assets/js/components-modal.min.js"></script>
 
 </body>

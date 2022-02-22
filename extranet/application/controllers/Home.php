@@ -18,12 +18,12 @@ class Home extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	
+
 	public function __construct() {
 		parent::__construct();
 		$this->load->model("profile");
 	}
-	
+
 	public function index()
 	{
 		$userid = $this->session->userdata("userid");
@@ -31,7 +31,7 @@ class Home extends MY_Controller {
 		$data["negosiasi"] = $this->db->query("select count(prc_tender_vendor_status.ptm_number) as jumlah from prc_tender_vendor_status
 			LEFT JOIN prc_tender_main ON prc_tender_main.ptm_number=prc_tender_vendor_status.ptm_number
 			where pvs_vendor_code = '".$userid."' and pvs_status = '10' AND ptm_status=1140")->row_array();
-		$data["penawaran_dikirim"] = $this->db->query("select count(ptm_number) as jumlah from prc_tender_vendor_status where pvs_vendor_code = '".$userid."' and pvs_status in (3, 21)")->row_array();		
+		$data["penawaran_dikirim"] = $this->db->query("select count(ptm_number) as jumlah from prc_tender_vendor_status where pvs_vendor_code = '".$userid."' and pvs_status in (3, 21)")->row_array();
 		$data["award"] = $this->db->query("select count(ptm_number) as jumlah from prc_tender_vendor_status where pvs_vendor_code = '".$userid."' and pvs_status = '11'")->row_array();
 		//start code hlmifzi
 		$data["menunggu_penawaran"] = $this->db->query("select count(a.ptm_number) as jumlah from prc_tender_vendor_status a join prc_tender_prep b on a.ptm_number = b.ptm_number where a.pvs_vendor_code = '".$userid."' and pvs_status in (2, 20, 12) and (b.ptp_quot_closing_date > now() or b.ptp_bid_closing2 > now())")->row_array();
@@ -41,16 +41,16 @@ class Home extends MY_Controller {
 			INNER JOIN prc_tender_main B ON A.ptm_number = B.ptm_number
 			INNER JOIN prc_tender_prep C ON A.ptm_number = C.ptm_number
 			where C.ptp_aanwijzing_online=1 AND A.pvs_vendor_code = '".$userid."'  AND ptp_prebid_date < NOW() AND ptp_quot_opening_date > NOW() ")->row()->jumlah;
-		
+
 		$query_eauction = "select count(A.vendor_id) as jumlah from prc_eauction_vendor A INNER JOIN prc_eauction_header B ON A.PPM_ID = B.PPM_ID INNER JOIN prc_tender_vendor_status C on C.pvs_vendor_code = A.vendor_id and C.ptm_number = A.ppm_id where NOW() BETWEEN TANGGAL_MULAI AND TANGGAL_BERAKHIR AND C.pvs_status IN (4,5,8) AND B.status = 1 AND A.vendor_id = '".$userid."'";
 		$data["eauction"] = $this->db->query($query_eauction)->row()->jumlah;
 		$data['bast'] = $this->db
 		->query("SELECT po_id as id, contract_number,po_notes as description,b.vendor_name,progress_percentage, 'WO' as type FROM ctr_po_header b
-			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id 
+			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id
 			WHERE b.vendor_id='".$userid."' AND progress_percentage='100' AND COALESCE(bastp_status::integer,0) IN (0,99) AND bastp_number IS NULL
-			UNION ALL 
+			UNION ALL
 			SELECT milestone_id as id, contract_number,b.description,vendor_name,progress_percentage, 'LUMPSUM' as type FROM ctr_contract_milestone b
-			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id 
+			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id
 			WHERE a.vendor_id='".$userid."' AND progress_percentage='100' AND COALESCE(bastp_status::integer,0) IN (0,99) AND bastp_number IS NULL")
 		->num_rows();
 		$data["terminasi_lelang"] = $this->db->query("select count(a.ptm_number) as jumlah from prc_tender_main a join prc_tender_prep b on a.ptm_number = b.ptm_number join prc_tender_vendor_status c on b.ptm_number = c.ptm_number join z_bidder_status d on c.pvs_status = d.lkp_id  where ptm_status = '1800' AND c.pvs_vendor_code = '".$userid."'")->row_array();
@@ -58,21 +58,23 @@ class Home extends MY_Controller {
 		//start code hlmifzi
 		$data['tagihan'] = $this->db
 		->query("SELECT invoice_id as id,b.contract_number,invoice_notes as description,b.vendor_name, 'WO' as type FROM ctr_invoice_header b
-			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id 
+			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id
 			WHERE b.vendor_id='".$userid."' AND invoice_status is null AND invoice_number is NULL
 
-			UNION ALL 
+			UNION ALL
 
 			SELECT invoice_id as id,b.contract_number,invoice_notes as description,b.vendor_name, 'WO' as type FROM ctr_invoice_milestone_header b
-			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id 
+			LEFT JOIN ctr_contract_header a ON a.contract_id=b.contract_id
 			WHERE b.vendor_id='".$userid."' AND invoice_status is null AND invoice_number is NULL
 
 
 			")->num_rows();
 
+			$data['title'] = 'Ringkasan Pekerjaan';
+
 		$this->layout->view('home', $data);
 	}
-	
+
 	public function profile(){
 
 
@@ -138,8 +140,8 @@ class Home extends MY_Controller {
 			$data['must_upload'] = 1;
 		}
 
-		
-		
+		$data['title'] = 'Profil';
+
 		$this->layout->view('profile', $data);
 	}
 
@@ -162,13 +164,13 @@ class Home extends MY_Controller {
 		if ($vdp_id == 0) {
 			$data_header['vdp_id'] = 1;
 		}
-		
+
 		$uploaded_vdd_ids = $post['item_id'];
 		$error = false;
 		$message = ""; //return message
 		$data_detail = array();
-		for ($i=0; $i < count($post['item_id']); $i++) { 
-			
+		for ($i=0; $i < count($post['item_id']); $i++) {
+
 			$temps = $this->do_upload('file_'.$i, $this->session->userdata("userid"), "Dokumen PQ");
 
 				if(is_array($temps)){
@@ -177,7 +179,7 @@ class Home extends MY_Controller {
 							$error =  true; //true or false
 							$i = count($post['item_id']);
 						}
-						
+
 					}
 					else{
 					// array_push($temp, "");
@@ -201,12 +203,12 @@ class Home extends MY_Controller {
 			$this->db->order_by('vnd_doc_pq_detail.vdd_id', 'desc');
 			$this->db->order_by('vnd_doc_pq_detail.vdpd_id', 'desc');
 			$uploaded_doc_ids = $this->profile->getVndDocPqDetail()->result_array();
-			
+
 			foreach ($uploaded_doc_ids as $key => $value) {
 				$vdpd_ids[] = $value['vdpd_id'];
 			}
 		}
-		
+
 
 
 		$this->db->trans_begin();
@@ -244,6 +246,6 @@ class Home extends MY_Controller {
 			echo json_encode("success");
 
 		}
-		
+
 	}
 }

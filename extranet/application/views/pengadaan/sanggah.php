@@ -6,18 +6,6 @@ else{
 }
 ?>
 
-<div class="row">
-	<div class="col-7">
-		<div class="content-header"><strong><?php echo $this->lang->line('Sanggahan'); ?></strong></div>			
-	</div>
-	<div class="col-5">
-		<div class="content-header float-right">
-			<a class="text-muted text-xs block h5" id="servertime"></a>
-		</div>
-	</div>
-</div>
-
-
 <div class="wrapper wrapper-content animated fadeIn">
 	<div class="row">
 		<div class="col-lg-12">
@@ -99,7 +87,7 @@ else{
 
 							<?php if(!isset($content)) { ?>
 							<div class="form-group"><label class="col-sm-2 control-label"> Lampiran Jaminan *
-								
+
 							</label>
 								<div class="col-lg-6 m-l-n"><input <?php echo $modes; ?> id="lampiran_jaminan" name="lampiran_jaminan" type="file" class="file" required></div>
 							</div>
@@ -149,7 +137,7 @@ else{
 								</div>
 							</div>
 							<?php } ?>
-						</form>		
+						</form>
 					</div>
 				</div>
 			</div>

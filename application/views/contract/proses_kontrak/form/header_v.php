@@ -3,7 +3,7 @@
     <div class="card">
 
       <div class="card-header border-bottom pb-2">
-        <h4 class="card-title float-left"><?php echo $tender['evt_description']?></h4> 
+        <h4 class="card-title float-left"><?php echo $kontrak['subject_work']?></h4> 
         <span class="text-info float-right text-bold-700"><i class="ft-cpu"></i> Lelang Electronik</span>
       </div>
 
@@ -116,10 +116,10 @@
                 <label class="col-sm-4 control-label text-right mt-2 text-bold-700">Download Template</label>
                 <div class="col-sm-8">
                   <p class="form-control-static mt-2">
-                    <span class="badge badge-info mr-2">SPK</span>
-                    <span class="badge badge-info mr-2">SPB</span>
-                    <span class="badge badge-info mr-2">PPJ</span>
-                    <span class="badge badge-info mr-2">PPB</span>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">SPK</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">SPB</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">PPJ</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">PPB</a>
                   </p>
                 </div>
               </div>     
@@ -142,7 +142,7 @@
 
             </div>
 
-            <!-- center-side -->
+            <!-- right-side -->
             <div class="col">
 
               <?php $curval = (isset($kontrak['vendor_name'])) ? $kontrak['vendor_name'] : ""; ?>
@@ -220,7 +220,7 @@
                 <label class="col-sm-4 control-label text-right text-bold-700 mb-2">e-Signature</label>
                 <div class="col-sm-8">
                   <div class="custom-switch custom-switch-info mb-2">
-                      <input type="checkbox" class="custom-control-input" id="color-switch-1" checked>
+                      <input type="checkbox" class="custom-control-input" id="color-switch-1">
                       <label class="custom-control-label" for="color-switch-1"></label>
                   </div>  
                 </div>
@@ -230,7 +230,7 @@
                 <label class="col-sm-4 control-label text-right text-bold-700">Kirim Ke PaDi UMKM</label>
                 <div class="col-sm-8">
                   <div class="custom-switch custom-switch-info">
-                      <input type="checkbox" class="custom-control-input" id="color-switch-2" checked>
+                      <input type="checkbox" name="padi_umkm_inp" class="custom-control-input" id="color-switch-2">
                       <label class="custom-control-label" for="color-switch-2"></label>
                   </div>  
                 </div>
