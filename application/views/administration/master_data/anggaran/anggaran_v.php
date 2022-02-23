@@ -40,6 +40,7 @@
   });
 
   function operateFormatter(value, row, index) {
+
     var link = "<?php echo site_url('administration/master_data/anggaran') ?>";
     return [
       '<div class="btn-group"><a class="btn btn-sm btn-info btn-xs action" href="' + link + '/ubah/' + value + '">',
@@ -50,6 +51,21 @@
       '</a></div>',
     ].join('');
   }
+
+  function conditionCheck(row) {
+    if (row['pusat'] = 't') {
+      return[
+        '<i class="ft-check mr-1"></i>'
+      ].join('');
+    } else if (row['proyek'] = 't') {
+      '<i class="ft-check mr-1"></i>'
+    } else if (row['devisi'] = 't') {
+      '<i class="ft-check mr-1"></i>'
+    } else {
+      '<i class="ft-x mr-1"></i>'
+    }
+  }
+
 </script>
 
 <script type="text/javascript">
@@ -98,7 +114,8 @@
           order:true,
           searchable:true,
           align: 'center',
-          valign: 'middle'
+          valign: 'middle',
+          formatter: conditionCheck
         },
         {
           field: 'devisi',
@@ -107,7 +124,8 @@
           order:true,
           searchable:true,
           align: 'left',
-          valign: 'middle'
+          valign: 'middle',
+          formatter: conditionCheck
         },
         {
           field: 'proyek',
@@ -116,7 +134,8 @@
           order:true,
           searchable:true,
           align: 'left',
-          valign: 'middle'
+          valign: 'middle',
+          formatter: conditionCheck
         }
         /*
         {

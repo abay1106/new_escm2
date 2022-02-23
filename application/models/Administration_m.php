@@ -881,10 +881,10 @@ class Administration_m extends CI_Model {
 	}
 
 	public function getAllJob($employee_id, $limit){
-		
+
 		if(!empty($employee_id)){
-			
-			if (!empty($limit)) {	
+
+			if (!empty($limit)) {
 				$this->db->limit(5);
 			}
 			$this->db->select("vw_job_all.*");
@@ -907,11 +907,11 @@ class Administration_m extends CI_Model {
 			$this->db->where(array('status'=> 0, 'TRIM(employee_to)'=>$name));
 			$this->db->order_by("id","desc");
 			return $this->db->get("prc_chat_rfq");
-		}     
+		}
 	}
 
 	//Aspek Penilaian Mutu Pekerjaan dan Personal
-	public function addAspekPenilaianMutu($data=array()){ 
+	public function addAspekPenilaianMutu($data=array()){
 		$insert = $this->db->insert_batch('adm_aspek_penilaian_mutu', $data);
 		return $insert;
 	}
@@ -971,9 +971,9 @@ class Administration_m extends CI_Model {
 			if($check > 0){
 				$this->db->update('adm_target_dan_bobot_kompilasi_vpi', $data, $where);
 			}else{
-				$this->db->insert('adm_target_dan_bobot_kompilasi_vpi', $data);	
+				$this->db->insert('adm_target_dan_bobot_kompilasi_vpi', $data);
 			}
-			
+
 		}else{
 			$this->db->insert('adm_target_dan_bobot_kompilasi_vpi', $data);
 		}
@@ -983,7 +983,7 @@ class Administration_m extends CI_Model {
 	}
 
 	//Kuesioner Kepuasan Vendor
-	public function addKuesioner($data=array()){ 
+	public function addKuesioner($data=array()){
 		$insert = $this->db->insert_batch('adm_vsi_kuesioner', $data);
 		return $insert;
 	}
@@ -1009,7 +1009,7 @@ class Administration_m extends CI_Model {
 	}
 
 	public function UpdateStatusKuesioner($id=array()){
-		
+
 		$data = $this->db->where_in("avk_id", $id)->get("adm_vsi_kuesioner")->result_array();
 
 		foreach ($data as $k => $v) {
@@ -1022,14 +1022,14 @@ class Administration_m extends CI_Model {
 
 			$this->db->where_in("avk_id",$id);
 
-			$this->db->update("adm_vsi_kuesioner", array("avk_status"=>$status_to, 'updated_datetime'=>date('Y-m-d h:i:s')));	
+			$this->db->update("adm_vsi_kuesioner", array("avk_status"=>$status_to, 'updated_datetime'=>date('Y-m-d h:i:s')));
 		}
-		
+
 	}
 
 
 	//Template Kuesioner Kepuasan Vendor
-	public function addTemplateKuesioner($data=array()){ 
+	public function addTemplateKuesioner($data=array()){
 		$insert = $this->db->insert_batch('adm_vsi_template_kuesioner', $data);
 		return $insert;
 	}
@@ -1060,7 +1060,7 @@ class Administration_m extends CI_Model {
 		if(!empty($id)){
 
 			$this->db->where("atk_id",$id);
-			
+
 			if ($status == "nonaktif") {
 				$status_to = "Non Aktif";
 			}else{
@@ -1073,35 +1073,35 @@ class Administration_m extends CI_Model {
 	}
 
 	public function getRegion($id=""){
-		
+
 		if (!empty($id)) {
-			
+
 			$this->db->where("region_id", $id);
 		}
 		return $this->db->get("adm_region");
 	}
-	
+
 	public function updateRegion($id="", $data=array()){
-		
+
 		if (!empty($id)) {
-			
+
 			$this->db->where("region_id", $id);
 			return $this->db->update("adm_region", $data);
 		}
 	}
-	
+
 	public function insertRegion($input=""){
-		
+
 		if (!empty($input)) {
-		
+
 			return $this->db->insert("adm_region", $input);
 		}
 	}
 
 	public function insertMasterMdiv($input=array()){
-		
+
 		if (!empty($input)) {
-		
+
 			return $this->db->insert("adm_master_mdiv", $input);
 		}
 	}
@@ -1110,7 +1110,7 @@ class Administration_m extends CI_Model {
 
 		$this->db->select("a.*, b.region_name, c.pos_name, d.dept_name");
 
-		if (!empty($where)) {	
+		if (!empty($where)) {
 			$this->db->where($where);
 		}
 
@@ -1122,7 +1122,7 @@ class Administration_m extends CI_Model {
 	}
 
 	public function updateMasterMdiv($id="", $data=array()){
-		
+
 		if(!empty($id)){
 
 			return $this->db->where("amm_id", $id)->update("adm_master_mdiv", $data);
@@ -1130,12 +1130,12 @@ class Administration_m extends CI_Model {
 	}
 
 	public function getVendorVsi($id="", $template=""){
-		
-		if (!empty($id)) 
+
+		if (!empty($id))
 		{
 			$this->db->where("vvq_id", $id);
 		}
-		if (!empty($template)) 
+		if (!empty($template))
 		{
 			$this->db->where("template_id", $template);
 		}
@@ -1143,16 +1143,16 @@ class Administration_m extends CI_Model {
 	}
 
 	public function getVendorVsiKues($id="", $quest="", $head=""){
-		
-		if (!empty($id)) 
+
+		if (!empty($id))
 		{
 			$this->db->where("vvk_id", $id);
 		}
-		if (!empty($quest)) 
+		if (!empty($quest))
 		{
 			$this->db->where("questmaster_id", $quest);
 		}
-		if (!empty($head)) 
+		if (!empty($head))
 		{
 			$this->db->where("vvk_quest_header", $head);
 		}
@@ -1161,7 +1161,7 @@ class Administration_m extends CI_Model {
 
 	// adm vpi baru
 	//hasil mutu pekerjaan
-	public function addHasilMutuPekerjaan($data=array()){ 
+	public function addHasilMutuPekerjaan($data=array()){
 		$insert = $this->db->insert_batch('adm_vpi_hasil_mutu_pekerjaan', $data);
 		return $insert;
 	}

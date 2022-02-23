@@ -1,71 +1,148 @@
-<div class="row">
-  <div class="col-12">
-    <div class="card">
-      
-      <div class="card-header border-bottom pb-2">
-        <h4 class="card-title">Multiple Filtering</h4>
-      </div>
+<link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<style>
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+}
+</style>
+<section class="users-list-wrapper">
+    <!-- starts -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
 
-      <div class="card-content">
-        <div class="card-body">
-            <div class="col-md-3 col-12">
-                <fieldset class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">Type</label>
-                        </div>
-                        <select class="form-control" id="siup_type">
-                            <option value="#">Choose...</option>
-                            <?php foreach ($siup_type as $v) { ?>
-                              <option value="<?php echo $v['siup_type'];?>"><?php echo $v['siup_type'];?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </fieldset>
+            <div class="card-header border-bottom pb-2">
+              <h4 class="card-title">Multiple Filtering</h4>
             </div>
 
-            <div class="col-md-3 col-12">
-                <fieldset class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">Date</label>
-                        </div>
-                        <input type="date" id="date_start" class="form-control">
-                    </div>
-                </fieldset>
+            <div class="card-content">
+              <div class="card-body">
+                <form action="<?= site_url('contract/monitor/monitor_kontrak') ?>" method="post">
+                  <div class="col-md-3 col-12">
+                      <fieldset class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <label class="input-group-text">Type</label>
+                              </div>
+                              <select class="form-control" name="siup_type_keyword" id="siup_type">
+                                <option value="#">Choose...</option>
+                                  <?php foreach ($siup_type as $v) { ?>
+                                    <option value="<?php echo $v['siup_type'];?>"><?php echo $v['siup_type'];?></option>
+                                  <?php } ?>
+                              </select>
+                          </div>
+                      </fieldset>
+                  </div>
+
+                  <div class="col-md-3 col-12">
+                      <fieldset class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <label class="input-group-text">Date</label>
+                              </div>
+                              <input type="date" name="date_start" id="date_start" class="form-control">
+                          </div>
+                      </fieldset>
+                  </div>
+
+                  <div class="col-md-2 col-12">
+                      <fieldset class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <label class="input-group-text">Divisi</label>
+                              </div>
+                              <select class="form-control" name="divisi_keyword" id="divisi">
+                                  <option selected>Choose...</option>
+                                  <?php foreach ($ptm_dept_name as $v) { ?>
+                                    <option value="<?php echo $v['ptm_dept_name'];?>"><?php echo $v['ptm_dept_name'];?></option>
+                                  <?php } ?>
+                              </select>
+                          </div>
+                      </fieldset>
+                  </div>
+
+                  <div class="col-md-2 col-12">
+                    <fieldset class="form-group">
+                      <button type="submit" class="btn btn-info btn-block">
+                        <i class="ft-search"></i> Search
+                      </button>
+                    </fieldset>
+                  </div>
+
+                  <div class="col-md-2 col-12">
+                    <fieldset class="form-group">
+                      <a href="<?= site_url('contract/monitor/monitor_kontrak') ?>" class="btn btn-success btn-block">
+                        <i class="ft-refresh-ccw"></i> Reset
+                      </a>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
             </div>
 
-            <div class="col-md-3 col-12">
-                <fieldset class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">Divisi</label>
-                        </div>
-                        <select class="form-control" id="divisi">
-                            <option selected>Choose...</option>
-                            <?php foreach ($ptm_dept_name as $v) { ?>
-                              <option value="<?php echo $v['ptm_dept_name'];?>"><?php echo $v['ptm_dept_name'];?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </fieldset>
-            </div>
-
-            <div class="col-md-2 col-12">
-                <button type="button" id="dt_cari_act" name="button" class="btn btn-info btn-block"><i class="ft-search"></i> Search</button>
-            </div>
-
+          </div>
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                <div class="card-header border-bottom pb-2">
+                    <h4 class="card-title">Daftar Kontrak</h4>
+                </div>
+                  <div class="card-content">
+                      <div class="card-body">
+          							<div class="table-responsive">
+          								<table id="dtBasicExample" class="table table-sm table-striped table-bordered">
+          									<thead class="thead-light">
+          										<tr>
+          											<th class="text-center">#</th>
+          											<th class="text-center">Nomor Pengadaan</th>
+          											<th class="text-center">Nomor Kontrak</th>
+          											<th class="text-center">Deskripsi Pekerjaan</th>
+          											<th class="text-center">Vendor</th>
+          											<th class="text-center">Tipe</th>
+          											<th class="text-center">Status</th>
+          											<th class="text-center">UMKM</th>
+          										</tr>
+          									</thead>
+          									<tbody>
+                              <?php $link = site_url('contract/monitor/monitor_kontrak/lihat') ?>
+                              <?php foreach ($monitor_kontrak_data as $value) { ?>
+                                  <tr>
+                                    <td><a class="btn btn-info action" href="<?= $link ?>/<?= $value->contract_id ?>"> Lihat </a> </td>
+                                    <td><?= $value->ptm_number ?></td>
+                                    <td><?= $value->contract_number ?></td>
+                                    <td><?= $value->subject_work ?></td>
+                                    <td><?= $value->vendor_name ?></td>
+                                    <td><?= $value->contract_type ?></td>
+                                    <td><?= $value->status_name ?></td>
+                                    <td><img src="<?= base_url('assets/img/padi-umkm-logo.png') ?>" style="width: 50%;" /></td>
+                                  </tr>
+                              <?php } ?>
+          									</tbody>
+          								</table>
+          							</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <!-- ends -->
+</section>
 
 <div class="row">
   <div class="col-12">
     <div class="card">
-      
+
       <div class="card-header border-bottom pb-2">
           <h4 class="card-title">Daftar Kontrak</h4>
       </div>
@@ -73,7 +150,7 @@
       <div class="card-content">
         <div class="card-body">
           <div class="table-responsive">
-              <table id="table_monitor_kontrak" class="table table-bordered table-striped"></table>
+              <!-- <table id="table_monitor_kontrak" class="table table-bordered table-striped"></table> -->
           </div>
         </div>
       </div>
@@ -82,9 +159,14 @@
   </div>
 </div>
 
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
 <script type="text/javascript">
 
-  console.log($('#siup_type').val() );
+$(document).ready(function () {
+$('#dtBasicExample').DataTable();
+$('.dataTables_length').addClass('bs-select');
+});
 
   jQuery.extend({
     getCustomJSON: function(url) {
@@ -108,8 +190,8 @@
 
     var html = [];
     $.each(row, function (key, value) {
-     var data = $.grep(mydata, function(e){ 
-       return e.field == key; 
+     var data = $.grep(mydata, function(e){
+       return e.field == key;
      });
 
      if(typeof data[0] !== 'undefined'){
@@ -122,6 +204,24 @@
 
   }
 
+  function logoUmkmPadi(value, row, index) {
+    var link_img = "<?php echo base_url('assets/img/padi-umkm-logo.png') ?>";
+
+    <?php if(empty($contract['siup_type'])){ ?>
+
+      return [
+      '<img src="'+link_img+'" alt="UMKM" width="60" height="30">',
+      ].join('');
+
+    <?php } else { ?>
+
+        return [
+        '-',
+        ].join('');
+
+    <?php }  ?>
+  }
+
   function operateFormatter(value, row, index) {
     var link = "<?php echo site_url('contract/monitor/monitor_kontrak') ?>";
     return [
@@ -131,7 +231,7 @@
     ].join('');
   }
   window.operateEvents = {
-    'click .approval': function (e, value, row, index) {    
+    'click .approval': function (e, value, row, index) {
   },
 };
 function totalTextFormatter(data) {
@@ -166,7 +266,7 @@ function totalPriceFormatter(data) {
       url: "<?php echo site_url('contract/data_monitor_kontrak/'.$act) ?>",
 
       cookieIdTable:"monitor_kontrak",
-      
+
       idField:"contract_id",
 
       <?php echo DEFAULT_BOOTSTRAP_TABLE_CONFIG ?>
@@ -248,6 +348,14 @@ function totalPriceFormatter(data) {
           valign: 'middle',
           width:'20%',
         },
+        {
+          field: "contract_id",
+          title: 'UMKM?',
+          align: 'center',
+          width:'8%',
+          valign: 'middle',
+          formatter: logoUmkmPadi,
+        },
         ]
 
       });
@@ -294,7 +402,7 @@ function totalPriceFormatter(data) {
 
     });
     $table_monitor_kontrak.on('all.bs.table', function (e, name, args) {
-  
+
   });
 
     function getIdSelections() {

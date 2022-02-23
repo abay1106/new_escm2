@@ -280,6 +280,18 @@ public function monitor($param1 = "" ,$param2 = "",$param3 = ""){
     break;
   }
 
+	case 'Kontrak':
+
+  switch ($param2) {
+    case 'lihat':
+    $this->lihat_kontrak();
+    break;
+
+    default:
+    $this->Kontrak($param2);
+    break;
+  }
+
   break;
 
   case 'monitor_adendum_kontrak':
@@ -464,6 +476,10 @@ public function monitor_tagihan(){
 
 public function monitor_kontrak($act = ""){
   include("contract/monitor/monitor_kontrak.php");
+}
+
+public function Kontrak($act = ""){
+  include("contract/monitor/Kontrak.php");
 }
 
 public function data_monitor_kontrak($act = ""){
@@ -685,11 +701,11 @@ public function push_wo(){
       // redirect(base_url("guide/WIKA_eSCM_User_Guide_v1.1.pdf"));
       redirect(base_url("guide/user_guide.zip"));
       break;
-    
+
     default:
      show_404();
       break;
   }
-  
+
 }
 }
