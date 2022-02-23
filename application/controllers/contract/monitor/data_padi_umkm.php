@@ -9,7 +9,7 @@
 
 	$ch = curl_init( UMKM_PADI );
 	
-	$payload = json_encode( array( "get_umkm" => array("size" => (int)$limit, "page" => 11) ) );
+	$payload = json_encode( array( "get_umkm" => array("size" => (int)$limit, "page" => 1) ) );
 
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
