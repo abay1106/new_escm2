@@ -448,6 +448,25 @@ class Administration extends Telescoope_Controller
 
         break;
 
+        case 'news':
+
+          switch ($param2) {
+
+            case 'tambah':
+              $this->submit_news();
+              break;
+
+            case 'hapus':
+              $this->delete_news($param3);
+              break;
+
+            default:
+              $this->news();
+              break;
+          }
+
+          break;
+
         case 'rks':
 
           switch ($param2) {
@@ -1556,6 +1575,21 @@ class Administration extends Telescoope_Controller
   public function picker_anggaran()
   {
     include("administration/master_data/anggaran/picker_anggaran.php");
+  }
+
+  public function news()
+  {
+    include("administration/document/news.php");
+  }
+
+  public function submit_news()
+  {
+    include("administration/document/submit_news.php");
+  }
+
+  public function delete_news($id)
+  {
+    include("administration/document/delete_news.php");
   }
 
   public function rks()

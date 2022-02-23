@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 
 class Contract_m extends CI_Model {
 
@@ -1005,12 +1006,12 @@ class Contract_m extends CI_Model {
 		}
 
 		$this->db->join("vnd_header vnd","vnd.vendor_id = vw_ctr_monitor.vendor_id", "LEFT");
-		
+
 		$this->db->join("prc_tender_main tender","tender.ptm_number = vw_ctr_monitor.ptm_number", "LEFT");
 
 		$this->db->order_by("contract_id", "DESC");
 
-		return $this->db->get("vw_ctr_monitor");
+		return $this->db->get("vw_ctr_monitor")->result();
 
 	}
 
@@ -1110,7 +1111,7 @@ class Contract_m extends CI_Model {
 				'Content-Type: multipart/form-data',
 				'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
 			);
-			$url = NASABAH_URL; 
+			$url = NASABAH_URL;
 
 			$vendordoc = $this->getDocWs($data['vendor_id']);
 			$vendorbank = $this->getBankWs($data['vendor_id']);
@@ -1138,12 +1139,12 @@ class Contract_m extends CI_Model {
 				'pkp' => $data["npwp_pkp"],
 				'telpon1' => $data["address_phone_no"],
 				'handphone' => $data["address_phone_no"],
-				'kelompok' => $data['cot_kelompok_name'], 
-				'jenis_kantor' => "Pusat", 
+				'kelompok' => $data['cot_kelompok_name'],
+				'jenis_kantor' => "Pusat",
 				'siupp' => $data["siup_no"],
 				'cotid' => $data["vnd_cot"],
 				//not important
-				'keterangan' => NULL, 
+				'keterangan' => NULL,
 				'is_pkp' => $data["npwp_pkp"],
 				'alamat_npwp' => $data["npwp_address"],
 				'ext' => NULL,
@@ -1152,29 +1153,29 @@ class Contract_m extends CI_Model {
 				'email' => $data["email_address"],
 				'kualifikasi_vendor' => NULL,
 				'sertifikat' => NULL,
-				'nama_kontak2' => NULL, 
-				'jabatan2' => NULL, 
-				'jenis_nasabah' => $data['jenis_nasabah'], 
+				'nama_kontak2' => NULL,
+				'jabatan2' => NULL,
+				'jenis_nasabah' => $data['jenis_nasabah'],
 				'skt' => $data["npwp_pkp_no"],
 				'email1' => $data["email_address"],
 				'email2' => NULL,
 				'fax_cp1' => NULL,
 				'fax_cp2' => NULL,
-				'telpon2' => NULL, 
-				'handphone2' => NULL, 
-				'tipe_lain_perusahaan' => NULL, 
-				'tipe_faktur' => NULL, 
+				'telpon2' => NULL,
+				'handphone2' => NULL,
+				'tipe_lain_perusahaan' => NULL,
+				'tipe_faktur' => NULL,
 				'nama_bank' => $vendorbank['bank'],
-				'cabang' => NULL, 
-				'nomor_rekening' => $vendorbank['rek'], 
-				'atas_nama' => $vendorbank['nama'], 
-				'is_app' => "t", 
-				'id_user' => NULL, 
+				'cabang' => NULL,
+				'nomor_rekening' => $vendorbank['rek'],
+				'atas_nama' => $vendorbank['nama'],
+				'is_app' => "t",
+				'id_user' => NULL,
 				'file_npwp' => $vendordoc['npwpdoc'],
 				'file_sppkp' => $vendordoc['pkpdoc'],
 				'file_lain' => NULL
 			];
-			
+
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -1185,7 +1186,7 @@ class Contract_m extends CI_Model {
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 4); //timeout in seconds
-			
+
 			$result = curl_exec($ch);
 
 			return $result;
@@ -1268,7 +1269,7 @@ class Contract_m extends CI_Model {
 
 		$url_ws = "http://vendor.pengadaan.com:8888/RESTSERVICE";
 		$boards = json_decode(file_get_contents($url_ws."/vndboard.json?token=123456&vendorId=".$vendor_id."&act=1"), true);
-		
+
 		$cou = count($boards['listVndBoard']);
 
 		for ($i=0; $i < $cou; $i++) {
@@ -1286,7 +1287,7 @@ class Contract_m extends CI_Model {
 				break;
 			}else{
 				$board = NULL;
-			}			
+			}
 		}
 
 		return $board;
@@ -1295,5 +1296,30 @@ class Contract_m extends CI_Model {
 	public function generateVsi()
 	{
 		$ctr = $this->getData()->result_array();
+	}
+
+	public function getMonitorContract($startDate, $id = "") {
+		if(!empty($id)){
+			$this->db->where("contract_id",$id);
+		}
+
+		$this->db->join("vnd_header vnd","vnd.vendor_id = vw_ctr_monitor.vendor_id", "LEFT");
+		$this->db->join("prc_tender_main tender","tender.ptm_number = vw_ctr_monitor.ptm_number", "LEFT");
+		$this->db->order_by("contract_id", "DESC");
+		$this->db->where('vw_ctr_monitor.pf_start_date', $startDate);
+		return $this->db->get("vw_ctr_monitor")->result();
+	}
+
+	public function getMonitorContractByKeyword($siup_type, $divisi, $id = "") {
+		if(!empty($id)){
+			$this->db->where("contract_id",$id);
+		}
+
+		$this->db->join("vnd_header vnd","vnd.vendor_id = vw_ctr_monitor.vendor_id", "LEFT");
+		$this->db->join("prc_tender_main tender","tender.ptm_number = vw_ctr_monitor.ptm_number", "LEFT");
+		$this->db->order_by("contract_id", "DESC");
+		$this->db->like('vnd.siup_type', $siup_type, 'both');
+		$this->db->or_like('tender.ptm_dept_name', $divisi, 'both');
+		return $this->db->get("vw_ctr_monitor")->result();
 	}
 }
