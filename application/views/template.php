@@ -58,6 +58,8 @@
     <link rel="stylesheet" type="text/css" href="assets/app-assets/css/plugins/switchery.css">    
     <!-- <link rel="stylesheet" type="text/css" href="assets/app-assets/vendors/css/chartist.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/assets/css/style.css">
+    <link rel="stylesheet" href="assets/datatables.net-bs/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/datatables/css/select.dataTables.min.css">
 
     <!-- haqim -->
     <link rel="stylesheet" href="assets/css/chosen/chosen.min.css">
@@ -270,6 +272,9 @@
   <script type="text/javascript" src="assets/assets/js/scripts.js"></script>
   <script type="text/javascript" src="assets/app-assets/js/customizer.js"></script>
   <script type="text/javascript" src="assets/app-assets/vendors/js/switchery.min.js"></script>
+  <script src="assets/datatables/js/jquery.dataTables.min.js"></script>
+  <script src="assets/datatables.net-bs/js/dataTables.bootstrap4.min.js"></script>
+  <script src="assets/datatables/js/dataTables.select.min.js"></script>
 
   <script type="text/javascript" src="assets/js/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="assets/plugins/bootstrap-table/dist/extensions/editable/x-editable.js"></script>
