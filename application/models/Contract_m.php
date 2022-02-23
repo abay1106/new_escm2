@@ -407,7 +407,7 @@ class Contract_m extends CI_Model {
 
 		$this->db->order_by("contract_id","desc");
 
-		return $this->db->get("ctr_contract_item");
+		return $this->db->get("vw_smbd_sum_rab");
 
 	}
 

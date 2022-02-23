@@ -2,7 +2,7 @@
 
     $error = false;
 
-    $post = $this->input->post();        
+    $post = $this->input->post();      
 
     $id = $post['id'];
 
@@ -82,6 +82,10 @@
       $input['padi_umkm'] = $post['padi_umkm_inp'];
     }
 
+    if (isset($post['e_signature_inp'])) {
+      $input['e_signature'] = $post['e_signature_inp'];
+    }
+
     $input_doc = array();
 
     $input_item = array();
@@ -151,7 +155,7 @@
 
     if(in_array($last_activity, array(2010,2030))){
 
-      $this->form_validation->set_rules("jenis_kontrak_inp", "Jenis Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
+      //$this->form_validation->set_rules("jenis_kontrak_inp", "Jenis Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
       $this->form_validation->set_rules("tgl_mulai_inp", "Tanggal Mulai Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
       $this->form_validation->set_rules("tgl_akhir_inp", "Tanggal Akhir Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
 
@@ -243,7 +247,7 @@
       ->get("prc_tender_main")
       ->row()->dep_code;
 
-      $input['contract_number'] = $this->Contract_m->getUrut("", $contract['contract_type'], $post['jenis_kontrak_inp'], $tipe_pengadaan, $getdept);
+      $input['contract_number'] = $this->Contract_m->getUrut("", $contract['contract_type'], $post['item_kontrak_inp'], $tipe_pengadaan, $getdept);
 
     }
 
@@ -253,7 +257,7 @@
 
       $input['subject_work'] = $post['subject_work_inp'];
       $input['scope_work'] = $post['scope_work_inp'];
-      $input['contract_type_2'] = $post['jenis_kontrak_inp'];
+      //$input['contract_type_2'] = $post['jenis_kontrak_inp'];
       $input['ctr_item_type'] = $post['item_kontrak_inp'];
 
       $mulai = $post['tgl_mulai_inp'];
@@ -317,11 +321,7 @@
           if(isset($post['doc_id_inp'][$key2])){
             $input_doc[$key2]['doc_id'] = $post['doc_id_inp'][$key2];
           }
-
-          if(isset($post['doc_category_inp'][$key2])){
-            $this->form_validation->set_rules("doc_category_inp[$key2]", "lang:code #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $input_doc[$key2]['category']= $post['doc_category_inp'][$key2];
-          }
+          
           if(isset($post['doc_desc_inp'][$key2])){
             $this->form_validation->set_rules("doc_desc_inp[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH_TEXT.']');
             $input_doc[$key2]['description']= $post['doc_desc_inp'][$key2];
@@ -330,10 +330,20 @@
             $this->form_validation->set_rules("doc_attachment_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
             $input_doc[$key2]['filename']= $post['doc_attachment_inp'][$key2];
           }
-
           if(isset($post['doc_vendor_inp'][$key2])){
-            $this->form_validation->set_rules("doc_vendor_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $input_doc[$key2]['publish']= $post['doc_vendor_inp'][$key2];
+            $this->form_validation->set_rules("doc_vendor_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');                        
+            $input_doc[$key2]['publish']= $post['doc_vendor_inp'][$key2];    
+          }
+          if(isset($post['doc_name_input'][$key2])){
+            $this->form_validation->set_rules("doc_name_input[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            $input_doc[$key2]['name_input']= $post['doc_name_input'][$key2];
+          }
+          if(isset($post['doc_req_e_sign_inp'][$key2])){
+            $this->form_validation->set_rules("doc_req_e_sign_inp[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');            
+            $input_doc[$key2]['req_e_sign']= $post['doc_req_e_sign_inp'][$key2];
+          }
+          if(isset($post['doc_name_input'][$key2])){
+            $input_doc[$key2]['upload_date']= date('Y-m-d h:i:s');
           }
 
           if(isset($post['milestone_percent'][$key2])){
@@ -428,6 +438,9 @@
         }
         if(isset($post['max_qty'])){
           $input['max_qty'] = $post['max_qty'][$key];
+        }
+        if(isset($post['note'])){
+          $input['note'] = $post['note'][$key];
         }
         $this->db->where("contract_item_id",$key)->update("ctr_contract_item",$input);
       }
