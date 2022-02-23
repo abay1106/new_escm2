@@ -3,8 +3,8 @@
     <div class="card">
 
       <div class="card-header border-bottom pb-2">
-        <h4 class="card-title float-left"><?php echo $kontrak['subject_work']?></h4> 
-        <span class="text-info float-right text-bold-700"><i class="ft-cpu"></i> Lelang Electronik</span>
+        <span class="card-title text-bold-700"><?php echo $kontrak['subject_work']?></span> 
+        <span class="text-info text-bold-700"><i class="ft-cpu"></i> Lelang Electronik</span>
       </div>
 
       <div class="card-content">
@@ -64,15 +64,7 @@
                   <div class="col-sm-8">
                     <p class="form-control-static"><?php echo $curval ?></p>
                   </div>
-                </div>  
-                
-                <?php $curval = (isset($tender['ptm_requester_name'])) ? $tender['ptm_requester_name'] : ""; ?>
-                <div class="form-group">
-                  <label class="col-sm-4 control-label text-right text-bold-700">User</label>
-                  <div class="col-sm-8">
-                    <p class="form-control-static"><?php echo $curval ?></p>
-                  </div>
-                </div>     
+                </div>                  
 
                 <?php $curval = (isset($tender['ptm_project_name'])) ? $tender['ptm_project_name'] : ""; ?>
                 <div class="form-group">
@@ -159,7 +151,7 @@
 
                 <?php $curval = (isset($hps)) ? inttomoney($hps) : 0; ?>
                 <div class="form-group">
-                  <label class="col-sm-4 control-label text-right text-bold-700">Nilai HPS</label>
+                  <label class="col-sm-4 control-label text-right text-bold-700">Nilai RAB</label>
                   <div class="col-sm-8">
                     <p class="form-control-static"><?php echo $curval ?></p>
                   </div>
@@ -192,14 +184,6 @@
                 </div>
 
                 <?php endif ?>
-
-                <?php $curval = $specialist_name; ?>
-                <div class="form-group">
-                  <label class="col-sm-4 control-label text-right text-bold-700">Pelaksana Kontrak</label>
-                  <div class="col-sm-8">
-                    <p class="form-control-static"><?php echo $curval ?></p>
-                  </div>
-                </div>
 
                 <div class="form-group">                
                   <label class="col-sm-4 control-label text-right text-bold-700 mb-2">e-Signature</label>

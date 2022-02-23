@@ -64,15 +64,7 @@
                 <div class="col-sm-8">
                   <p class="form-control-static"><?php echo $curval ?></p>
                 </div>
-              </div>  
-              
-              <?php $curval = (isset($tender['ptm_requester_name'])) ? $tender['ptm_requester_name'] : ""; ?>
-              <div class="form-group">
-                <label class="col-sm-4 control-label text-right text-bold-700">User</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
-                </div>
-              </div>     
+              </div>                
 
               <?php $curval = (isset($tender['ptm_project_name'])) ? $tender['ptm_project_name'] : ""; ?>
               <div class="form-group">
@@ -171,7 +163,7 @@
 
               <?php $curval = (isset($hps)) ? inttomoney($hps) : 0; ?>
               <div class="form-group">
-                <label class="col-sm-4 control-label text-right text-bold-700">Nilai HPS</label>
+                <label class="col-sm-4 control-label text-right text-bold-700">Nilai RAB</label>
                 <div class="col-sm-8">
                   <p class="form-control-static"><?php echo $curval ?></p>
                 </div>
@@ -207,15 +199,7 @@
                 </div>
               </div>
               <?php endif ?>
-
-              <?php $curval = $specialist_name; ?>
-              <div class="form-group">
-                <label class="col-sm-4 control-label text-right text-bold-700">Pelaksana Kontrak</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
-                </div>
-              </div>
-
+              
               <div class="form-group">                
                 <label class="col-sm-4 control-label text-right text-bold-700 mb-2">e-Signature</label>
                 <div class="col-sm-8">

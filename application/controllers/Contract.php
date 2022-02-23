@@ -460,8 +460,12 @@ public function data_monitor_kontrak($act = ""){
   include("contract/monitor/data_monitor_kontrak.php");
 }
 
-public function data_umkm_padi($act = ""){
-  include("contract/monitor/data_umkm_padi.php");
+public function data_padi_umkm($act = ""){
+  include("contract/monitor/data_padi_umkm.php");
+}
+
+public function data_padi_transaksi($act = ""){
+  include("contract/monitor/data_padi_transaksi.php");
 }
 
 public function monitor_addendum(){

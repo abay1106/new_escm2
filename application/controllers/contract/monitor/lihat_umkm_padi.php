@@ -1,6 +1,6 @@
 <?php 
 
-	$view = 'contract/monitor/monitor_umkm_padi';	
+	$view = 'contract/monitor/monitor_padi_umkm';	
 	
 	$data = array();
 
