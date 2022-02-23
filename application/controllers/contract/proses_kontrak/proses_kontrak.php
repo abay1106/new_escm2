@@ -169,6 +169,11 @@
 	}
 
 	$data['item'] = $this->Contract_m->getItem("",$contract_id)->result_array();
+
+	$this->db->select_sum('subtotal_rab');
+	$this->db->where('contract_id', $contract_id);
+	$data['subtotal_rab'] = $this->db->get('vw_smbd_sum_rab')->row_array();
+
      //hlmifzi
 	$data['kode_item'] = $this->Contract_m->getItem("",$contract_id)->row_array();
 	//end

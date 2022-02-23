@@ -2,7 +2,7 @@
 
     $error = false;
 
-    $post = $this->input->post();
+    $post = $this->input->post();      
 
     $id = $post['id'];
 
@@ -10,21 +10,81 @@
 
     $last_activity = (!empty($last_comment)) ? $last_comment['activity'] : 2000;
 
-    $ptm_number = $last_comment['tender_id'];
-
+    $ptm_number = $last_comment['tender_id'];    
+    
     $this->db->select('pr_number');
     $this->db->where('ptm_number', $ptm_number);
     $getNoPR = $this->db->get('vw_prc_monitor')->row_array();
-
+    
+    $contract_id = $last_comment['contract_id'];
+    
     $permintaan = $this->Procpr_m->getPR($getNoPR['pr_number'])->row_array();
+    
+    $contract = $this->Contract_m->getContractNew($ptm_number)->row_array();
+
+    $contract_header = $this->Contract_m->getData($contract_id)->row_array();
+    
+    // post api umkm padi
+    if ($contract_header['padi_umkm'] == "on") {
+          
+        $vendor = $this->Vendor_m->getVendorActive($contract['vendor_id'])->row_array();
+          
+        $ch = curl_init( UMKM_PADI );
+    
+        $payload = json_encode( array( "umkm" => array(
+            "uid" => 'WIKA-' . $vendor['vendor_id'],
+            "nama_umkm" => $vendor['vendor_name'],
+            "alamat" => $vendor['address_street'],
+            "blok_no_kav" => "-",
+            "kode_pos" => $vendor['address_postcode'],
+            "kota" => $vendor['address_city'],
+            "provinsi" => $vendor['addres_prop'],
+            "no_telp" => $vendor['address_phone_no'],
+            "hp" => $vendor['address_phone_no'],
+            "email" => $vendor['login_id'],
+            "kategori_usaha" => "",
+            "jenis_kegiatan_usaha" => "",
+            "npwp" => $vendor['npwp_no'],
+            "nama_bank" => "",
+            "country_bank" => "",
+            "no_rekening" => "",
+            "nama_pemilik_rekening" => "",
+            "longitute" => "",
+            "latitute" => "",
+            "total_project" => "1",
+            "total_revenue" => "",
+            "ontime_rate" => "",
+            "average_rating" => ""
+        ) ) );
+      
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
+          'Content-Type:application/json',
+          'x-api-key:' . API_KEY_PADI,
+          'User-Agent:WIKA_E-SCM_V2'
+        ));
+      
+        $result = curl_exec($ch);
+      
+        $res_padi = json_decode($result, true);    
+        
+        curl_close($ch);
+    }
 
     $perencanaan_id = $permintaan['ppm_id'];
-
-    $contract_id = $last_comment['contract_id'];
 
     $tender = $this->Procrfq_m->getRFQ($last_comment['tender_id'])->row_array();
 
     $input = array();
+
+    if (isset($post['padi_umkm_inp'])) {
+      $input['padi_umkm'] = $post['padi_umkm_inp'];
+    }
+
+    if (isset($post['e_signature_inp'])) {
+      $input['e_signature'] = $post['e_signature_inp'];
+    }
 
     $input_doc = array();
 
@@ -43,8 +103,6 @@
     }
 
     if($last_activity == 2000){
-
-      $contract = $this->Contract_m->getContractNew($ptm_number)->row_array();
 
       $input['ptm_number'] = $ptm_number;
       $input['vendor_id'] = $contract['vendor_id'];
@@ -97,7 +155,7 @@
 
     if(in_array($last_activity, array(2010,2030))){
 
-      $this->form_validation->set_rules("jenis_kontrak_inp", "Jenis Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
+      //$this->form_validation->set_rules("jenis_kontrak_inp", "Jenis Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
       $this->form_validation->set_rules("tgl_mulai_inp", "Tanggal Mulai Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
       $this->form_validation->set_rules("tgl_akhir_inp", "Tanggal Akhir Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
 
@@ -189,7 +247,7 @@
       ->get("prc_tender_main")
       ->row()->dep_code;
 
-      $input['contract_number'] = $this->Contract_m->getUrut("", $contract['contract_type'], $post['jenis_kontrak_inp'], $tipe_pengadaan, $getdept);
+      $input['contract_number'] = $this->Contract_m->getUrut("", $contract['contract_type'], $post['item_kontrak_inp'], $tipe_pengadaan, $getdept);
 
     }
 
@@ -199,7 +257,7 @@
 
       $input['subject_work'] = $post['subject_work_inp'];
       $input['scope_work'] = $post['scope_work_inp'];
-      $input['contract_type_2'] = $post['jenis_kontrak_inp'];
+      //$input['contract_type_2'] = $post['jenis_kontrak_inp'];
       $input['ctr_item_type'] = $post['item_kontrak_inp'];
 
       $mulai = $post['tgl_mulai_inp'];
@@ -263,11 +321,7 @@
           if(isset($post['doc_id_inp'][$key2])){
             $input_doc[$key2]['doc_id'] = $post['doc_id_inp'][$key2];
           }
-
-          if(isset($post['doc_category_inp'][$key2])){
-            $this->form_validation->set_rules("doc_category_inp[$key2]", "lang:code #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $input_doc[$key2]['category']= $post['doc_category_inp'][$key2];
-          }
+          
           if(isset($post['doc_desc_inp'][$key2])){
             $this->form_validation->set_rules("doc_desc_inp[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH_TEXT.']');
             $input_doc[$key2]['description']= $post['doc_desc_inp'][$key2];
@@ -276,10 +330,20 @@
             $this->form_validation->set_rules("doc_attachment_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
             $input_doc[$key2]['filename']= $post['doc_attachment_inp'][$key2];
           }
-
           if(isset($post['doc_vendor_inp'][$key2])){
-            $this->form_validation->set_rules("doc_vendor_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $input_doc[$key2]['publish']= $post['doc_vendor_inp'][$key2];
+            $this->form_validation->set_rules("doc_vendor_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');                        
+            $input_doc[$key2]['publish']= $post['doc_vendor_inp'][$key2];    
+          }
+          if(isset($post['doc_name_input'][$key2])){
+            $this->form_validation->set_rules("doc_name_input[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            $input_doc[$key2]['name_input']= $post['doc_name_input'][$key2];
+          }
+          if(isset($post['doc_req_e_sign_inp'][$key2])){
+            $this->form_validation->set_rules("doc_req_e_sign_inp[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');            
+            $input_doc[$key2]['req_e_sign']= $post['doc_req_e_sign_inp'][$key2];
+          }
+          if(isset($post['doc_name_input'][$key2])){
+            $input_doc[$key2]['upload_date']= date('Y-m-d h:i:s');
           }
 
           if(isset($post['milestone_percent'][$key2])){
@@ -375,6 +439,9 @@
         if(isset($post['max_qty'])){
           $input['max_qty'] = $post['max_qty'][$key];
         }
+        if(isset($post['note'])){
+          $input['note'] = $post['note'][$key];
+        }
         $this->db->where("contract_item_id",$key)->update("ctr_contract_item",$input);
       }
 
@@ -390,9 +457,9 @@
     if ($last_activity == 2901) {
 
     }
-
-    $return = $this->Procedure2_m->ctr_contract_comment_complete($ptm_number,$userdata['complete_name'],$last_activity,$response,$com,$attachment,$last_comment['comment_id'],$contract_id,$userdata['employee_id']);
-
+    
+    $return = $this->Procedure2_m->ctr_contract_comment_complete($ptm_number,$userdata['complete_name'],$last_activity,$response,$com,$attachment,$last_comment['comment_id'],$contract_id,$userdata['employee_id']);    
+    
     if ($return['nextactivity'] == 2902) {
       $check_vol = $this->Procplan_m->getVolumeHist("","",$ptm_number)->result_array();
       if (count($check_vol) > 0) {
@@ -427,7 +494,7 @@
     }
 
     if(!empty($return['nextactivity'])){
-      $comment = $this->Comment_m->insertContract($ptm_number,$return['nextactivity'],"","","",$return['nextposcode'],$return['nextposname'],$contract_id,$ccc_user);
+      $comment = $this->Comment_m->insertContract($ptm_number,$return['nextactivity'],"","","",$return['nextposcode'],$return['nextposname'],$contract_id,$userdata['employee_id']);
     }
 
     if ($return['nextactivity'] == "2901") {
@@ -567,6 +634,7 @@
         $this->db->where("vendor_id", $contract['vendor_id'])->update("vnd_header", array("nasabah_code" => $cust));
         $this->setMessage("Kode nasabah ".$cust);
       }
+
       else if($nasabahStat != NULL){
         
         foreach ($nasabahStat['message'] as $k => $v) {
@@ -576,6 +644,55 @@
         $this->setMessage("Gagal generate kode nasabah vendor, silahkan hubungi admin<p>");
         $error = true;
       }
+
+      // post api umkm padi
+      // if ($post['padi_umkm_inp'] == "on") {
+          
+          $vendor = $this->Vendor_m->getVendorActive($contract['vendor_id'])->row_array();
+          
+          $ch = curl_init( UMKM_PADI );
+      
+          $payload = json_encode( array( "umkm" => array(
+              "uid" => $vendor['vendor_id'],
+              "nama_umkm" => $vendor['vendor_name'],
+              "alamat" => $vendor['address_street'],
+              "blok_no_kav" => "-",
+              "kode_pos" => $vendor['address_postcode'],
+              "kota" => $vendor['address_city'],
+              "provinsi" => $vendor['addres_prop'],
+              "no_telp" => $vendor['address_phone_no'],
+              "hp" => $vendor['address_phone_no'],
+              "email" => $vendor['login_id'],
+              "kategori_usaha" => "",
+              "jenis_kegiatan_usaha" => "",
+              "npwp" => $vendor['npwp_no'],
+              "nama_bank" => "",
+              "country_bank" => "",
+              "no_rekening" => "",
+              "nama_pemilik_rekening" => "",
+              "longitute" => "",
+              "latitute" => "",
+              "total_project" => "1",
+              "total_revenue" => "",
+              "ontime_rate" => "",
+              "average_rating" => ""
+          ) ) );
+        
+          curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+          curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+          curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type:application/json',
+            'x-api-key:' . API_KEY_PADI,
+            'User-Agent:WIKA_E-SCM_V2'
+          ));
+        
+          $result = curl_exec($ch);
+        
+          $res_padi = json_decode($result, true);    
+          
+          curl_close($ch);
+      // }
+
     }
 
     if(!empty($return['message'])){

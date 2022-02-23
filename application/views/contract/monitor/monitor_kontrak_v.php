@@ -288,7 +288,7 @@ function totalPriceFormatter(data) {
           valign: 'middle',
           formatter: operateFormatter,
         },
-        <?php } ?>
+        <?php } ?>        
         {
           field: 'vw_ctr_monitor.ptm_number',
           title: 'Nomor Pengadaan',

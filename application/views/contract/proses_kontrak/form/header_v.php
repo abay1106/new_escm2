@@ -3,8 +3,8 @@
     <div class="card">
 
       <div class="card-header border-bottom pb-2">
-        <h4 class="card-title float-left"><?php echo $kontrak['subject_work']?></h4> 
-        <span class="text-info float-right text-bold-700"><i class="ft-cpu"></i> Lelang Electronik</span>
+        <span class="card-title text-bold-600 mr-2"><?php echo $kontrak['subject_work']?></span> 
+        <span class="text-info text-bold-700"><i class="ft-cpu"></i> Lelang Electronik</span>
       </div>
 
       <div class="card-content">
@@ -31,7 +31,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Nomor Tender</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static">
+                  <p class="form-control-static"> : 
                     <a href="<?php echo site_url('procurement/procurement_tools/monitor_pengadaan/lihat/'.$curval) ?>" target="_blank">
                       <?php echo $curval ?>
                     </a>
@@ -44,7 +44,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Nomor Kontrak</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static">
+                  <p class="form-control-static"> : 
                     <?php echo $curval ?>
                   </p>
                 </div>
@@ -54,7 +54,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Buyer</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
               </div>     
 
@@ -62,49 +62,26 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Divisi</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
-              </div>  
-              
-              <?php $curval = (isset($tender['ptm_requester_name'])) ? $tender['ptm_requester_name'] : ""; ?>
-              <div class="form-group">
-                <label class="col-sm-4 control-label text-right text-bold-700">User</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
-                </div>
-              </div>     
+              </div>                
 
               <?php $curval = (isset($tender['ptm_project_name'])) ? $tender['ptm_project_name'] : ""; ?>
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Proyek</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
               </div>    
               
-              <?php $curval = (isset($kontrak['contract_type_2'])) ? $kontrak["contract_type_2"] : set_value("jenis_kontrak_inp"); ?>
+              <?php $curval = (isset($kontrak['ctr_item_type'])) ? $kontrak["ctr_item_type"] : set_value("item_kontrak_inp"); ?>
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Jenis Kontrak <span class="text-danger text-bold-700">*</span></label>
                 <div class="col-sm-6">
-                <select class="form-control" required name="jenis_kontrak_inp" value="<?php echo $curval ?>">
-                  <option value="">Pilih Jenis Kontrak</option>
-                  <?php foreach($contract_type as $key => $val){
-                    $selected = ($val == $curval) ? "selected" : ""; 
-                    ?>
-                    <option <?php echo $selected ?> value="<?php echo $val ?>"><?php echo $val ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>                                                                        
-
-              <?php $curval = (isset($kontrak['ctr_item_type'])) ? $kontrak["ctr_item_type"] : set_value("item_kontrak_inp"); ?>
-              <div class="form-group">
-                <label class="col-sm-4 control-label mt-2 text-right text-bold-700">Item Kontrak <span class="text-danger text-bold-700">*</span></label>
-                <div class="col-sm-6 mt-2">
-                <select class="form-control" required name="item_kontrak_inp" value="<?php echo $curval ?>">
-                  <option value="">Pilih Item Kontrak</option>
-                  <?php foreach($contract_item as $key => $val){
-                    $selected = ($val == $curval) ? "selected" : ""; 
+                  <select class="form-control" required name="item_kontrak_inp" value="<?php echo $curval ?>">
+                    <option value="">Pilih Jenis Kontrak</option>
+                    <?php foreach($contract_item as $key => $val){
+                      $selected = ($val == $curval) ? "selected" : ""; 
                     ?>
                     <option <?php echo $selected ?> value="<?php echo $val ?>"><?php echo $val ?></option>
                     <?php } ?>
@@ -116,10 +93,10 @@
                 <label class="col-sm-4 control-label text-right mt-2 text-bold-700">Download Template</label>
                 <div class="col-sm-8">
                   <p class="form-control-static mt-2">
-                    <span class="badge badge-info mr-2">SPK</span>
-                    <span class="badge badge-info mr-2">SPB</span>
-                    <span class="badge badge-info mr-2">PPJ</span>
-                    <span class="badge badge-info mr-2">PPB</span>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">SPK</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">SPB</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">PPJ</a>
+                    <a href="<?php echo base_url('user_guide/template_kontrak.zip');?>" class="btn btn-info btn-sm">PPB</a>
                   </p>
                 </div>
               </div>     
@@ -149,7 +126,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Vendor/Penyedia</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
               </div>
 
@@ -157,7 +134,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Tipe Kontrak</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
               </div>
 
@@ -165,17 +142,26 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label text-right text-bold-700">Mata Uang</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
               </div>
 
               <?php $curval = (isset($hps)) ? inttomoney($hps) : 0; ?>
               <div class="form-group">
-                <label class="col-sm-4 control-label text-right text-bold-700">Nilai HPS</label>
+                <label class="col-sm-4 control-label text-right text-bold-700">Nilai RAB</label>
                 <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
+                  <p class="form-control-static"> : <?php echo $curval ?></p>
                 </div>
               </div> 
+
+              <div class="form-group">
+                  <label class="col-sm-4 control-label mb-2 text-right">Kategori Pekerjaan</label>
+                  <div class="col-sm-6 mb-2">
+                      <select class="form-control" name="kategori_pekerjaan_inp">
+                        <option value="">Pilih Kategori Pekerjaan</option>                        
+                      </select>
+                  </div>
+                </div>
 
               <?php $curval = (isset($kontrak['start_date']) && !empty($kontrak['start_date'])) ?  date("Y-m-d",strtotime($kontrak["start_date"])) : set_value("tgl_mulai_inp"); ?>
               <div class="form-group">
@@ -207,20 +193,12 @@
                 </div>
               </div>
               <?php endif ?>
-
-              <?php $curval = $specialist_name; ?>
-              <div class="form-group">
-                <label class="col-sm-4 control-label text-right text-bold-700">Pelaksana Kontrak</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static"><?php echo $curval ?></p>
-                </div>
-              </div>
-
+              
               <div class="form-group">                
                 <label class="col-sm-4 control-label text-right text-bold-700 mb-2">e-Signature</label>
                 <div class="col-sm-8">
                   <div class="custom-switch custom-switch-info mb-2">
-                      <input type="checkbox" class="custom-control-input" id="color-switch-1" checked>
+                      <input type="checkbox" name="e_signature_inp" class="custom-control-input" id="color-switch-1">
                       <label class="custom-control-label" for="color-switch-1"></label>
                   </div>  
                 </div>
@@ -230,7 +208,7 @@
                 <label class="col-sm-4 control-label text-right text-bold-700">Kirim Ke PaDi UMKM</label>
                 <div class="col-sm-8">
                   <div class="custom-switch custom-switch-info">
-                      <input type="checkbox" class="custom-control-input" id="color-switch-2" checked>
+                      <input type="checkbox" name="padi_umkm_inp" class="custom-control-input" id="color-switch-2">
                       <label class="custom-control-label" for="color-switch-2"></label>
                   </div>  
                 </div>

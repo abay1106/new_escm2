@@ -88,8 +88,9 @@ $data['nilai_kontrak'] = $head;
                              ->get('vw_prc_quotation_vendor_sum a')
                              ->row_array();
 
+$last_comment = $this->Comment_m->getContract("",$contract_id,"")->row_array();
 
-$activity_id = (!empty($kontrak['status'])) ? $kontrak['status'] : 2000;
+$activity_id = (!empty($last_comment['activity'])) ? $last_comment['activity'] : 2000;
 
 $activity = $this->Procedure2_m->getActivity($activity_id)->row_array();
 
@@ -126,6 +127,10 @@ $hps = $this->Procrfq_m->getHPSRFQ($ptm_number)->row_array();
 $data['hps'] = ($totalhps == "") ? $hps['hps_total'] : $totalhps;
 
 $data['item'] = $this->Contract_m->getItem("",$contract_id)->result_array();
+
+$this->db->select_sum('subtotal_rab');
+$this->db->where('contract_id', $contract_id);
+$data['subtotal_rab'] = $this->db->get('vw_smbd_sum_rab')->row_array();
 
 $data['milestone'] = $this->Contract_m->getMilestone("",$contract_id)->result_array();
 
