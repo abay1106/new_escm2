@@ -1,61 +1,92 @@
+<style>
+	.btn-action-edit {
+		border-radius: 8px 0 0 8px;
+		width: 100px;
+	}
+
+	.btn-action-delete {
+		border-radius: 0 8px 8px 0;
+		background-color: rgb(36 36 36 / 22%);
+		position: relative;
+		left: -4px;
+	}
+
+	.btn-tambah {
+		border-radius: 8px;
+	}
+
+	.save-comment {
+		position: absolute;
+		right: 20px;
+	}
+
+	.table-catatan td {
+		padding: 1rem !important;
+	}
+
+	.table-catatan th {
+		padding: 1rem !important;
+	}
+</style>
+
 <div class="wrapper wrapper-content animated fadeInRight">
 
-	<?php 
-		$bg_color_1 = '';
-		$bg_color_2 = '';
-		$bg_color_3 = '';
-		$bg_color_4 = '';
-		$bg_color_5 = '';
-		$color_1 = '';
-		$color_2 = '';
-		$color_3 = '';
-		$color_4 = '';
-		$color_5 = '';
-		$icon_1 = 'ft-chevrons-right ';
-		$icon_2 = 'ft-chevrons-right ';
-		$icon_3 = 'ft-chevrons-right ';
-		$icon_4 = 'ft-chevrons-right ';
-		$icon_5 = '';
-		$status_1 = 'Menunggu proses';
-		$status_2 = 'Menunggu proses';
-		$status_3 = 'Menunggu proses';
-		$status_4 = 'Menunggu proses';
-		$status_5 = 'Menunggu proses';
-		
-		if ($activity_id > 2020 && $activity_id < 2904) {
-			$bg_color_1 = 'card-inverse bg-info';
-			$color_1 = 'card-text';
-			$icon_1 = 'ft-check-circle ';
-			$status_1 = $end_date_1["end_date"];
-		}
-		
-		if ($activity_id > 2029 && $activity_id < 2904) {
-			$bg_color_2 = 'card-inverse bg-info';
-			$color_2 = 'card-text';
-			$icon_2 = 'ft-check-circle ';
-			$status_2 = $end_date_2["end_date"];
-		}
+	<?php
+	$bg_color_1 = '';
+	$bg_color_2 = '';
+	$bg_color_3 = '';
+	$bg_color_4 = '';
+	$bg_color_5 = '';
+	$color_1 = '';
+	$color_2 = '';
+	$color_3 = '';
+	$color_4 = '';
+	$color_5 = '';
+	$icon_1 = 'ft-chevrons-right ';
+	$icon_2 = 'ft-chevrons-right ';
+	$icon_3 = 'ft-chevrons-right ';
+	$icon_4 = 'ft-chevrons-right ';
+	$icon_5 = '';
+	$status_1 = 'Menunggu proses';
+	$status_2 = 'Menunggu proses';
+	$status_3 = 'Menunggu proses';
+	$status_4 = 'Menunggu proses';
+	$status_5 = 'Menunggu proses';
 
-		if ($activity_id > 2900 && $activity_id < 2904) {
-			$bg_color_3 = 'card-inverse bg-info';
-			$color_3 = 'card-text';
-			$icon_3 = 'ft-check-circle ';
-			$status_3 = $end_date_3["end_date"];
-		}
+	if ($activity_id > 2020 && $activity_id < 2904) {
+		$bg_color_1 = 'card-inverse bg-info';
+		$color_1 = 'card-text';
+		$icon_1 = 'ft-check-circle ';
+		$status_1 = $end_date_1["end_date"];
+	}
 
-		if ($activity_id > 2902 && $activity_id < 2904) {
-			$bg_color_4 = 'card-inverse bg-info';
-			$color_4 = 'card-text';
-			$icon_4 = 'ft-check-circle ';
-			$status_4 = $end_date_4["end_date"];
-		}
+	if ($activity_id > 2029 && $activity_id < 2904) {
+		$bg_color_2 = 'card-inverse bg-info';
+		$color_2 = 'card-text';
+		$icon_2 = 'ft-check-circle ';
+		$status_2 = $end_date_2["end_date"];
+	}
 
-		if ($activity_id == 2903) {
-			$bg_color_5 = 'card-inverse bg-info';
-			$color_5 = 'card-text';
-			$icon_5 = 'ft-check-circle ';
-			$status_5 = $end_date_5["end_date"];
-		}
+	if ($activity_id > 2900 && $activity_id < 2904) {
+		$bg_color_3 = 'card-inverse bg-info';
+		$color_3 = 'card-text';
+		$icon_3 = 'ft-check-circle ';
+		$status_3 = $end_date_3["end_date"];
+	}
+
+	if ($activity_id > 2902 && $activity_id < 2904) {
+		$bg_color_4 = 'card-inverse bg-info';
+		$color_4 = 'card-text';
+		$icon_4 = 'ft-check-circle ';
+		$status_4 = $end_date_4["end_date"];
+	}
+
+	if ($activity_id == 2903) {
+		$bg_color_5 = 'card-inverse bg-info';
+		$color_5 = 'card-text';
+		$icon_5 = 'ft-check-circle ';
+		$status_5 = $end_date_5["end_date"];
+	}
 	?>
 
 	<div class="row">
@@ -146,11 +177,11 @@
 		</div>
 	</div>
 
-	<form class="form-horizontal">
+	<div class="form-horizontal">
 
 		<input type="hidden" name="id" value="<?php echo $id ?>">
 
-		<?php 
+		<?php
 
 		$loaded = array();
 
@@ -165,58 +196,179 @@
 		?>
 
 		<div class="row" id="form-comment">
-			<div class="col-12">        
+			<div class="col-12">
 				<div class="card">
 					<div class="card-header border-bottom pb-2">
-						<h4 class="card-title float-left">Daftar Komentar</h4>
-						<a href="#" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#komentarForm"><i class="ft ft-plus"></i>Tambah</a>
+						<h4 class="card-title float-left">Catatan</h4>
+						<button onclick="isShowAdd()" class="btn btn-sm btn-info btn-tambah ml-2">
+							<i class="ft ft-plus"></i>Tambah
+						</button>
+						<div class="float-right">
+							<i class="fa fa-thumbs-up fa-lg mr-1" style="color: #2aace3"></i> <b><?= $thumbs_up ?></b>
+							<i class="fa fa-thumbs-down fa-lg ml-1 mr-1" style="color: #ff7376"></i> <b><?= $thumbs_down ?></b>
+							<i class="fa fa-comment fa-lg ml-1 mr-1" style="color: #25353c"></i> <b><?= $com_num ?></b>
+						</div>
 					</div>
 
 					<div class="card-content">
-						<div class="card-body">  
-							<div class="row">  
+						<div class="card-body">
+							<form action="<?php echo site_url($controller_name . '/submit_comment_contract#form-comment'); ?>" method="POST" id="comment">
+							</form>
 
-								<div class="col-md-12">        
-									<?php if ($com_num > 0) { ?>
-										<?php foreach ($komentar as $value) { ?>
-											<ul class="list-group">
-												<li class="list-group-item">
-													<span class="badge badge-info mr-2"><?php echo strtoupper($value['cad_user_name'][0]); ?></span> <?php echo $value['cad_user_name']; ?> 
-													<span class="ml-2">| <?php echo date("D, d/m/Y - H:i:s", strtotime($value['cad_created_date'])); ?></span>												
+							<div id="showAdd" style="display: none;">
+								<form action="<?php echo site_url($controller_name . '/submit_comment_contract#form-comment'); ?>" method="POST">
+									<div class="row">
+										<?php $ptm_number = (isset($kontrak['ptm_number'])) ? $kontrak['ptm_number'] : ""; ?>
+										<?php $contract_id = (isset($kontrak['contract_id'])) ? $kontrak['contract_id'] : ""; ?>
+										<div class="col-md-2">
+											<label>Objek Penilaian</label>
+										</div>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="cad_obj_nilai" placeholder="Objek Penilaian" required>
+										</div>
 
-													<?php if ($pos["job_title"] == "PIC USER") { ?>
-														<a href="<?php echo site_url('contract/submit_delete_comment/' . $value['id']); ?>" onclick="return confirm('Apakah Anda yakin akan hapus data ini?')" class="text-danger"><i class="ft-x-circle"></i></a>													
-													<?php } ?>
+										<div class="col-md-2">
+											<label for="lampiran">No. Telpon</label>
+										</div>
+										<div class="col-md-4">
+											<input type="text" class="form-control" id="cad_no_telp" name="cad_no_telp" placeholder="Nomor Telpon" required>
+										</div>
+									</div>
+									<br>
 
-													<p class="m-2 ml-4"><?php echo $value['cad_comment']; ?></p>
-												</li>
-											</ul>
+									<div class="row form-group">
+										<?php $curval = (isset($v['ppd_file_name'])) ? $v['ppd_file_name'] :  set_value("doc_attachment_inp[]"); ?>
+										<label class="col-sm-2 control-label"><?php echo lang('attachment') ?></label>
+										<div class="col-md-4">
+											<div class="input-group align-items-center">
+												<span class="input-group-btn">
+													<button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo $dir . '/comment' ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-sm btn-info upload">
+														<i class="fa fa-cloud-upload"></i> Upload
+													</button>
+													<button type="button" data-url="<?php echo site_url('log/download_attachment/procurement/' . $curval) ?>" class="btn btn-sm btn-info preview_upload" id="preview_file_<?php echo $k ?>">
+														<i class="fa fa-share"></i> Preview
+													</button>
+												</span>
+												<input readonly type="text" class="form-control" id="doc_attachment_inp_<?php echo $k ?>" name="cad_lampiran" value="<?php echo $curval ?>">
+												<span class="input-group-btn">
+													<button type="button" data-id="doc_attachment_inp_<?php echo $k ?>" data-folder="<?php echo $dir ?>" data-preview="preview_file_<?php echo $k ?>" class="btn btn-sm btn-danger removefile">
+														<i class="fa fa-trash"></i>
+													</button>
+												</span>
+											</div>
+											<div class="col-sm-0" style="font-size: 11px">
+												<i>Max file 5 MB
+													<br>
+													Tipe file : doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, jpeg, PNG, Zip, rar, tgz, 7zip, tar
+												</i>
+											</div>
+										</div>
+										<label class="col-md-2">Komentar</label>
+										<div class="col-md-4">
+											<input type="hidden" name="cad_contract_id" value="<?php echo $contract_id; ?>">
+											<input type="hidden" name="cad_ptm_number" value="<?php echo $ptm_number; ?>">
+											<input type="hidden" name="cad_ptm_number" value="<?php echo $ptm_number; ?>">
+											<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>
+										</div>
+									</div>
+									<div class="row form-group mr-2 justify-content-end">
+										<input type="hiden" style="display: none;" value="" id="cad_respon" name="cad_respon">
+										<i onclick="respon(1)" class="fa fa-thumbs-up fa-3x mr-1" style="color: #2aace3"></i>
+										<i onclick="respon(0)" class="fa fa-thumbs-down fa-3x ml-1" style="color: #ff7376"></i>
+									</div>
+									<span class="wrapper-action save-comment">
+										<input type="submit" class="btn btn-sm btn-info btn-action-edit" onclick="return confirm('Apakah Anda yakin simpan komentar ini?')" value="Simpan"></input>
+										<button type="reset" onclick=" return resetForm('comment')" class="btn btn-sm btn-action-delete">
+											<i class="fa fa-trash fa-lg"></i>
+										</button>
+									</span>
+								</form>
+							</div>
+						</div>
+						<br>
+						<div class="overflow-auto px-2">
+							<table class="table table-striped table-catatan text-center">
+								<thead>
+									<tr>
+										<th scope="col">No</th>
+										<th scope="col">Respon</th>
+										<th scope="col">Objek Penilaian</th>
+										<th scope="col">Lampiran</th>
+										<th scope="col">Nama</th>
+										<th scope="col">Jabatan</th>
+										<th scope="col">Devisi</th>
+										<th scope="col">No.Telp</th>
+										<th scope="col">Tanggal & Waktu</th>
+										<th scope="col">Komentar</th>
+										<th scope="col">Aksi</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									if ($com_num > 0) {
+										foreach ($komentar as $key => $val) {
+									?>
+											<tr>
+												<td><?php echo $key + 1 ?></td>
+												<td>
+
+													<?php
+													$thumbs_up = '<i class="fa fa-thumbs-up fa-2x mr-1" style="color: #2aace3"></i>';
+													$thumbs_down = '<i class="fa fa-thumbs-down fa-2x ml-1 mr-1" style="color: #ff7376"></i>';
+													echo $val['cad_respon'] == 't' ?
+														$thumbs_up :
+														$thumbs_down
+													?>
+												</td>
+												<td><?php echo $val['cad_obj_nilai'] ?></td>
+												<td>
+													<a href="<?php echo site_url('log/download_attachment/contract/comment/' . $val['cad_lampiran']) ?>"><?= $val['cad_lampiran'] ?></a>
+												</td>
+												<td><?php echo $val['cad_user_name'] ?></td>
+												<td><?php echo $val['cad_position'] ?></td>
+												<td><?php echo $val['cad_divisi'] ?></td>
+												<td><?php echo $val['cad_no_telp'] ?></td>
+												<td><?php echo $val['cad_created_date'] ?></td>
+												<td>
+													<textarea name="cad_comment">
+													<?php echo $val['cad_comment'] ?>
+												</textarea>
+												</td>
+												<td>
+													<span class="wrapper-action">
+														<button class="btn btn-sm btn-info btn-action-edit">Edit</button>
+														<button class="btn btn-sm btn-action-delete">
+															<i class="fa fa-trash"></i>
+														</button>
+													</span>
+												</td>
+											</tr>
+
 										<?php } ?>
 									<?php } else { ?>
 										<div class="alert bg-light-secondary text-center text-bold-700" role="alert">Belum ada komentar.</div>
 									<?php } ?>
-								</div>								
-
-							</div>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<?php 
+		<?php
 		$i = 0;
-		include(VIEWPATH."/comment_view_v.php") ?>
+		include(VIEWPATH . "/comment_view_v.php") ?>
 
-		<div class="card">				
+		<div class="card">
 			<div class="card-content">
-				<div class="card-body">			            
-					<?php echo buttonback('contract/monitor/monitor_kontrak',lang('back')) ?>
+				<div class="card-body">
+					<?php echo buttonback('contract/monitor/monitor_kontrak', lang('back')) ?>
 				</div>
 			</div>
 		</div>
 
-	</form>
+	</div>
 
 	<!-- Modal-add-komentar -->
 	<div class="modal fade text-left" id="komentarForm" tabindex="-1" role="dialog" aria-hidden="true">
@@ -229,22 +381,22 @@
 					</button>
 				</div>
 
-				<form action="<?php echo site_url($controller_name . '/submit_comment_contract#form-comment');?>" method="POST">
+				<form action="<?php echo site_url($controller_name . '/submit_comment_contract#form-comment'); ?>" method="POST">
 					<div class="modal-body">
 
 						<?php $ptm_number = (isset($kontrak['ptm_number'])) ? $kontrak['ptm_number'] : ""; ?>
 						<?php $contract_id = (isset($kontrak['contract_id'])) ? $kontrak['contract_id'] : ""; ?>
 						<label>Isi Komentar</label>
 						<div class="form-group">
-							<input type="hidden" name="cad_contract_id" value="<?php echo $contract_id; ?>" >
-							<input type="hidden" name="cad_ptm_number" value="<?php echo $ptm_number; ?>" >
-							<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>							
+							<input type="hidden" name="cad_contract_id" value="<?php echo $contract_id; ?>">
+							<input type="hidden" name="cad_ptm_number" value="<?php echo $ptm_number; ?>">
+							<textarea rows="4" class="form-control" name="cad_comment" placeholder="Isi komentar" required></textarea>
 						</div>
 
 					</div>
 					<div class="modal-footer">
 						<input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Tutup">
-						<input type="submit" onclick="return confirm('Apakah Anda yakin simpan komentar ini?')" class="btn btn-info" value="Simpan" >
+						<input type="submit" onclick="return confirm('Apakah Anda yakin simpan komentar ini?')" class="btn btn-info" value="Simpan">
 					</div>
 				</form>
 			</div>
@@ -252,3 +404,24 @@
 	</div>
 
 </div>
+
+<script>
+	function resetForm(params) {
+		params.preventDefault();
+		document.getElementById(params).reset();
+	}
+
+	function respon(params) {
+		var responEl = document.querySelector('input[name="cad_respon"]');
+		responEl.value = params;
+	}
+
+	function isShowAdd() {
+		var div = document.getElementById("showAdd");
+		if (div.style.display !== "none") {
+			div.style.display = "none";
+		} else {
+			div.style.display = "block";
+		}
+	}
+</script>
