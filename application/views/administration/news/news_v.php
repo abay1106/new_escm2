@@ -143,7 +143,7 @@
 						<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
 					</button>
 				</div>
-				<form name="formlkpp" action="<?php echo base_url('_api/lkpp'); ?>" method="POST">
+				<form name="formlkpp" action="<?php echo base_url('administration/submit_news_lkpp'); ?>" method="POST">
 					<div class="modal-body">
 						<label>Link Gambar</label>
 						<div class="form-group position-relative has-icon-left">

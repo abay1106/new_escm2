@@ -5,14 +5,12 @@ $post = $this->input->post();
 $userdata = $this->Administration_m->getLogin();
 
 $data = array(
-	'kode_perkiraan' => $userdata['kode_perkiraan'],
-	'nama_perkiraan' => $userdata['nama_perkiraan'],
-	'pusat' => $post['pusat'],
-	'divisi' => $post['divisi'],
-	'proyek' => $post['proyek'],
-	//'allocation_cc' => $post['allocation_inp'],
-	//'dept_cc' => $post['dept_inp'],
-	//'year_cc' => $post['year_inp'],
+	'kode_perkiraan' => $post['kode_perkiraan'],
+	'nama_perkiraan' => $post['nama_perkiraan'],
+	'pusat' => $post['pusat'] == 't' ? 't' : 'f',
+	'devisi' => $post['devisi'] == 't' ? 't' : 'f',
+	'proyek' => $post['proyek'] == 't' ? 't' : 'f',
+	'date_created' => date('Y-m-d h:i:s')
 	);
 
 $insert = $this->db->insert('adm_coa_new', $data);

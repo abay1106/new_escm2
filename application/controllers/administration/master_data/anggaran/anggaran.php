@@ -1,4 +1,4 @@
-<?php 
+<?php
 
   $view = 'administration/master_data/anggaran/anggaran_v';
 

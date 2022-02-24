@@ -460,6 +460,10 @@ class Administration extends Telescoope_Controller
               $this->delete_news($param3);
               break;
 
+            case 'add':
+              $this->submit_news_lkpp();
+              break;
+
             default:
               $this->news();
               break;
@@ -1590,6 +1594,11 @@ class Administration extends Telescoope_Controller
   public function delete_news($id)
   {
     include("administration/document/delete_news.php");
+  }
+
+  public function submit_news_lkpp()
+  {
+    include("administration/document/submit_news_lkpp.php");
   }
 
   public function rks()
