@@ -159,6 +159,17 @@ $data['penilaian']= $this->db->get('adm_question_kpi_vendor')->result_array();
 $this->db->where('cad_contract_id', $kontrak['contract_id']);
 $komentar = $this->db->get('ctr_comment_all_div');
 
+// count thumbs
+$thumbs_up = $this->db->where('cad_contract_id', $kontrak['contract_id']);
+$thumbs_up->where('cad_respon', 't');
+$thumbs_up = $this->db->get('ctr_comment_all_div');
+$data['thumbs_up'] = $thumbs_up->num_rows();
+
+$thumbs_down = $this->db->where('cad_contract_id', $kontrak['contract_id']);
+$thumbs_down->where('cad_respon', 'f');
+$thumbs_down = $this->db->get('ctr_comment_all_div');
+$data['thumbs_down'] = $thumbs_down->num_rows();
+
 $data['komentar'] = $komentar->result_array();
 $data['com_num'] = $komentar->num_rows();
 

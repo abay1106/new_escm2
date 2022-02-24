@@ -17,6 +17,11 @@
 	$input['cad_position'] =  $userdata['pos_name'];
 	$input['cad_user_name'] =  $userdata['complete_name'];
 	$input['cad_created_date'] = date("Y-m-d H:i:s");
+	$input['cad_obj_nilai'] = $post['cad_obj_nilai'];
+	$input['cad_lampiran'] = $post['cad_lampiran'];
+	$input['cad_respon'] = $post['cad_respon'];
+	$input['cad_no_telp'] = $post['cad_no_telp'];
+	$input['cad_divisi'] = $userdata['dept_name'];
 
 	$act = $this->db->insert("ctr_comment_all_div", $input);	
 
@@ -32,7 +37,7 @@
 		$this->db->trans_commit();
 		$this->setMessage("Berhasil mengubah data");
 		$this->renderMessage("success");		
-		redirect(site_url("contract/monitor/monitor_kontrak/lihat/" . $post['cad_contract_id']));
+		redirect(site_url("contract/monitor/monitor_kontrak/lihat/" . $post['cad_contract_id'] . "#form-comment"));
 	}
 
 ?>
