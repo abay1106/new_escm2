@@ -14,4 +14,4 @@ if($insert){
 	$this->setMessage("Berhasil menambah data");
 }
 
-redirect(site_url('administration/master_data/rks/tambah'));
+redirect(site_url('administration/master_data/rks'));

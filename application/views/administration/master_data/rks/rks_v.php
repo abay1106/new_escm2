@@ -32,7 +32,7 @@
 					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
 				</button>
 			</div>
-			<form action="<?php echo base_url('administration/master_data/rks/submit_add_rks_header'); ?>" method="POST">
+			<form action="<?= base_url('administration/submit_add_rks_header'); ?>" method="POST">
 				<div class="modal-body">
 
 					<label class="text-bold-700">Header Main <span class="text-danger text-bold-700">(*)</span></label>
@@ -63,7 +63,7 @@
 					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
 				</button>
 			</div>
-			<form action="<?php echo base_url('administration/master_data/rks/submit_add_rks_header_sub'); ?>" method="POST">
+			<form action="<?= base_url('administration/submit_add_rks_header_sub'); ?>" method="POST">
 				<div class="modal-body">
 
 					<label class="text-bold-700">Header Main <span class="text-danger text-bold-700">(*)</span></label>
@@ -104,7 +104,7 @@
 					<span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
 				</button>
 			</div>
-			<form action="<?php echo base_url('administration/master_data/rks/submit_add_rks_description'); ?>" method="POST">
+			<form action="<?php echo base_url('administration/submit_add_rks_description'); ?>" method="POST">
 				<div class="modal-body">
 
                     <label class="text-bold-700">Header Main <span class="text-danger text-bold-700">(*)</span></label>
