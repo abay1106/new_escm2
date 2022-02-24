@@ -12,34 +12,34 @@
 				?>
          <div class="form-group">
             <label class="control-label">Kode Anggaran</label>
-            <input type="text" class="form-control" id="kode_perkiraan" maxlength="12" name="kode_perkiraan" value="<?= $kode_perkiraan ?>">
+            <input type="text" class="form-control" maxlength="12" name="kode_perkiraan" value="<?= $kode_perkiraan ?>">
           </div>
 
           <div class="form-group">
             <label class="control-label">Nama Anggaran</label>
-            <input type="text" class="form-control" id="nama_perkiraan" maxlength="255" name="nama_perkiraan" value="<?= $nama_perkiraan ?>">
+            <input type="text" class="form-control" maxlength="255" name="nama_perkiraan" value="<?= $nama_perkiraan ?>">
           </div>
 
           <div class="form-group">
             <label class="checkbox-inline col-sm-3">
 							<?php if($pusat === 't') { ?>
-	              <input type="checkbox" class="form-check-input" id="pusat" value="<?= $pusat ?>" checked> Pusat
+	              <input type="checkbox" class="form-check-input" name="pusat" value="<?= $pusat ?>" checked> Pusat
 							<?php } else { ?>
-								<input type="checkbox" class="form-check-input" id="pusat" value="<?= $pusat ?>"> Pusat
+								<input type="checkbox" class="form-check-input" name="pusat" value="<?= $pusat ?>"> Pusat
 							<?php } ?>
             </label>
             <label class="checkbox-inline col-sm-3">
 							<?php if($devisi === 't') { ?>
-	              <input type="checkbox" class="form-check-input" id="divisi" value="<?= $devisi ?>" checked> Divisi
+	              <input type="checkbox" class="form-check-input" name="divisi" value="<?= $devisi ?>" checked> Divisi
 							<?php } else { ?>
-								<input type="checkbox" class="form-check-input" id="divisi" value="<?= $devisi ?>"> Divisi
+								<input type="checkbox" class="form-check-input" name="divisi" value="<?= $devisi ?>"> Divisi
 							<?php } ?>
             </label>
             <label class="checkbox-inline col-sm-3">
 							<?php if($proyek === 't') { ?>
-	              <input type="checkbox" class="form-check-input" id="proyek" value="<?= $proyek ?>" checked> Proyek
+	              <input type="checkbox" class="form-check-input" name="proyek" value="<?= $proyek ?>" checked> Proyek
 							<?php } else { ?>
-								<input type="checkbox" class="form-check-input" id="proyek" value="<?= $proyek ?>"> Proyek
+								<input type="checkbox" class="form-check-input" name="proyek" value="<?= $proyek ?>"> Proyek
 							<?php } ?>
             </label>
           </div>

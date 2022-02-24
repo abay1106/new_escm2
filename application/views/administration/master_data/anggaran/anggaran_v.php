@@ -52,17 +52,39 @@
     ].join('');
   }
 
-  function conditionCheck(row) {
-    if (row['pusat'] = 't') {
+  function valuePusat(value, row, index) {
+    if (row['pusat'] == 't') {
       return[
         '<i class="ft-check mr-1"></i>'
       ].join('');
-    } else if (row['proyek'] = 't') {
-      '<i class="ft-check mr-1"></i>'
-    } else if (row['devisi'] = 't') {
-      '<i class="ft-check mr-1"></i>'
     } else {
-      '<i class="ft-x mr-1"></i>'
+      return[
+        '<i class="ft-x mr-1"></i>'
+      ].join('');
+    }
+  }
+
+  function valueProyek(value, row, index) {
+    if (row['proyek'] == 't') {
+      return[
+        '<i class="ft-check mr-1"></i>'
+      ].join('');
+    } else {
+      return[
+        '<i class="ft-x mr-1"></i>'
+      ].join('');
+    }
+  }
+
+  function valueDevisi(value, row, index) {
+    if (row['devisi'] == 't') {
+      return[
+        '<i class="ft-check mr-1"></i>'
+      ].join('');
+    } else {
+      return[
+        '<i class="ft-x mr-1"></i>'
+      ].join('');
     }
   }
 
@@ -115,7 +137,7 @@
           searchable:true,
           align: 'center',
           valign: 'middle',
-          formatter: conditionCheck
+          formatter: valuePusat,
         },
         {
           field: 'devisi',
@@ -125,7 +147,7 @@
           searchable:true,
           align: 'left',
           valign: 'middle',
-          formatter: conditionCheck
+          formatter: valueDevisi
         },
         {
           field: 'proyek',
@@ -135,7 +157,7 @@
           searchable:true,
           align: 'left',
           valign: 'middle',
-          formatter: conditionCheck
+          formatter: valueProyek
         }
         /*
         {

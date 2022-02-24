@@ -1,4 +1,6 @@
 <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css" rel="stylesheet"> -->
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.semanticui.min.css" rel="stylesheet">
 <style>
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,
@@ -288,7 +290,7 @@ function totalPriceFormatter(data) {
           valign: 'middle',
           formatter: operateFormatter,
         },
-        <?php } ?>        
+        <?php } ?>
         {
           field: 'vw_ctr_monitor.ptm_number',
           title: 'Nomor Pengadaan',
