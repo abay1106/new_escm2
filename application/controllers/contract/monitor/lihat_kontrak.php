@@ -128,10 +128,6 @@ $data['hps'] = ($totalhps == "") ? $hps['hps_total'] : $totalhps;
 
 $data['item'] = $this->Contract_m->getItem("",$contract_id)->result_array();
 
-$this->db->select_sum('subtotal_rab');
-$this->db->where('contract_id', $contract_id);
-$data['subtotal_rab'] = $this->db->get('vw_smbd_sum_rab')->row_array();
-
 $data['milestone'] = $this->Contract_m->getMilestone("",$contract_id)->result_array();
 
 $data['document'] = $this->Contract_m->getDoc("",$contract_id)->result_array();

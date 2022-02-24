@@ -97,6 +97,14 @@ public function submit_comment_contract(){
   include("contract/monitor/submit_comment_contract.php");
 }
 
+public function edit_comment_contract(){
+  include("contract/monitor/edit_comment_contract.php");
+}
+
+public function get_edit_comment_contract(){
+  include("contract/monitor/get_edit_comment_contract.php");
+}
+
 public function submit_delete_comment($id = ""){
   include("contract/monitor/submit_delete_comment.php");
 }
