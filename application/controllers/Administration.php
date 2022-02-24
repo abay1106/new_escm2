@@ -479,6 +479,18 @@ class Administration extends Telescoope_Controller
               $this->add_rks();
               break;
 
+            case 'tambah':
+              $this->submit_add_rks_header();
+              break;
+
+            case 'tambah':
+              $this->submit_add_rks_header_sub();
+              break;
+
+            case 'tambah':
+              $this->submit_add_rks_description();
+              break;
+
             case 'ubah':
               $this->edit_rks($param3);
               break;
@@ -1616,9 +1628,19 @@ class Administration extends Telescoope_Controller
     include("administration/master_data/rks/add_rks.php");
   }
 
-  public function submit_add_rks()
+  public function submit_add_rks_header()
   {
-    include("administration/master_data/rks/submit_add_rks.php");
+    include("administration/master_data/rks/submit_add_rks_header.php");
+  }
+
+  public function submit_add_rks_header_sub()
+  {
+    include("administration/master_data/rks/submit_add_rks_header_sub.php");
+  }
+
+  public function submit_add_rks_description()
+  {
+    include("administration/master_data/rks/submit_add_rks_description.php");
   }
 
   public function edit_rks($id)
