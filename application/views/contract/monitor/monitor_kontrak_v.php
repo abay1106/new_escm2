@@ -14,6 +14,37 @@ table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
 bottom: .5em;
 }
+
+.table-bordered, .table-bordered td, .table-bordered th {
+  border: 1px solid #e0e0e000;
+}
+
+table.dataTable thead th[class*="sorting"]:not(.sorting_disabled):before {
+  display: none;
+}
+
+table.dataTable.table thead th.sorting:after, table.dataTable.table thead td.sorting:after {
+  display: none;
+}
+
+.table .thead-light th {
+  background-color: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  font-size: medium;
+}
+
+table.dataTable.table {
+  padding-top: 10px;
+}
+
+.card {
+  border-radius: 30px;
+}
+
+.card .card-title {
+  color: #29a7de;
+}
 </style>
 <section class="users-list-wrapper">
     <!-- starts -->
@@ -103,10 +134,10 @@ bottom: .5em;
                   <div class="card-content">
                       <div class="card-body">
           							<div class="table-responsive">
-          								<table id="dtBasicExample" class="table table-sm table-striped table-bordered">
+          								<table id="dtBasicExample" class="table table-hover">
           									<thead class="thead-light">
           										<tr>
-          											<th class="text-center">#</th>
+          											<th class="text-center" style="width:85px !important;">Aksi</th>
           											<th class="text-center">Nomor Pengadaan</th>
           											<th class="text-center">Nomor Kontrak</th>
           											<th class="text-center">Deskripsi Pekerjaan</th>
@@ -120,7 +151,7 @@ bottom: .5em;
                               <?php $link = site_url('contract/monitor/monitor_kontrak/lihat') ?>
                               <?php foreach ($monitor_kontrak_data as $value) { ?>
                                   <tr>
-                                    <td><a class="btn btn-info action" href="<?= $link ?>/<?= $value->contract_id ?>"> Lihat </a> </td>
+                                    <td><a class="btn btn-info action" href="<?= $link ?>/<?= $value->contract_id ?>"><i class="ft-file-text mr-1"></i>Lihat </a> </td>
                                     <td><?= $value->ptm_number ?></td>
                                     <td><?= $value->contract_number ?></td>
                                     <td><?= $value->subject_work ?></td>
@@ -141,7 +172,7 @@ bottom: .5em;
     <!-- ends -->
 </section>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-12">
     <div class="card">
 
@@ -152,14 +183,14 @@ bottom: .5em;
       <div class="card-content">
         <div class="card-body">
           <div class="table-responsive">
-              <!-- <table id="table_monitor_kontrak" class="table table-bordered table-striped"></table> -->
+              <table id="table_monitor_kontrak" class="table table-bordered table-striped"></table>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-</div>
+</div> -->
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
