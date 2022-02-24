@@ -263,6 +263,7 @@ class Pengadaan extends MY_Controller {
 
 		$post = $this->input->post();
 		$data['post'] = $post;
+		$data["title"] = "Title";
 
 		$protocol = $_SERVER['PROTOCOL'] = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 		$urls = $protocol.'://'.$_SERVER['HTTP_HOST'].'/index.php/pusher/sendMessage/';
@@ -873,6 +874,7 @@ class Pengadaan extends MY_Controller {
 
 		$post = $this->input->post();
 		$data['post'] = $post;
+		$data["title"] = "Title";
 
 		if(empty($post)){
 			redirect(site_url("home"));

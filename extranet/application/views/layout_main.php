@@ -335,12 +335,12 @@
 					<div class="row bg-breadcrumb">
 						<div class="col-7">
 							<div class="content-header" style="margin-top: 40px;">
-								<strong><?= $title; ?></strong>
+								<strong><?php echo $title; ?></strong>
 							</div>
 						</div>
 						<div class="col-5">
 							<div class="content-header float-right" style="margin-top:5px;">
-								<img src="<?= base_url('assets') ?>/app-assets/img/wika_employee.png" alt="WIKA Logo" / style="width:180px;">
+								<img src="<?php echo base_url('assets') ?>/app-assets/img/wika_employee.png" alt="WIKA Logo" / style="width:180px;">
 							</div>
 						</div>
 					</div>
