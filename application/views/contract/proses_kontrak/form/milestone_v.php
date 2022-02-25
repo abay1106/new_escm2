@@ -1,212 +1,208 @@
 <?php $contract_type = (isset($kontrak['contract_type'])) ? $kontrak["contract_type"] : "";
-if($contract_type != "HARGA SATUAN"){ ?>
+//if($contract_type != "HARGA SATUAN"){ ?>
 
   <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>MILESTONE / TERMIN PEMBAYARAN</h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header border-bottom pb-2">
+          <div class="btn-group-sm float-left">
+              <span class="card-title text-bold-600 mr-2">Milestone / Termin Pembayaran</span> <span><a onclick="isShowAddTermin()" class="btn btn-info btn-sm"><i class="ft-plus"></i> Tambah</a></span>            
+            </div>
+            <div class="btn-group-sm float-right" id="showButtonTermin" style="display: none">
+              <a class="btn btn-info action_milestone">Simpan</a>
+              <a class="btn btn-danger empty_milestone" title="Hapus"><i class="ft-trash"></i></a>            
+              <input type="hidden" id="current_milestone" value=""/>   
+            </div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-body">
+
+            <div id="showAddTermin" style="display: none">            
+
+              <div class="row mb-2">
+                <!-- left-side -->
+                <div class="col-sm">
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Deskripsi Milestone</label>
+                    <div class="col-sm-8">
+                      <textarea class="form-control" id="deskripsi_milestone_inp"></textarea>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Progress (%)</label>
+                    <div class="col-sm-4">
+                      <input class="form-control money" id="bobot_milestone_inp" maxlength="4" placeholder="Maksimal 100%">
+                    </div>
+                    <div class="col-sm-4">
+                      <input class="form-control money" id="nilai_milestone_inp" maxlength="4" placeholder="nilai">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- right-side -->
+                <div class="col-sm">             
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Target Tanggal</label>
+                    <div class="col-sm-6">
+                      <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="date" id="tanggal_milestone_inp" class="form-control" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <?php $curval = set_value("milestone_file_inp"); ?>
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Upload Dokumen</label>
+                    <div class="col-sm-6">
+                      <div class="input-group">
+                        <span class="input-group-btn">
+                        <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file" class="btn btn-info upload">...</button> 
+                        </span> 
+                        <input readonly type="text" class="form-control" id="milestone_file_inp" name="milestone_file_inp" value="<?php echo $curval ?>">
+                        <span class="input-group-btn">
+                        <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/milestone/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file"><i class="fa fa-share"></i></button> 
+                        </span> 
+                      </div>
+                    </div>
+                  </div>   
+                </div>
+                
+              </div> 
+
+            </div>
+
+              <table class="table table-bordered" id="milestone_table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Deskripsi</th>
+                    <th>Progress (%)</th>
+                    <th>Tanggal Target</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>                  
+                </tbody>
+              </table>
+
           </div>
         </div>
-        <div class="ibox-content">
 
-
-          <?php $curval = ""; ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Deskripsi Milestone</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="deskripsi_milestone_inp"></textarea>
-            </div>
-          </div>
-
-          <?php //$curval = date(DEFAULT_FORMAT_DATETIME_DB); ?>
-          <div class="form-group">
-          <label class="col-sm-2 control-label">Target Tanggal</label>
-            <div class="col-sm-3">
-              <div class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                <input type="date" id="tanggal_milestone_inp" class="form-control" value="<?php //echo $curval ?>">
-              </div>
-            </div>
-          </div>
-
-
-<!--    <div class="form-group">
-          <label class="col-sm-2 control-label">Pilih item</label>
-          <div class="col-sm-6">
-            <div class="input-group">
-              <span class="input-group-btn">
-                   <button type="button" data-id="kode_item" data-url="<?php echo site_url(COMMODITY_KATALOG_JASA_PATH.'/picker') ?>" class="btn btn-primary picker jasa_btn not_integrated">Pilih Jasa</button>
-             </span>
-             <?php $curval = set_value("kode_item"); ?>
-             <input readonly type="text" class="form-control" id="kode_item" name="kode_item" value="<?php echo $curval ?>">
-           </div>
-         </div>
-       </div> -->
-
-          <?php $curval = ""; ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Bobot (%)</label>
-            <div class="col-sm-2">
-              <input class="form-control money" id="bobot_milestone_inp" maxlength="6">
-            </div>
-          </div>
-
-          <center>
-            <a class="btn btn-primary action_milestone">Add</a>
-            <a class="btn btn-light empty_milestone">Clear</a>
-            <input type="hidden" id="current_milestone" value=""/>
-            <br>
-          </center>
-
-          <hr>
-
-          <table class="table table-bordered" id="milestone_table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Deskripsi</th>
-                <th>Target Tanggal</th>
-                <th>Bobot (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php 
-              $subtotal = 0;
-              if(isset($milestone) && !empty($milestone)){
-                foreach ($milestone as $key => $value) { 
-                $myid = $key+1;
-                 ?>
-
-                <tr>
-                  <td>
-                    <button data-no="<?php echo $myid ?>" class="btn btn-primary btn-xs edit_milestone" type="button">
-                      <i class="fa fa-edit"></i>
-                      <?php  ?>
-                      <input type="hidden" name="milestone_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
-                    </button>
-                  </td>
-                  <td>
-                    <input type="hidden" value="<?php echo $value['description'] ?>" name="milestone_desc[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="milestone_desc">
-                    <?php echo $value['description'] ?>
-                  </td>
-                  <td>
-                    <input type="hidden" value="<?php echo date("Y-m-d",strtotime($value['target_date'])) ?>" name="milestone_date[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="milestone_date">
-                   <?php echo date("Y-m-d",strtotime($value['target_date'])) ?>
-                  </td>
-                  <td class="money">
-                    <input type="hidden" value="<?php echo inttomoney($value['percentage']) ?>" name="milestone_percent[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="milestone_percent">
-                    <?php echo inttomoney($value['percentage']) ?>
-                  </td>
-                </tr>
-
-                <?php } } ?>
-
-              </tbody>
-            </table>
-
-            <hr>
-
-          </div>
-
-        </div>
       </div>
     </div>
+  </div>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
 
-      $(document).ready(function(){
+    $(document).ready(function(){
 
-        $(".action_milestone").click(function(){
+      $(".action_milestone").click(function(){
 
-          var current_milestone = $("#current_milestone").val();
-          var no = current_milestone;
+        var current_milestone = $("#current_milestone").val();
+        var no = current_milestone;
 
-          if(current_milestone == ""){
-            no = ($("#milestone_table tr").length) ? parseInt($("#milestone_table tr").length) : 1;
-          }
+        if(current_milestone == ""){
+          no = ($("#milestone_table tr").length) ? parseInt($("#milestone_table tr").length) : 1;
+        }
 
-          var mybobot = 0;
+        var mybobot = 0;
 
-          $("#milestone_table tbody tr").each(function(i,val){
-            
-            var v = $(this).find(".milestone_percent").val();
-            mybobot += moneytoint(v);
-
-          });
-
-          var deskripsi = $("#deskripsi_milestone_inp").val();
-          var tanggal = $("#tanggal_milestone_inp").val();
-          var bobot = moneytoint($("#bobot_milestone_inp").val());
-
-          if(deskripsi == ""){
-
-            alert("Isi deskripsi milestone");
-
-          } else if(tanggal == ""){
-
-            alert("Isi tanggal milestone");
-
-          } else if(bobot == ""){
-
-            alert("Isi bobot milestone");
-
-          } else if(parseFloat(mybobot+bobot) > 100){
-
-            alert("Bobot harus dibawah 100");
-
-          } else {
-
-            bobot = inttomoney(bobot);
-
-            var html = "<tr><td><button type='button' class='btn btn-primary btn-xs edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
-            html += "<td><input type='hidden' class='milestone_desc' data-no='"+no+"' name='milestone_desc["+no+"]' value='"+deskripsi+"'/>"+deskripsi+"</td>";
-            html += "<td><input type='hidden' class='milestone_date' data-no='"+no+"' name='milestone_date["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
-            html += "<td class='money'><input type='hidden' class='milestone_percent' data-no='"+no+"' name='milestone_percent["+no+"]' value='"+bobot+"'/>"+bobot+"</td>";
-            html += "</tr>";
-            $("#milestone_table").append(html);
-
-            $("#deskripsi_milestone_inp").val("");
-            $("#tanggal_milestone_inp").val("");
-            $("#bobot_milestone_inp").val("");
-            $("#current_milestone").val("");
-            
-          }
+        $("#milestone_table tbody tr").each(function(i,val){
+          
+          var v = $(this).find(".milestone_percent").val();
+          mybobot += moneytoint(v);
 
         });
 
-  $(document.body).on("click",".empty_milestone",function(){
+        var deskripsi = $("#deskripsi_milestone_inp").val();
+        var tanggal = $("#tanggal_milestone_inp").val();
+        var bobot = moneytoint($("#bobot_milestone_inp").val());
 
-    $("#deskripsi_milestone_inp").val("");
-    $("#tanggal_milestone_inp").val("");
-    $("#bobot_milestone_inp").val("");
-    $("#current_milestone").val("");
+        if(deskripsi == ""){
 
-  });
+          alert("Isi deskripsi milestone");
 
-  $(document.body).on("click",".edit_milestone",function(){
+        } else if(tanggal == ""){
 
-    var no = $(this).attr('data-no');
-    var deskripsi = $(".milestone_desc[data-no='"+no+"']").val();
-    var tanggal = $(".milestone_date[data-no='"+no+"']").val();
-    var bobot = $(".milestone_percent[data-no='"+no+"']").val();
+          alert("Isi tanggal milestone");
 
-    $("#current_milestone").val(no);
-    $("#deskripsi_milestone_inp").val(deskripsi);
-    $("#tanggal_milestone_inp").val(tanggal);
-    $("#bobot_milestone_inp").val(bobot);
+        } else if(bobot == ""){
 
-    $(this).parent().parent().remove();
+          alert("Isi bobot milestone");
 
-    return false;
+        } else if(parseFloat(mybobot+bobot) > 100){
 
-  });
-})
+          alert("Bobot harus dibawah 100");
 
-</script>
+        } else {
 
-<?php } ?>
+          bobot = inttomoney(bobot);
+
+          var html = "<tr>";
+          html += "<td>"+no+"</td>";
+          html += "<td><input type='hidden' class='milestone_desc' data-no='"+no+"' name='milestone_desc["+no+"]' value='"+deskripsi+"'/>"+deskripsi+"</td>";
+          html += "<td class='money'><input type='hidden' class='milestone_percent' data-no='"+no+"' name='milestone_percent["+no+"]' value='"+bobot+"'/>"+bobot+"</td>";
+          html += "<td><input type='hidden' class='milestone_date' data-no='"+no+"' name='milestone_date["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
+          html += "<td><button type='button' class='btn btn-primary btn-xs edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
+          html += "</tr>";
+
+          $("#milestone_table").append(html);
+          $("#deskripsi_milestone_inp").val("");
+          $("#tanggal_milestone_inp").val("");
+          $("#bobot_milestone_inp").val("");
+          $("#current_milestone").val("");
+          
+        }
+
+      });
+
+      $(document.body).on("click",".empty_milestone",function(){
+
+        $("#deskripsi_milestone_inp").val("");
+        $("#tanggal_milestone_inp").val("");
+        $("#bobot_milestone_inp").val("");
+        $("#current_milestone").val("");
+
+      });
+
+      $(document.body).on("click",".edit_milestone",function(){
+
+        var no = $(this).attr('data-no');
+        var deskripsi = $(".milestone_desc[data-no='"+no+"']").val();
+        var tanggal = $(".milestone_date[data-no='"+no+"']").val();
+        var bobot = $(".milestone_percent[data-no='"+no+"']").val();
+
+        $("#current_milestone").val(no);
+        $("#deskripsi_milestone_inp").val(deskripsi);
+        $("#tanggal_milestone_inp").val(tanggal);
+        $("#bobot_milestone_inp").val(bobot);
+
+        $(this).parent().parent().remove();
+
+        return false;
+
+      });
+
+    })
+
+    function isShowAddTermin() {
+      var div_add = document.getElementById("showAddTermin");
+      var div_btn = document.getElementById("showButtonTermin");
+      if (div_add.style.display !== "none") {
+        div_add.style.display = "none";
+      } else {
+        div_add.style.display = "block";
+      }
+
+      if (div_btn.style.display !== "none") {
+        div_btn.style.display = "none";
+      } else {
+        div_btn.style.display = "block";
+      }
+    }
+
+  </script>
+
+<?php //} ?>
