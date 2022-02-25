@@ -48,8 +48,7 @@ class Log extends Telescoope_Controller {
 
 	}
 
-	// public function download_attachment($folder = "",$filename = ""){
-	public function download_attachment($folder = "",$subfolder="",$filename = ""){
+	public function download_attachment($folder = "", $subfolder = "", $filename = ""){
 
 		switch ($folder) {
 			case 'procurement':
