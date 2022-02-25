@@ -28,6 +28,10 @@ $kontrak = $this->Contract_m->getData($contract_id)->row_array();
 
 $ptm_number = $kontrak['ptm_number'];
 
+$this->db->select_sum('subtotal_rab');
+$this->db->where('contract_id', $contract_id);
+$data['subtotal_rab'] = $this->db->get('vw_smbd_sum_rab')->row_array();
+
 //startcode helmi
 
 $data['currency'] = $this->Administration_m->get_currency()->result_array();
