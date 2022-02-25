@@ -92,6 +92,9 @@ public function pembatalan_kontrak($param1 = ""){
 public function proses_pembatalan_kontrak(){
   include("contract/proses_kontrak/proses_pembatalan_kontrak.php");
 }
+public function pdf_comment(){
+  include("contract/monitor/pdf_comment.php");
+}
 
 public function submit_comment_contract(){
   include("contract/monitor/submit_comment_contract.php");
