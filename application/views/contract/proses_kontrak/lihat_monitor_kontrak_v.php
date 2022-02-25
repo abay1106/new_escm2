@@ -15,6 +15,11 @@
 		border-radius: 8px;
 	}
 
+	.btn-export {
+		background-color: transparent;
+		border: none;
+	}
+
 	.save-comment {
 		position: absolute;
 		right: 20px;
@@ -207,7 +212,12 @@
 							<i class="fa fa-thumbs-up fa-lg mr-1" style="color: #2aace3"></i> <b><?= $thumbs_up ?></b>
 							<i class="fa fa-thumbs-down fa-lg ml-1 mr-1" style="color: #ff7376"></i> <b><?= $thumbs_down ?></b>
 							<i class="fa fa-comment fa-lg ml-1 mr-1" style="color: #25353c"></i> <b><?= $com_num ?></b>
-							<button class="btn btn-light ml-1">Export <i class=" fa fa-angle-down fa-lg"></i></button>
+							<a href="<?= $controller_name . '/pdf_comment/'. $kontrak['contract_id'] ?>">
+								<button class="btn btn-export ml-1">
+									<img width="20" class="mr-1" src="<?= base_url('assets/img/icons/printer.png') ?>" alt="printer-icon">
+									Export <i class=" fa fa-angle-down fa-lg"></i>
+								</button>
+							</a>
 						</div>
 					</div>
 
