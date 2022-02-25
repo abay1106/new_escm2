@@ -212,7 +212,7 @@
 							<i class="fa fa-thumbs-up fa-lg mr-1" style="color: #2aace3"></i> <b><?= $thumbs_up ?></b>
 							<i class="fa fa-thumbs-down fa-lg ml-1 mr-1" style="color: #ff7376"></i> <b><?= $thumbs_down ?></b>
 							<i class="fa fa-comment fa-lg ml-1 mr-1" style="color: #25353c"></i> <b><?= $com_num ?></b>
-							<a href="<?= $controller_name . '/pdf_comment/'. $kontrak['contract_id'] ?>">
+							<a href="<?= $controller_name . '/pdf_comment/' . $kontrak['contract_id'] ?>">
 								<button class="btn btn-export ml-1">
 									<img width="20" class="mr-1" src="<?= base_url('assets/img/icons/printer.png') ?>" alt="printer-icon">
 									Export <i class=" fa fa-angle-down fa-lg"></i>
@@ -315,21 +315,20 @@
 									<br>
 
 									<div class="row form-group">
-										<?php $curval = (isset($v['ppd_file_name'])) ? $v['ppd_file_name'] :  set_value("doc_attachment_inp[]"); ?>
 										<label class="col-sm-2 control-label"><?php echo lang('attachment') ?></label>
 										<div class="col-md-4">
 											<div class="input-group align-items-center">
 												<span class="input-group-btn">
-													<button type="button" data-id="doc_attachment_inp_" data-folder="<?php echo $dir . '/comment' ?>" data-preview="preview_file_" class="btn btn-sm btn-info upload">
+													<button type="button" data-id="doc_attachment_inp_add" data-folder="<?php echo $dir . '/comment' ?>" data-preview="preview_file_add" class="btn btn-sm btn-info upload">
 														<i class="fa fa-cloud-upload"></i> Upload
 													</button>
-													<button type="button" data-url="<?php echo site_url('log/download_attachment/contract/comment/' . $curval) ?>" class="btn btn-sm btn-info preview_upload" id="preview_file_">
+													<button type="button" data-url="<?php echo site_url('log/download_attachment/contract/comment/' . $curval) ?>" class="btn btn-sm btn-info preview_upload" id="preview_file_add">
 														<i class="fa fa-share"></i> Preview
 													</button>
 												</span>
-												<input readonly type="text" class="form-control" id="doc_attachment_inp_" name="cad_lampiran" value="<?php echo $curval ?>">
+												<input readonly type="text" class="form-control" id="doc_attachment_inp_add" name="cad_lampiran" value="<?php echo $curval ?>">
 												<span class="input-group-btn">
-													<button type="button" data-id="doc_attachment_inp_" data-folder="<?php echo $dir ?>" data-preview="preview_file_" class="btn btn-sm btn-danger removefile">
+													<button type="button" data-id="doc_attachment_inp_add" data-folder="<?php echo $dir ?>" data-preview="preview_file_add" class="btn btn-sm btn-danger removefile">
 														<i class="fa fa-trash"></i>
 													</button>
 												</span>
