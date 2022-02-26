@@ -94,7 +94,6 @@
                 <tbody>    
 
                   <?php 
-                    $subtotal = 0;
                     $no = 1;
                     if(isset($milestone) && !empty($milestone)){
                       foreach ($milestone as $key => $value) { 
@@ -128,7 +127,7 @@
                       <?php echo $value['note'] ?>
                     </td>
                     <td>
-                      <button data-no="<?php echo $myid ?>" class="btn btn-info btn-sm edit_milestone" type="button">
+                      <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_milestone" type="button">
                         <i class="fa fa-edit"></i>
                         <?php  ?>
                         <input type="hidden" name="milestone_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
@@ -207,7 +206,7 @@
           html += "<td><input type='hidden' class='tanggal_milestone' data-no='"+no+"' name='tanggal_milestone["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
           html += "<td class='text-right'><input type='hidden' class='milestone_file' data-no='"+no+"' name='milestone_file["+no+"]' value='"+milestone_file+"'/><a href='"+url_file+milestone_file+"'>"+milestone_file+"</a></td>";
           html += "<td><input type='hidden' class='keterangan' data-no='"+no+"' name='keterangan["+no+"]' value='"+keterangan+"'/>"+keterangan+"</td>";
-          html += "<td><button type='button' class='btn btn-info btn-sm edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
+          html += "<td><button type='button' class='btn btn-warning btn-sm edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
           html += "</tr>";
 
           $("#milestone_table").append(html);
