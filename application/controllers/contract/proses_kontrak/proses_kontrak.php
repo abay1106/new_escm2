@@ -182,6 +182,10 @@
 	//end
 
 	$data['milestone'] = $this->Contract_m->getMilestone("",$contract_id)->result_array();
+	
+	$data['jaminan'] = $this->Contract_m->getJaminan("",$contract_id)->result_array();
+	
+	$data['person'] = $this->Contract_m->getPerson("",$contract_id)->result_array();
 
 	$data['document'] = $this->Contract_m->getDoc("",$contract_id)->result_array();
 

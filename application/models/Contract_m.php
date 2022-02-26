@@ -442,7 +442,7 @@ class Contract_m extends CI_Model {
 
 		if(!empty($contract_id)){
 
-			$this->db->where("contract_id",$contract_id);
+			$this->db->where("cj_contract_id",$contract_id);
 
 		}
 
@@ -462,7 +462,7 @@ class Contract_m extends CI_Model {
 
 		if(!empty($contract_id)){
 
-			$this->db->where("contract_id",$contract_id);
+			$this->db->where("cp_contract_id",$contract_id);
 
 		}
 
@@ -1022,7 +1022,7 @@ class Contract_m extends CI_Model {
 
 			if(!empty($id)){
 
-				$this->db->where(array("contract_id"=>$input['contract_id'],"id"=>$id));
+				$this->db->where(array("cj_contract_id"=>$input['cj_contract_id'],"id"=>$id));
 				$check = $this->getJaminan()->row_array();
 				if(!empty($check)){
 					$last_id = $check['id'];
@@ -1049,7 +1049,7 @@ class Contract_m extends CI_Model {
 
 			if(!empty($id)){
 
-				$this->db->where(array("contract_id"=>$input['contract_id'],"id"=>$id));
+				$this->db->where(array("cp_contract_id"=>$input['cp_contract_id'],"id"=>$id));
 				$check = $this->getPerson()->row_array();
 				if(!empty($check)){
 					$last_id = $check['id'];
@@ -1176,14 +1176,14 @@ class Contract_m extends CI_Model {
 
 	public function deleteIfNotExistJaminan($id,$deleted){
 		if(!empty($id) && !empty($deleted)){
-			$this->db->where_not_in("id",$deleted)->where("contract_id",$id)->delete("ctr_jaminan");
+			$this->db->where_not_in("id",$deleted)->where("cj_contract_id",$id)->delete("ctr_jaminan");
 			return $this->db->affected_rows();
 		}
 	}
 
 	public function deleteIfNotExistPerson($id,$deleted){
 		if(!empty($id) && !empty($deleted)){
-			$this->db->where_not_in("id",$deleted)->where("contract_id",$id)->delete("ctr_person_in_charge");
+			$this->db->where_not_in("id",$deleted)->where("cp_contract_id",$id)->delete("ctr_person_in_charge");
 			return $this->db->affected_rows();
 		}
 	}
