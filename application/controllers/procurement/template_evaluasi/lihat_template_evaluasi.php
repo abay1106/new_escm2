@@ -4,9 +4,9 @@
 
   $data = array();
 
-   $id = (isset($post['id'])) ? $post['id'] : $this->uri->segment(4, 0);
+  $id = (isset($post['id'])) ? $post['id'] : $this->uri->segment(4, 0);
 
-   $data['id'] = $id;
+  $data['id'] = $id;
 
   $data['data'] = $this->Procevaltemp_m->getTemplateEvaluasi($id)->row_array();
 
