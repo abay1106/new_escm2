@@ -33,10 +33,10 @@
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Progress (%)</label>
                     <div class="col-sm-4">
-                      <input class="form-control money" name="bobot_milestone_inp" id="bobot_milestone_inp" maxlength="4" placeholder="Maksimal 100%">
+                      <input class="form-control money" name="bobot_milestone_inp" id="bobot_milestone_inp" maxlength="6" placeholder="Maksimal 100%">
                     </div>
                     <div class="col-sm-4">
-                      <input class="form-control money" name="nilai_milestone_inp" id="nilai_milestone_inp" maxlength="4" placeholder="nilai">
+                      <input class="form-control money" name="nilai_milestone_inp" id="nilai_milestone_inp" maxlength="15" placeholder="nilai">
                     </div>
                   </div>
                   <div class="row form-group">
@@ -54,7 +54,7 @@
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Keterangan</label>
                     <div class="col-sm-8">
-                      <textarea class="form-control" id="keterangan_inp" placeholder="Keterangan"></textarea>
+                      <textarea class="form-control" name="keterangan_inp" id="keterangan_inp" placeholder="Keterangan"></textarea>
                     </div>
                   </div>                          
                   <?php $curval = set_value("milestone_file_inp"); ?>
@@ -75,7 +75,6 @@
                 </div>
                 
               </div> 
-
             </div>
 
             <div class="table-responsive">
@@ -122,7 +121,7 @@
 
         $("#milestone_table tbody tr").each(function(i,val){
           
-          var v = $(this).find(".milestone_percent").val();
+          var v = $(this).find(".bobot_milestone_inp").val();
           mybobot += moneytoint(v);
 
         });
@@ -144,11 +143,11 @@
 
         } else if(bobot == ""){
 
-          alert("Isi bobot milestone");
+          alert("Isi progress milestone");
 
         } else if(parseFloat(mybobot+bobot) > 100){
 
-          alert("Bobot harus dibawah 100");
+          alert("Progress harus dibawah 100");
 
         } else {
 
@@ -157,9 +156,9 @@
           var html = "<tr>";
           html += "<td>"+no+"</td>";
           html += "<td><input type='hidden' class='deskripsi_milestone' data-no='"+no+"' name='deskripsi_milestone["+no+"]' value='"+deskripsi+"'/>"+deskripsi+"</td>";
-          html += "<td class='money'><input type='hidden' class='nilai_milestone' data-no='"+no+"' name='nilai_milestone["+no+"]' value='"+nilai_milestone+"'/>"+nilai_milestone+"</td>";
-          html += "<td class='money'><input type='hidden' class='milestone_percent' data-no='"+no+"' name='milestone_percent["+no+"]' value='"+bobot+"'/>"+bobot+"</td>";
-          html += "<td><input type='hidden' class='milestone_date' data-no='"+no+"' name='milestone_date["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
+          html += "<td class='text-right money'><input type='hidden' class='nilai_milestone' data-no='"+no+"' name='nilai_milestone["+no+"]' value='"+nilai_milestone+"'/>"+nilai_milestone+"</td>";
+          html += "<td class='text-right money'><input type='hidden' class='bobot_milestone' data-no='"+no+"' name='bobot_milestone["+no+"]' value='"+bobot+"'/>"+bobot+"</td>";
+          html += "<td><input type='hidden' class='tanggal_milestone' data-no='"+no+"' name='tanggal_milestone["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
           html += "<td class='text-right'><input type='hidden' class='milestone_file' data-no='"+no+"' name='milestone_file["+no+"]' value='"+milestone_file+"'/><a href='"+url_file+milestone_file+"'>"+milestone_file+"</a></td>";
           html += "<td><input type='hidden' class='keterangan' data-no='"+no+"' name='keterangan["+no+"]' value='"+keterangan+"'/>"+keterangan+"</td>";
           html += "<td><button type='button' class='btn btn-info btn-sm edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
@@ -195,8 +194,8 @@
         var no = $(this).attr('data-no');
         var deskripsi = $(".deskripsi_milestone[data-no='"+no+"']").val();
         var nilai_milestone = $(".nilai_milestone[data-no='"+no+"']").val();
-        var bobot = $(".milestone_percent[data-no='"+no+"']").val();
-        var tanggal = $(".milestone_date[data-no='"+no+"']").val();
+        var bobot = $(".bobot_milestone[data-no='"+no+"']").val();
+        var tanggal = $(".tanggal_milestone[data-no='"+no+"']").val();
         var milestone_file = $(".milestone_file[data-no='"+no+"']").val();
         var keterangan = $(".keterangan[data-no='"+no+"']").val();
 
