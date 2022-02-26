@@ -289,9 +289,9 @@
               <span class="card-title text-bold-600 mr-2">Person In Charge</span> <span><a onclick="isShowAddPerson()" class="btn btn-info btn-sm"><i class="ft-plus"></i> Tambah</a></span>            
             </div>
             <div class="btn-group-sm float-right" id="showButtonPerson" style="display: none">
-              <a class="btn btn-info action_milestone">Simpan</a>
-              <a class="btn btn-danger empty_milestone" title="Hapus"><i class="ft-trash"></i></a>            
-              <input type="hidden" id="current_milestone" value=""/>   
+              <a class="btn btn-info action_person">Simpan</a>
+              <a class="btn btn-danger empty_person" title="Hapus"><i class="ft-trash"></i></a>            
+              <input type="hidden" id="current_person" value=""/>   
             </div>
         </div>
 
@@ -304,18 +304,21 @@
                 <!-- left-side -->
                 <div class="col-sm">
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Deskripsi Milestone</label>
+                    <label class="col-sm-4 control-label text-right">Jabatan</label>
                     <div class="col-sm-8">
-                      <textarea class="form-control" id="deskripsi_milestone_inp"></textarea>
+                      <input class="form-control" name="jabatan_inp" id="jabatan_inp">
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Progress (%)</label>
-                    <div class="col-sm-4">
-                      <input class="form-control money" id="bobot_milestone_inp" maxlength="4" placeholder="Maksimal 100%">
+                    <label class="col-sm-4 control-label text-right">Divisi</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" name="divisi_inp" id="divisi_inp">
                     </div>
-                    <div class="col-sm-4">
-                      <input class="form-control money" id="nilai_milestone_inp" maxlength="4" placeholder="nilai">
+                  </div>
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Perusahaan</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" name="perusahaan_inp" id="perusahaan_inp">
                     </div>
                   </div>
                 </div>
@@ -323,42 +326,39 @@
                 <!-- right-side -->
                 <div class="col-sm">             
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Target Tanggal</label>
-                    <div class="col-sm-6">
-                      <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="date" id="tanggal_milestone_inp" class="form-control" value="">
-                      </div>
+                    <label class="col-sm-4 control-label text-right">No. Telpon</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" name="telp_inp" id="telp_inp">
                     </div>
-                  </div>
-                  <?php $curval = set_value("milestone_file_inp"); ?>
+                  </div>  
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Upload Dokumen</label>
-                    <div class="col-sm-6">
-                      <div class="input-group">
-                        <span class="input-group-btn">
-                        <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file" class="btn btn-info upload">...</button> 
-                        </span> 
-                        <input readonly type="text" class="form-control" id="milestone_file_inp" name="milestone_file_inp" value="<?php echo $curval ?>">
-                        <span class="input-group-btn">
-                        <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/milestone/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file"><i class="fa fa-share"></i></button> 
-                        </span> 
-                      </div>
+                    <label class="col-sm-4 control-label text-right">Email</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" name="email_inp" id="email_inp">
                     </div>
                   </div>   
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Keterangan</label>
+                    <div class="col-sm-8">
+                      <textarea class="form-control" name="person_keterangan_inp" id="person_keterangan_inp"></textarea>
+                    </div>
+                  </div>               
                 </div>
                 
               </div> 
 
             </div>
 
-              <table class="table table-bordered" id="milestone_table">
+              <table class="table table-bordered" id="person_table">
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Deskripsi</th>
-                    <th>Progress (%)</th>
-                    <th>Tanggal Target</th>
+                    <th>Jabatan</th>                   
+                    <th>Divisi</th>                   
+                    <th>Perusahaan</th>                   
+                    <th>No. Telpon</th>                   
+                    <th>Email</th>                   
+                    <th>Keterangan</th>                   
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -377,92 +377,87 @@
 
     $(document).ready(function(){
 
-      $(".action_milestone").click(function(){
+        $(".action_person").click(function(){ 
 
-        var current_milestone = $("#current_milestone").val();
-        var no = current_milestone;
+          var current_person = $("#current_person").val();
+          var no = current_person;
+          var jabatan = $("#jabatan_inp").val();          
+          var divisi = $("#divisi_inp").val();          
+          var perusahaan = $("#perusahaan_inp").val();          
+          var telp = $("#telp_inp").val();          
+          var email = $("#email_inp").val();          
+          var person_keterangan = $("#person_keterangan_inp").val();          
 
-        if(current_milestone == ""){
-          no = ($("#milestone_table tr").length) ? parseInt($("#milestone_table tr").length) : 1;
-        }
+          if(current_person == ""){
+            if (getMaxDataNo(".edit_person") == null) {
+              no = 1;
+            }else{
+              no = getMaxDataNo(".edit_person")+1;
+            }
 
-        var mybobot = 0;
+          } else{ }
 
-        $("#milestone_table tbody tr").each(function(i,val){
-          
-          var v = $(this).find(".milestone_percent").val();
-          mybobot += moneytoint(v);
+          if (jabatan == ""){
+
+            alert("Data tidak boleh kosong.");
+
+          } else {
+
+            var html = "<tr>";
+                html += "<td>"+no+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='jabatan' data-no='"+no+"' name='jabatan["+no+"]' value='"+jabatan+"'/>"+jabatan+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='divisi' data-no='"+no+"' name='divisi["+no+"]' value='"+divisi+"'/>"+divisi+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='perusahaan' data-no='"+no+"' name='perusahaan["+no+"]' value='"+perusahaan+"'/>"+perusahaan+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='telp' data-no='"+no+"' name='telp["+no+"]' value='"+telp+"'/>"+telp+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='email' data-no='"+no+"' name='email["+no+"]' value='"+email+"'/>"+email+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='person_keterangan' data-no='"+no+"' name='person_keterangan["+no+"]' value='"+person_keterangan+"'/>"+person_keterangan+"</td>";
+                html += "<td><button type='button' class='btn btn-warning btn-sm edit_person' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>"; 
+                html += "</tr>";
+
+            $("#person_table").append(html);
+            $("#jabatan_inp").val("");
+            $("#divisi_inp").val("");
+            $("#perusahaan_inp").val("");
+            $("#telp_inp").val("");
+            $("#email_inp").val("");
+            $("#person_keterangan").val("");
+            $("#person_keterangan_inp").val("");
+          }
 
         });
 
-        var deskripsi = $("#deskripsi_milestone_inp").val();
-        var tanggal = $("#tanggal_milestone_inp").val();
-        var bobot = moneytoint($("#bobot_milestone_inp").val());
+        $(document.body).on("click",".empty_person",function(){
+          $("#current_person").val("");     
+          $("#jabatan_inp").val("");
+          $("#divisi_inp").val("");
+          $("#perusahaan_inp").val("");
+          $("#telp_inp").val("");
+          $("#email_inp").val("");
+          $("#person_keterangan_inp").val("");
+        });
 
-        if(deskripsi == ""){
-
-          alert("Isi deskripsi milestone");
-
-        } else if(tanggal == ""){
-
-          alert("Isi tanggal milestone");
-
-        } else if(bobot == ""){
-
-          alert("Isi bobot milestone");
-
-        } else if(parseFloat(mybobot+bobot) > 100){
-
-          alert("Bobot harus dibawah 100");
-
-        } else {
-
-          bobot = inttomoney(bobot);
-
-          var html = "<tr>";
-          html += "<td>"+no+"</td>";
-          html += "<td><input type='hidden' class='milestone_desc' data-no='"+no+"' name='milestone_desc["+no+"]' value='"+deskripsi+"'/>"+deskripsi+"</td>";
-          html += "<td class='money'><input type='hidden' class='milestone_percent' data-no='"+no+"' name='milestone_percent["+no+"]' value='"+bobot+"'/>"+bobot+"</td>";
-          html += "<td><input type='hidden' class='milestone_date' data-no='"+no+"' name='milestone_date["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
-          html += "<td><button type='button' class='btn btn-primary btn-xs edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
-          html += "</tr>";
-
-          $("#milestone_table").append(html);
-          $("#deskripsi_milestone_inp").val("");
-          $("#tanggal_milestone_inp").val("");
-          $("#bobot_milestone_inp").val("");
-          $("#current_milestone").val("");
+        $(document.body).on("click",".edit_person",function(){
+          var no = $(this).attr('data-no');
+          var jabatan = $(".jabatan[data-no='"+no+"']").val();
+          var divisi = $(".divisi[data-no='"+no+"']").val();
+          var perusahaan = $(".perusahaan[data-no='"+no+"']").val();
+          var telp = $(".telp[data-no='"+no+"']").val();
+          var email = $(".email[data-no='"+no+"']").val();
+          var person_keterangan = $(".person_keterangan[data-no='"+no+"']").val();
           
-        }
+          $("#current_person").val(no);
+          $("#jabatan_inp").val(jabatan);
+          $("#divisi_inp").val(divisi);
+          $("#perusahaan_inp").val(perusahaan);
+          $("#telp_inp").val(telp);
+          $("#email_inp").val(email);
+          $("#person_keterangan_inp").val(person_keterangan);
+          
+          $(this).parent().parent().remove();
 
-      });
+          return false;
 
-      $(document.body).on("click",".empty_milestone",function(){
-
-        $("#deskripsi_milestone_inp").val("");
-        $("#tanggal_milestone_inp").val("");
-        $("#bobot_milestone_inp").val("");
-        $("#current_milestone").val("");
-
-      });
-
-      $(document.body).on("click",".edit_milestone",function(){
-
-        var no = $(this).attr('data-no');
-        var deskripsi = $(".milestone_desc[data-no='"+no+"']").val();
-        var tanggal = $(".milestone_date[data-no='"+no+"']").val();
-        var bobot = $(".milestone_percent[data-no='"+no+"']").val();
-
-        $("#current_milestone").val(no);
-        $("#deskripsi_milestone_inp").val(deskripsi);
-        $("#tanggal_milestone_inp").val(tanggal);
-        $("#bobot_milestone_inp").val(bobot);
-
-        $(this).parent().parent().remove();
-
-        return false;
-
-      });
+        });
 
     })
 
@@ -484,32 +479,32 @@
 
   </script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-  $(document).ready(function(){
+    $(document).ready(function(){
 
-    $(".tambah_dok").click(function(){
+      $(".tambah_dok").click(function(){
 
-      var total = parseInt($("div.lampiran:visible").length);
-      var find = parseInt($("div.lampiran:hidden").attr("data-no"));
+        var total = parseInt($("div.lampiran:visible").length);
+        var find = parseInt($("div.lampiran:hidden").attr("data-no"));
 
-      if(total == 4){
-        $(".tambah_dok").hide();
-      }
-      $("div.lampiran[data-no='"+find+"']").show();
-      return false;
+        if(total == 4){
+          $(".tambah_dok").hide();
+        }
+        $("div.lampiran[data-no='"+find+"']").show();
+        return false;
+
+      });
+
+      $(".tutup").click(function(){
+
+        $(".tambah_dok").show();
+        var no = parseInt($(this).attr("data-no"));
+        $("div.lampiran[data-no='"+no+"']").hide();
+
+        return false;
+
+      });
 
     });
-
-    $(".tutup").click(function(){
-
-      $(".tambah_dok").show();
-      var no = parseInt($(this).attr("data-no"));
-      $("div.lampiran[data-no='"+no+"']").hide();
-
-      return false;
-
-    });
-
-  });
-</script>
+  </script>
