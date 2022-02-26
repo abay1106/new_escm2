@@ -368,8 +368,8 @@
 
             $this->form_validation->set_rules("jenis_jaminan[$key2]", "Jenis Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
             
-            if(!empty($post['id'][$key2])){
-              $input_jaminan[$key2]['id']=$post['id'][$key2];
+            if(!empty($post['jaminan_id'][$key2])){
+              $input_jaminan[$key2]['id']=$post['jaminan_id'][$key2];
             }
 
             $input_jaminan[$key2]['cj_jenis_jaminan']=$post['jenis_jaminan'][$key2];
@@ -386,6 +386,26 @@
 
           }
 
+          if(isset($post['user_inp'][$key2])){
+
+            $this->form_validation->set_rules("user_inp[$key2]", "Nama Lengkap #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            
+            if(!empty($post['person_id'][$key2])){
+              $input_person[$key2]['id']=$post['person_id'][$key2];
+            }
+
+            $input_person[$key2]['cp_nama_lengkap']=$post['user'][$key2];
+            $input_person[$key2]['cp_jabatan']=$post['jabatan'][$key2];
+            $input_person[$key2]['cp_divisi']=$post['divisi'][$key2];
+            $input_person[$key2]['cp_nama_perusahaan']=$post['perusahaan'][$key2];
+            $input_person[$key2]['cp_no_telp']=$post['telp'][$key2];
+            $input_person[$key2]['cp_email']=$post['email'][$key2];
+            $input_person[$key2]['cp_note']=$post['person_keterangan'][$key2];
+            $input_person[$key2]['cp_created_by']=$userdata['employee_id'][$key2];
+            $input_person[$key2]['cp_created_date']=date('Y-m-d h:i:s');
+
+          }
+
         }
 
         $n++;
@@ -393,7 +413,6 @@
       }
 
     }
-
 
     if ($this->form_validation->run() == FALSE || $error){
 

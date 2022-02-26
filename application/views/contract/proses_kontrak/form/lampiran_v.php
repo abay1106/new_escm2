@@ -316,19 +316,19 @@
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Jabatan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="jabatan_inp" id="jabatan_inp" placeholder="Jabatan">
+                      <input type="text" class="form-control" name="jabatan_inp" id="jabatan_inp" placeholder="Jabatan">
                     </div>
                   </div>
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Divisi <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="divisi_inp" id="divisi_inp" placeholder="Nama divisi">
+                      <input type="text" class="form-control" name="divisi_inp" id="divisi_inp" placeholder="Nama divisi">
                     </div>
                   </div>
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Perusahaan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="perusahaan_inp" id="perusahaan_inp" placeholder="Nama perusahaan">
+                      <input type="text" class="form-control" name="perusahaan_inp" id="perusahaan_inp" placeholder="Nama perusahaan">
                     </div>
                   </div>
                 </div>
@@ -338,13 +338,13 @@
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">No. Telpon <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="telp_inp" id="telp_inp" placeholder="Nomor telepon">
+                      <input type="text" class="form-control" name="telp_inp" id="telp_inp" placeholder="Nomor telepon">
                     </div>
                   </div>  
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Email <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="email_inp" id="email_inp" placeholder="Email">
+                      <input type="email" class="form-control" name="email_inp" id="email_inp" placeholder="Email">
                     </div>
                   </div>   
                   <div class="row form-group">
@@ -373,7 +373,54 @@
                     <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody>                  
+                <tbody>     
+                  <?php 
+                    $no = 1;
+                    if(isset($person) && !empty($person)){
+                      foreach ($person as $key => $value) { 
+                      $myid = $key+1;
+                  ?>
+
+                  <tr>   
+                    <td><?php echo $no++; ?></td>                      
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_nama_lengkap'] ?>" name="user[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="user">
+                      <?php echo $value['cp_nama_lengkap'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_jabatan'] ?>" name="jabatan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="jabatan">
+                      <?php echo $value['cp_jabatan'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_divisi'] ?>" name="divisi[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="divisi">
+                      <?php echo $value['cp_divisi'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_nama_perusahaan'] ?>" name="perusahaan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="perusahaan">
+                      <?php echo $value['cp_nama_perusahaan'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_no_telp'] ?>" name="telp[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="telp">
+                      <?php echo $value['cp_no_telp'] ?>
+                    </td>                 
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_email'] ?>" name="email[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="email">
+                      <?php echo $value['cp_email'] ?>
+                    </td>                 
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cp_note'] ?>" name="person_keterangan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="person_keterangan">
+                      <?php echo $value['cp_note'] ?>
+                    </td>                 
+                    <td>
+                      <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_person" type="button">
+                        <i class="fa fa-edit"></i>
+                        <?php  ?>
+                        <input type="hidden" name="person_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <?php } } ?>               
                 </tbody>
               </table>
 

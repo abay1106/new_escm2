@@ -136,8 +136,7 @@
                 </tr>
               </thead>
               <tbody>      
-                <?php 
-                    $subtotal = 0;
+                  <?php 
                     $no = 1;
                     if(isset($jaminan) && !empty($jaminan)){
                       foreach ($jaminan as $key => $value) { 
@@ -183,7 +182,7 @@
                       <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_item" type="button">
                         <i class="fa fa-edit"></i>
                         <?php  ?>
-                        <input type="hidden" name="id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
+                        <input type="hidden" name="jaminan_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
                       </button>
                     </td>
                   </tr>

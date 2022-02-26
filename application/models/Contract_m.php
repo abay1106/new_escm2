@@ -1060,7 +1060,7 @@ class Contract_m extends CI_Model {
 				}
 
 			} else {
-				$this->insertJaminan($input);
+				$this->insertPerson($input);
 				$last_id = $this->db->insert_id();
 			}
 
