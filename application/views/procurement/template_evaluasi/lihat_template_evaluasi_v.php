@@ -1,3 +1,5 @@
+
+
 <form class="form-horizontal">
   <div class="row">
       <div class="col-12">
@@ -56,6 +58,8 @@
                     </div>
                   </div>
               </div>
+
+
             </div>
 
           </div>
@@ -79,6 +83,8 @@
                       <th>Item</th>
                       <th>Jenis</th>
                       <th>Bobot</th>
+                      <th></th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -88,7 +94,9 @@
                       <td><input disabled type='hidden' class='item_name' data-no='<?php echo $value['etd_id'] ?>' name='item_name[<?php echo $value['etd_id'] ?>]' value='<?php echo $value['etd_item'] ?>'/><?php echo $value['etd_item'] ?></td>
                       <td><input disabled type='hidden' class='item_jenis' data-no='<?php echo $value['etd_id'] ?>' name='item_jenis[<?php echo $value['etd_id'] ?>]' value='<?php echo $value['etd_mode'] ?>'/><?php echo ($value['etd_mode'] == 1) ? "Teknis" : "Administrasi" ?></td>
                       <td class="text-right"><input disabled type='hidden' class='item_bobot' data-no='<?php echo $value['etd_id'] ?>' name='item_bobot[<?php echo $value['etd_id'] ?>]' value='<?php echo $value['etd_weight'] ?>'/><?php echo $value['etd_weight'] ?></td>
-                      </tr>
+                      <td><?php if($value['etd_weight'] > 0) : ?><a id="btnModalScore" onclick="fModalScore(<?php echo $value['etd_id'] ?>)" class="btn btn-info">Petunjuk Score</a><?php endif; ?></td>
+                      
+                    </tr>
                   <?php } ?>
                   </tbody>
                 </table>
@@ -112,7 +120,39 @@
       </div>
     </div>
   </div>
-
 </form>
 
+
+<div id="score-modal" class="modal fade" tabindex="-1" role="dialog"  >
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="my-modal-title">Title</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Content</p>
+      </div>
+      <div class="modal-footer">
+        Footer
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    
+  });
+
+  function fModalScore(id)
+  {
+    window.open('<?= base_url() ?>'+"/"+"procurement/procurement_tools/lihat_template_evaluasi_score/"+id);
+    //$("#score-modal").modal("show");
+  }
+
+</script>
 <?php include("form_template_evaluasi_js.php") ?>

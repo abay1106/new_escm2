@@ -331,6 +331,30 @@ class Privy extends CI_Controller {
 
     }
 
+    public function save_doc($url = "")
+    {
+        $output_filename = "test.pdf";
+
+        $host = "https://stg-onpremise-minio.privy.id/staging-privy-onpremise-sdk/SDKHASHSIGN/signed/signed-hs256b2b-1271cf25-209e-c043d4c70e82004260d633ef74bf7d4258bde67a108c6f6ae392017428981f95?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20220224%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220224T084226Z&X-Amz-Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=b3cffce20e26913536aaeb660f128c843b7b16b7aa008645f22ed5eafb291e0e";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $host);
+        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, false);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $result = curl_exec($ch);
+        curl_close($ch);
+    
+        print_r($result);
+    
+        // the following lines write the contents to a file in the same directory (provided permissions etc)
+        $fp = fopen($output_filename, 'wb');
+        fwrite($fp, $result);
+        fclose($fp);
+            
+    }
+
 }
 
 /* End of file PrivyTest.php */

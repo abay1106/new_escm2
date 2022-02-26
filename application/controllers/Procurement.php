@@ -476,6 +476,10 @@ public function procurement_tools($param1 = "" ,$param2 = "", $param3 = ""){
     $this->template_evaluasi('lihat');
     break;
 
+    case 'lihat_template_evaluasi_score':
+    $this->lihat_template_evaluasi_score('lihat_score');
+    break;
+
     case 'hapus_template_evaluasi':
     $this->template_evaluasi('hapus');
     break;
@@ -625,6 +629,11 @@ public function template_evaluasi($param1 = "",$param2 = ""){
    case 'lihat':
    $this->lihat_template_evaluasi();
    break;
+
+   case 'lihat_score':
+   $this->lihat_template_evaluasi();
+   break;
+
 
    case 'ubah':
    $this->ubah_template_evaluasi();
@@ -887,6 +896,10 @@ public function ubah_template_evaluasi(){
 
 public function lihat_template_evaluasi(){
   include("procurement/template_evaluasi/lihat_template_evaluasi.php");
+}
+
+public function lihat_template_evaluasi_score(){
+  include("procurement/template_evaluasi/template_score.php");
 }
 
 public function data_template_evaluasi(){
