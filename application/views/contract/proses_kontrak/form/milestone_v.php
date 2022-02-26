@@ -201,7 +201,7 @@
 
         $("#current_milestone").val(no);
         $("#deskripsi_milestone_inp").val(deskripsi);
-        $("#nilai_milestone_inp").val(nilai_milestone);
+        $("#nilai_milestone_inp").val(inttomoney(nilai_milestone));
         $("#tanggal_milestone_inp").val(tanggal);
         $("#bobot_milestone_inp").val(bobot);
         $("#milestone_file_inp").val(milestone_file);

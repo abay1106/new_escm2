@@ -297,26 +297,36 @@
 
         <div class="card-content">
           <div class="card-body">
-
             <div id="showAddPerson" style="display: none">            
 
               <div class="row mb-2">
-                <!-- left-side -->
+                <!-- left-side -->                
                 <div class="col-sm">
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Jabatan</label>
+                    <label class="col-sm-4 control-label text-right">User <span class="text-danger text-bold-700">*</span> </label>
+                    <div class="col-sm-8">
+                      <select class="form-control select2" name="user_inp" id="user_inp" style="width: 100%">
+                        <option value="">Pilih</option>
+                        <?php foreach($adm_user as $v) { ?>
+                          <option value="<?php echo $v['complete_name'];?>"><?php echo $v['complete_name'];?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <label class="col-sm-4 control-label text-right">Jabatan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <input class="form-control" name="jabatan_inp" id="jabatan_inp">
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Divisi</label>
+                    <label class="col-sm-4 control-label text-right">Divisi <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <input class="form-control" name="divisi_inp" id="divisi_inp">
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Perusahaan</label>
+                    <label class="col-sm-4 control-label text-right">Perusahaan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <input class="form-control" name="perusahaan_inp" id="perusahaan_inp">
                     </div>
@@ -326,19 +336,19 @@
                 <!-- right-side -->
                 <div class="col-sm">             
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">No. Telpon</label>
+                    <label class="col-sm-4 control-label text-right">No. Telpon <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <input class="form-control" name="telp_inp" id="telp_inp">
                     </div>
                   </div>  
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Email</label>
+                    <label class="col-sm-4 control-label text-right">Email <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <input class="form-control" name="email_inp" id="email_inp">
                     </div>
                   </div>   
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Keterangan</label>
+                    <label class="col-sm-4 control-label text-right">Keterangan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <textarea class="form-control" name="person_keterangan_inp" id="person_keterangan_inp"></textarea>
                     </div>
@@ -353,6 +363,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Nama</th>                   
                     <th>Jabatan</th>                   
                     <th>Divisi</th>                   
                     <th>Perusahaan</th>                   
@@ -377,10 +388,14 @@
 
     $(document).ready(function(){
 
+        // Basic Select2 select
+        $(".select2").select2();
+
         $(".action_person").click(function(){ 
 
           var current_person = $("#current_person").val();
           var no = current_person;
+          var user = $("#user_inp").val();          
           var jabatan = $("#jabatan_inp").val();          
           var divisi = $("#divisi_inp").val();          
           var perusahaan = $("#perusahaan_inp").val();          
@@ -405,6 +420,7 @@
 
             var html = "<tr>";
                 html += "<td>"+no+"</td>";
+                html += "<td class='text-left'><input type='hidden' class='user' data-no='"+no+"' name='user["+no+"]' value='"+user+"'/>"+user+"</td>";
                 html += "<td class='text-left'><input type='hidden' class='jabatan' data-no='"+no+"' name='jabatan["+no+"]' value='"+jabatan+"'/>"+jabatan+"</td>";
                 html += "<td class='text-left'><input type='hidden' class='divisi' data-no='"+no+"' name='divisi["+no+"]' value='"+divisi+"'/>"+divisi+"</td>";
                 html += "<td class='text-left'><input type='hidden' class='perusahaan' data-no='"+no+"' name='perusahaan["+no+"]' value='"+perusahaan+"'/>"+perusahaan+"</td>";
@@ -415,6 +431,7 @@
                 html += "</tr>";
 
             $("#person_table").append(html);
+            $("#user_inp").val("");
             $("#jabatan_inp").val("");
             $("#divisi_inp").val("");
             $("#perusahaan_inp").val("");
@@ -428,6 +445,7 @@
 
         $(document.body).on("click",".empty_person",function(){
           $("#current_person").val("");     
+          $("#user_inp").val("");
           $("#jabatan_inp").val("");
           $("#divisi_inp").val("");
           $("#perusahaan_inp").val("");
@@ -438,6 +456,7 @@
 
         $(document.body).on("click",".edit_person",function(){
           var no = $(this).attr('data-no');
+          var user = $(".user[data-no='"+no+"']").val();
           var jabatan = $(".jabatan[data-no='"+no+"']").val();
           var divisi = $(".divisi[data-no='"+no+"']").val();
           var perusahaan = $(".perusahaan[data-no='"+no+"']").val();
@@ -446,6 +465,7 @@
           var person_keterangan = $(".person_keterangan[data-no='"+no+"']").val();
           
           $("#current_person").val(no);
+          $("#user_inp").val(user);
           $("#jabatan_inp").val(jabatan);
           $("#divisi_inp").val(divisi);
           $("#perusahaan_inp").val(perusahaan);
@@ -460,6 +480,15 @@
         });
 
     })
+
+    function getMaxDataNo(selector) {
+      var min=null, max=null;
+      $(selector).each(function() {
+        var no_pp = parseInt($(this).attr('data-no'), 10);
+        if ((max===null) || (no_pp > max)) { max = no_pp; }
+      });
+      return max;
+    }
 
     function isShowAddPerson() {
       var div_add = document.getElementById("showAddPerson");

@@ -148,23 +148,23 @@
 
 	} else {
 
-	$hps = $this->Procrfq_m->getEachHPS($ptm_number, $kontrak['vendor_id'])->result_array();
+		$hps = $this->Procrfq_m->getEachHPS($ptm_number, $kontrak['vendor_id'])->result_array();
 
-	$totalhps = 0;
+		$totalhps = 0;
 
-	foreach ($hps as $kh => $valhps) {
+		foreach ($hps as $kh => $valhps) {
 
-		$qty = $valhps['tit_quantity'];
+			$qty = $valhps['tit_quantity'];
 
-		$price = $valhps['tit_price'];
+			$price = $valhps['tit_price'];
 
-		$totalhps += $qty * $price;
+			$totalhps += $qty * $price;
 
-	}
+		}
 
-	$hps = $this->Procrfq_m->getHPSRFQ($ptm_number)->row_array();
+		$hps = $this->Procrfq_m->getHPSRFQ($ptm_number)->row_array();
 
-	$data['hps'] = ($totalhps == "") ? $hps['hps_total'] : $totalhps;	
+		$data['hps'] = ($totalhps == "") ? $hps['hps_total'] : $totalhps;	
 
 	}
 
@@ -173,6 +173,9 @@
 	$this->db->select_sum('subtotal_rab');
 	$this->db->where('contract_id', $contract_id);
 	$data['subtotal_rab'] = $this->db->get('vw_smbd_sum_rab')->row_array();
+
+	$this->db->where('is_locked', '0');
+	$data['adm_user'] = $this->db->get('adm_user')->result_array();
 
      //hlmifzi
 	$data['kode_item'] = $this->Contract_m->getItem("",$contract_id)->row_array();
