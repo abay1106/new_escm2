@@ -432,6 +432,46 @@ class Contract_m extends CI_Model {
 
 	}
 
+	public function getJaminan($id = "",$contract_id = ""){
+
+		if(!empty($id)){
+
+			$this->db->where("id",$id);
+
+		}
+
+		if(!empty($contract_id)){
+
+			$this->db->where("contract_id",$contract_id);
+
+		}
+
+		$this->db->order_by("id","asc");
+
+		return $this->db->get("ctr_jaminan");
+
+	}
+
+	public function getPerson($id = "",$contract_id = ""){
+
+		if(!empty($id)){
+
+			$this->db->where("id",$id);
+
+		}
+
+		if(!empty($contract_id)){
+
+			$this->db->where("contract_id",$contract_id);
+
+		}
+
+		$this->db->order_by("id","asc");
+
+		return $this->db->get("ctr_person_in_charge");
+
+	}
+
 	public function getInvoice($invoice_id = "",$contract_id = ""){
 
 		if(!empty($invoice_id)){
@@ -887,11 +927,61 @@ class Contract_m extends CI_Model {
 
 	}
 
+	public function insertJaminan($input=array()){
+
+		if (!empty($input)){
+
+			unset($input['id']);
+
+			$this->db->insert("ctr_jaminan",$input);
+
+			return $this->db->affected_rows();
+		}
+
+	}
+
+	public function insertPerson($input=array()){
+
+		if (!empty($input)){
+
+			unset($input['id']);
+
+			$this->db->insert("ctr_person_in_charge",$input);
+
+			return $this->db->affected_rows();
+		}
+
+	}
+
 	public function updateMilestone($id, $input = array()){
 
 		if(!empty($id) && !empty($input)){
 
 			$this->db->where('milestone_id',$id)->update('ctr_contract_milestone',$input);
+
+			return $this->db->affected_rows();
+
+		}
+
+	}
+
+	public function updateJaminan($id, $input = array()){
+
+		if(!empty($id) && !empty($input)){
+
+			$this->db->where('id',$id)->update('ctr_jaminan',$input);
+
+			return $this->db->affected_rows();
+
+		}
+
+	}
+
+	public function updatePerson($id, $input = array()){
+
+		if(!empty($id) && !empty($input)){
+
+			$this->db->where('id',$id)->update('ctr_person_in_charge',$input);
 
 			return $this->db->affected_rows();
 
@@ -917,6 +1007,60 @@ class Contract_m extends CI_Model {
 
 			} else {
 				$this->insertMilestone($input);
+				$last_id = $this->db->insert_id();
+			}
+
+			return $last_id;
+
+		}
+
+	}
+
+	public function replaceJaminan($id,$input){
+
+		if(!empty($input)){
+
+			if(!empty($id)){
+
+				$this->db->where(array("contract_id"=>$input['contract_id'],"id"=>$id));
+				$check = $this->getJaminan()->row_array();
+				if(!empty($check)){
+					$last_id = $check['id'];
+					$this->updateJaminan($last_id,$input);
+				} else {
+					$this->insertJaminan($input);
+					$last_id = $this->db->insert_id();
+				}
+
+			} else {
+				$this->insertJaminan($input);
+				$last_id = $this->db->insert_id();
+			}
+
+			return $last_id;
+
+		}
+
+	}
+
+	public function replacePerson($id,$input){
+
+		if(!empty($input)){
+
+			if(!empty($id)){
+
+				$this->db->where(array("contract_id"=>$input['contract_id'],"id"=>$id));
+				$check = $this->getPerson()->row_array();
+				if(!empty($check)){
+					$last_id = $check['id'];
+					$this->updatePerson($last_id,$input);
+				} else {
+					$this->insertPerson($input);
+					$last_id = $this->db->insert_id();
+				}
+
+			} else {
+				$this->insertJaminan($input);
 				$last_id = $this->db->insert_id();
 			}
 
@@ -1026,6 +1170,20 @@ class Contract_m extends CI_Model {
 	public function deleteIfNotExistMilestone($id,$deleted){
 		if(!empty($id) && !empty($deleted)){
 			$this->db->where_not_in("milestone_id",$deleted)->where("contract_id",$id)->delete("ctr_contract_milestone");
+			return $this->db->affected_rows();
+		}
+	}
+
+	public function deleteIfNotExistJaminan($id,$deleted){
+		if(!empty($id) && !empty($deleted)){
+			$this->db->where_not_in("id",$deleted)->where("contract_id",$id)->delete("ctr_jaminan");
+			return $this->db->affected_rows();
+		}
+	}
+
+	public function deleteIfNotExistPerson($id,$deleted){
+		if(!empty($id) && !empty($deleted)){
+			$this->db->where_not_in("id",$deleted)->where("contract_id",$id)->delete("ctr_person_in_charge");
 			return $this->db->affected_rows();
 		}
 	}

@@ -160,13 +160,13 @@
       $this->form_validation->set_rules("tgl_akhir_inp", "Tanggal Akhir Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
 
       $input['created_date'] = date("Y-m-d H:i:s");
-      $input['pf_bank'] = $post['nama_bank_inp'];
-      $input['pf_amount'] = moneytoint($post['nilai_jaminan_inp']);
-      $input['pf_number'] = $post['no_jaminan_inp'];
-      $input['pf_start_date'] = (!empty($post['mulai_berlaku_inp'])) ? date("Y-m-d",strtotime($post['mulai_berlaku_inp'])) : null;
-      $input['pf_end_date'] = (!empty($post['berlaku_hingga_inp'])) ? date("Y-m-d",strtotime($post['berlaku_hingga_inp'])) : null;
-      $input['pf_attachment'] = $post['jaminan_file_inp'];
-      $input['ctr_currency'] = $post['currency_inp'];
+      //$input['pf_bank'] = $post['nama_bank_inp'];
+      //$input['pf_amount'] = moneytoint($post['nilai_jaminan_inp']);
+      //$input['pf_number'] = $post['no_jaminan_inp'];
+      // $input['pf_start_date'] = (!empty($post['mulai_berlaku_inp'])) ? date("Y-m-d",strtotime($post['mulai_berlaku_inp'])) : null;
+      // $input['pf_end_date'] = (!empty($post['berlaku_hingga_inp'])) ? date("Y-m-d",strtotime($post['berlaku_hingga_inp'])) : null;
+      // $input['pf_attachment'] = $post['jaminan_file_inp'];
+      // $input['ctr_currency'] = $post['currency_inp'];
       
     }
 
@@ -303,8 +303,9 @@
     }
 
     $input_doc = array();
-
+    $input_jaminan = array();
     $input_milestone = array();
+    $input_person = array();
 
     $n = 0;
 
@@ -346,19 +347,20 @@
             $input_doc[$key2]['upload_date']= date('Y-m-d h:i:s');
           }
 
-          if(isset($post['milestone_percent'][$key2])){
+          if(isset($post['deskripsi_milestone'][$key2])){
 
-            $this->form_validation->set_rules("milestone_percent[$key2]", "Bobot Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $this->form_validation->set_rules("milestone_desc[$key2]", "Jumlah Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH_TEXT.']');
-            $this->form_validation->set_rules("milestone_date[$key2]", "Tanggal Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            $this->form_validation->set_rules("deskripsi_milestone[$key2]", "Deskripsi Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
             
-            if(!empty($post['milestone_id'][$key2])){
-              $input_milestone[$key2]['milestone_id']=$post['milestone_id'][$key2];
-            }
+            // if(!empty($post['milestone_id'][$key2])){
+            //   $input_milestone[$key2]['milestone_id']=$post['milestone_id'][$key2];
+            // }
 
-            $input_milestone[$key2]['percentage']=moneytoint($post['milestone_percent'][$key2]);
-            $input_milestone[$key2]['description']=$post['milestone_desc'][$key2];
-            $input_milestone[$key2]['target_date']=$post['milestone_date'][$key2];
+            $input_milestone[$key2]['percentage']=moneytoint($post['bobot_milestone'][$key2]);
+            $input_milestone[$key2]['description']=$post['deskripsi_milestone'][$key2];
+            $input_milestone[$key2]['target_date']=$post['tanggal_milestone'][$key2];
+            $input_milestone[$key2]['note']=$post['keterangan'][$key2];
+            $input_milestone[$key2]['milestone_file']=$post['milestone_file'][$key2];
+            $input_milestone[$key2]['nilai']=moneytoint($post['nilai_milestone'][$key2]);
 
           }
 
@@ -422,6 +424,38 @@
       }
 
       $this->Contract_m->deleteIfNotExistMilestone($contract_id,$deleted);
+
+    }
+
+    if(!empty($input_jaminan)){
+
+      $deleted = array();
+
+      foreach ($input_jaminan as $key => $value) {
+        $value['contract_id'] = $contract_id;
+        $act = $this->Contract_m->replaceMilestone($key,$value);
+        if($act){
+          $deleted[] = $act;
+        }
+      }
+
+      $this->Contract_m->deleteIfNotExistJaminan($contract_id,$deleted);
+
+    }
+
+    if(!empty($input_person)){
+
+      $deleted = array();
+
+      foreach ($input_person as $key => $value) {
+        $value['contract_id'] = $contract_id;
+        $act = $this->Contract_m->replaceMilestone($key,$value);
+        if($act){
+          $deleted[] = $act;
+        }
+      }
+
+      $this->Contract_m->deleteIfNotExistPerson($contract_id,$deleted);
 
     }
 
