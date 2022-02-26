@@ -135,7 +135,60 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody>       
+              <tbody>      
+                <?php 
+                    $subtotal = 0;
+                    $no = 1;
+                    if(isset($jaminan) && !empty($jaminan)){
+                      foreach ($jaminan as $key => $value) { 
+                      $myid = $key+1;
+                  ?>
+
+                  <tr>   
+                    <td><?php echo $no++; ?></td>                      
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_jenis_jaminan'] ?>" name="jenis_jaminan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="jenis_jaminan">
+                      <?php echo $value['cj_jenis_jaminan'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_tipe_jaminan'] ?>" name="tipe_jaminan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="tipe_jaminan">
+                      <?php echo $value['cj_tipe_jaminan'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_nama_perusahaan'] ?>" name="nama_perusahaan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="nama_perusahaan">
+                      <?php echo $value['cj_nama_perusahaan'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_nomor_jaminan'] ?>" name="nomor_jaminan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="nomor_jaminan">
+                      <?php echo $value['cj_nomor_jaminan'] ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_alamat'] ?>" name="alamat[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="alamat">
+                      <?php echo $value['cj_alamat'] ?>
+                    </td>
+                    <td class="money">
+                      <input type="hidden" value="<?php echo inttomoney($value['cj_nilai']) ?>" name="nilai[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="nilai">
+                      <?php echo inttomoney($value['cj_nilai']) ?>
+                    </td>                  
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_date_start'] ?>" name="mulai_berlaku[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="mulai_berlaku">
+                      <input type="hidden" value="<?php echo $value['cj_date_end'] ?>" name="berlaku_hingga[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="berlaku_hingga">
+                      <?php echo $value['cj_date_start'] . ' / ' . $value['cj_date_end'] ?>                      
+                    </td>                  
+                    <td>
+                      <input type="hidden" value="<?php echo $value['cj_lampiran'] ?>" name="jaminan_file[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="jaminan_file">
+                      <a href='<?php echo site_url("log/download_attachment/contract/jaminan/".$value['cj_lampiran']) ?>' target="_blank"><?php echo $value['cj_lampiran'] ?></a>                      
+                    </td>                 
+                    <td>
+                      <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_item" type="button">
+                        <i class="fa fa-edit"></i>
+                        <?php  ?>
+                        <input type="hidden" name="id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <?php } } ?>   
               </tbody>
             </table>
           </div>

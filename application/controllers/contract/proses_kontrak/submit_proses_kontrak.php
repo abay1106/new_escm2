@@ -155,17 +155,17 @@
 
     if(in_array($last_activity, array(2010,2030))){
 
-      //$this->form_validation->set_rules("jenis_kontrak_inp", "Jenis Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
+      // $this->form_validation->set_rules("jenis_kontrak_inp", "Jenis Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
       $this->form_validation->set_rules("tgl_mulai_inp", "Tanggal Mulai Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
       $this->form_validation->set_rules("tgl_akhir_inp", "Tanggal Akhir Kontrak", 'required|max_length['.DEFAULT_MAXLENGTH.']');
 
       $input['created_date'] = date("Y-m-d H:i:s");
-      //$input['pf_bank'] = $post['nama_bank_inp'];
-      //$input['pf_amount'] = moneytoint($post['nilai_jaminan_inp']);
-      //$input['pf_number'] = $post['no_jaminan_inp'];
-      // $input['pf_start_date'] = (!empty($post['mulai_berlaku_inp'])) ? date("Y-m-d",strtotime($post['mulai_berlaku_inp'])) : null;
-      // $input['pf_end_date'] = (!empty($post['berlaku_hingga_inp'])) ? date("Y-m-d",strtotime($post['berlaku_hingga_inp'])) : null;
-      // $input['pf_attachment'] = $post['jaminan_file_inp'];
+      $input['pf_bank'] = $post['deskripsi_milestone_inp'];
+      $input['pf_amount'] = moneytoint($post['nilai_inp']);
+      $input['pf_number'] = $post['nomor_jaminan_inp'];
+      $input['pf_start_date'] = (!empty($post['mulai_berlaku_inp'])) ? date("Y-m-d",strtotime($post['mulai_berlaku_inp'])) : null;
+      $input['pf_end_date'] = (!empty($post['berlaku_hingga_inp'])) ? date("Y-m-d",strtotime($post['berlaku_hingga_inp'])) : null;
+      $input['pf_attachment'] = $post['jaminan_file_inp'];
       // $input['ctr_currency'] = $post['currency_inp'];
       
     }
@@ -283,9 +283,9 @@
 
         $milestone = 0.0;
 
-        if(isset($post['milestone_percent'])){
+        if(isset($post['bobot_milestone'])){
 
-          foreach ($post['milestone_percent'] as $key => $value) {
+          foreach ($post['bobot_milestone'] as $key => $value) {
             $milestone += moneytoint($value);
           }
 
@@ -351,9 +351,9 @@
 
             $this->form_validation->set_rules("deskripsi_milestone[$key2]", "Deskripsi Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
             
-            // if(!empty($post['milestone_id'][$key2])){
-            //   $input_milestone[$key2]['milestone_id']=$post['milestone_id'][$key2];
-            // }
+            if(!empty($post['milestone_id'][$key2])){
+              $input_milestone[$key2]['milestone_id']=$post['milestone_id'][$key2];
+            }
 
             $input_milestone[$key2]['percentage']=moneytoint($post['bobot_milestone'][$key2]);
             $input_milestone[$key2]['description']=$post['deskripsi_milestone'][$key2];
@@ -361,6 +361,28 @@
             $input_milestone[$key2]['note']=$post['keterangan'][$key2];
             $input_milestone[$key2]['milestone_file']=$post['milestone_file'][$key2];
             $input_milestone[$key2]['nilai']=moneytoint($post['nilai_milestone'][$key2]);
+
+          }
+
+          if(isset($post['jenis_jaminan'][$key2])){
+
+            $this->form_validation->set_rules("jenis_jaminan[$key2]", "Jenis Milestone #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            
+            if(!empty($post['id'][$key2])){
+              $input_jaminan[$key2]['id']=$post['id'][$key2];
+            }
+
+            $input_jaminan[$key2]['cj_jenis_jaminan']=$post['jenis_jaminan'][$key2];
+            $input_jaminan[$key2]['cj_tipe_jaminan']=$post['tipe_jaminan'][$key2];
+            $input_jaminan[$key2]['cj_nama_perusahaan']=$post['nama_perusahaan'][$key2];
+            $input_jaminan[$key2]['cj_nomor_jaminan']=$post['nomor_jaminan'][$key2];
+            $input_jaminan[$key2]['cj_alamat']=$post['alamat'][$key2];
+            $input_jaminan[$key2]['cj_date_start']=$post['mulai_berlaku'][$key2];
+            $input_jaminan[$key2]['cj_date_end']=$post['berlaku_hingga'][$key2];
+            $input_jaminan[$key2]['cj_lampiran']=$post['jaminan_file'][$key2];
+            $input_jaminan[$key2]['cj_nilai']=moneytoint($post['nilai'][$key2]);
+            $input_jaminan[$key2]['cj_created_by']=$userdata['employee_id'][$key2];
+            $input_jaminan[$key2]['cj_created_date']=date('Y-m-d h:i:s');
 
           }
 
@@ -432,8 +454,8 @@
       $deleted = array();
 
       foreach ($input_jaminan as $key => $value) {
-        $value['contract_id'] = $contract_id;
-        $act = $this->Contract_m->replaceMilestone($key,$value);
+        $value['cj_contract_id'] = $contract_id;
+        $act = $this->Contract_m->replaceJaminan($key,$value);
         if($act){
           $deleted[] = $act;
         }
@@ -448,8 +470,8 @@
       $deleted = array();
 
       foreach ($input_person as $key => $value) {
-        $value['contract_id'] = $contract_id;
-        $act = $this->Contract_m->replaceMilestone($key,$value);
+        $value['cp_contract_id'] = $contract_id;
+        $act = $this->Contract_m->replacePerson($key,$value);
         if($act){
           $deleted[] = $act;
         }

@@ -91,7 +91,53 @@
                     <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody>                  
+                <tbody>    
+
+                  <?php 
+                    $subtotal = 0;
+                    $no = 1;
+                    if(isset($milestone) && !empty($milestone)){
+                      foreach ($milestone as $key => $value) { 
+                      $myid = $key+1;
+                  ?>
+
+                  <tr>   
+                    <td><?php echo $no++; ?></td>                      
+                    <td>
+                      <input type="hidden" value="<?php echo $value['description'] ?>" name="deskripsi_milestone[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="deskripsi_milestone">
+                      <?php echo $value['description'] ?>
+                    </td>
+                    <td class="money">
+                      <input type="hidden" value="<?php echo inttomoney($value['nilai']) ?>" name="nilai_milestone[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="nilai_milestone">
+                      <?php echo inttomoney($value['nilai']) ?>
+                    </td>
+                    <td class="money">
+                      <input type="hidden" value="<?php echo inttomoney($value['percentage']) ?>" name="bobot_milestone[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="bobot_milestone">
+                      <?php echo inttomoney($value['percentage']) ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo date("Y-m-d",strtotime($value['target_date'])) ?>" name="tanggal_milestone[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="tanggal_milestone">
+                      <?php echo date("Y-m-d",strtotime($value['target_date'])) ?>
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['milestone_file'] ?>" name="milestone_file[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="milestone_file">
+                      <a href='<?php echo site_url("log/download_attachment/contract/milestone/".$value['milestone_file']) ?>' target="_blank"><?php echo $value['milestone_file'] ?></a>                      
+                    </td>
+                    <td>
+                      <input type="hidden" value="<?php echo $value['note'] ?>" name="keterangan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="keterangan">
+                      <?php echo $value['note'] ?>
+                    </td>
+                    <td>
+                      <button data-no="<?php echo $myid ?>" class="btn btn-info btn-sm edit_milestone" type="button">
+                        <i class="fa fa-edit"></i>
+                        <?php  ?>
+                        <input type="hidden" name="milestone_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <?php } } ?>    
+
                 </tbody>
               </table>
             </div>
