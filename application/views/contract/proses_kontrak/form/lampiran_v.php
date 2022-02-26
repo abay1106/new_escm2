@@ -316,19 +316,19 @@
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Jabatan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="jabatan_inp" id="jabatan_inp">
+                      <input class="form-control" name="jabatan_inp" id="jabatan_inp" palceholder="Jabatan">
                     </div>
                   </div>
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Divisi <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="divisi_inp" id="divisi_inp">
+                      <input class="form-control" name="divisi_inp" id="divisi_inp" palceholder="Nama divisi">
                     </div>
                   </div>
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Perusahaan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="perusahaan_inp" id="perusahaan_inp">
+                      <input class="form-control" name="perusahaan_inp" id="perusahaan_inp" palceholder="Nama perusahaan">
                     </div>
                   </div>
                 </div>
@@ -338,19 +338,19 @@
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">No. Telpon <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="telp_inp" id="telp_inp">
+                      <input class="form-control" name="telp_inp" id="telp_inp" palceholder="Nomor telepon">
                     </div>
                   </div>  
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Email <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="email_inp" id="email_inp">
+                      <input class="form-control" name="email_inp" id="email_inp" palceholder="Email">
                     </div>
                   </div>   
                   <div class="row form-group">
                     <label class="col-sm-4 control-label text-right">Keterangan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
-                      <textarea class="form-control" name="person_keterangan_inp" id="person_keterangan_inp"></textarea>
+                      <textarea class="form-control" name="person_keterangan_inp" id="person_keterangan_inp" palceholder="Keterangan"></textarea>
                     </div>
                   </div>               
                 </div>
