@@ -386,9 +386,9 @@
 
           }
 
-          if(isset($post['user_inp'][$key2])){
+          if(isset($post['user'][$key2])){
 
-            $this->form_validation->set_rules("user_inp[$key2]", "Nama Lengkap #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            $this->form_validation->set_rules("user[$key2]", "Nama Lengkap #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
             
             if(!empty($post['person_id'][$key2])){
               $input_person[$key2]['id']=$post['person_id'][$key2];
