@@ -24,7 +24,7 @@
 						</div>
 						<div class="card-content">
 							<div class="card-img">
-								<img class="img-fluid" src="<?php echo base_url('attachment/news/' . $value['image'])?>">
+								<img class="img-fluid" src="<?= base_url('uploads/administration/' . $value['image'])?>">
 							</div>
 							<div class="card-body">
 								<p class="card-text"><?php echo substr($value['content'], 0, 100); ?></p>
@@ -36,7 +36,7 @@
 								<span class="badge bg-warning"><?php echo $value['kategori']; ?></span>
 							</span>
 						</div>
-						<a href="<?= base_url('administration/news/delete_news/' . $value['news_id']);?>" onclick="return confirm('Apakah Anda yakin hapus data di ini?')" class="btn btn-outline-danger m-3">Hapus</a>
+						<a href="<?= site_url('administration/document/news/hapus/' . $value['news_id']);?>" onclick="return confirm('Apakah Anda yakin hapus data di ini?')" class="btn btn-outline-danger m-3">Hapus</a>
 					</div>
 				</div>
 			<?php } ?>
@@ -68,7 +68,7 @@
 						<div class="card-body">
 							<h4 class="card-title"><?php echo $value['link_title'];?></h4> <hr/>
 							<p class="card-text"><?php echo substr($value['link_content'], 0, 120);?>...</p>
-							<a href="<?php echo base_url('_api/lkpp/delete_id/' . $value['id']);?>" onclick="return confirm('Apakah Anda yakin hapus data di ini?')" class="btn btn-outline-danger">Hapus</a>
+							<a href="<?php echo site_url('administration/document/news/hapus_lkpp/' . $value['id']);?>" onclick="return confirm('Apakah Anda yakin hapus data di ini?')" class="btn btn-outline-danger">Hapus</a>
 							<a href="<?php echo $value['link_lanjutan'];?>" target="_blank" class="btn btn-outline-info">Selengkapnya</a>
 							<p class="card-text text-muted mt-2"><?php echo date("d-m-Y H:i:s", strtotime($value['date_created'])); ?>
 						</div>

@@ -1,4 +1,11 @@
 <?php
+if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+    $this->upload->do_upload('image');
+    $files = $this->upload->data();
+    $data['image'] = $files['file_name'] ? $files['file_name'] : '';
+}else{
+    unset($data['image']);
+}
 
 $post = $this->input->post();
 
@@ -8,8 +15,10 @@ $data = array(
 	'kategori' => $post['kategori'],
 	'tittle' => $post['tittle'],
 	'content' => $post['content'],
-	'image' => $post['image']
+	'image' => $data['image']
 	);
+
+  // print_r($data);
 
 $insert = $this->db->insert('vnd_news', $data);
 
