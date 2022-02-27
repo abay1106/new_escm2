@@ -69,6 +69,35 @@ class Administration extends Telescoope_Controller
     }
   }
 
+  public function document($param1 = "", $param2 = "", $param3 = "")
+  {
+    switch ($param1) {
+      case 'news':
+      switch ($param2) {
+
+        case 'tambah':
+          $this->submit_news();
+          break;
+
+        case 'hapus':
+          $this->delete_news($param3);
+          break;
+
+        case 'hapus_lkpp':
+          $this->delete_news_lkpp($param3);
+          break;
+
+        case 'add':
+          $this->submit_news_lkpp();
+          break;
+
+      }
+      default:
+        $this->news();
+        break;
+    }
+  }
+
   public function user_management($param1 = "", $param2 = "", $param3 = "")
   {
 
@@ -447,29 +476,6 @@ class Administration extends Telescoope_Controller
         }
 
         break;
-
-        case 'news':
-
-          switch ($param2) {
-
-            case 'tambah':
-              $this->submit_news();
-              break;
-
-            case 'hapus':
-              $this->delete_news($param3);
-              break;
-
-            case 'add':
-              $this->submit_news_lkpp();
-              break;
-
-            default:
-              $this->news();
-              break;
-          }
-
-          break;
 
         case 'rks':
 
@@ -1595,22 +1601,27 @@ class Administration extends Telescoope_Controller
 
   public function news()
   {
-    include("administration/document/news.php");
+    include("administration/document/news/news.php");
   }
 
   public function submit_news()
   {
-    include("administration/document/submit_news.php");
+    include("administration/document/news/submit_news.php");
   }
 
   public function delete_news($id)
   {
-    include("administration/document/delete_news.php");
+    include("administration/document/news/delete_news.php");
+  }
+
+  public function delete_news_lkpp($id)
+  {
+    include("administration/document/news/delete_news_lkpp.php");
   }
 
   public function submit_news_lkpp()
   {
-    include("administration/document/submit_news_lkpp.php");
+    include("administration/document/news/submit_news_lkpp.php");
   }
 
   public function rks()
