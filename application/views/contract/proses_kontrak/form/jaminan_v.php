@@ -3,14 +3,14 @@
     <div class="card">
       
       <div class="card-header border-bottom pb-2">
-        <div class="btn-group-sm float-left">
+          <div class="btn-group-sm float-left">
             <span class="card-title text-bold-600 mr-2">Jaminan</span> <span><a onclick="isShowAddJaminan()" class="btn btn-info btn-sm"><i class="ft-plus"></i> Tambah</a></span>            
           </div>
           <div class="btn-group-sm float-right" id="showButtonJaminan" style="display: none">
-            <a class="btn btn-info action_item">Simpan</a>
-            <a class="btn btn-danger empty_item" title="Hapus"><i class="ft-trash"></i></a>
-            <input type="hidden" id="current_item" name="current_item" value=""/>      
-          </div>
+            <a class="btn btn-info btn-sm action_item">Simpan</a>
+            <a class="btn btn-danger btn-sm empty_item" title="Hapus"><i class="ft-trash"></i></a>
+            <input type="hidden" id="current_item" name="current_item" value=""/>                  
+          </div>          
       </div>
 
       <div class="card-content">
@@ -46,7 +46,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Nama Perusahaan <span class="text-danger text-bold-700">*</span></label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" maxlength="40" name="nama_perusahaan_inp" id="nama_perusahaan_inp" value="<?php echo $curval ?>">              
+                    <input type="text" class="form-control" maxlength="40" name="nama_perusahaan_inp" id="nama_perusahaan_inp" value="<?php echo $curval ?>" placeholder="Nama perusahaan">              
                   </div>
                 </div>
 
@@ -54,7 +54,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Nomor Jaminan <span class="text-danger text-bold-700">*</span></label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" maxlength="40" name="nomor_jaminan_inp" id="nomor_jaminan_inp" value="<?php echo $curval ?>">              
+                    <input type="text" class="form-control" maxlength="40" name="nomor_jaminan_inp" id="nomor_jaminan_inp" value="<?php echo $curval ?>" placeholder="Nomor jaminan">              
                   </div>
                 </div>
 
@@ -62,7 +62,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Alamat <span class="text-danger text-bold-700">*</span></label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" maxlength="150" name="alamat_inp" id="alamat_inp" value="<?php echo $curval ?>">              
+                    <input type="text" class="form-control" maxlength="150" name="alamat_inp" id="alamat_inp" value="<?php echo $curval ?>" placeholder="Alamat">              
                   </div>
                 </div>
 
@@ -94,7 +94,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Nilai Jaminan <span class="text-danger text-bold-700">*</span></label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control money" maxlength="40" name="nilai_inp" id="nilai_inp" value="<?php echo $curval ?>">              
+                    <input type="text" class="form-control money" maxlength="40" name="nilai_inp" id="nilai_inp" value="<?php echo $curval ?>" placeholder="25.000.0000">              
                   </div>
                 </div>   
 
