@@ -102,15 +102,19 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">Upload Dokumen</label>
                   <div class="col-sm-6">
+
                     <div class="input-group">
                       <span class="input-group-btn">
-                      <button type="button" data-id="jaminan_file_inp" data-folder="<?php echo "contract/jaminan" ?>" data-preview="preview_file" class="btn btn-info upload">...</button> 
+                      <button type="button" data-id="jaminan_file_inp" data-folder="<?php echo "contract/jaminan" ?>" data-preview="preview_file" class="btn btn-info upload" title="Upload"><i class="ft-upload"></i></button> 
                       </span> 
                       <input readonly type="text" class="form-control" id="jaminan_file_inp" name="jaminan_file_inp" value="<?php echo $curval ?>">
-                      <span class="input-group-btn">
-                      <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/jaminan/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file"><i class="fa fa-share"></i></button> 
-                      </span> 
-                    </div>
+                      <span class="btn-group-">
+                          <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/jaminan/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file" title="Preview"><i class="fa fa-share"></i></button> 
+                          <button type="button" data-id="jaminan_file_inp" data-folder="<?php echo "contract/jaminan" ?>" data-preview="preview_file" class="btn btn-danger removefile">
+                            <i class="fa fa-trash"></i>
+                          </button> 
+                      </span>                         
+                    </div>                    
                   </div>
                 </div>              
               

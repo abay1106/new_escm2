@@ -25,13 +25,13 @@
                 <!-- left-side -->
                 <div class="col-sm">
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Deskripsi</label>
+                    <label class="col-sm-4 control-label text-right">Deskripsi <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <textarea class="form-control" name="deskripsi_milestone_inp" id="deskripsi_milestone_inp" placeholder="Pembayaran tahap I"></textarea>
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Progress (%)</label>
+                    <label class="col-sm-4 control-label text-right">Progress (%) <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-4">
                       <input class="form-control money" name="bobot_milestone_inp" id="bobot_milestone_inp" maxlength="6" placeholder="Maksimal 100%">
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Target Tanggal</label>
+                    <label class="col-sm-4 control-label text-right">Target Tanggal <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-6">
                       <div class="input-group date">                        
                         <input type="date" name="tanggal_milestone_inp" id="tanggal_milestone_inp" class="form-control" value="">
@@ -52,7 +52,7 @@
                 <!-- right-side -->
                 <div class="col-sm">     
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Keterangan</label>
+                    <label class="col-sm-4 control-label text-right">Keterangan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <textarea class="form-control" name="keterangan_inp" id="keterangan_inp" placeholder="Keterangan"></textarea>
                     </div>
@@ -63,12 +63,15 @@
                     <div class="col-sm-6">
                       <div class="input-group">
                         <span class="input-group-btn">
-                        <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file2" class="btn btn-info upload">...</button> 
+                        <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file2" class="btn btn-info upload" title="Upload"><i class="ft-upload"></i></button> 
                         </span> 
                         <input readonly type="text" class="form-control" id="milestone_file_inp" name="milestone_file_inp" value="<?php echo $curval ?>">
-                        <span class="input-group-btn">
-                        <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/milestone/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file2"><i class="fa fa-share"></i></button> 
-                        </span> 
+                        <span class="btn-group-">
+                            <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/milestone/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file2" title="Preview"><i class="fa fa-share"></i></button> 
+                            <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file_2" class="btn btn-danger removefile">
+                              <i class="fa fa-trash"></i>
+                            </button> 
+                        </span>                         
                       </div>
                     </div>
                   </div>                                      
@@ -186,9 +189,17 @@
 
           alert("Isi tanggal milestone");
 
+        } else if(nilai_milestone == ""){
+
+          alert("Isi nilai milestone");
+
         } else if(bobot == ""){
 
           alert("Isi progress milestone");
+
+        } else if(keterangan == ""){
+
+          alert("Isi keterangan milestone");
 
         } else if(parseFloat(mybobot+bobot) > 100){
 
