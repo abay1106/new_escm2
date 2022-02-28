@@ -323,27 +323,27 @@
             $input_doc[$key2]['doc_id'] = $post['doc_id_inp'][$key2];
           }
           
-          if(isset($post['doc_desc_inp'][$key2])){
-            $this->form_validation->set_rules("doc_desc_inp[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH_TEXT.']');
-            $input_doc[$key2]['description']= $post['doc_desc_inp'][$key2];
+          if(isset($post['doc_desc'][$key2])){
+            $this->form_validation->set_rules("doc_desc[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH_TEXT.']');
+            $input_doc[$key2]['description']= $post['doc_desc'][$key2];
           }
-          if(isset($post['doc_attachment_inp'][$key2])){
-            $this->form_validation->set_rules("doc_attachment_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $input_doc[$key2]['filename']= $post['doc_attachment_inp'][$key2];
+          if(isset($post['doc_attachment'][$key2])){
+            $this->form_validation->set_rules("doc_attachment[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            $input_doc[$key2]['filename']= $post['doc_attachment'][$key2];
           }
-          if(isset($post['doc_vendor_inp'][$key2])){
-            $this->form_validation->set_rules("doc_vendor_inp[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');                        
-            $input_doc[$key2]['publish']= $post['doc_vendor_inp'][$key2];    
+          if(isset($post['doc_vendor'][$key2])){
+            $this->form_validation->set_rules("doc_vendor[$key2]", "lang:attachment #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');                        
+            $input_doc[$key2]['publish']= $post['doc_vendor'][$key2];    
           }
-          if(isset($post['doc_name_input'][$key2])){
-            $this->form_validation->set_rules("doc_name_input[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
-            $input_doc[$key2]['name_input']= $post['doc_name_input'][$key2];
+          if(isset($post['doc_name'][$key2])){
+            $this->form_validation->set_rules("doc_name[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');
+            $input_doc[$key2]['name_input']= $post['doc_name'][$key2];
           }
-          if(isset($post['doc_req_e_sign_inp'][$key2])){
-            $this->form_validation->set_rules("doc_req_e_sign_inp[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');            
-            $input_doc[$key2]['req_e_sign']= $post['doc_req_e_sign_inp'][$key2];
+          if(isset($post['doc_req_e_sign'][$key2])){
+            $this->form_validation->set_rules("doc_req_e_sign[$key2]", "lang:description #$key2", 'max_length['.DEFAULT_MAXLENGTH.']');            
+            $input_doc[$key2]['req_e_sign']= $post['doc_req_e_sign'][$key2];
           }
-          if(isset($post['doc_name_input'][$key2])){
+          if(isset($post['doc_name'][$key2])){
             $input_doc[$key2]['upload_date']= date('Y-m-d h:i:s');
           }
 
