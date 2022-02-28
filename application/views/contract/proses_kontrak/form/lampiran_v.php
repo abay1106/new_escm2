@@ -77,75 +77,77 @@
               </div> 
             </div>
 
-            <table class="table table-bordered" id="dok_table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nama Dokumen</th>
-                  <th>Lampiran</th>
-                  <th>Request E-Sign</th>
-                  <th>Signor</th>
-                  <th>Tanggal Upload</th>
-                  <th>Keterangan</th>
-                  <th>Kirim ke Vendor?</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dok_table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Dokumen</th>
+                    <th>Lampiran</th>
+                    <th>Request E-Sign</th>
+                    <th>Signor</th>
+                    <th>Tanggal Upload</th>
+                    <th>Keterangan</th>
+                    <th>Kirim ke Vendor?</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <?php 
-                  $no = 1;
-                  if(isset($document) && !empty($document)){
-                    foreach ($document as $key => $value) { 
-                    $myid = $key+1;
-                ?>
+                <tbody>
+                  <?php 
+                    $no = 1;
+                    if(isset($document) && !empty($document)){
+                      foreach ($document as $key => $value) { 
+                      $myid = $key+1;
+                  ?>
 
-                <tr>   
-                  <td><?php echo $no++; ?></td>                      
-                  <td>
-                    <input type="hidden" value="<?php echo $value['name_input'] ?>" name="doc_name[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_name">
-                    <?php echo $value['name_input'] ?>
-                  </td>                         
-                  <td>
-                    <input type="hidden" value="<?php echo $value['filename'] ?>" name="doc_attachment[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_attachment">
-                    <a href='<?php echo site_url("log/download_attachment/contract/document/".$value['filename']) ?>' target="_blank"><?php echo $value['filename'] ?></a>                      
-                  </td>   
-                  <td class="text-center">
-                      <div class="custom-switch custom-switch-info">
-                        <input type="checkbox" name="doc_req_e_sign[<?php echo $myid ?>]" class="custom-control-input" disabled id="color-switch-10" <?php echo ($value['req_e_sign'] == "on") ? "checked" : "" ?>>
-                        <label class="custom-control-label" for="color-switch-10"></label>
-                      </div>  
-                  </td>  
-                  <td>
-                    <input type="hidden" value="<?php echo $value['signor'] ?>" name="doc_name_signor[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_name_signor">
-                    <?php echo $value['signor'] ?>
-                  </td>  
-                  <td>
-                    <input type="hidden" value="<?php echo $value['upload_date'] ?>" name="upload_date_inp[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="upload_date_inp">
-                    <?php echo $value['upload_date'] ?>
-                  </td>    
-                  <td>
-                    <input type="hidden" value="<?php echo $value['description'] ?>" name="doc_desc[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_desc">
-                    <?php echo $value['description'] ?>
-                  </td>    
-                  <td class="text-center">
-                      <div class="custom-switch custom-switch-info">
-                        <input type="checkbox" name="doc_vendor[<?php echo $myid ?>]" class="custom-control-input" disabled id="color-switch-11" <?php echo ($value['publish'] == "on") ? "checked" : "" ?>>
-                        <label class="custom-control-label" for="color-switch-11"></label>
-                      </div>  
-                  </td>              
-                  <td>
-                    <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_dok" type="button">
-                      <i class="fa fa-edit"></i>
-                      <?php  ?>
-                      <input type="hidden" name="doc_id_inp[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
-                    </button>
-                  </td>
-                </tr>
+                  <tr>   
+                    <td><?php echo $no++; ?></td>                      
+                    <td>
+                      <input type="hidden" value="<?php echo $value['name_input'] ?>" name="doc_name[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_name">
+                      <?php echo $value['name_input'] ?>
+                    </td>                         
+                    <td>
+                      <input type="hidden" value="<?php echo $value['filename'] ?>" name="doc_attachment[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_attachment">
+                      <a href='<?php echo site_url("log/download_attachment/contract/document/".$value['filename']) ?>' target="_blank"><?php echo $value['filename'] ?></a>                      
+                    </td>   
+                    <td class="text-center">
+                        <div class="custom-switch custom-switch-info">
+                          <input type="checkbox" name="doc_req_e_sign[<?php echo $myid ?>]" class="custom-control-input" disabled id="color-switch-10" <?php echo ($value['req_e_sign'] == "on") ? "checked" : "" ?>>
+                          <label class="custom-control-label" for="color-switch-10"></label>
+                        </div>  
+                    </td>  
+                    <td>
+                      <input type="hidden" value="<?php echo $value['signor'] ?>" name="doc_name_signor[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_name_signor">
+                      <?php echo $value['signor'] ?>
+                    </td>  
+                    <td>
+                      <input type="hidden" value="<?php echo $value['upload_date'] ?>" name="upload_date_inp[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="upload_date_inp">
+                      <?php echo $value['upload_date'] ?>
+                    </td>    
+                    <td>
+                      <input type="hidden" value="<?php echo $value['description'] ?>" name="doc_desc[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="doc_desc">
+                      <?php echo $value['description'] ?>
+                    </td>    
+                    <td class="text-center">
+                        <div class="custom-switch custom-switch-info">
+                          <input type="checkbox" name="doc_vendor[<?php echo $myid ?>]" class="custom-control-input" disabled id="color-switch-11" <?php echo ($value['publish'] == "on") ? "checked" : "" ?>>
+                          <label class="custom-control-label" for="color-switch-11"></label>
+                        </div>  
+                    </td>              
+                    <td>
+                      <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_dok" type="button">
+                        <i class="fa fa-edit"></i>
+                        <?php  ?>
+                        <input type="hidden" name="doc_id_inp[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
+                      </button>
+                    </td>
+                  </tr>
 
-                <?php } } ?>               
-              </tbody>
-            </table>
+                  <?php } } ?>               
+                </tbody>
+              </table>
+            </div>
         </div>
       </div>
 
