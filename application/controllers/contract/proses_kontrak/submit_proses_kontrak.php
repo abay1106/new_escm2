@@ -23,54 +23,6 @@
     $contract = $this->Contract_m->getContractNew($ptm_number)->row_array();
 
     $contract_header = $this->Contract_m->getData($contract_id)->row_array();
-    
-    // post api umkm padi
-    if ($contract_header['padi_umkm'] == "on") {
-          
-        $vendor = $this->Vendor_m->getVendorActive($contract['vendor_id'])->row_array();
-          
-        $ch = curl_init( UMKM_PADI );
-    
-        $payload = json_encode( array( "umkm" => array(
-            "uid" => 'WIKA-' . $vendor['vendor_id'],
-            "nama_umkm" => $vendor['vendor_name'],
-            "alamat" => $vendor['address_street'],
-            "blok_no_kav" => "-",
-            "kode_pos" => $vendor['address_postcode'],
-            "kota" => $vendor['address_city'],
-            "provinsi" => $vendor['addres_prop'],
-            "no_telp" => $vendor['address_phone_no'],
-            "hp" => $vendor['address_phone_no'],
-            "email" => $vendor['login_id'],
-            "kategori_usaha" => "",
-            "jenis_kegiatan_usaha" => "",
-            "npwp" => $vendor['npwp_no'],
-            "nama_bank" => "",
-            "country_bank" => "",
-            "no_rekening" => "",
-            "nama_pemilik_rekening" => "",
-            "longitute" => "",
-            "latitute" => "",
-            "total_project" => "1",
-            "total_revenue" => "",
-            "ontime_rate" => "",
-            "average_rating" => ""
-        ) ) );
-      
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
-          'Content-Type:application/json',
-          'x-api-key:' . API_KEY_PADI,
-          'User-Agent:WIKA_E-SCM_V2'
-        ));
-      
-        $result = curl_exec($ch);
-      
-        $res_padi = json_decode($result, true);    
-        
-        curl_close($ch);
-    }
 
     $perencanaan_id = $permintaan['ppm_id'];
 
@@ -721,52 +673,52 @@
       }
 
       // post api umkm padi
-      // if ($post['padi_umkm_inp'] == "on") {
+      if ($contract_header['padi_umkm'] == "on") {
+            
+        $vendor = $this->Vendor_m->getVendorActive($contract['vendor_id'])->row_array();
           
-          $vendor = $this->Vendor_m->getVendorActive($contract['vendor_id'])->row_array();
-          
-          $ch = curl_init( UMKM_PADI );
+        $ch = curl_init( UMKM_PADI );
+    
+        $payload = json_encode( array( "umkm" => array(
+            "uid" => 'WIKA-' . $vendor['vendor_id'],
+            "nama_umkm" => $vendor['vendor_name'],
+            "alamat" => $vendor['address_street'],
+            "blok_no_kav" => "-",
+            "kode_pos" => $vendor['address_postcode'],
+            "kota" => $vendor['address_city'],
+            "provinsi" => $vendor['addres_prop'],
+            "no_telp" => $vendor['address_phone_no'],
+            "hp" => $vendor['address_phone_no'],
+            "email" => $vendor['login_id'],
+            "kategori_usaha" => "",
+            "jenis_kegiatan_usaha" => "",
+            "npwp" => $vendor['npwp_no'],
+            "nama_bank" => "",
+            "country_bank" => "",
+            "no_rekening" => "",
+            "nama_pemilik_rekening" => "",
+            "longitute" => "",
+            "latitute" => "",
+            "total_project" => "1",
+            "total_revenue" => "",
+            "ontime_rate" => "",
+            "average_rating" => ""
+        ) ) );
       
-          $payload = json_encode( array( "umkm" => array(
-              "uid" => $vendor['vendor_id'],
-              "nama_umkm" => $vendor['vendor_name'],
-              "alamat" => $vendor['address_street'],
-              "blok_no_kav" => "-",
-              "kode_pos" => $vendor['address_postcode'],
-              "kota" => $vendor['address_city'],
-              "provinsi" => $vendor['addres_prop'],
-              "no_telp" => $vendor['address_phone_no'],
-              "hp" => $vendor['address_phone_no'],
-              "email" => $vendor['login_id'],
-              "kategori_usaha" => "",
-              "jenis_kegiatan_usaha" => "",
-              "npwp" => $vendor['npwp_no'],
-              "nama_bank" => "",
-              "country_bank" => "",
-              "no_rekening" => "",
-              "nama_pemilik_rekening" => "",
-              "longitute" => "",
-              "latitute" => "",
-              "total_project" => "1",
-              "total_revenue" => "",
-              "ontime_rate" => "",
-              "average_rating" => ""
-          ) ) );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
+          'Content-Type:application/json',
+          'x-api-key:' . API_KEY_PADI,
+          'User-Agent:WIKA_E-SCM_V2'
+        ));
+      
+        $result = curl_exec($ch);
+      
+        $res_padi = json_decode($result, true);    
         
-          curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-          curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-          curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type:application/json',
-            'x-api-key:' . API_KEY_PADI,
-            'User-Agent:WIKA_E-SCM_V2'
-          ));
-        
-          $result = curl_exec($ch);
-        
-          $res_padi = json_decode($result, true);    
-          
-          curl_close($ch);
-      // }
+        curl_close($ch);
+      }
 
     }
 
