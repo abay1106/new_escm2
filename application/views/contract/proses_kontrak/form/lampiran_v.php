@@ -213,7 +213,7 @@
                 <div class="row form-group">
                   <label class="col-sm-4 control-label text-right">No. Telpon <span class="text-danger text-bold-700">*</span></label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" name="telp_inp" id="telp_inp" placeholder="Nomor telepon">
+                    <input type="text" maxlength="13" class="form-control" name="telp_inp" id="telp_inp" placeholder="Nomor telepon">
                   </div>
                 </div>  
                 <div class="row form-group">
@@ -566,5 +566,27 @@
 			div_btn.style.display = "block";
 		}
 	}
+
+  // Restricts input for the given textbox to the given inputFilter.
+  function setInputFilter(textbox, inputFilter) {
+    ["input"].forEach(function(event) {
+        textbox.addEventListener(event, function() {
+        if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        } else {
+            this.value = "";
+        }
+        });
+    });
+    }
+
+    // Install input filters.
+    setInputFilter(document.getElementById("telp_inp"), function(value) {
+    return /^-?\d*$/.test(value); });
 
 </script>
