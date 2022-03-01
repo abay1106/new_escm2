@@ -484,6 +484,17 @@ public function procurement_tools($param1 = "" ,$param2 = "", $param3 = ""){
     $this->template_evaluasi('hapus');
     break;
 
+    case 'daftar_template_kewnangan':
+     $this->daftar_kewenangan();
+    break;
+
+    
+    case 'detail_template_kewnangan':
+      $this->detail_template_kewenangan();
+     break;
+
+    
+
     case 'panitia_pengadaan':
 
     switch ($param2) {
@@ -856,6 +867,16 @@ public function submit_ubah_template_evaluasi(){
 public function hapus_template_evaluasi(){
   include("procurement/template_evaluasi/hapus_template_evaluasi.php");
 }
+
+public function daftar_kewenangan(){
+  include("procurement/template_kewenangan/daftar_template_kewenangan.php");
+}
+
+public function detail_template_kewenangan(){
+  include("procurement/template_kewenangan/detail_template_kewenangan.php");
+}
+
+
 
 public function data_monitor_pengadaan(){
   include("procurement/procurement_tools/data_monitor_pengadaan.php");
