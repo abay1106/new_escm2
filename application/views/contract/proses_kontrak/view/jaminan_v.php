@@ -1,100 +1,69 @@
+
 <div class="row">
   <div class="col-12">
     <div class="card">
 
       <div class="card-header border-bottom pb-2">
-        <h4 class="card-title">Jaminan Pelaksanaan</h4>
+        <h4 class="card-title">Jaminan</h4>
       </div>
 
       <div class="card-content">
         <div class="card-body">
-            <?php $curval = (isset($kontrak['pf_bank']) AND !empty($kontrak['pf_bank'])) ? $kontrak['pf_bank'] : "-"; ?>
-
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Institusi Keuangan</label>
-              <div class="col-sm-8">
-                <p class="form-control-static">
-                  <?php echo $curval ?>
-                </p>
-              </div>
-            </div>
-
-            <?php $curval = (isset($kontrak['pf_number']) AND !empty($kontrak['pf_number'])) ? $kontrak['pf_number'] : "-"; ?>
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Nomor Jaminan</label>
-              <div class="col-sm-4">
-                <p class="form-control-static">
-                  <?php echo $curval ?>
-                </p>
-              </div>
-            </div>
-
-            <?php $curval = (isset($kontrak['pf_start_date'])) ? date("d M Y",strtotime($kontrak['pf_start_date'])) : "-"; ?>
-
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Mulai Berlaku</label>
-              <div class="col-sm-4">
-                
-                <p class="form-control-static">
-                  <?php echo $curval ?>
-                </p>
-
-              </div>
-            </div>
-
-            <?php $curval = (isset($kontrak['pf_end_date'])) ? date("d M Y",strtotime($kontrak['pf_end_date'])) : "-"; ; ?>
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Berlaku Hingga</label>
-              <div class="col-sm-4">
-                
-                <p class="form-control-static">
-                  <?php echo $curval ?>
-                </p>
-
-              </div>
-            </div>
-
-            <?php $curval = (isset($kontrak['ctr_currency'])) ? $kontrak["ctr_currency"] : set_value("ctr_currency_inp");?>
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Mata Uang Jaminan</label>
-              <div class="col-sm-3">
-              <select class="form-control" disabled name="currency_inp" value="<?php echo $curval ?>">
-                <option value="">--Pilih--</option>
-                <?php foreach($currency as $key => $val){
-                  $selected = ($val['curr_code'] == $curval) ? "selected" : ""; 
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Jenis Jaminan</th>
+                  <th>Tipe Jaminan</th>
+                  <th>Nama Perusahaan</th>
+                  <th>Nomor Jaminan</th>
+                  <th>Alamat</th>
+                  <th>Nilai Jaminan</th>
+                  <th>Masa Berlaku</th>
+                  <th>Lampiran</th>
+                </tr>
+              </thead>
+              <tbody>      
+                  <?php 
+                    $no = 1;
+                    if(isset($jaminan) && !empty($jaminan)){
+                      foreach ($jaminan as $key => $value) { 
+                      $myid = $key+1;
                   ?>
-                  <option <?php echo $selected ?> value="<?php echo $val['curr_code'] ?>"><?php echo $val['curr_code']." - ".$val['curr_name']?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
 
+                  <tr>   
+                    <td><?php echo $no++; ?></td>                      
+                    <td>
+                      <?php echo $value['cj_jenis_jaminan'] ?>
+                    </td>
+                    <td>
+                      <?php echo $value['cj_tipe_jaminan'] ?>
+                    </td>
+                    <td>
+                      <?php echo $value['cj_nama_perusahaan'] ?>
+                    </td>
+                    <td>
+                      <?php echo $value['cj_nomor_jaminan'] ?>
+                    </td>
+                    <td>
+                      <?php echo $value['cj_alamat'] ?>
+                    </td>
+                    <td class="money text-right">
+                      <?php echo inttomoney($value['cj_nilai']) ?>
+                    </td>                  
+                    <td class="text-right">
+                      <?php echo $value['cj_date_start'] . ' / ' . $value['cj_date_end'] ?>                      
+                    </td>                  
+                    <td>
+                      <a href='<?php echo site_url("log/download_attachment/contract/jaminan/".$value['cj_lampiran']) ?>' target="_blank"><?php echo $value['cj_lampiran'] ?></a>                      
+                    </td>   
+                  </tr>
 
-            <?php $curval = (isset($kontrak['pf_amount'])) ? inttomoney($kontrak['pf_amount']) : "-"; ?>
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Nilai Jaminan</label>
-              <div class="col-sm-5">
-                <p class="form-control-static">
-                  <?php echo "IDR ".$curval ?>
-                </p>
-              </div>
-            </div>
-
-            <?php $curval = (isset($kontrak['pf_attachment'])) ? $kontrak['pf_attachment'] : ""; ?>
-            <div class="row form-group">
-              <label class="col-sm-2 control-label text-right">Lampiran Jaminan</label>
-              <div class="col-sm-5">
-                <p class="form-control-static">
-                  <?php if ($curval != "") { ?>
-                    <a href="<?php echo site_url("log/download_attachment/contract/jaminan/".$curval) ?>" target="_blank">
-                    <?php echo $curval ?>
-                <?php } else {?>
-                      -
-                    <?php } ?>
-                  </a>
-                </p>
-              </div>
-            </div>
+                  <?php } } ?>   
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

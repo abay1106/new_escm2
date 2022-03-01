@@ -234,70 +234,72 @@
 
           </div>
 
-          <table class="table table-bordered" id="person_table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama</th>                   
-                <th>Jabatan</th>                   
-                <th>Divisi</th>                   
-                <th>Perusahaan</th>                   
-                <th>No. Telpon</th>                   
-                <th>Email</th>                   
-                <th>Keterangan</th>                   
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>     
-              <?php 
-                $no = 1;
-                if(isset($person) && !empty($person)){
-                  foreach ($person as $key => $value) { 
-                  $myid = $key+1;
-              ?>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="person_table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>                   
+                  <th>Jabatan</th>                   
+                  <th>Divisi</th>                   
+                  <th>Perusahaan</th>                   
+                  <th>No. Telpon</th>                   
+                  <th>Email</th>                   
+                  <th>Keterangan</th>                   
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>     
+                <?php 
+                  $no = 1;
+                  if(isset($person) && !empty($person)){
+                    foreach ($person as $key => $value) { 
+                    $myid = $key+1;
+                ?>
 
-              <tr>   
-                <td><?php echo $no++; ?></td>                      
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_nama_lengkap'] ?>" name="user[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="user">
-                  <?php echo $value['cp_nama_lengkap'] ?>
-                </td>
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_jabatan'] ?>" name="jabatan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="jabatan">
-                  <?php echo $value['cp_jabatan'] ?>
-                </td>
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_divisi'] ?>" name="divisi[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="divisi">
-                  <?php echo $value['cp_divisi'] ?>
-                </td>
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_nama_perusahaan'] ?>" name="perusahaan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="perusahaan">
-                  <?php echo $value['cp_nama_perusahaan'] ?>
-                </td>
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_no_telp'] ?>" name="telp[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="telp">
-                  <?php echo $value['cp_no_telp'] ?>
-                </td>                 
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_email'] ?>" name="email[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="email">
-                  <?php echo $value['cp_email'] ?>
-                </td>                 
-                <td>
-                  <input type="hidden" value="<?php echo $value['cp_note'] ?>" name="person_keterangan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="person_keterangan">
-                  <?php echo $value['cp_note'] ?>
-                </td>                 
-                <td>
-                  <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_person" type="button">
-                    <i class="fa fa-edit"></i>
-                    <?php  ?>
-                    <input type="hidden" name="person_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
-                  </button>
-                </td>
-              </tr>
+                <tr>   
+                  <td><?php echo $no++; ?></td>                      
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_nama_lengkap'] ?>" name="user[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="user">
+                    <?php echo $value['cp_nama_lengkap'] ?>
+                  </td>
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_jabatan'] ?>" name="jabatan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="jabatan">
+                    <?php echo $value['cp_jabatan'] ?>
+                  </td>
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_divisi'] ?>" name="divisi[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="divisi">
+                    <?php echo $value['cp_divisi'] ?>
+                  </td>
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_nama_perusahaan'] ?>" name="perusahaan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="perusahaan">
+                    <?php echo $value['cp_nama_perusahaan'] ?>
+                  </td>
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_no_telp'] ?>" name="telp[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="telp">
+                    <?php echo $value['cp_no_telp'] ?>
+                  </td>                 
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_email'] ?>" name="email[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="email">
+                    <?php echo $value['cp_email'] ?>
+                  </td>                 
+                  <td>
+                    <input type="hidden" value="<?php echo $value['cp_note'] ?>" name="person_keterangan[<?php echo $myid ?>]" data-no="<?php echo $myid ?>" class="person_keterangan">
+                    <?php echo $value['cp_note'] ?>
+                  </td>                 
+                  <td>
+                    <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_person" type="button">
+                      <i class="fa fa-edit"></i>
+                      <?php  ?>
+                      <input type="hidden" name="person_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
+                    </button>
+                  </td>
+                </tr>
 
-              <?php } } ?>               
-            </tbody>
-          </table>
+                <?php } } ?>               
+              </tbody>
+            </table>
+          </div>
 
         </div>
       </div>
