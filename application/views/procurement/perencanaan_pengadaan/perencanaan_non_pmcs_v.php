@@ -15,11 +15,11 @@
           <div class="table-responsive">
             <div class="card" style="border-radius: 30px;">
               <div class="card-body">
+                <a href="<?= site_url('procurement/perencanaan_pengadaan/tambah_perencanaan_non_pmcs') ?>" class="btn btn-info btn-lg"><i class="ft ft-file"></i> Tambah</a>
                 <table id="table_perencanaan_non_pmcs" class="table table-bordered table-striped"></table>
               </div>
             </div>
           </div>
-
 
         </div>
       </div>

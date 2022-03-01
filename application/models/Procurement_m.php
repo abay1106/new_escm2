@@ -157,4 +157,39 @@ class Procurement_m extends CI_Model {
 			}
 		}
 
+		public function get_curr()
+		{
+			$this->db->order_by('curr_code', 'asc');
+			return $this->db->get('adm_curr')->result_array();
+		}
+
+		public function get_employee()
+		{
+			$role = $this->session->userdata(do_hash('ROLE'));
+
+			$this->db->where('dept_id !=', null);
+			$this->db->where('id', $role);
+
+			return $this->db->get('vw_employee')->row_array();
+
+		}
+
+		public function get_item_matgis()
+		{
+			//$this->db->order_by('id', 'asc');
+			$res = $this->db->get('vw_pr_item_non_matgis')->result_array();
+
+			return $res;
+			//exit;
+		}
+
+		public function get_matgis($id = null)
+		{
+			# code...
+			if($id != null) $this->db->where('id', $id);
+
+			$this->db->order_by('id', 'asc');
+			return $this->db->get('adm_desc_matgis')->result_array();
+		}
+
 }
