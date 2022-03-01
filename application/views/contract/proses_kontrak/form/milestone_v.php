@@ -25,13 +25,13 @@
                 <!-- left-side -->
                 <div class="col-sm">
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Deskripsi</label>
+                    <label class="col-sm-4 control-label text-right">Deskripsi <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <textarea class="form-control" name="deskripsi_milestone_inp" id="deskripsi_milestone_inp" placeholder="Pembayaran tahap I"></textarea>
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Progress (%)</label>
+                    <label class="col-sm-4 control-label text-right">Progress (%) <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-4">
                       <input class="form-control money" name="bobot_milestone_inp" id="bobot_milestone_inp" maxlength="6" placeholder="Maksimal 100%">
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                   </div>
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Target Tanggal</label>
+                    <label class="col-sm-4 control-label text-right">Target Tanggal <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-6">
                       <div class="input-group date">                        
                         <input type="date" name="tanggal_milestone_inp" id="tanggal_milestone_inp" class="form-control" value="">
@@ -52,7 +52,7 @@
                 <!-- right-side -->
                 <div class="col-sm">     
                   <div class="row form-group">
-                    <label class="col-sm-4 control-label text-right">Keterangan</label>
+                    <label class="col-sm-4 control-label text-right">Keterangan <span class="text-danger text-bold-700">*</span></label>
                     <div class="col-sm-8">
                       <textarea class="form-control" name="keterangan_inp" id="keterangan_inp" placeholder="Keterangan"></textarea>
                     </div>
@@ -63,12 +63,15 @@
                     <div class="col-sm-6">
                       <div class="input-group">
                         <span class="input-group-btn">
-                        <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file2" class="btn btn-info upload">...</button> 
+                        <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file2" class="btn btn-info upload" title="Upload"><i class="ft-upload"></i></button> 
                         </span> 
                         <input readonly type="text" class="form-control" id="milestone_file_inp" name="milestone_file_inp" value="<?php echo $curval ?>">
-                        <span class="input-group-btn">
-                        <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/milestone/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file2"><i class="fa fa-share"></i></button> 
-                        </span> 
+                        <span class="btn-group-">
+                            <button type="button" data-url="<?php echo site_url("log/download_attachment/contract/milestone/".$curval) ?>" class="btn btn-info preview_upload" id="preview_file2" title="Preview"><i class="fa fa-share"></i></button> 
+                            <button type="button" data-id="milestone_file_inp" data-folder="<?php echo "contract/milestone" ?>" data-preview="preview_file_2" class="btn btn-danger removefile">
+                              <i class="fa fa-trash"></i>
+                            </button> 
+                        </span>                         
                       </div>
                     </div>
                   </div>                                      
@@ -94,7 +97,6 @@
                 <tbody>    
 
                   <?php 
-                    $subtotal = 0;
                     $no = 1;
                     if(isset($milestone) && !empty($milestone)){
                       foreach ($milestone as $key => $value) { 
@@ -128,7 +130,7 @@
                       <?php echo $value['note'] ?>
                     </td>
                     <td>
-                      <button data-no="<?php echo $myid ?>" class="btn btn-info btn-sm edit_milestone" type="button">
+                      <button data-no="<?php echo $myid ?>" class="btn btn-warning btn-sm edit_milestone" type="button">
                         <i class="fa fa-edit"></i>
                         <?php  ?>
                         <input type="hidden" name="milestone_id[<?php echo $myid ?>]" value="<?php echo $myid ?>"/>
@@ -187,9 +189,17 @@
 
           alert("Isi tanggal milestone");
 
+        } else if(nilai_milestone == ""){
+
+          alert("Isi nilai milestone");
+
         } else if(bobot == ""){
 
           alert("Isi progress milestone");
+
+        } else if(keterangan == ""){
+
+          alert("Isi keterangan milestone");
 
         } else if(parseFloat(mybobot+bobot) > 100){
 
@@ -207,7 +217,7 @@
           html += "<td><input type='hidden' class='tanggal_milestone' data-no='"+no+"' name='tanggal_milestone["+no+"]' value='"+tanggal+"'/>"+tanggal+"</td>";
           html += "<td class='text-right'><input type='hidden' class='milestone_file' data-no='"+no+"' name='milestone_file["+no+"]' value='"+milestone_file+"'/><a href='"+url_file+milestone_file+"'>"+milestone_file+"</a></td>";
           html += "<td><input type='hidden' class='keterangan' data-no='"+no+"' name='keterangan["+no+"]' value='"+keterangan+"'/>"+keterangan+"</td>";
-          html += "<td><button type='button' class='btn btn-info btn-sm edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
+          html += "<td><button type='button' class='btn btn-warning btn-sm edit_milestone' data-no='"+no+"'><i class='fa fa-edit'></i></button></td>";
           html += "</tr>";
 
           $("#milestone_table").append(html);
