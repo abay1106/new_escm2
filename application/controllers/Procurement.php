@@ -492,7 +492,7 @@ public function procurement_tools($param1 = "" ,$param2 = "", $param3 = ""){
     $this->template_evaluasi('hapus');
     break;
 
-    case 'daftar_template_kewnangan':
+    case 'daftar_template_kewenangan':
      $this->daftar_kewenangan();
     break;
 
