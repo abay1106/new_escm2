@@ -36,6 +36,12 @@ $data['subtotal_rab'] = $this->db->get('vw_smbd_sum_rab')->row_array();
 
 $data['currency'] = $this->Administration_m->get_currency()->result_array();
 
+$data['milestone'] = $this->Contract_m->getMilestone("",$contract_id)->result_array();
+	
+$data['jaminan'] = $this->Contract_m->getJaminan("",$contract_id)->result_array();
+
+$data['person'] = $this->Contract_m->getPerson("",$contract_id)->result_array();
+
 $pqm = $this->Procrfq_m->getVendorQuoMainRFQ("",$ptm_number)->result_array();
 
 $quo_id = array();
@@ -94,7 +100,7 @@ $data['nilai_kontrak'] = $head;
 
 $last_comment = $this->Comment_m->getContract("",$contract_id,"")->row_array();
 
-$activity_id = (!empty($last_comment['activity'])) ? $last_comment['activity'] : 2000;
+$activity_id = (!empty($kontrak['status'])) ? $kontrak['status'] : 2000;
 
 $activity = $this->Procedure2_m->getActivity($activity_id)->row_array();
 
