@@ -265,6 +265,10 @@ public function perencanaan_pengadaan($param1 = "" ,$param2 = ""){
    $this->perencanaan_non_pmcs();
    break;
 
+   case 'tambah_perencanaan_non_pmcs':
+  $this->tambah_perencanaan_non_pmcs();
+  break;
+
    case 'drup':
   $this->drup();
   break;
@@ -929,6 +933,10 @@ public function perencanaan_pmcs(){
 
 public function perencanaan_non_pmcs(){
   include("procurement/perencanaan_pengadaan/perencanaan_non_pmcs.php");
+}
+
+public function tambah_perencanaan_non_pmcs(){
+  include("procurement/perencanaan_pengadaan/tambah_perencanaan_non_pmcs.php");
 }
 
 public function drup(){
